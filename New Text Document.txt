@@ -1,0 +1,9 @@
+﻿Web ASP.NET (MVC 5, C#, HTML, CSS, JS)
+
+coding convention
+
+đặt bàn - tự đặt trên web/gọi điện
+
+PM quản lý nhà hàng (trọng tâm)
+
+Sự cố: cháy nổ, thực phẩm ngộ độc/quá hạn, đầu bếp gặp tai nạn, khách hàng quấy rối, hư hại thiết bị
