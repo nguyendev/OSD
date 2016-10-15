@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>d6ae489c-d6f1-4b66-b1ee-07eef15cf804</ProjectGuid>
+    <RootNamespace>QLNH</RootNamespace>
+    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
+    <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ApplicationInsightsResourceId>/subscriptions/837c6f98-fe8e-4a75-b87a-d566cdfc7eba/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/QLNH</ApplicationInsightsResourceId>
+  </PropertyGroup>
+  <ItemGroup>
+    <DnxInvisibleContent Include="bower.json" />
+    <DnxInvisibleContent Include=".bowerrc" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\DotNet.Web\Microsoft.DotNet.Web.targets" Condition="'$(VSToolsPath)' != ''" />
+</Project>
