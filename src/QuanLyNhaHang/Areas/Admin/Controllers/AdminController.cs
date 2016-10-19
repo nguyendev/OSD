@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Areas.Admin.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace QuanLyNhaHang.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admins")]
     public class AdminController : Controller
     {
         // GET: /<controller>/

@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using QuanLyNhaHang.Models;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace QuanLyNhaHang.Areas.Admin.ViewModels
 {
@@ -19,5 +22,20 @@ namespace QuanLyNhaHang.Areas.Admin.ViewModels
         [Required]
         [UIHint("password")]
         public string Password { get; set; }
+    }
+
+    public class RoleEditModel
+    {
+        public IdentityRole Role { get; set; }
+        public IEnumerable<AppUser> Members { get; set; }
+        public IEnumerable<AppUser> NonMembers { get; set; }
+    }
+    public class RoleModificationModel
+    {
+        [Required]
+        public string RoleName { get; set; }
+        public string RoleId { get; set; }
+        public string[] IdsToAdd { get; set; }
+        public string[] IdsToDelete { get; set; }
     }
 }

@@ -13,6 +13,8 @@ using QuanLyNhaHang.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace QuanLyNhaHang
 {
@@ -43,7 +45,30 @@ namespace QuanLyNhaHang
             services.AddTransient<IPasswordValidator<AppUser>,
                     CustomPasswordValidator>();
             services.AddTransient<IUserValidator<AppUser>, CustomUserValidator>();
+            services.AddTransient<IAuthorizationHandler, BlockUsersHandler>();
+            services.AddTransient<IAuthorizationHandler, DocumentAuthorizationHandler>();
+            services.AddAuthorization(opts => {
+                opts.AddPolicy("DCUsers", policy => {
+                    policy.RequireRole("Users");
+                    policy.RequireClaim(ClaimTypes.StateOrProvince, "DC");
+                });
+                opts.AddPolicy("NotBob", policy => {
+                    policy.RequireAuthenticatedUser();
+                    policy.AddRequirements(new BlockUsersRequirement("Bob"));
+                });
+                opts.AddPolicy("AuthorsAndEditors", policy => {
+                    policy.AddRequirements(new DocumentAuthorizationRequirement
+                    {
+                        AllowAuthors = true,
+                        AllowEditors = true
+                    });
+                });
+            });
+
+
             services.AddApplicationInsightsTelemetry(Configuration);
+
+
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(
                 Configuration["Data:QuanLyNhaHang:ConnectionString"]));
@@ -86,6 +111,12 @@ namespace QuanLyNhaHang
 
             app.UseStaticFiles();
             app.UseIdentity();
+            app.UseClaimsTransformation(LocationClaimsProvider.AddClaims);
+            app.UseGoogleAuthentication(new GoogleOptions
+            {
+                ClientId = "<enter client id here>",
+                ClientSecret = "<enter client secret here>"
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "areaRoute",
@@ -94,6 +125,8 @@ namespace QuanLyNhaHang
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices, Configuration).Wait();
         }
     }
 }
