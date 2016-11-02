@@ -10,6 +10,9 @@
 <p>
     <a asp-action="UpdateBusiness">Cap nhat</a>
 </p>
+<div>
+    @Html.Raw(TempData["err"])
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -33,7 +36,7 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BusinessId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BusinessId">Details</a> |
+                <a asp-action="Index" asp-route-id="@item.BusinessCode" asp-controller="BlogPermission" asp-area="admin">Danh sách các action</a> |
                 <a asp-action="Delete" asp-route-id="@item.BusinessId">Delete</a>
             </td>
         </tr>

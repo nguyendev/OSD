@@ -10,6 +10,7 @@ using QuanLyNhaHangv1.Models;
 
 namespace QuanLyNhaHangv1.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class BlogPermissionController : Controller
     {
         private readonly QuanLyNhaHangDbContext _context;
@@ -20,9 +21,9 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         }
 
         // GET: BlogPermission
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string id)
         {
-            var quanLyNhaHangDbContext = _context.blogPermission.Include(b => b.BlogBusinesses);
+            var quanLyNhaHangDbContext = _context.blogPermission.Where(x => x.BussinessCode == id);
             return View(await quanLyNhaHangDbContext.ToListAsync());
         }
 
@@ -80,7 +81,7 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["BussinessCode"] = new SelectList(_context.blogBusiness, "BussinessCode", "BussinessCode", blogPermission.BussinessCode);
+            ViewData["BussinessCode"] = new SelectList(_context.blogBusiness, "BusinessCode", "BusinessCode", blogPermission.BussinessCode);
             return View(blogPermission);
         }
 
@@ -91,10 +92,10 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PermissionId,BussinessCode,Description,PermissionName")] BlogPermission blogPermission)
         {
-            if (id != blogPermission.PermissionId)
-            {
-                return NotFound();
-            }
+            //if (id != blogPermission.PermissionId)
+            //{
+            //    return NotFound();
+            //}
 
             if (ModelState.IsValid)
             {
@@ -114,9 +115,9 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = blogPermission.BussinessCode});
             }
-            ViewData["BussinessCode"] = new SelectList(_context.blogBusiness, "BussinessCode", "BussinessCode", blogPermission.BussinessCode);
+            ViewBag.BussinessCode = new SelectList(_context.blogBusiness, "BusinessCode", "BusinessCode", blogPermission.BussinessCode);
             return View(blogPermission);
         }
 

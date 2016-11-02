@@ -89,10 +89,10 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BusinessId,BusinessCode,BusinessName")] BlogBusiness blogBusiness)
         {
-            if (id != blogBusiness.BusinessId)
-            {
-                return NotFound();
-            }
+            //if (id != blogBusiness.BusinessId)
+            //{
+            //    return NotFound();
+            //}
 
             if (ModelState.IsValid)
             {
