@@ -39,9 +39,6 @@ namespace QuanLyNhaHang.Controllers
             }
         }
         public ViewResult Index() => View(docs);
-        public ViewResult Edit(string title)
-        {
-            return View("Index", docs.FirstOrDefault(d => d.Title == title));
-        }
+      
     }
 }
