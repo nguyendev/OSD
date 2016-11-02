@@ -18,7 +18,7 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
 
         public BlogBusinessController(QuanLyNhaHangDbContext context)
         {
-            _context = context;
+            _context = context;    
         }
 
         // GET: BlogBusiness
@@ -28,14 +28,14 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         }
 
         // GET: BlogBusiness/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var blogBusiness = await _context.blogBusiness.SingleOrDefaultAsync(m => m.BussinessId == id);
+            var blogBusiness = await _context.blogBusiness.SingleOrDefaultAsync(m => m.BusinessId == id);
             if (blogBusiness == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BussinessId,BusinessName")] BlogBusiness blogBusiness)
+        public async Task<IActionResult> Create([Bind("BusinessId,BusinessCode,BusinessName")] BlogBusiness blogBusiness)
         {
             if (ModelState.IsValid)
             {
@@ -67,14 +67,14 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         }
 
         // GET: BlogBusiness/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var blogBusiness = await _context.blogBusiness.SingleOrDefaultAsync(m => m.BussinessId == id);
+            var blogBusiness = await _context.blogBusiness.SingleOrDefaultAsync(m => m.BusinessId == id);
             if (blogBusiness == null)
             {
                 return NotFound();
@@ -87,9 +87,9 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("BussinessId,BusinessName")] BlogBusiness blogBusiness)
+        public async Task<IActionResult> Edit(int id, [Bind("BusinessId,BusinessCode,BusinessName")] BlogBusiness blogBusiness)
         {
-            if (id != blogBusiness.BussinessId)
+            if (id != blogBusiness.BusinessId)
             {
                 return NotFound();
             }
@@ -103,7 +103,7 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BlogBusinessExists(blogBusiness.BussinessId))
+                    if (!BlogBusinessExists(blogBusiness.BusinessId))
                     {
                         return NotFound();
                     }
@@ -118,14 +118,14 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         }
 
         // GET: BlogBusiness/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var blogBusiness = await _context.blogBusiness.SingleOrDefaultAsync(m => m.BussinessId == id);
+            var blogBusiness = await _context.blogBusiness.SingleOrDefaultAsync(m => m.BusinessId == id);
             if (blogBusiness == null)
             {
                 return NotFound();
@@ -137,33 +137,31 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         // POST: BlogBusiness/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var blogBusiness = await _context.blogBusiness.SingleOrDefaultAsync(m => m.BussinessId == id);
+            var blogBusiness = await _context.blogBusiness.SingleOrDefaultAsync(m => m.BusinessId == id);
             _context.blogBusiness.Remove(blogBusiness);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool BlogBusinessExists(string id)
+        private bool BlogBusinessExists(int id)
         {
-            return _context.blogBusiness.Any(e => e.BussinessId == id);
+            return _context.blogBusiness.Any(e => e.BusinessId == id);
         }
-
-
 
         //GET: /Business/UpdateBusiness --C?p nh?t danh sách nghi?p v?
         public ActionResult UpdateBusiness()
         {
             ReflectionControllerAction rc = new ReflectionControllerAction();
             List<Type> listControllerType = rc.GetControllers("Controllers");
-            List<string> listControllerOld = _context.blogBusiness.Select(c => c.BussinessId).ToList();
+            List<string> listControllerOld = _context.blogBusiness.Select(c => c.BusinessCode).ToList();
             List<string> listPermistionOld = _context.blogPermission.Select(p => p.PermissionName).ToList();
             foreach (var c in listControllerType)
             {
                 if (!listControllerOld.Contains(c.Name))
                 {
-                    BlogBusiness b = new BlogBusiness() { BussinessId = c.Name, BusinessName = "Ch?a có mô t?" };
+                    BlogBusiness b = new BlogBusiness() { BusinessCode = c.Name, BusinessName = "Ch?a có mô t?" };
                     _context.blogBusiness.Add(b);
                 }
                 List<string> listPermission = rc.GetActions(c);
@@ -171,7 +169,7 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
                 {
                     if (!listPermistionOld.Contains(c.Name + "-" + p))
                     {
-                        BlogPermission permission = new BlogPermission() { PermissionName = c.Name + "-" + p, Description = "Ch?a có mô t?", BussinessId = c.Name };
+                        BlogPermission permission = new BlogPermission() { PermissionName = c.Name + "-" + p, Description = "Ch?a có mô t?", BussinessCode = c.Name };
                         _context.blogPermission.Add(permission);
                     }
                 }

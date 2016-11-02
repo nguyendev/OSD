@@ -1,0 +1,1 @@
+﻿Drop database [aspnet-core-QuanLyNhaHangv1.1]

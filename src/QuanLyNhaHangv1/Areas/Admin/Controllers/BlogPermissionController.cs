@@ -46,7 +46,7 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         // GET: BlogPermission/Create
         public IActionResult Create()
         {
-            ViewData["BussinessId"] = new SelectList(_context.blogBusiness, "BussinessId", "BussinessId");
+            ViewData["BussinessCode"] = new SelectList(_context.blogBusiness, "BussinessCode", "BussinessCode");
             return View();
         }
 
@@ -55,7 +55,7 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PermissionId,BussinessId,Description,PermissionName")] BlogPermission blogPermission)
+        public async Task<IActionResult> Create([Bind("PermissionId,BussinessCode,Description,PermissionName")] BlogPermission blogPermission)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["BussinessId"] = new SelectList(_context.blogBusiness, "BussinessId", "BussinessId", blogPermission.BussinessId);
+            ViewData["Bussinesscode"] = new SelectList(_context.blogBusiness, "BussinessCode", "BussinessCode", blogPermission.BussinessCode);
             return View(blogPermission);
         }
 
@@ -80,7 +80,7 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["BussinessId"] = new SelectList(_context.blogBusiness, "BussinessId", "BussinessId", blogPermission.BussinessId);
+            ViewData["BussinessCode"] = new SelectList(_context.blogBusiness, "BussinessCode", "BussinessCode", blogPermission.BussinessCode);
             return View(blogPermission);
         }
 
@@ -89,7 +89,7 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PermissionId,BussinessId,Description,PermissionName")] BlogPermission blogPermission)
+        public async Task<IActionResult> Edit(int id, [Bind("PermissionId,BussinessCode,Description,PermissionName")] BlogPermission blogPermission)
         {
             if (id != blogPermission.PermissionId)
             {
@@ -116,7 +116,7 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["BussinessId"] = new SelectList(_context.blogBusiness, "BussinessId", "BussinessId", blogPermission.BussinessId);
+            ViewData["BussinessCode"] = new SelectList(_context.blogBusiness, "BussinessCode", "BussinessCode", blogPermission.BussinessCode);
             return View(blogPermission);
         }
 

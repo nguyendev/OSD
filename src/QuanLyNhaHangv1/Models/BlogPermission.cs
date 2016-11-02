@@ -29,7 +29,7 @@ namespace QuanLyNhaHangv1.Models
         [MaxLength(64)]
         [Display(Name = "Mã nghiệp vụ")]
         [Column(TypeName = "varchar(64)")]
-        public string BussinessId { get; set; }
+        public string BussinessCode { get; set; }
         public virtual BlogBusiness BlogBusinesses { get; set; }
 
         public virtual ICollection<GrantPermission> GrantPermissions { get; set; }

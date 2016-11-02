@@ -11,11 +11,12 @@ namespace QuanLyNhaHangv1.Models
     public class BlogBusiness
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int BusinessId { get; set; }
+
         [MaxLength(64)]
         [Display(Name = "Mã nghiệp vụ")]
-        public string BussinessId { get; set; }
-
-
+        public string BusinessCode { get; set; }
 
         [Required(ErrorMessage = "Hãy nhập tên nghiệp vụ")]
         [Display(Name = "Tên nghiệp vụ")]

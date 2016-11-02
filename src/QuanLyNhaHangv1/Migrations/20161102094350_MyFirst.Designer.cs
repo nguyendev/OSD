@@ -8,8 +8,8 @@ using QuanLyNhaHangv1.Data;
 namespace QuanLyNhaHangv1.Migrations
 {
     [DbContext(typeof(QuanLyNhaHangDbContext))]
-    [Migration("20161102061410_BlogAdministrator")]
-    partial class BlogAdministrator
+    [Migration("20161102094350_MyFirst")]
+    partial class MyFirst
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,15 +51,17 @@ namespace QuanLyNhaHangv1.Migrations
 
             modelBuilder.Entity("QuanLyNhaHangv1.Models.BlogBusiness", b =>
                 {
-                    b.Property<string>("BussinessId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("BusinessId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BusinessCode")
                         .HasAnnotation("MaxLength", 64);
 
                     b.Property<string>("BusinessName")
                         .IsRequired()
                         .HasAnnotation("MaxLength", 256);
 
-                    b.HasKey("BussinessId");
+                    b.HasKey("BusinessId");
 
                     b.ToTable("BlogBusiness");
                 });
@@ -92,7 +94,9 @@ namespace QuanLyNhaHangv1.Migrations
                     b.Property<int>("PermissionId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BussinessId")
+                    b.Property<int?>("BlogBusinessesBusinessId");
+
+                    b.Property<string>("BussinessCode")
                         .IsRequired()
                         .HasColumnType("varchar(64)")
                         .HasAnnotation("MaxLength", 64);
@@ -108,7 +112,7 @@ namespace QuanLyNhaHangv1.Migrations
 
                     b.HasKey("PermissionId");
 
-                    b.HasIndex("BussinessId");
+                    b.HasIndex("BlogBusinessesBusinessId");
 
                     b.ToTable("BlogPermission");
                 });
@@ -185,8 +189,7 @@ namespace QuanLyNhaHangv1.Migrations
                 {
                     b.HasOne("QuanLyNhaHangv1.Models.BlogBusiness", "BlogBusinesses")
                         .WithMany("BlogPermissions")
-                        .HasForeignKey("BussinessId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BlogBusinessesBusinessId");
                 });
 
             modelBuilder.Entity("QuanLyNhaHangv1.Models.BlogPost", b =>
