@@ -64,7 +64,9 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a> |
+                <a asp-controller="BlogGrantPermission" asp-action="Index" asp-route-id="@item.UserId">Cap quyen</a>
+
             </td>
         </tr>
 }

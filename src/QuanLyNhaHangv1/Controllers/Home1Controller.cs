@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace QuanLyNhaHangv1.Controllers
 {
@@ -10,6 +11,7 @@ namespace QuanLyNhaHangv1.Controllers
     {
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("Test", "Ben Rules!");
             return View();
         }
 

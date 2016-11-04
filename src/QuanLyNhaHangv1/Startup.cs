@@ -54,7 +54,9 @@ namespace QuanLyNhaHangv1
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();
+
             services.AddDbContext<QuanLyNhaHangDbContext>(options =>
                       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // Add application services.
@@ -81,6 +83,7 @@ namespace QuanLyNhaHangv1
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            // IMPORTANT: This session call MUST go before UseMvc()
             app.UseSession();
             app.UseApplicationInsightsExceptionTelemetry();
 
@@ -102,20 +105,23 @@ namespace QuanLyNhaHangv1
         }
         public void Seed(QuanLyNhaHangDbContext dbcontext)
         {
-            var admin = new BlogAdministrator()
+            if (!dbcontext.blogAdministrator.Any())
             {
-                UserName = "nguyenit",
-                Password = "29666bce25e58a3ab323a2260a4177dc",
-                FullName = "Nguyễn An Hoàng Nguyên",
-                Avatar = "admin/dist/img/avatar.png",
-                Email = "nguyen.nah76@gmail.com",
-                IsAdmin = 1,
-                Allowed = 1,
-            };
+                var admin = new BlogAdministrator()
+                {
+                    UserName = "nguyenit",
+                    Password = "29666bce25e58a3ab323a2260a4177dc",
+                    FullName = "Nguyễn An Hoàng Nguyên",
+                    Avatar = "admin/dist/img/avatar.png",
+                    Email = "nguyen.nah76@gmail.com",
+                    IsAdmin = 1,
+                    Allowed = 1,
+                };
 
 
-            dbcontext.blogAdministrator.Add(admin);
-
+                dbcontext.blogAdministrator.Add(admin);
+                dbcontext.SaveChanges();
+            }
         }
     }
 }
