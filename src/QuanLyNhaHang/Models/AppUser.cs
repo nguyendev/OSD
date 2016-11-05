@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace QuanLyNhaHang.Models
 {
@@ -15,7 +11,7 @@ namespace QuanLyNhaHang.Models
         None, Basic, Advanced
     }
 
-    public class AppUser : IdentityUser 
+    public class AppUser : IdentityUser
     {
         public Cities City { get; set; }
         public QualificationLevels Qualifications { get; set; }

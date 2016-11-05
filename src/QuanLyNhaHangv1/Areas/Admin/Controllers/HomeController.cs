@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace QuanLyNhaHangv1.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("admin")]
     public class HomeController : Controller
     {
         private readonly QuanLyNhaHangDbContext _context;
@@ -22,6 +22,7 @@ namespace QuanLyNhaHangv1.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
+            var value = HttpContext.Session.GetString("asdf");
             return View();
         }
         public IActionResult Login()

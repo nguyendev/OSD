@@ -1,4 +1,12 @@
-﻿
+﻿@{
+    var userid = new Byte[20];
+    if (!Context.Session.TryGetValue("userid", out userid))
+    {
+        //RedirectResult("~/Admin/Home/Login");
+    }
+
+
+}
 
 
 <!DOCTYPE html>

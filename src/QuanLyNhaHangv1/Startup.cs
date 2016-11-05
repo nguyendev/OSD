@@ -13,6 +13,7 @@ using QuanLyNhaHangv1.Data;
 using QuanLyNhaHangv1.Models;
 using QuanLyNhaHangv1.Services;
 using QuanLyNhaHangv1.Models.BussinessModels;
+using Microsoft.AspNetCore.Http;
 
 namespace QuanLyNhaHangv1
 {
@@ -55,7 +56,11 @@ namespace QuanLyNhaHangv1
 
             services.AddMvc();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
-            services.AddSession();
+            services.AddSession(opts =>
+            {
+                opts.CookieName = ".NetEscapades.Session";
+                opts.IdleTimeout = TimeSpan.FromMinutes(5);
+            });
 
             services.AddDbContext<QuanLyNhaHangDbContext>(options =>
                       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -102,6 +107,7 @@ namespace QuanLyNhaHangv1
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
             Seed(context);
+            SessionStart();
         }
         public void Seed(QuanLyNhaHangDbContext dbcontext)
         {
@@ -123,5 +129,10 @@ namespace QuanLyNhaHangv1
                 dbcontext.SaveChanges();
             }
         }
+        protected void SessionStart()
+        {
+
+        }
+        
     }
 }

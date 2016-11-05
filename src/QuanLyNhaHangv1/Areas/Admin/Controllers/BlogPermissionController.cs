@@ -10,7 +10,7 @@ using QuanLyNhaHangv1.Models;
 
 namespace QuanLyNhaHangv1.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("admin")]
     public class BlogPermissionController : Controller
     {
         private readonly QuanLyNhaHangDbContext _context;

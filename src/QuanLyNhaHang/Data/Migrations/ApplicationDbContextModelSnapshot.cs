@@ -7,14 +7,13 @@ using QuanLyNhaHang.Data;
 
 namespace QuanLyNhaHang.Migrations
 {
-    [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20161019023552_Initial")]
-    partial class Initial
+    [DbContext(typeof(ApplicationDbContext))]
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
+                .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -130,6 +129,8 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<int>("City");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -154,6 +155,8 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<int>("Qualifications");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -170,7 +173,52 @@ namespace QuanLyNhaHang.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("QuanLyNhaHang.Models.BlogBusiness", b =>
+                {
+                    b.Property<int>("BusinessId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BusinessCode")
+                        .HasAnnotation("MaxLength", 64);
+
+                    b.Property<string>("BusinessName")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.HasKey("BusinessId");
+
+                    b.ToTable("BlogBusiness");
+                });
+
+            modelBuilder.Entity("QuanLyNhaHang.Models.BlogPermission", b =>
+                {
+                    b.Property<int>("PermissionId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("BlogBusinessesBusinessId");
+
+                    b.Property<string>("BussinessCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(64)")
+                        .HasAnnotation("MaxLength", 64);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.Property<string>("PermissionName")
+                        .IsRequired()
+                        .HasColumnType("varchar(256)")
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.HasKey("PermissionId");
+
+                    b.HasIndex("BlogBusinessesBusinessId");
+
+                    b.ToTable("BlogPermission");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -208,6 +256,13 @@ namespace QuanLyNhaHang.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("QuanLyNhaHang.Models.BlogPermission", b =>
+                {
+                    b.HasOne("QuanLyNhaHang.Models.BlogBusiness", "BlogBusinesses")
+                        .WithMany("BlogPermissions")
+                        .HasForeignKey("BlogBusinessesBusinessId");
                 });
         }
     }

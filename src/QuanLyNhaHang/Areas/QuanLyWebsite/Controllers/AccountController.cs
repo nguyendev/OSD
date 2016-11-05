@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using QuanLyNhaHang.Areas.Admin.ViewModels;
 using Microsoft.AspNetCore.Identity;
-using QuanLyNhaHang.Models;
 using Microsoft.AspNetCore.Http.Authentication;
 using System.Security.Claims;
+using QuanLyNhaHang.Models;
+using QuanLyNhaHang.Areas.Admin.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace QuanLyNhaHang.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("quanlywebsite")]
     public class AccountController : Controller
     {
         private UserManager<AppUser> _userManager;
