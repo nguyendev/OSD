@@ -95,6 +95,7 @@ namespace QuanLyNhaHang
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddScoped(typeof(IGenericRepository<NhanVien>), typeof(NhanVienRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
