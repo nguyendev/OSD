@@ -19,6 +19,6 @@ namespace QuanLyNhaHang.Models
         [Display(Name = "Tên nghiệp vụ")]
         [MaxLength(256)]
         public string BusinessName { get; set; }
-        public virtual ICollection<BlogPermission> BlogPermissions { get; set; }
+        public ICollection<BlogPermission> BlogPermissions { get; set; }
     }
 }

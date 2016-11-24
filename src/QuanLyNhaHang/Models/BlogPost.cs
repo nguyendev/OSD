@@ -55,9 +55,9 @@ namespace QuanLyNhaHang.Models
         [Display(Name = "Mã người dùng")]
         public int? UserId { get; set; }
 
-        public virtual BlogCategory BlogCategory { get; set; }
+        public BlogCategory BlogCategory { get; set; }
 
-        public virtual AppUser BlogAdminstrator { get; set; }
+        public AppUser BlogAdminstrator { get; set; }
 
 
 

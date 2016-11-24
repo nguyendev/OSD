@@ -4,7 +4,7 @@
 
 /**
  * @summary     Scroller
- * @description Virtual rendering for DataTables
+ * @description rendering for DataTables
  * @version     1.4.2
  * @file        dataTables.scroller.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
@@ -52,8 +52,8 @@ var DataTable = $.fn.dataTable;
 
 
 /**
- * Scroller is a virtual rendering plug-in for DataTables which allows large
- * datasets to be drawn on screen every quickly. What the virtual rendering means
+ * Scroller is a rendering plug-in for DataTables which allows large
+ * datasets to be drawn on screen every quickly. What the rendering means
  * is that only the visible portion of the table (and a bit to either side to make
  * the scrolling smooth) is drawn, while the scrolling container gives the
  * visual impression that the whole table is visible. This is done by making use
@@ -271,11 +271,11 @@ $.extend( Scroller.prototype, {
 	 *      } );
 	 *    } );
 	 */
-	"fnRowToPixels": function ( rowIdx, intParse, virtual )
+	"fnRowToPixels": function ( rowIdx, intParse, )
 	{
 		var pixels;
 
-		if ( virtual ) {
+		if ( ) {
 			pixels = this._domain( 'virtualToPhysical', rowIdx * this.s.heights.row );
 		}
 		else {
@@ -299,7 +299,7 @@ $.extend( Scroller.prototype, {
 	 * value (relative to the last non-linear positioning).
 	 *  @param {int} iPixels Offset from top to calculate the row number of
 	 *  @param {int} [intParse=true] If an integer value should be returned
-	 *  @param {int} [virtual=false] Perform the calculations in the virtual domain
+	 *  @param {int} [virtual=false] Perform the calculations in the domain
 	 *  @returns {int} Row index
 	 *  @example
 	 *    $(document).ready(function() {
@@ -315,10 +315,10 @@ $.extend( Scroller.prototype, {
 	 *      } );
 	 *    } );
 	 */
-	"fnPixelsToRow": function ( pixels, intParse, virtual )
+	"fnPixelsToRow": function ( pixels, intParse, )
 	{
 		var diff = pixels - this.s.baseScrollTop;
-		var row = virtual ?
+		var row = ?
 			this._domain( 'physicalToVirtual', pixels ) / this.s.heights.row :
 			( diff / this.s.heights.row ) + this.s.baseRowTop;
 
@@ -360,7 +360,7 @@ $.extend( Scroller.prototype, {
 		// We need to know if the table will redraw or not before doing the
 		// scroll. If it will not redraw, then we need to use the currently
 		// displayed table, and scroll with the physical pixels. Otherwise, we
-		// need to calculate the table's new position from the virtual
+		// need to calculate the table's new position from the
 		// transform.
 		var preRows = ((this.s.displayBuffer-1)/2) * this.s.viewportRows;
 		var drawRow = iRow - preRows;
@@ -728,7 +728,7 @@ $.extend( Scroller.prototype, {
 
 	/**
 	 * Convert from one domain to another. The physical domain is the actual
-	 * pixel count on the screen, while the virtual is if we had browsers which
+	 * pixel count on the screen, while the is if we had browsers which
 	 * had scrolling containers of infinite height (i.e. the absolute value)
 	 *
 	 *  @param {string} dir Domain transform direction, `virtualToPhysical` or
@@ -741,7 +741,7 @@ $.extend( Scroller.prototype, {
 		var heights = this.s.heights;
 		var coeff;
 
-		// If the virtual and physical height match, then we use a linear
+		// If the and physical height match, then we use a linear
 		// transform between the two, allowing the scrollbar to be linear
 		if ( heights.virtual === heights.scroll ) {
 			return val;
@@ -810,7 +810,7 @@ $.extend( Scroller.prototype, {
 		// Resize the scroll forcing element
 		this._fnScrollForce();
 
-		// Reposition the scrolling for the updated virtual position if needed
+		// Reposition the scrolling for the updated position if needed
 		if ( displayStart === 0 ) {
 			// Linear calculation at the top of the table
 			iScrollTop = this.s.topRowFloat * heights.row;
@@ -831,7 +831,7 @@ $.extend( Scroller.prototype, {
 		this.s.baseScrollTop = iScrollTop;
 		this.s.baseRowTop = this.s.topRowFloat;
 
-		// Position the table in the virtual scroller
+		// Position the table in the scroller
 		var tableTop = iScrollTop - ((this.s.topRowFloat - displayStart) * heights.row);
 		if ( displayStart === 0 ) {
 			tableTop = 0;
@@ -908,7 +908,7 @@ $.extend( Scroller.prototype, {
 	 *
 	 * Note that if the calculated required scrolling height exceeds a maximum
 	 * value (1 million pixels - hard-coded) the forcing element will be set
-	 * only to that maximum value and virtual / physical domain transforms will
+	 * only to that maximum value and / physical domain transforms will
 	 * be used to allow Scroller to display tables of any number of records.
 	 *  @returns {void}
 	 *  @private
@@ -1279,21 +1279,21 @@ Api.register( 'scroller()', function () {
 } );
 
 // Undocumented and deprecated - is it actually useful at all?
-Api.register( 'scroller().rowToPixels()', function ( rowIdx, intParse, virtual ) {
+Api.register( 'scroller().rowToPixels()', function ( rowIdx, intParse, ) {
 	var ctx = this.context;
 
 	if ( ctx.length && ctx[0].oScroller ) {
-		return ctx[0].oScroller.fnRowToPixels( rowIdx, intParse, virtual );
+		return ctx[0].oScroller.fnRowToPixels( rowIdx, intParse, );
 	}
 	// undefined
 } );
 
 // Undocumented and deprecated - is it actually useful at all?
-Api.register( 'scroller().pixelsToRow()', function ( pixels, intParse, virtual ) {
+Api.register( 'scroller().pixelsToRow()', function ( pixels, intParse, ) {
 	var ctx = this.context;
 
 	if ( ctx.length && ctx[0].oScroller ) {
-		return ctx[0].oScroller.fnPixelsToRow( pixels, intParse, virtual );
+		return ctx[0].oScroller.fnPixelsToRow( pixels, intParse, );
 	}
 	// undefined
 } );

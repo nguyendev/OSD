@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 
 namespace QuanLyNhaHang.Infrastructure
 {
-    interface IGenericRepository<T>
+    public interface IGenericRepository<T>
     {
-        T Get(int id);
-        IQueryable<T> GetAll();
-        void Add(T Entity);
-        void Update(T Entity);   
+        Task<T> Get(int? id);
+        bool Exists(int id);
+        Task<List<T>> GetAll();
+        Task Add(T Entity);
+        Task Update(T Entity);
+
+        Task Delete(int id);
     }
 }

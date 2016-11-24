@@ -221,6 +221,20 @@ namespace QuanLyNhaHang.Migrations
                     b.ToTable("BlogPermission");
                 });
 
+            modelBuilder.Entity("QuanLyNhaHang.Models.NhanVien", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ChucVu");
+
+                    b.Property<string>("HoTen");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NhanVien");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")

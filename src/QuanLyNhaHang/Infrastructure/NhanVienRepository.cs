@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using QuanLyNhaHang.Data;
 using QuanLyNhaHang.Models;
 using System;
 using System.Collections.Generic;
@@ -7,40 +8,52 @@ using System.Threading.Tasks;
 
 namespace QuanLyNhaHang.Infrastructure
 {
-    public class NhanVienRepository : IGenericRepository<NhanVien>
+    public class NhanVienRepository : IGenericRepository<NHANVIEN>
     {
-        protected readonly DbContext Context;
-        protected DbSet<NhanVien> DbSet;
+        protected readonly ApplicationDbContext Context;
+        protected DbSet<NHANVIEN> DbSet;
 
         public NhanVienRepository(ApplicationDbContext context)
         {
             Context = context;
-            DbSet = context.Set<NhanVien>();
+            DbSet = context.Set<NHANVIEN>();
         }
-        public void Add(NhanVien Entity)
+        public async Task Add(NHANVIEN Entity)
         {
             Context.Add(Entity);
-            Save();
+            await Save();
         }
 
-        public NhanVien Get(int id)
+        public async Task<NHANVIEN> Get(int? id)
         {
-            return DbSet.Where(c => c.Id == id).SingleOrDefault();
+            return await DbSet.Where(c => c.Id == id).SingleOrDefaultAsync();
+        }
+        public bool Exists(int id)
+        {
+            return DbSet.Any(c => c.Id == id);
         }
 
-        public IQueryable<NhanVien> GetAll()
+        public async Task<List<NHANVIEN>> GetAll()
         {
-            return DbSet;
+            return await DbSet.ToListAsync();
         }
 
-        public void Update(NhanVien Entity)
+        public async Task Update(NHANVIEN Entity)
         {
-            Save();
+            DbSet.Update(Entity);
+            await Save();
         }
 
-        private void Save()
+        public async Task Delete(int id)
         {
-            Context.SaveChanges();
+            var nhanVien = await DbSet.SingleOrDefaultAsync(m => m.Id == id);
+            DbSet.Remove(nhanVien);
+            await Save();          
+        }
+
+        private async Task Save()
+        {
+            await Context.SaveChangesAsync();
         }
     }
 }

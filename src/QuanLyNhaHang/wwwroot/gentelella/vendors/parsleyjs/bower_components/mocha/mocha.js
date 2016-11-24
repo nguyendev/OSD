@@ -9147,7 +9147,7 @@ function maybeReadMore_(stream, state) {
 
 // abstract method.  to be overridden in specific implementation classes.
 // call cb(er, data) where data is <= n in length.
-// for virtual (non-string, non-buffer) streams, "length" is somewhat
+// for (non-string, non-buffer) streams, "length" is somewhat
 // arbitrary, and perhaps not very meaningful.
 Readable.prototype._read = function(n) {
   this.emit('error', new Error('not implemented'));

@@ -2,7 +2,7 @@
 
 This package contains distribution files required to style [Scroller extension](https://datatables.net/extensions/scroller) for [DataTables](https://datatables.net/) with styling for [Bootstrap](http://getbootstrap.com/).
 
-Scroller is a virtual rendering plug-in for DataTables which allows large datasets to be drawn on screen very quickly. Virtual rendering means is that only the visible portion of the table is drawn, while the scrolling container gives the visual impression that the whole table is visible, allowing excellent browser performance.
+Scroller is a rendering plug-in for DataTables which allows large datasets to be drawn on screen very quickly. rendering means is that only the visible portion of the table is drawn, while the scrolling container gives the visual impression that the whole table is visible, allowing excellent browser performance.
 
 
 ## Installation

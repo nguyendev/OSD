@@ -87,5 +87,8 @@ namespace QuanLyNhaHang.Data
                 }
             }
         }
+        // public DbSet<BlogCategory> blogCategory { get; set; }
+        // public DbSet<GrantPermission> grantPermission { get; set; }
+        public DbSet<NHANVIEN> NhanVien { get; set; }
     }
 }

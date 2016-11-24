@@ -32,7 +32,7 @@ namespace QuanLyNhaHang.Models
         [Display(Name = "Mã người dùng")]
         public int? UserId { get; set; } 
 
-        public virtual AppUser BlogAdministrator { get; set; }
-        public virtual ICollection<BlogPost> BlogPosts { get; set; }
+        public AppUser BlogAdministrator { get; set; }
+        public ICollection<BlogPost> BlogPosts { get; set; }
     }
 }

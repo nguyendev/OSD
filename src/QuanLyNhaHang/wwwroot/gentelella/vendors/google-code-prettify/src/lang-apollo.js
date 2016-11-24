@@ -19,7 +19,7 @@
  * at http://virtualagc.googlecode.com
  * <p>
  * This file could be used by goodle code to allow syntax highlight for
- * Virtual AGC SVN repository or if you don't want to commonize
+ * AGC SVN repository or if you don't want to commonize
  * the header for the agc/aea html assembly listing.
  *
  * @author ohommes@alumni.cmu.edu

@@ -204,7 +204,7 @@
 
 ## 0.9.0 (Mar 15, 2015)
 
-- Wraps image with a virtual canvas (for zooming and rotating).
+- Wraps image with a canvas (for zooming and rotating).
 - Limits image position and size in strict mode.
 - Supports multiple global croppers by default.
 - Outputs cropped canvas for display or get Data URL or get Blob

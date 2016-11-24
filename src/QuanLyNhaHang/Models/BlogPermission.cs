@@ -26,9 +26,9 @@ namespace QuanLyNhaHang.Models
         [Display(Name = "Mã nghiệp vụ")]
         [Column(TypeName = "varchar(64)")]
         public string BussinessCode { get; set; }
-        public virtual BlogBusiness BlogBusinesses { get; set; }
+        public BlogBusiness BlogBusinesses { get; set; }
 
-       // public virtual ICollection<AppRole> GrantPermissions { get; set; }
+       // public ICollection<AppRole> GrantPermissions { get; set; }
     }
 
 }

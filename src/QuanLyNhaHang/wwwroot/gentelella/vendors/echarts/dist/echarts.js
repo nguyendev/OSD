@@ -30653,7 +30653,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var rootName = option.name;
 	            rootName == null && (rootName = option.name);
 
-	            // Create a virtual root.
+	            // Create a root.
 	            var root = {name: rootName, children: option.data};
 	            var value0 = (data[0] || {}).value;
 

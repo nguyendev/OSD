@@ -19831,7 +19831,7 @@
 
 	// abstract method.  to be overridden in specific implementation classes.
 	// call cb(er, data) where data is <= n in length.
-	// for virtual (non-string, non-buffer) streams, "length" is somewhat
+	// for (non-string, non-buffer) streams, "length" is somewhat
 	// arbitrary, and perhaps not very meaningful.
 	Readable.prototype._read = function(n) {
 	  this.emit('error', new Error('not implemented'));
@@ -21657,7 +21657,7 @@
 	'use strict';
 
 	// var b64 = require('./base64.js').base64DecToArr;
-	function VirtualFileSystem() {
+	functionFileSystem() {
 		this.fileSystem = {};
 		this.baseSystem = {};
 	}
@@ -21694,7 +21694,7 @@
 		return filename;
 	}
 
-	module.exports = new VirtualFileSystem();
+	module.exports = newFileSystem();
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer, "/"))
 

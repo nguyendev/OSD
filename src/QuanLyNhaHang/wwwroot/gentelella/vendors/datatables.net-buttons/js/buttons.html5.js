@@ -819,7 +819,7 @@ var excelStrings = {
 		'</styleSheet>'
 };
 // Note we could use 3 `for` loops for the styles, but when gzipped there is
-// virtually no difference in size, since the above can be easily compressed
+//ly no difference in size, since the above can be easily compressed
 
 
 
