@@ -12,6 +12,12 @@ namespace QuanLyNhaHang.Models
 {
     public class THIETHAI
     {
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public string MaBienBan
         {
             get;
@@ -43,12 +49,6 @@ namespace QuanLyNhaHang.Models
         }
 
         public string ThanhTien
-        {
-            get;
-            set;
-        }
-
-        public int Id
         {
             get;
             set;

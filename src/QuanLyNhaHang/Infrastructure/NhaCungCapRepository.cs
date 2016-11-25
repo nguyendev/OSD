@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace QuanLyNhaHang.Infrastructure
 {
-    public class NhanVienRepository : IGenericRepository<NHANVIEN>
+    public class NhaCungCapRepository:IGenericRepository<NHACUNGCAP>
     {
         protected readonly ApplicationDbContext Context;
-        protected DbSet<NHANVIEN> DbSet;
+        protected DbSet<NHACUNGCAP> DbSet;
 
-        public NhanVienRepository(ApplicationDbContext context)
+        public NhaCungCapRepository(ApplicationDbContext context)
         {
             Context = context;
-            DbSet = context.Set<NHANVIEN>();
+            DbSet = context.Set<NHACUNGCAP>();
         }
-        public async Task Add(NHANVIEN Entity)
+        public async Task Add(NHACUNGCAP Entity)
         {
             Context.Add(Entity);
             await Save();
         }
 
-        public async Task<NHANVIEN> Get(int? id)
+        public async Task<NHACUNGCAP> Get(int? id)
         {
             return await DbSet.Where(c => c.Id == id).SingleOrDefaultAsync();
         }
@@ -33,12 +33,12 @@ namespace QuanLyNhaHang.Infrastructure
             return DbSet.Any(c => c.Id == id);
         }
 
-        public async Task<List<NHANVIEN>> GetAll()
+        public async Task<List<NHACUNGCAP>> GetAll()
         {
             return await DbSet.ToListAsync();
         }
 
-        public async Task Update(NHANVIEN Entity)
+        public async Task Update(NHACUNGCAP Entity)
         {
             DbSet.Update(Entity);
             await Save();
@@ -46,9 +46,9 @@ namespace QuanLyNhaHang.Infrastructure
 
         public async Task Delete(int id)
         {
-            var nhanvien = await DbSet.SingleOrDefaultAsync(m => m.Id == id);
-            DbSet.Remove(nhanvien);
-            await Save();          
+            var nhacungcap = await DbSet.SingleOrDefaultAsync(m => m.Id == id);
+            DbSet.Remove(nhacungcap);
+            await Save();
         }
 
         private async Task Save()

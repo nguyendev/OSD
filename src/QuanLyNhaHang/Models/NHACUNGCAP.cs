@@ -12,6 +12,12 @@ namespace QuanLyNhaHang.Models
 {
     public class NHACUNGCAP
     {
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public string MaNCC
         {
             get;
@@ -42,13 +48,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public NHAPHANG NHAPHANG
+        public virtual NHAPHANG NHAPHANG
         {
             get;
             set;

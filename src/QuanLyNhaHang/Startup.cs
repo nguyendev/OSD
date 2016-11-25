@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +8,7 @@ using Microsoft.Extensions.Logging;
 using QuanLyNhaHang.Data;
 using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Services;
-using Microsoft.AspNetCore.Identity;
 using QuanLyNhaHang.Infrastructure;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 
 namespace QuanLyNhaHang
 {
@@ -96,6 +89,8 @@ namespace QuanLyNhaHang
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped(typeof(IGenericRepository<NHANVIEN>), typeof(NhanVienRepository));
+            services.AddScoped(typeof(IGenericRepository<NHACUNGCAP>), typeof(NhaCungCapRepository));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

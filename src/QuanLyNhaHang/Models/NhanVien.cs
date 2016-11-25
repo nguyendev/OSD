@@ -13,6 +13,12 @@ namespace QuanLyNhaHang.Models
 
     public class NHANVIEN
     {
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public string MaNV
         {
             get;
@@ -49,31 +55,25 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        public int Id
+        public virtual HOADONNHAPHANG HOADONNHAPHANG
         {
             get;
             set;
         }
 
-        public HOADONNHAPHANG HOADONNHAPHANG
+        public virtual BIENBANSUCO BIENBANSUCO
         {
             get;
             set;
         }
 
-        public BIENBANSUCO BIENBANSUCO
+        public virtual PHIEUCHI PHIEUCHI
         {
             get;
             set;
         }
 
-        public PHIEUCHI PHIEUCHI
-        {
-            get;
-            set;
-        }
-
-        public PHIEUTHU PHIEUTHU
+        public virtual PHIEUTHU PHIEUTHU
         {
             get;
             set;

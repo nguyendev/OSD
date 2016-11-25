@@ -12,6 +12,12 @@ namespace QuanLyNhaHang.Models
 {
     public class MONAN
     {
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public string MaMon
         {
             get;
@@ -30,19 +36,13 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        public int Id
+        public virtual CHEBIEN CHEBIEN
         {
             get;
             set;
         }
 
-        public CHEBIEN CHEBIEN
-        {
-            get;
-            set;
-        }
-
-        public YEUCAUMONAN YEUCAUMONAN
+        public virtual YEUCAUMONAN YEUCAUMONAN
         {
             get;
             set;

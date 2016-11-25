@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace QuanLyNhaHang.Migrations
 {
-    public partial class init : Migration
+    public partial class rms : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -12,6 +12,12 @@ namespace QuanLyNhaHang.Models
 {
     public class SOTHUCHI
     {
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public string Ngay
         {
             get;
@@ -25,12 +31,6 @@ namespace QuanLyNhaHang.Models
         }
 
         public string MaPC
-        {
-            get;
-            set;
-        }
-
-        public int Id
         {
             get;
             set;

@@ -12,6 +12,12 @@ namespace QuanLyNhaHang.Models
 {
     public class NHAPHANG
     {
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public string SoHD
         {
             get;
@@ -41,13 +47,6 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
-
-        public int Id
-        {
-            get;
-            set;
-        }
-
     }
 
 }

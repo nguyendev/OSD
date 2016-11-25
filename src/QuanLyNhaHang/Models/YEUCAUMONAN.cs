@@ -12,6 +12,12 @@ namespace QuanLyNhaHang.Models
 {
     public class YEUCAUMONAN
     {
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public int MaLuot
         {
             get;
@@ -25,12 +31,6 @@ namespace QuanLyNhaHang.Models
         }
 
         public int SoLuong
-        {
-            get;
-            set;
-        }
-
-        public int Id
         {
             get;
             set;

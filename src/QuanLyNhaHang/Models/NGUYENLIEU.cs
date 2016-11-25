@@ -12,6 +12,12 @@ namespace QuanLyNhaHang.Models
 {
     public class NGUYENLIEU
     {
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public string DVT
         {
             get;
@@ -19,12 +25,6 @@ namespace QuanLyNhaHang.Models
         }
 
         public string Gia
-        {
-            get;
-            set;
-        }
-
-        public int Id
         {
             get;
             set;
@@ -48,13 +48,13 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        public CHEBIEN CHEBIEN
+        public virtual CHEBIEN CHEBIEN
         {
             get;
             set;
         }
 
-        public NGUYENLIEUTRONGKHO KHO
+        public virtual NGUYENLIEUTRONGKHO KHO
         {
             get;
             set;

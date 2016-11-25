@@ -12,6 +12,13 @@ namespace QuanLyNhaHang.Models
 {
     public class BIENBANSUCO
     {
+
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public string MaBienBan
         {
             get;
@@ -53,14 +60,7 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
-
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public THIETHAI THIETHAI
+        public virtual THIETHAI THIETHAI
         {
             get;
             set;

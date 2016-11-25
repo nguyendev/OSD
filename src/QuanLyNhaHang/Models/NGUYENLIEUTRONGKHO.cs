@@ -12,6 +12,12 @@ namespace QuanLyNhaHang.Models
 {
     public class NGUYENLIEUTRONGKHO
     {
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public string MaNL
         {
             get;
@@ -29,13 +35,6 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
-
-        public int Id
-        {
-            get;
-            set;
-        }
-
     }
 
 }

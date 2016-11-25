@@ -12,6 +12,12 @@ namespace QuanLyNhaHang.Models
 {
     public class BOPHAN 
     {
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public string MaBP
         {
             get;
@@ -30,13 +36,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public NHANVIEN NHANVIEN
+        public virtual NHANVIEN NHANVIEN
         {
             get;
             set;

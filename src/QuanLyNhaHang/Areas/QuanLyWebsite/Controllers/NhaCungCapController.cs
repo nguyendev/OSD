@@ -1,33 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using QuanLyNhaHang.Data;
 using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Infrastructure;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
     [Area("QuanLyWebsite")]
-    public class NhanViensController : Controller
+    public class NhaCungCapController : Controller
     {
-        private readonly IGenericRepository<NHANVIEN> _context;
+        private readonly IGenericRepository<NHACUNGCAP> _context;
 
-        public NhanViensController(IGenericRepository<NHANVIEN> context)
+        public NhaCungCapController(IGenericRepository<NHACUNGCAP> context)
         {
             _context = context;    
         }
 
-        // GET: NhanViens
+        // GET: NhaCungCap
         public async Task<IActionResult> Index()
         {
             return View(await _context.GetAll());
         }
 
-        // GET: NhanViens/Details/5
+        // GET: NhaCungCap/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,37 +30,37 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 return NotFound();
             }
 
-            var nhanVien = await _context.Get(id);
-            if (nhanVien == null)
+            var nhacungcap = await _context.Get(id);
+            if (nhacungcap == null)
             {
                 return NotFound();
             }
 
-            return View(nhanVien);
+            return View(nhacungcap);
         }
 
-        // GET: NhanViens/Create
+        // GET: NhaCungCap/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: NhanViens/Create
+        // POST: NhaCungCap/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ChucVu,HoTen")] NHANVIEN nhanVien)
+        public async Task<IActionResult> Create([Bind("Id,DiaChi,MaNCC,SoDT,SoNo,TenNCC")] NHACUNGCAP nhacungcap)
         {
             if (ModelState.IsValid)
             {
-                await _context.Add(nhanVien);
+                await _context.Add(nhacungcap);
                 return RedirectToAction("Index");
             }
-            return View(nhanVien);
+            return View(nhacungcap);
         }
 
-        // GET: NhanViens/Edit/5
+        // GET: NhaCungCap/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +68,22 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 return NotFound();
             }
 
-            var nhanVien = await _context.Get(id);
-            if (nhanVien == null)
+            var nhacungcap = await _context.Get(id);
+            if (nhacungcap == null)
             {
                 return NotFound();
             }
-            return View(nhanVien);
+            return View(nhacungcap);
         }
 
-        // POST: NhanViens/Edit/5
+        // POST: NhaCungCap/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ChucVu,HoTen")] NHANVIEN nhanVien)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DiaChi,MaNCC,SoDT,SoNo,TenNCC")] NHACUNGCAP nhacungcap)
         {
-            if (id != nhanVien.Id)
+            if (id != nhacungcap.Id)
             {
                 return NotFound();
             }
@@ -97,11 +92,11 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
-                   await _context.Update(nhanVien);
+                    await _context.Update(nhacungcap);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NhanVienExists(nhanVien.Id))
+                    if (!NHACUNGCAPExists(nhacungcap.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +107,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            return View(nhanVien);
+            return View(nhacungcap);
         }
 
-        // GET: NhanViens/Delete/5
+        // GET: NhaCungCap/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,16 +118,16 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 return NotFound();
             }
 
-            var nhanVien = await _context.Get(id);
-            //if (nhanVien == null)
+            var nhacungcap = await _context.Get(id);
+            //if (nhanvien == null)
             //{
             //    return NotFound();
             //}
 
-            return View(nhanVien);
+            return View(nhacungcap);
         }
 
-        // POST: NhanViens/Delete/5
+        // POST: NhaCungCap/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -141,7 +136,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool NhanVienExists(int id)
+        private bool NHACUNGCAPExists(int id)
         {
             return _context.Exists(id);
         }

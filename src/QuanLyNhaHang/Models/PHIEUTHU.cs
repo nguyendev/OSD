@@ -12,6 +12,12 @@ namespace QuanLyNhaHang.Models
 {
     public class PHIEUTHU
     {
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public string MaPT
         {
             get;
@@ -60,19 +66,13 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        public int Id
-        {
-            get;
-            set;
-        }
-
         public string MaNV
         {
             get;
             set;
         }
 
-        public SOTHUCHI SOTHUCHI
+        public virtual SOTHUCHI SOTHUCHI
         {
             get;
             set;
