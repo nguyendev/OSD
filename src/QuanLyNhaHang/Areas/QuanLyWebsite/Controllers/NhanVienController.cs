@@ -16,13 +16,13 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;    
         }
 
-        // GET: NhanViens
+        // GET: NhanVien
         public async Task<IActionResult> Index()
         {
             return View(await _context.GetAll());
         }
 
-        // GET: NhanViens/Details/5
+        // GET: NhanVien/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,18 +39,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             return View(nhanvien);
         }
 
-        // GET: NhanViens/Create
+        // GET: NhanVien/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: NhanViens/Create
+        // POST: NhanVien/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MaNV,TenNV,SoDT,DiaChi,CMND,MaBP")] NHANVIEN nhanvien)
+        public async Task<IActionResult> Create([Bind("Id,CMND,DiaChi,MaBP,MaNV,SoDT,TenNV")] NHANVIEN nhanvien)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             return View(nhanvien);
         }
 
-        // GET: NhanViens/Edit/5
+        // GET: NhanVien/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,12 +76,12 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             return View(nhanvien);
         }
 
-        // POST: NhanViens/Edit/5
+        // POST: NhanVien/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MaNV,TenNV,SoDT,DiaChi,CMND,MaBP")] NHANVIEN nhanvien)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CMND,DiaChi,MaBP,MaNV,SoDT,TenNV")] NHANVIEN nhanvien)
         {
             if (id != nhanvien.Id)
             {
@@ -92,11 +92,11 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
-                   await _context.Update(nhanvien);
+                    await _context.Update(nhanvien);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NhanVienExists(nhanvien.Id))
+                    if (!NhanvienExists(nhanvien.Id))
                     {
                         return NotFound();
                     }
@@ -110,7 +110,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             return View(nhanvien);
         }
 
-        // GET: NhanViens/Delete/5
+        // GET: NhanVien/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -119,15 +119,15 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             }
 
             var nhanvien = await _context.Get(id);
-            //if (nhanvien == null)
-            //{
-            //    return NotFound();
-            //}
+            if (nhanvien == null)
+            {
+                return NotFound();
+            }
 
             return View(nhanvien);
         }
 
-        // POST: NhanViens/Delete/5
+        // POST: NhanVien/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -136,7 +136,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool NhanVienExists(int id)
+        private bool NhanvienExists(int id)
         {
             return _context.Exists(id);
         }

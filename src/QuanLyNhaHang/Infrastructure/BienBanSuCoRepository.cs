@@ -4,26 +4,27 @@ using QuanLyNhaHang.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace QuanLyNhaHang.Infrastructure
 {
-    public class NhanVienRepository : IGenericRepository<NHANVIEN>
+    public class BienBanSuCoRepository : IGenericRepository<BIENBANSUCO>
     {
         protected readonly ApplicationDbContext Context;
-        protected DbSet<NHANVIEN> DbSet;
+        protected DbSet<BIENBANSUCO> DbSet;
 
-        public NhanVienRepository(ApplicationDbContext context)
+        public BienBanSuCoRepository(ApplicationDbContext context)
         {
             Context = context;
-            DbSet = context.Set<NHANVIEN>();
+            DbSet = context.Set<BIENBANSUCO>();
         }
-        public async Task Add(NHANVIEN Entity)
+        public async Task Add(BIENBANSUCO Entity)
         {
             Context.Add(Entity);
             await Save();
         }
 
-        public async Task<NHANVIEN> Get(int? id)
+        public async Task<BIENBANSUCO> Get(int? id)
         {
             return await DbSet.Where(c => c.Id == id).SingleOrDefaultAsync();
         }
@@ -32,12 +33,12 @@ namespace QuanLyNhaHang.Infrastructure
             return DbSet.Any(c => c.Id == id);
         }
 
-        public async Task<List<NHANVIEN>> GetAll()
+        public async Task<List<BIENBANSUCO>> GetAll()
         {
             return await DbSet.ToListAsync();
         }
 
-        public async Task Update(NHANVIEN Entity)
+        public async Task Update(BIENBANSUCO Entity)
         {
             DbSet.Update(Entity);
             await Save();
@@ -45,9 +46,9 @@ namespace QuanLyNhaHang.Infrastructure
 
         public async Task Delete(int id)
         {
-            var nhanvien = await DbSet.SingleOrDefaultAsync(m => m.Id == id);
-            DbSet.Remove(nhanvien);
-            await Save();          
+            var bienban = await DbSet.SingleOrDefaultAsync(m => m.Id == id);
+            DbSet.Remove(bienban);
+            await Save();
         }
 
         private async Task Save()

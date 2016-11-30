@@ -4,27 +4,28 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace QuanLyNhaHang.Models
 {
     public class CHEBIEN
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id
         {
             get;
             set;
         }
 
-        public string MaMon
+        public int MonAnId
         {
             get;
             set;
         }
 
-        public string MaNL
+        public int NguyenLieuId
         {
             get;
             set;
@@ -36,7 +37,17 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        //public virtual MONAN MONAN
+        //{
+        //    get;
+        //    set;
+        //}
 
+        //public virtual NGUYENLIEU NGUYENLIEU
+        //{
+        //    get;
+        //    set;
+        //}
     }
 }
 

@@ -90,7 +90,20 @@ namespace QuanLyNhaHang
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped(typeof(IGenericRepository<NHANVIEN>), typeof(NhanVienRepository));
             services.AddScoped(typeof(IGenericRepository<NHACUNGCAP>), typeof(NhaCungCapRepository));
-
+            services.AddScoped(typeof(IGenericRepository<BIENBANSUCO>), typeof(BienBanSuCoRepository));
+            services.AddScoped(typeof(IGenericRepository<BOPHAN>), typeof(BoPhanRepository));
+            services.AddScoped(typeof(IGenericRepository<CHEBIEN>), typeof(CheBienRepository));
+            services.AddScoped(typeof(IGenericRepository<HOADONNHAPHANG>), typeof(HoaDonNhapHangRepository));
+            services.AddScoped(typeof(IGenericRepository<LUOTKHACH>), typeof(LuotKhachRepository));
+            services.AddScoped(typeof(IGenericRepository<MONAN>), typeof(MonAnRepository));
+            services.AddScoped(typeof(IGenericRepository<NGUYENLIEU>), typeof(NguyenLieuRepository));
+            services.AddScoped(typeof(IGenericRepository<NGUYENLIEUTRONGKHO>), typeof(NguyenLieuTrongKhoRepository));
+            services.AddScoped(typeof(IGenericRepository<NHAPHANG>), typeof(NhapHangRepository));
+            services.AddScoped(typeof(IGenericRepository<PHIEUCHI>), typeof(PhieuChiRepository));
+            services.AddScoped(typeof(IGenericRepository<PHIEUTHU>), typeof(PhieuThuRepository));
+            services.AddScoped(typeof(IGenericRepository<SOTHUCHI>), typeof(SoThuChiRepository));
+            services.AddScoped(typeof(IGenericRepository<THIETHAI>), typeof(ThietHaiRepository));
+            services.AddScoped(typeof(IGenericRepository<YEUCAUMONAN>), typeof(YeuCauMonAnRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -261,8 +261,6 @@ D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Infrastructure\NhaCung
 D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Infrastructure\NhanVienRepository.cs
 D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Infrastructure\ReflectionControllerAction.cs
 D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Infrastructure\RoleUsersTagHelper.cs
-D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Migrations\20161125163919_rms.cs
-D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Migrations\20161125163919_rms.Designer.cs
 D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Models\AppUser.cs
 D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Models\BIENBANSUCO.cs
 D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Models\BlogBusiness.cs
@@ -277,7 +275,7 @@ D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Models\MONAN.cs
 D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Models\NGUYENLIEU.cs
 D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Models\NGUYENLIEUTRONGKHO.cs
 D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Models\NHACUNGCAP.cs
-D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Models\NHANVIEN.cs
+D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Models\NhanVien.cs
 D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Models\NHAPHANG.cs
 D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Models\PHIEUCHI.cs
 D:\Documents\IT_Documents\OOD\RMS\trunk\src\QuanLyNhaHang\Models\PHIEUTHU.cs

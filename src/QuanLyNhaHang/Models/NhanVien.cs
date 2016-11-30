@@ -4,16 +4,45 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace QuanLyNhaHang.Models
 {
-
     public class NHANVIEN
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id
+        {
+            get;
+            set;
+        }
+
+        //public int HoaDonNhapHangId
+        //{
+        //    get;
+        //    set;
+        //}
+
+        //public int BienBanSuCoId
+        //{
+        //    get;
+        //    set;
+        //}
+
+        //public int PhieuChiId
+        //{
+        //    get;
+        //    set;
+        //}
+
+        //public int PhieuThuId
+        //{
+        //    get;
+        //    set;
+        //}
+
+        public int BoPhanId
         {
             get;
             set;
@@ -49,35 +78,34 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        public string MaBP
-        {
-            get;
-            set;
-        }
+        //public virtual BOPHAN BOPHAN
+        //{
+        //    get;
+        //    set;
+        //}
+        //public virtual HOADONNHAPHANG HOADONNHAPHANG
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public virtual HOADONNHAPHANG HOADONNHAPHANG
-        {
-            get;
-            set;
-        }
+        //public virtual BIENBANSUCO BIENBANSUCO
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public virtual BIENBANSUCO BIENBANSUCO
-        {
-            get;
-            set;
-        }
+        //public virtual PHIEUCHI PHIEUCHI
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public virtual PHIEUCHI PHIEUCHI
-        {
-            get;
-            set;
-        }
-
-        public virtual PHIEUTHU PHIEUTHU
-        {
-            get;
-            set;
-        }
+        //public virtual PHIEUTHU PHIEUTHU
+        //{
+        //    get;
+        //    set;
+        //}
 
     }
 

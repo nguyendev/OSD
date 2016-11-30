@@ -4,20 +4,33 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace QuanLyNhaHang.Models
 {
     public class HOADONNHAPHANG
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id
         {
             get;
             set;
         }
 
+        public int NhanVienId
+        {
+            get;
+            set;
+        }
+
+        public int NhaCungCapId
+        {
+            get;
+            set;
+        }
         public string SoHD
         {
             get;
@@ -25,18 +38,6 @@ namespace QuanLyNhaHang.Models
         }
 
         public string ThoiGianNhap
-        {
-            get;
-            set;
-        }
-
-        public string MaNV
-        {
-            get;
-            set;
-        }
-
-        public string MaNCC
         {
             get;
             set;
@@ -54,12 +55,23 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        public virtual NHAPHANG NHAPHANG
-        {
-            get;
-            set;
-        }
+        //public virtual NHANVIEN NHANVIEN
+        //{
+        //    get;
+        //    set;
+        //}
 
+        //public virtual NHACUNGCAP NHACUNGCAP
+        //{
+        //    get;
+        //    set;
+        //}
+
+        //public virtual ICollection<NHAPHANG> NHAPHANG
+        //{
+        //    get;
+        //    set;
+        //}
     }
 
 }

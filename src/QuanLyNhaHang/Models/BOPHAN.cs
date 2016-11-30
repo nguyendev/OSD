@@ -4,20 +4,26 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace QuanLyNhaHang.Models
 {
     public class BOPHAN 
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id
         {
             get;
             set;
         }
 
+        
+        public int TruongBPId
+        {
+            get;
+            set;
+        }
         public string MaBP
         {
             get;
@@ -30,17 +36,17 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        public string TruongBP
-        {
-            get;
-            set;
-        }
+        //public string TruongBP
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public virtual NHANVIEN NHANVIEN
-        {
-            get;
-            set;
-        }
+        //public virtual NHANVIEN NHANVIEN
+        //{
+        //    get;
+        //    set;
+        //}
 
     }
 

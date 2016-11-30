@@ -119,10 +119,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             }
 
             var nhacungcap = await _context.Get(id);
-            //if (nhanvien == null)
-            //{
-            //    return NotFound();
-            //}
+            if (nhacungcap == null)
+            {
+                return NotFound();
+            }
 
             return View(nhacungcap);
         }
