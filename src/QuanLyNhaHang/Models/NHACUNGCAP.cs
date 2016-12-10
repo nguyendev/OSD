@@ -4,57 +4,67 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace QuanLyNhaHang.Models
+public class NHACUNGCAP
 {
-    public class NHACUNGCAP
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public string MaNCC
-        {
-            get;
-            set;
-        }
-
-        public string TenNCC
-        {
-            get;
-            set;
-        }
-
-        public string DiaChi
-        {
-            get;
-            set;
-        }
-
-        public string SoDT
-        {
-            get;
-            set;
-        }
-
-        public string SoNo
-        {
-            get;
-            set;
-        }
-
-        //public virtual NHAPHANG NHAPHANG
-        //{
-        //    get;
-        //    set;
-        //}
-
+        get;
+        set;
     }
+    public string MaNCC
+	{
+		get;
+		set;
+	}
+
+	public string TenNCC
+	{
+		get;
+		set;
+	}
+
+	public string DiaChi
+	{
+		get;
+		set;
+	}
+
+	public string SoDT
+	{
+		get;
+		set;
+	}
+
+	public string SoNo
+	{
+		get;
+		set;
+	}
+
+
+
+	public string SoTienNo
+	{
+		get;
+		set;
+	}
+
+	//public virtual YEUCAUNHAPHANG NHAPHANG
+	//{
+	//	get;
+	//	set;
+	//}
+
+	//public virtual List<YEUCAUNHAPHANG> getListYeuCau()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
 
 }
+

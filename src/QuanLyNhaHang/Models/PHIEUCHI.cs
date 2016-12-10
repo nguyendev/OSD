@@ -6,60 +6,63 @@
 //------------------------------------------------------------------------------
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace QuanLyNhaHang.Models
+
+public class PHIEUCHI : THUCHI
 {
-    public class PHIEUCHI
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public override int Id
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public string MaPC
-        {
-            get;
-            set;
-        }
-
-        public string MaNCC
-        {
-            get;
-            set;
-        }
-
-        public string SoTienChi
-        {
-            get;
-            set;
-        }
-
-        public string SoHD
-        {
-            get;
-            set;
-        }
-
-        public string NgayLap
-        {
-            get;
-            set;
-        }
-
-        public string MaNV
-        {
-            get;
-            set;
-        }
-
-        //public virtual SOTHUCHI SOTHUCHI
-        //{
-        //    get;
-        //    set;
-        //}
-
+        get;
+        set;
     }
+    public string MaPC
+	{
+		get;
+		set;
+	}
+
+	public string SoTienChi
+	{
+		get;
+		set;
+	}
+
+	public int MaHoaDon
+	{
+		get;
+		set;
+	}
+
+	//public string NgayLap
+	//{
+	//	get;
+	//	set;
+	//}
+
+
+
+	//public virtual string MaNV
+	//{
+	//	get;
+	//	set;
+	//}
+
+	public virtual string SoNo
+	{
+		get;
+		set;
+	}
+
+	//public virtual HOADONNHAPHANG getHoaDonNhapHang()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
+
+	//public virtual NHANVIEN getNhanVien()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
 
 }
+

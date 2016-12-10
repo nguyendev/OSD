@@ -1,4 +1,4 @@
-@model QuanLyNhaHang.Models.NHACUNGCAP
+@model NHACUNGCAP
 
 @{
     ViewData["Title"] = "Delete";
@@ -37,6 +37,12 @@
             @Html.DisplayFor(model => model.SoNo)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.SoTienNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoTienNo)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.TenNCC)
         </dt>
         <dd>
@@ -48,7 +54,6 @@
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
             <a asp-action="Index">Back to List</a>
-            <input type="hidden" asp-for="Id" />
         </div>
     </form>
 </div>

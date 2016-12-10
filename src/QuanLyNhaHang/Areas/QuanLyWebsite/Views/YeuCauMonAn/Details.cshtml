@@ -1,0 +1,37 @@
+@model YEUCAUMONAN
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>YEUCAUMONAN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaLuot)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaLuot)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaMon)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaMon)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

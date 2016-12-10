@@ -7,46 +7,44 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace QuanLyNhaHang.Models
+public class YEUCAUMONAN
 {
-    public class YEUCAUMONAN
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public int LuotKhachId
-        {
-            get;
-            set;
-        }
-
-        public int MonAnId
-        {
-            get;
-            set;
-        }
-
-        public int SoLuong
-        {
-            get;
-            set;
-        }
-
-        //public virtual LUOTKHACH LUOTKHACH
-        //{
-        //    get;
-        //    set;
-        //}
-
-        //public virtual MONAN MONAN
-        //{
-        //    get;
-        //    set;
-        //}
+        get;
+        set;
     }
+    public int MaLuot
+	{
+		get;
+		set;
+	}
+
+	public int MaMon
+	{
+		get;
+		set;
+	}
+
+	public int SoLuong
+	{
+		get;
+		set;
+	}
+
+
+
+	//public virtual LUOTKHACH getLuotKhach()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
+
+	//public virtual MONAN geMonAn()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
+
 }
+

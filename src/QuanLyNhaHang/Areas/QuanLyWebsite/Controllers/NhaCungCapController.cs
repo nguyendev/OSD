@@ -1,12 +1,10 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Infrastructure;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
-    [Area("QuanLyWebsite")]
     public class NhaCungCapController : Controller
     {
         private readonly IGenericRepository<NHACUNGCAP> _context;
@@ -50,7 +48,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DiaChi,MaNCC,SoDT,SoNo,TenNCC")] NHACUNGCAP nhacungcap)
+        public async Task<IActionResult> Create([Bind("Id,DiaChi,MaNCC,SoDT,SoNo,SoTienNo,TenNCC")] NHACUNGCAP nhacungcap)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +79,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DiaChi,MaNCC,SoDT,SoNo,TenNCC")] NHACUNGCAP nhacungcap)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DiaChi,MaNCC,SoDT,SoNo,SoTienNo,TenNCC")] NHACUNGCAP nhacungcap)
         {
             if (id != nhacungcap.Id)
             {
@@ -96,7 +94,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NHACUNGCAPExists(nhacungcap.Id))
+                    if (!NhaCungCapExists(nhacungcap.Id))
                     {
                         return NotFound();
                     }
@@ -108,6 +106,11 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 return RedirectToAction("Index");
             }
             return View(nhacungcap);
+        }
+
+        private bool NhaCungCapExists(int id)
+        {
+            return _context.Exists(id);
         }
 
         // GET: NhaCungCap/Delete/5
@@ -136,9 +139,5 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool NHACUNGCAPExists(int id)
-        {
-            return _context.Exists(id);
-        }
     }
 }

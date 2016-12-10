@@ -1,0 +1,57 @@
+@model LUOTKHACH
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>LUOTKHACH</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="MaLuot" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MaLuot" class="form-control" />
+                <span asp-validation-for="MaLuot" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SoBan" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SoBan" class="form-control" />
+                <span asp-validation-for="SoBan" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ThoiGianRa" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ThoiGianRa" class="form-control" />
+                <span asp-validation-for="ThoiGianRa" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ThoiGianVao" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ThoiGianVao" class="form-control" />
+                <span asp-validation-for="ThoiGianVao" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

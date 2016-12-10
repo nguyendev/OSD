@@ -1,0 +1,54 @@
+@model IEnumerable<LUOTKHACH>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaLuot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoBan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThoiGianRa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThoiGianVao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLuot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianRa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianVao)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

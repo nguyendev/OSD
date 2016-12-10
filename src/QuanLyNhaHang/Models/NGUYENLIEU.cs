@@ -7,60 +7,80 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace QuanLyNhaHang.Models
+public class NGUYENLIEU
 {
-    public class NGUYENLIEU
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public string DVT
-        {
-            get;
-            set;
-        }
-
-        public string Gia
-        {
-            get;
-            set;
-        }
-
-        public string MaNL
-        {
-            get;
-            set;
-        }
-
-        public string TenNL
-        {
-            get;
-            set;
-        }
-
-        public string XuatXu
-        {
-            get;
-            set;
-        }
-
-        //public virtual CHEBIEN CHEBIEN
-        //{
-        //    get;
-        //    set;
-        //}
-
-        //public virtual NGUYENLIEUTRONGKHO KHO
-        //{
-        //    get;
-        //    set;
-        //}
-
+        get;
+        set;
     }
+    public string DVT
+	{
+		get;
+		set;
+	}
+
+	public string Gia
+	{
+		get;
+		set;
+	}
+
+
+
+	public string MaNL
+	{
+		get;
+		set;
+	}
+
+	public string TenNL
+	{
+		get;
+		set;
+	}
+
+	//public string XuatXu
+	//{
+	//	get;
+	//	set;
+	//}
+
+	//public virtual NGUYENLIEUTRONGKHO KHO
+	//{
+	//	get;
+	//	set;
+	//}
+
+	//public virtual CHEBIEN CHEBIEN
+	//{
+	//	get;
+	//	set;
+	//}
+
+	//public virtual NGUYENLIEUTRONGKHO NGUYENLIEUTRONGKHO
+	//{
+	//	get;
+	//	set;
+	//}
+
+	//public virtual YEUCAUNHAPHANG NHAPHANG
+	//{
+	//	get;
+	//	set;
+	//}
+
+	//public virtual List<MONAN> getListMonAn()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
+
+	//public virtual NGUYENLIEUTRONGKHO getNguyenLieuTrongKho()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
 
 }
+

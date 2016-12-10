@@ -4,74 +4,77 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace QuanLyNhaHang.Models
+public class HOADONNHAPHANG
 {
-    public class HOADONNHAPHANG
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public int NhanVienId
-        {
-            get;
-            set;
-        }
-
-        public int NhaCungCapId
-        {
-            get;
-            set;
-        }
-        public string SoHD
-        {
-            get;
-            set;
-        }
-
-        public string ThoiGianNhap
-        {
-            get;
-            set;
-        }
-
-        public string ThanhTien
-        {
-            get;
-            set;
-        }
-
-        public string NgayLap
-        {
-            get;
-            set;
-        }
-
-        //public virtual NHANVIEN NHANVIEN
-        //{
-        //    get;
-        //    set;
-        //}
-
-        //public virtual NHACUNGCAP NHACUNGCAP
-        //{
-        //    get;
-        //    set;
-        //}
-
-        //public virtual ICollection<NHAPHANG> NHAPHANG
-        //{
-        //    get;
-        //    set;
-        //}
+        get;
+        set;
     }
+    public string SoHD
+	{
+		get;
+		set;
+	}
+
+	public string ThoiGianNhap
+	{
+		get;
+		set;
+	}
+
+	public int MaNV
+	{
+		get;
+		set;
+	}
+
+	public int MaNCC
+	{
+		get;
+		set;
+	}
+
+	public string ThanhTien
+	{
+		get;
+		set;
+	}
+
+	public string NgayLap
+	{
+		get;
+		set;
+	}
+
+
+
+	//public virtual PHIEUCHI PHIEUCHI
+	//{
+	//	get;
+	//	set;
+	//}
+
+	//public virtual YEUCAUNHAPHANG NHAPHANG
+	//{
+	//	get;
+	//	set;
+	//}
+
+	//public virtual PHIEUCHI getPhieuChi()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
+
+	//public virtual YEUCAUNHAPHANG getYeuCauNhapHang()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
 
 }
+

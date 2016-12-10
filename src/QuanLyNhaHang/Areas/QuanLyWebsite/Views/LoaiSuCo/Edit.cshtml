@@ -1,0 +1,51 @@
+@model LOAISUCO
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>LOAISUCO</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="MaBoPhanXuLy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MaBoPhanXuLy" class="form-control" />
+                <span asp-validation-for="MaBoPhanXuLy" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="MaLSC" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MaLSC" class="form-control" />
+                <span asp-validation-for="MaLSC" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TenLSC" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TenLSC" class="form-control" />
+                <span asp-validation-for="TenLSC" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

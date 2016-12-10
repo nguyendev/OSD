@@ -4,55 +4,60 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace QuanLyNhaHang.Models
+
+public class MONAN
 {
-    public class MONAN
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public string MaMon
-        {
-            get;
-            set;
-        }
-
-        public string TenMon
-        {
-            get;
-            set;
-        }
-
-        public string Gia
-        {
-            get;
-            set;
-        }
-
-        //public IList<CHEBIEN> CHEBIEN
-        //{
-        //    get;
-        //    set;
-        //}
-        //public virtual CHEBIEN CHEBIEN
-        //{
-        //    get;
-        //    set;
-        //}
-
-        //public virtual YEUCAUMONAN YEUCAUMONAN
-        //{
-        //    get;
-        //    set;
-        //}
-
+        get;
+        set;
     }
+    public string MaMon
+	{
+		get;
+		set;
+	}
+
+	public string TenMon
+	{
+		get;
+		set;
+	}
+
+	public string Gia
+	{
+		get;
+		set;
+	}
+
+
+
+	//public virtual YEUCAUMONAN YEUCAUMONAN
+	//{
+	//	get;
+	//	set;
+	//}
+
+	//public virtual CHEBIEN CHEBIEN
+	//{
+	//	get;
+	//	set;
+	//}
+
+	//public virtual List<NGUYENLIEU> getListNguyenLieu()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
+
+	//public virtual List<YEUCAUMONAN> getListYeuCauMonAn()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
 
 }
+

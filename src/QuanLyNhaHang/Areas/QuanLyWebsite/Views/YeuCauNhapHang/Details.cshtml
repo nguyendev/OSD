@@ -1,0 +1,49 @@
+@model YEUCAUNHAPHANG
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>YEUCAUNHAPHANG</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DonGia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaNCC)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaNCC)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaNL)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaNL)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SoHD)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoHD)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

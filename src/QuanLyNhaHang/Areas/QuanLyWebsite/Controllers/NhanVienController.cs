@@ -1,12 +1,10 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Infrastructure;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
-    [Area("QuanLyWebsite")]
     public class NhanVienController : Controller
     {
         private readonly IGenericRepository<NHANVIEN> _context;
@@ -96,7 +94,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NhanvienExists(nhanvien.Id))
+                    if (!NhanVienExists(nhanvien.Id))
                     {
                         return NotFound();
                     }
@@ -108,6 +106,11 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 return RedirectToAction("Index");
             }
             return View(nhanvien);
+        }
+
+        private bool NhanVienExists(int id)
+        {
+            return _context.Exists(id);
         }
 
         // GET: NhanVien/Delete/5
@@ -136,9 +139,5 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool NhanvienExists(int id)
-        {
-            return _context.Exists(id);
-        }
     }
 }

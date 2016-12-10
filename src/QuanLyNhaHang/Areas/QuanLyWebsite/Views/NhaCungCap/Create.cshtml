@@ -1,4 +1,4 @@
-@model QuanLyNhaHang.Models.NHACUNGCAP
+@model NHACUNGCAP
 
 @{
     ViewData["Title"] = "Create";
@@ -38,6 +38,13 @@
             <div class="col-md-10">
                 <input asp-for="SoNo" class="form-control" />
                 <span asp-validation-for="SoNo" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SoTienNo" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SoTienNo" class="form-control" />
+                <span asp-validation-for="SoTienNo" class="text-danger" />
             </div>
         </div>
         <div class="form-group">

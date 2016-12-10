@@ -4,50 +4,54 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace QuanLyNhaHang.Models
+
+public class BOPHAN
 {
-    public class BOPHAN 
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        
-        public int TruongBPId
-        {
-            get;
-            set;
-        }
-        public string MaBP
-        {
-            get;
-            set;
-        }
-
-        public string TenBP
-        {
-            get;
-            set;
-        }
-
-        //public string TruongBP
-        //{
-        //    get;
-        //    set;
-        //}
-
-        //public virtual NHANVIEN NHANVIEN
-        //{
-        //    get;
-        //    set;
-        //}
-
+        get;
+        set;
     }
+    public string MaBP
+	{
+		get;
+		set;
+	}
+
+	public string TenBP
+	{
+		get;
+		set;
+	}
+
+	public int? MaTruongBP
+	{
+		get;
+		set;
+	}
+
+
+
+	//public virtual LOAISUCO LOAISUCO
+	//{
+	//	get;
+	//	set;
+	//}
+
+	//public virtual List<NHANVIEN> getListNhanVien()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
+
+	//public virtual List<LOAISUCO> getListLoaiSuCo()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
 
 }
+

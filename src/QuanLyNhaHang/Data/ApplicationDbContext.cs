@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace QuanLyNhaHang.Data
 {
+    public class A
+    {
+
+    }
     public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -92,19 +94,22 @@ namespace QuanLyNhaHang.Data
         public DbSet<BIENBANSUCO> BIENBANSUCO { get; set; }
         public DbSet<BOPHAN> BOPHAN { get; set; }
         public DbSet<CHEBIEN> CHEBIEN { get; set; }
+        public DbSet<DATBAN> DATBAN { get; set; }
         public DbSet<HOADONNHAPHANG> HOADONNHAHANG { get; set; }
+        public DbSet<LOAISUCO> LOAISUCO { get; set; }
         public DbSet<LUOTKHACH> LUOTKHACH { get; set; }
         public DbSet<MONAN> MONAN { get; set; }
         public DbSet<NGUYENLIEU> NGUYENLIEU { get; set; }
         public DbSet<NGUYENLIEUTRONGKHO> NGUYENLIEUTRONGKHO { get; set; }
         public DbSet<NHACUNGCAP> NHACUNGCAP { get; set; }
         public DbSet<NHANVIEN> NHANVIEN { get; set; }
-        public DbSet<NHAPHANG> NHAPHANG { get; set; }
+        public DbSet<PHANHOI> PHANHOI { get; set; }
         public DbSet<PHIEUCHI> PHIEUCHI { get; set; }
         public DbSet<PHIEUTHU> PHIEUTHU { get; set; }
-        public DbSet<SOTHUCHI> SOTHUCHI { get; set; }
         public DbSet<THIETHAI> THIETHAI { get; set; }
+        public DbSet<THUCHI> THUCHI { get; set; }
         public DbSet<YEUCAUMONAN> YEUCAUMONAN { get; set; }
+        public DbSet<YEUCAUNHAPHANG> YEUCAUNHAPHANG { get; set; }
 
     }
 }

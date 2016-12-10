@@ -1,4 +1,4 @@
-@model IEnumerable<QuanLyNhaHang.Models.NHACUNGCAP>
+@model IEnumerable<NHACUNGCAP>
 
 @{
     ViewData["Title"] = "Index";
@@ -26,6 +26,9 @@
                 @Html.DisplayNameFor(model => model.SoNo)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.SoTienNo)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.TenNCC)
             </th>
             <th></th>
@@ -45,6 +48,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SoNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoTienNo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TenNCC)

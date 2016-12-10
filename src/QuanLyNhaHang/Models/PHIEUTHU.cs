@@ -6,78 +6,81 @@
 //------------------------------------------------------------------------------
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace QuanLyNhaHang.Models
+
+public class PHIEUTHU : THUCHI
 {
-    public class PHIEUTHU
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public override int Id
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        public string MaPT
-        {
-            get;
-            set;
-        }
-
-        public string MaLuot
-        {
-            get;
-            set;
-        }
-
-        public string TienHang
-        {
-            get;
-            set;
-        }
-
-        public string PhiDichVuKhac
-        {
-            get;
-            set;
-        }
-
-        public string KhuyenMai
-        {
-            get;
-            set;
-        }
-
-        public string VAT
-        {
-            get;
-            set;
-        }
-
-        public string TongTien
-        {
-            get;
-            set;
-        }
-
-        public string NgayLap
-        {
-            get;
-            set;
-        }
-
-        public string MaNV
-        {
-            get;
-            set;
-        }
-
-        //public virtual SOTHUCHI SOTHUCHI
-        //{
-        //    get;
-        //    set;
-        //}
-
+        get;
+        set;
     }
+    public string MaPT
+	{
+		get;
+		set;
+	}
+
+	public string MaLuot
+	{
+		get;
+		set;
+	}
+
+	public string TienHang
+	{
+		get;
+		set;
+	}
+
+	public string PhiDichVuKhac
+	{
+		get;
+		set;
+	}
+
+	public string KhuyenMai
+	{
+		get;
+		set;
+	}
+
+	public string VAT
+	{
+		get;
+		set;
+	}
+
+	public string TongTien
+	{
+		get;
+		set;
+	}
+
+	//public override string NgayLap
+	//{
+	//	get;
+	//	set;
+	//}
+
+
+
+	public int MaNV
+	{
+		get;
+		set;
+	}
+
+	//public virtual LUOTKHACH getLuotKhach()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
+
+	//public virtual NHANVIEN getNhanVien()
+	//{
+	//	throw new System.NotImplementedException();
+	//}
 
 }
+
