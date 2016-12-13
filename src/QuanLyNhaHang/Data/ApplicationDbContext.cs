@@ -96,6 +96,7 @@ namespace QuanLyNhaHang.Data
         public DbSet<CHEBIEN> CHEBIEN { get; set; }
         public DbSet<DATBAN> DATBAN { get; set; }
         public DbSet<HOADONNHAPHANG> HOADONNHAHANG { get; set; }
+        public DbSet<LOAIMONAN> LOAIMONAN { get; set; }
         public DbSet<LOAISUCO> LOAISUCO { get; set; }
         public DbSet<LUOTKHACH> LUOTKHACH { get; set; }
         public DbSet<MONAN> MONAN { get; set; }

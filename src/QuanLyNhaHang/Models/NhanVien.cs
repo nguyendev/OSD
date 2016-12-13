@@ -7,96 +7,100 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class NHANVIEN
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public class NHANVIEN
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id
+        {
+            get;
+            set;
+        }
+        public string MaNV
+        {
+            get;
+            set;
+        }
+
+        public string TenNV
+        {
+            get;
+            set;
+        }
+
+        public int SoDT
+        {
+            get;
+            set;
+        }
+
+        public string DiaChi
+        {
+            get;
+            set;
+        }
+
+        public string CMND
+        {
+            get;
+            set;
+        }
+
+        public int MaBP
+        {
+            get;
+            set;
+        }
+
+
+
+        //public virtual PHIEUTHU PHIEUTHU
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual BOPHAN BOPHAN
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual BIENBANSUCO BIENBANSUCO
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual HOADONNHAPHANG HOADONNHAPHANG
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual BOPHAN getBoPhan()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual List<BIENBANSUCO> getListBienBanSuCo()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual List<HOADONNHAPHANG> getListHoaDonNhapHangi()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual List<PHIEUTHU> getListPhieuThu()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
-    public string MaNV
-	{
-		get;
-		set;
-	}
-
-	public string TenNV
-	{
-		get;
-		set;
-	}
-
-	public int SoDT
-	{
-		get;
-		set;
-	}
-
-	public string DiaChi
-	{
-		get;
-		set;
-	}
-
-	public string CMND
-	{
-		get;
-		set;
-	}
-
-	public int MaBP
-	{
-		get;
-		set;
-	}
-
-
-
-	//public virtual PHIEUTHU PHIEUTHU
-	//{
-	//	get;
-	//	set;
-	//}
-
-	//public virtual BOPHAN BOPHAN
-	//{
-	//	get;
-	//	set;
-	//}
-
-	//public virtual BIENBANSUCO BIENBANSUCO
-	//{
-	//	get;
-	//	set;
-	//}
-
-	//public virtual HOADONNHAPHANG HOADONNHAPHANG
-	//{
-	//	get;
-	//	set;
-	//}
-
-	//public virtual BOPHAN getBoPhan()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
-
-	//public virtual List<BIENBANSUCO> getListBienBanSuCo()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
-
-	//public virtual List<HOADONNHAPHANG> getListHoaDonNhapHangi()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
-
-	//public virtual List<PHIEUTHU> getListPhieuThu()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
 
 }
 

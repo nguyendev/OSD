@@ -7,46 +7,48 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class DATBAN
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public class DATBAN
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id
+        {
+            get;
+            set;
+        }
+        public string Ngay
+        {
+            get;
+            set;
+        }
+
+        public string SoNguoi
+        {
+            get;
+            set;
+        }
+
+        public string Gio
+        {
+            get;
+            set;
+        }
+
+        public string SoDT
+        {
+            get;
+            set;
+        }
+
+        public string HoTen
+        {
+            get;
+            set;
+        }
+
     }
-    public string Ngay
-	{
-		get;
-		set;
-	}
-
-
-
-	public string SoNguoi
-	{
-		get;
-		set;
-	}
-
-	public string Gio
-	{
-		get;
-		set;
-	}
-
-	public string SoDT
-	{
-		get;
-		set;
-	}
-
-	public string HoTen
-	{
-		get;
-		set;
-	}
 
 }
 

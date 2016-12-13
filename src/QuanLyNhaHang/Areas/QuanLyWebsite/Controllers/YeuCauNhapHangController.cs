@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
+using QuanLyNhaHang.Models;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -48,7 +49,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DonGia,MaNCC,MaNL,SoHD,SoLuong")] YEUCAUNHAPHANG yeucaunhaphang)
+        public async Task<IActionResult> Create([Bind("Id,MaNCC,MaNL,SoHD,SoLuong,DonGia")] YEUCAUNHAPHANG yeucaunhaphang)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +81,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DonGia,MaNCC,MaNL,SoHD,SoLuong")] YEUCAUNHAPHANG yeucaunhaphang)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,MaNCC,MaNL,SoHD,SoLuong,DonGia")] YEUCAUNHAPHANG yeucaunhaphang)
         {
             if (id != yeucaunhaphang.Id)
             {

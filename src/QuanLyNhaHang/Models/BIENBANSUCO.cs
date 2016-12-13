@@ -8,68 +8,74 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class BIENBANSUCO
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public class BIENBANSUCO
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id
+        {
+            get;
+            set;
+        }
+
+        public string MaBienBan
+        {
+            get;
+            set;
+        }
+
+        public int MaLoaiSuCo
+        {
+            get;
+            set;
+        }
+
+        public int MaNV
+        {
+            get;
+            set;
+        }
+
+        public string NguyenNhan
+        {
+            get;
+            set;
+        }
+
+        public string ThoiGian
+        {
+            get;
+            set;
+        }
+
+        public string HuongGiaiQuyet
+        {
+            get;
+            set;
+        }
+
+
+
+
+        //public virtual THIETHAI THIETHAI
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual LOAISUCO getLoaiSuCo()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual THIETHAI getThietHai()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
-
-    public string MaBienBan
-	{
-		get;
-		set;
-	}
-
-	public string MaLSC
-	{
-		get;
-		set;
-	}
-
-	public string NguyenNhan
-	{
-		get;
-		set;
-	}
-
-	public string ThoiGian
-	{
-		get;
-		set;
-	}
-
-	public string HuongGiaiQuyet
-	{
-		get;
-		set;
-	}
-
-	public string MaNV
-	{
-		get;
-		set;
-	}
-
-
-	//public virtual THIETHAI THIETHAI
-	//{
-	//	get;
-	//	set;
-	//}
-
-	//public virtual LOAISUCO getLoaiSuCo()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
-
-	//public virtual THIETHAI getThietHai()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
 
 }
 

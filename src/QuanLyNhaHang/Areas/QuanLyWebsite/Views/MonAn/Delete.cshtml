@@ -1,4 +1,4 @@
-@model MONAN
+@model QuanLyNhaHang.Models.MONAN
 
 @{
     ViewData["Title"] = "Delete";
@@ -13,12 +13,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Gia)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Gia)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.MaMon)
         </dt>
         <dd>
@@ -29,6 +23,18 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.TenMon)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaLoaiMon)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaLoaiMon)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gia)
         </dd>
     </dl>
     

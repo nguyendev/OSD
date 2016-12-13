@@ -7,51 +7,57 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class LUOTKHACH
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public class LUOTKHACH
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id
+        {
+            get;
+            set;
+        }
+        public string MaLuot
+        {
+            get;
+            set;
+        }
+
+        public int SoBan
+        {
+            get;
+            set;
+        }
+
+        public string ThoiGianVao
+        {
+            get;
+            set;
+        }
+
+        public string ThoiGianRa
+        {
+            get;
+            set;
+        }
+
+   
+
+
+        //public virtual YEUCAUMONAN YEUCAUMONAN
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual PHIEUTHU PHIEUTHU
+        //{
+        //	get;
+        //	set;
+        //}
+
     }
-    public string MaLuot
-	{
-		get;
-		set;
-	}
-
-	public int SoBan
-	{
-		get;
-		set;
-	}
-
-	public string ThoiGianRa
-	{
-		get;
-		set;
-	}
-
-	public string ThoiGianVao
-	{
-		get;
-		set;
-	}
-
-
-	//public virtual YEUCAUMONAN YEUCAUMONAN
-	//{
-	//	get;
-	//	set;
-	//}
-
-	//public virtual PHIEUTHU PHIEUTHU
-	//{
-	//	get;
-	//	set;
-	//}
 
 }
 

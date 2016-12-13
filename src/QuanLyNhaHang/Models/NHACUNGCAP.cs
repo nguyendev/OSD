@@ -8,63 +8,65 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class NHACUNGCAP
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public class NHACUNGCAP
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id
+        {
+            get;
+            set;
+        }
+        public string MaNCC
+        {
+            get;
+            set;
+        }
+
+        public string TenNCC
+        {
+            get;
+            set;
+        }
+
+        public string DiaChi
+        {
+            get;
+            set;
+        }
+
+        public string SoDT
+        {
+            get;
+            set;
+        }
+
+        public string SoNo
+        {
+            get;
+            set;
+        }
+
+        public string SoTienNo
+        {
+            get;
+            set;
+        }
+
+        //public virtual YEUCAUNHAPHANG NHAPHANG
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual List<YEUCAUNHAPHANG> getListYeuCau()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
-    public string MaNCC
-	{
-		get;
-		set;
-	}
-
-	public string TenNCC
-	{
-		get;
-		set;
-	}
-
-	public string DiaChi
-	{
-		get;
-		set;
-	}
-
-	public string SoDT
-	{
-		get;
-		set;
-	}
-
-	public string SoNo
-	{
-		get;
-		set;
-	}
-
-
-
-	public string SoTienNo
-	{
-		get;
-		set;
-	}
-
-	//public virtual YEUCAUNHAPHANG NHAPHANG
-	//{
-	//	get;
-	//	set;
-	//}
-
-	//public virtual List<YEUCAUNHAPHANG> getListYeuCau()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
 
 }
 

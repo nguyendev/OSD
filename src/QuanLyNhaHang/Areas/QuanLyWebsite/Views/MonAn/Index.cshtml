@@ -1,4 +1,4 @@
-@model IEnumerable<MONAN>
+@model IEnumerable<QuanLyNhaHang.Models.MONAN>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,30 +12,36 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Gia)
-            </th>
+        <tr>         
             <th>
                 @Html.DisplayNameFor(model => model.MaMon)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TenMon)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaLoaiMon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gia)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gia)
-            </td>
+        <tr>         
             <td>
                 @Html.DisplayFor(modelItem => item.MaMon)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TenMon)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.MaLoaiMon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gia)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -1,4 +1,4 @@
-@model NGUYENLIEU
+@model QuanLyNhaHang.Models.NGUYENLIEU
 
 @{
     ViewData["Title"] = "Edit";
@@ -14,20 +14,6 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
         <div class="form-group">
-            <label asp-for="DVT" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="DVT" class="form-control" />
-                <span asp-validation-for="DVT" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Gia" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Gia" class="form-control" />
-                <span asp-validation-for="Gia" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
             <label asp-for="MaNL" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="MaNL" class="form-control" />
@@ -39,6 +25,20 @@
             <div class="col-md-10">
                 <input asp-for="TenNL" class="form-control" />
                 <span asp-validation-for="TenNL" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DVT" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DVT" class="form-control" />
+                <span asp-validation-for="DVT" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Gia" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Gia" class="form-control" />
+                <span asp-validation-for="Gia" class="text-danger" />
             </div>
         </div>
         <div class="form-group">

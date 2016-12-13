@@ -1,4 +1,4 @@
-@model IEnumerable<LOAISUCO>
+@model IEnumerable<QuanLyNhaHang.Models.LOAISUCO>
 
 @{
     ViewData["Title"] = "Index";
@@ -17,10 +17,10 @@
                 @Html.DisplayNameFor(model => model.MaBoPhanXuLy)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MaLSC)
+                @Html.DisplayNameFor(model => model.MaLoaiSuCo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TenLSC)
+                @Html.DisplayNameFor(model => model.TenLoaiSuCo)
             </th>
             <th></th>
         </tr>
@@ -32,10 +32,10 @@
                 @Html.DisplayFor(modelItem => item.MaBoPhanXuLy)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaLSC)
+                @Html.DisplayFor(modelItem => item.MaLoaiSuCo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TenLSC)
+                @Html.DisplayFor(modelItem => item.TenLoaiSuCo)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

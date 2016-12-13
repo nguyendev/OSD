@@ -7,49 +7,53 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class LOAISUCO
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
-	{
-		get;
-		set;
-	}
+    public class LOAISUCO
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id
+        {
+            get;
+            set;
+        }
 
-	public string MaLSC
-	{
-		get;
-		set;
-	}
+        public string MaLoaiSuCo
+        {
+            get;
+            set;
+        }
 
-	public string TenLSC
-	{
-		get;
-		set;
-	}
+        public string TenLoaiSuCo
+        {
+            get;
+            set;
+        }
 
-	public int MaBoPhanXuLy
-	{
-		get;
-		set;
-	}
+        public int MaBoPhanXuLy
+        {
+            get;
+            set;
+        }
 
-	//public virtual BIENBANSUCO BIENBANSUCO
-	//{
-	//	get;
-	//	set;
-	//}
+        //public virtual BIENBANSUCO BIENBANSUCO
+        //{
+        //	get;
+        //	set;
+        //}
 
-	//public virtual List<BIENBANSUCO> getListBienBanSuCo()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
+        //public virtual List<BIENBANSUCO> getListBienBanSuCo()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
 
-	//public virtual BOPHAN getBoPhan()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
+        //public virtual BOPHAN getBoPhan()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
 
+    }
 }
+
 

@@ -1,4 +1,4 @@
-@model IEnumerable<PHANHOI>
+@model IEnumerable<QuanLyNhaHang.Models.PHANHOI>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,12 +12,12 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NoiDung)
-            </th>
+        <tr>         
             <th>
                 @Html.DisplayNameFor(model => model.TenNguoiPH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoiDung)
             </th>
             <th></th>
         </tr>
@@ -26,10 +26,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NoiDung)
+                @Html.DisplayFor(modelItem => item.TenNguoiPH)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TenNguoiPH)
+                @Html.DisplayFor(modelItem => item.NoiDung)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -11,57 +11,61 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 
-public class THIETHAI
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public class THIETHAI
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id
+        {
+            get;
+            set;
+        }
+        public int MaBienBan
+        {
+            get;
+            set;
+        }
+
+        public string Ten
+        {
+            get;
+            set;
+        }
+
+        public int SoLuong
+        {
+            get;
+            set;
+        }
+
+        public string DVT
+        {
+            get;
+            set;
+        }
+
+        public string DonGia
+        {
+            get;
+            set;
+        }
+
+        public string ThanhTien
+        {
+            get;
+            set;
+        }
+
+
+
+        //public virtual BIENBANSUCO getBienBanSuCo()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
-    public int MaBienBan
-	{
-		get;
-		set;
-	}
-
-	public string Ten
-	{
-		get;
-		set;
-	}
-
-	public int SoLuong
-	{
-		get;
-		set;
-	}
-
-	public string DVT
-	{
-		get;
-		set;
-	}
-
-	public string DonGia
-	{
-		get;
-		set;
-	}
-
-	public string ThanhTien
-	{
-		get;
-		set;
-	}
-
-
-
-	//public virtual BIENBANSUCO getBienBanSuCo()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
 
 }
 

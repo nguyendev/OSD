@@ -1,4 +1,4 @@
-@model NHANVIEN
+@model QuanLyNhaHang.Models.NHANVIEN
 
 @{
     ViewData["Title"] = "Delete";
@@ -13,6 +13,24 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.MaNV)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaNV)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNV)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenNV)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaBP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaBP)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.CMND)
         </dt>
         <dd>
@@ -25,29 +43,12 @@
             @Html.DisplayFor(model => model.DiaChi)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.MaBP)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MaBP)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MaNV)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MaNV)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.SoDT)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.SoDT)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TenNV)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TenNV)
-        </dd>
+
     </dl>
     
     <form asp-action="Delete">

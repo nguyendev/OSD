@@ -7,80 +7,84 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class PHIEUTHU : THUCHI
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public override int Id
+    public class PHIEUTHU : THUCHI
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public override int Id
+        {
+            get;
+            set;
+        }
+        public string MaPT
+        {
+            get;
+            set;
+        }
+
+        public string MaLuot
+        {
+            get;
+            set;
+        }
+
+        public string TienHang
+        {
+            get;
+            set;
+        }
+
+        public string PhiDichVuKhac
+        {
+            get;
+            set;
+        }
+
+        public string KhuyenMai
+        {
+            get;
+            set;
+        }
+
+        public string VAT
+        {
+            get;
+            set;
+        }
+
+        public string TongTien
+        {
+            get;
+            set;
+        }
+
+        //public override string NgayLap
+        //{
+        //	get;
+        //	set;
+        //}
+
+
+
+        public int MaNV
+        {
+            get;
+            set;
+        }
+
+        //public virtual LUOTKHACH getLuotKhach()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual NHANVIEN getNhanVien()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
-    public string MaPT
-	{
-		get;
-		set;
-	}
-
-	public string MaLuot
-	{
-		get;
-		set;
-	}
-
-	public string TienHang
-	{
-		get;
-		set;
-	}
-
-	public string PhiDichVuKhac
-	{
-		get;
-		set;
-	}
-
-	public string KhuyenMai
-	{
-		get;
-		set;
-	}
-
-	public string VAT
-	{
-		get;
-		set;
-	}
-
-	public string TongTien
-	{
-		get;
-		set;
-	}
-
-	//public override string NgayLap
-	//{
-	//	get;
-	//	set;
-	//}
-
-
-
-	public int MaNV
-	{
-		get;
-		set;
-	}
-
-	//public virtual LUOTKHACH getLuotKhach()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
-
-	//public virtual NHANVIEN getNhanVien()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
 
 }
 

@@ -72,6 +72,7 @@ namespace QuanLyNhaHang
                 Configuration["Data:QuanLyNhaHang:ConnectionString"]));
             services.AddIdentity<AppUser, IdentityRole>(opts =>
             {
+
                 //opts.Cookies.ApplicationCookie.LoginPath = "/QuanLyWebsite/Account/Login";
                 //opts.User.RequireUniqueEmail = true;
                 //// opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
@@ -93,6 +94,7 @@ namespace QuanLyNhaHang
             services.AddScoped(typeof(IGenericRepository<CHEBIEN>), typeof(CheBienRepository));
             services.AddScoped(typeof(IGenericRepository<DATBAN>), typeof(DatBanRepository));
             services.AddScoped(typeof(IGenericRepository<HOADONNHAPHANG>), typeof(HoaDonNhapHangRepository));
+            services.AddScoped(typeof(IGenericRepository<LOAIMONAN>), typeof(LoaiMonAnRepository));
             services.AddScoped(typeof(IGenericRepository<LOAISUCO>), typeof(LoaiSuCoRepository));
             services.AddScoped(typeof(IGenericRepository<LUOTKHACH>), typeof(LuotKhachRepository));
             services.AddScoped(typeof(IGenericRepository<MONAN>), typeof(MonAnRepository));

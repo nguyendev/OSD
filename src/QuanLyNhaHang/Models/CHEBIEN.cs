@@ -7,44 +7,48 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class CHEBIEN
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public class CHEBIEN
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id
+        {
+            get;
+            set;
+        }
+
+        public string MaMon
+        {
+            get;
+            set;
+        }
+
+        public string MaNL
+        {
+            get;
+            set;
+        }
+
+        public string LuongDung
+        {
+            get;
+            set;
+        }
+
+
+        //public virtual NGUYENLIEU getNguyenLieu()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual MONAN getMonAn()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
-
-    public string MaMon
-	{
-		get;
-		set;
-	}
-
-	public string MaNL
-	{
-		get;
-		set;
-	}
-
-	public string LuongDung
-	{
-		get;
-		set;
-	}
-
-
-	//public virtual NGUYENLIEU getNguyenLieu()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
-
-	//public virtual MONAN getMonAn()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
 
 }
 

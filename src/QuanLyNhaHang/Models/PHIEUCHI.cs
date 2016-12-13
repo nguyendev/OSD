@@ -7,62 +7,66 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class PHIEUCHI : THUCHI
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public override int Id
+    public class PHIEUCHI : THUCHI
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public override int Id
+        {
+            get;
+            set;
+        }
+        public string MaPC
+        {
+            get;
+            set;
+        }
+
+        public string SoTienChi
+        {
+            get;
+            set;
+        }
+
+        public int MaHoaDon
+        {
+            get;
+            set;
+        }
+
+        //public string NgayLap
+        //{
+        //	get;
+        //	set;
+        //}
+
+
+
+        //public virtual string MaNV
+        //{
+        //	get;
+        //	set;
+        //}
+
+        public virtual string SoNo
+        {
+            get;
+            set;
+        }
+
+        //public virtual HOADONNHAPHANG getHoaDonNhapHang()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual NHANVIEN getNhanVien()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
-    public string MaPC
-	{
-		get;
-		set;
-	}
-
-	public string SoTienChi
-	{
-		get;
-		set;
-	}
-
-	public int MaHoaDon
-	{
-		get;
-		set;
-	}
-
-	//public string NgayLap
-	//{
-	//	get;
-	//	set;
-	//}
-
-
-
-	//public virtual string MaNV
-	//{
-	//	get;
-	//	set;
-	//}
-
-	public virtual string SoNo
-	{
-		get;
-		set;
-	}
-
-	//public virtual HOADONNHAPHANG getHoaDonNhapHang()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
-
-	//public virtual NHANVIEN getNhanVien()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
 
 }
 

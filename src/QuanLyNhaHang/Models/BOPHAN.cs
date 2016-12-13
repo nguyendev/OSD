@@ -8,50 +8,54 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class BOPHAN
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public class BOPHAN
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id
+        {
+            get;
+            set;
+        }
+        public string MaBP
+        {
+            get;
+            set;
+        }
+
+        public string TenBP
+        {
+            get;
+            set;
+        }
+
+        public int? MaTruongBP
+        {
+            get;
+            set;
+        }
+
+
+
+        //public virtual LOAISUCO LOAISUCO
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual List<NHANVIEN> getListNhanVien()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual List<LOAISUCO> getListLoaiSuCo()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
-    public string MaBP
-	{
-		get;
-		set;
-	}
-
-	public string TenBP
-	{
-		get;
-		set;
-	}
-
-	public int? MaTruongBP
-	{
-		get;
-		set;
-	}
-
-
-
-	//public virtual LOAISUCO LOAISUCO
-	//{
-	//	get;
-	//	set;
-	//}
-
-	//public virtual List<NHANVIEN> getListNhanVien()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
-
-	//public virtual List<LOAISUCO> getListLoaiSuCo()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
 
 }
 

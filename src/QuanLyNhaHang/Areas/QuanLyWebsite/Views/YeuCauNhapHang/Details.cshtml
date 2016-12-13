@@ -1,4 +1,4 @@
-@model YEUCAUNHAPHANG
+@model QuanLyNhaHang.Models.YEUCAUNHAPHANG
 
 @{
     ViewData["Title"] = "Details";
@@ -10,13 +10,7 @@
 <div>
     <h4>YEUCAUNHAPHANG</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DonGia)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DonGia)
-        </dd>
+    <dl class="dl-horizontal">      
         <dt>
             @Html.DisplayNameFor(model => model.MaNCC)
         </dt>
@@ -40,6 +34,12 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DonGia)
         </dd>
     </dl>
 </div>

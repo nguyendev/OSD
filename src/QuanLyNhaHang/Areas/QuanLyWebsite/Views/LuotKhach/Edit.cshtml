@@ -1,4 +1,4 @@
-@model LUOTKHACH
+@model QuanLyNhaHang.Models.LUOTKHACH
 
 @{
     ViewData["Title"] = "Edit";
@@ -28,19 +28,19 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="ThoiGianRa" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ThoiGianRa" class="form-control" />
-                <span asp-validation-for="ThoiGianRa" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
             <label asp-for="ThoiGianVao" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="ThoiGianVao" class="form-control" />
                 <span asp-validation-for="ThoiGianVao" class="text-danger" />
             </div>
         </div>
+        <div class="form-group">
+            <label asp-for="ThoiGianRa" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ThoiGianRa" class="form-control" />
+                <span asp-validation-for="ThoiGianRa" class="text-danger" />
+            </div>
+        </div>      
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

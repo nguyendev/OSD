@@ -8,56 +8,64 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class MONAN
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public class MONAN
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id
+        {
+            get;
+            set;
+        }
+        public string MaMon
+        {
+            get;
+            set;
+        }
+
+        public string TenMon
+        {
+            get;
+            set;
+        }
+
+        public string Gia
+        {
+            get;
+            set;
+        }
+
+        public int MaLoaiMon
+        {
+            get;
+            set;
+        }
+
+        //public virtual YEUCAUMONAN YEUCAUMONAN
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual CHEBIEN CHEBIEN
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual List<NGUYENLIEU> getListNguyenLieu()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual List<YEUCAUMONAN> getListYeuCauMonAn()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
-    public string MaMon
-	{
-		get;
-		set;
-	}
-
-	public string TenMon
-	{
-		get;
-		set;
-	}
-
-	public string Gia
-	{
-		get;
-		set;
-	}
-
-
-
-	//public virtual YEUCAUMONAN YEUCAUMONAN
-	//{
-	//	get;
-	//	set;
-	//}
-
-	//public virtual CHEBIEN CHEBIEN
-	//{
-	//	get;
-	//	set;
-	//}
-
-	//public virtual List<NGUYENLIEU> getListNguyenLieu()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
-
-	//public virtual List<YEUCAUMONAN> getListYeuCauMonAn()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
 
 }
 

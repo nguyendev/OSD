@@ -1,4 +1,4 @@
-@model NHACUNGCAP
+@model QuanLyNhaHang.Models.NHACUNGCAP
 
 @{
     ViewData["Title"] = "Details";
@@ -24,6 +24,12 @@
             @Html.DisplayFor(model => model.MaNCC)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.TenNCC)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenNCC)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.SoDT)
         </dt>
         <dd>
@@ -40,12 +46,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.SoTienNo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TenNCC)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TenNCC)
         </dd>
     </dl>
 </div>

@@ -4,42 +4,45 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class THUCHI
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public virtual int Id
-	{
-		get;
-		set;
-	}
+    public class THUCHI
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public virtual int Id
+        {
+            get;
+            set;
+        }
 
-	public string NgayLap
-	{
-		get;
-		set;
-	}
+        public string NgayLap
+        {
+            get;
+            set;
+        }
 
-	public string SoTien
-	{
-		get;
-		set;
-	}
+        public string SoTien
+        {
+            get;
+            set;
+        }
 
-	public bool LaPhieuThu
-	{
-		get;
-		set;
-	}
+        public bool LaPhieuThu
+        {
+            get;
+            set;
+        }
 
-	//public virtual List<THUCHI> getListThuChi()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
+        //public virtual List<THUCHI> getListThuChi()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+    }
 
 }
 

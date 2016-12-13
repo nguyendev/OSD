@@ -1,4 +1,4 @@
-@model BOPHAN
+@model QuanLyNhaHang.Models.BOPHAN
 
 @{
     ViewData["Title"] = "Create";
@@ -18,19 +18,19 @@
                 <input asp-for="MaBP" class="form-control" />
                 <span asp-validation-for="MaBP" class="text-danger" />
             </div>
+        </div>       
+        <div class="form-group">
+            <label asp-for="TenBP" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TenBP" class="form-control" />
+                <span asp-validation-for="TenBP" class="text-danger" />
+            </div>
         </div>
         <div class="form-group">
             <label asp-for="MaTruongBP" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="MaTruongBP" class="form-control" />
                 <span asp-validation-for="MaTruongBP" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="TenBP" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="TenBP" class="form-control" />
-                <span asp-validation-for="TenBP" class="text-danger" />
             </div>
         </div>
         <div class="form-group">

@@ -7,61 +7,65 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class YEUCAUNHAPHANG
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public class YEUCAUNHAPHANG
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id
+        {
+            get;
+            set;
+        }
+        public int SoHD
+        {
+            get;
+            set;
+        }
+
+        public int MaNL
+        {
+            get;
+            set;
+        }
+
+        public int SoLuong
+        {
+            get;
+            set;
+        }
+
+        public string DonGia
+        {
+            get;
+            set;
+        }
+
+        public int MaNCC
+        {
+            get;
+            set;
+        }
+
+
+
+        //public virtual HOADONNHAPHANG getHoaDonNhapHang()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual NHACUNGCAP getNhaCungCap()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual NGUYENLIEU getNguyenLieu()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
-    public int SoHD
-	{
-		get;
-		set;
-	}
-
-	public int MaNL
-	{
-		get;
-		set;
-	}
-
-	public int SoLuong
-	{
-		get;
-		set;
-	}
-
-	public string DonGia
-	{
-		get;
-		set;
-	}
-
-	public int MaNCC
-	{
-		get;
-		set;
-	}
-
-
-
-	//public virtual HOADONNHAPHANG getHoaDonNhapHang()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
-
-	//public virtual NHACUNGCAP getNhaCungCap()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
-
-	//public virtual NGUYENLIEU getNguyenLieu()
-	//{
-	//	throw new System.NotImplementedException();
-	//}
 
 }
 

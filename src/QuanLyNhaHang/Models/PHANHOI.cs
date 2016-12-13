@@ -7,28 +7,30 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class PHANHOI
+namespace QuanLyNhaHang.Models
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id
+    public class PHANHOI
     {
-        get;
-        set;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id
+        {
+            get;
+            set;
+        }
+        public string NoiDung
+        {
+            get;
+            set;
+        }
+
+        public string TenNguoiPH
+        {
+            get;
+            set;
+        }
+
     }
-    public string NoiDung
-	{
-		get;
-		set;
-	}
-
-
-
-	public string TenNguoiPH
-	{
-		get;
-		set;
-	}
 
 }
 

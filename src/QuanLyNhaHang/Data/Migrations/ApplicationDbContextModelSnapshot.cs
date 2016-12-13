@@ -16,6 +16,136 @@ namespace QuanLyNhaHang.Migrations
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("BIENBANSUCO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("HuongGiaiQuyet");
+
+                    b.Property<string>("MaBienBan");
+
+                    b.Property<string>("MaLSC");
+
+                    b.Property<string>("MaNV");
+
+                    b.Property<string>("NguyenNhan");
+
+                    b.Property<string>("ThoiGian");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BIENBANSUCO");
+                });
+
+            modelBuilder.Entity("BOPHAN", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("MaBP");
+
+                    b.Property<int?>("MaTruongBP");
+
+                    b.Property<string>("TenBP");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BOPHAN");
+                });
+
+            modelBuilder.Entity("CHEBIEN", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("LuongDung");
+
+                    b.Property<string>("MaMon");
+
+                    b.Property<string>("MaNL");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CHEBIEN");
+                });
+
+            modelBuilder.Entity("DATBAN", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Gio");
+
+                    b.Property<string>("HoTen");
+
+                    b.Property<string>("Ngay");
+
+                    b.Property<string>("SoDT");
+
+                    b.Property<string>("SoNguoi");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DATBAN");
+                });
+
+            modelBuilder.Entity("HOADONNHAPHANG", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("MaNCC");
+
+                    b.Property<int>("MaNV");
+
+                    b.Property<string>("NgayLap");
+
+                    b.Property<string>("SoHD");
+
+                    b.Property<string>("ThanhTien");
+
+                    b.Property<string>("ThoiGianNhap");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HOADONNHAHANG");
+                });
+
+            modelBuilder.Entity("LOAISUCO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("MaBoPhanXuLy");
+
+                    b.Property<string>("MaLSC");
+
+                    b.Property<string>("TenLSC");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LOAISUCO");
+                });
+
+            modelBuilder.Entity("LUOTKHACH", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("MaLuot");
+
+                    b.Property<int>("SoBan");
+
+                    b.Property<string>("ThoiGianRa");
+
+                    b.Property<string>("ThoiGianVao");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LUOTKHACH");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
                     b.Property<string>("Id");
@@ -123,6 +253,114 @@ namespace QuanLyNhaHang.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("MONAN", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Gia");
+
+                    b.Property<string>("MaMon");
+
+                    b.Property<string>("TenMon");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MONAN");
+                });
+
+            modelBuilder.Entity("NGUYENLIEU", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DVT");
+
+                    b.Property<string>("Gia");
+
+                    b.Property<string>("MaNL");
+
+                    b.Property<string>("TenNL");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NGUYENLIEU");
+                });
+
+            modelBuilder.Entity("NGUYENLIEUTRONGKHO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("MaNL");
+
+                    b.Property<int>("SoLuong");
+
+                    b.Property<bool>("TinhTrang");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NGUYENLIEUTRONGKHO");
+                });
+
+            modelBuilder.Entity("NHACUNGCAP", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DiaChi");
+
+                    b.Property<string>("MaNCC");
+
+                    b.Property<string>("SoDT");
+
+                    b.Property<string>("SoNo");
+
+                    b.Property<string>("SoTienNo");
+
+                    b.Property<string>("TenNCC");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NHACUNGCAP");
+                });
+
+            modelBuilder.Entity("NHANVIEN", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CMND");
+
+                    b.Property<string>("DiaChi");
+
+                    b.Property<int>("MaBP");
+
+                    b.Property<string>("MaNV");
+
+                    b.Property<int>("SoDT");
+
+                    b.Property<string>("TenNV");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NHANVIEN");
+                });
+
+            modelBuilder.Entity("PHANHOI", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("NoiDung");
+
+                    b.Property<string>("TenNguoiPH");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PHANHOI");
+                });
+
             modelBuilder.Entity("QuanLyNhaHang.Models.AppUser", b =>
                 {
                     b.Property<string>("Id");
@@ -176,32 +414,6 @@ namespace QuanLyNhaHang.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("QuanLyNhaHang.Models.BIENBANSUCO", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("HuongGiaiQuyet");
-
-                    b.Property<string>("LoaiSuCo");
-
-                    b.Property<string>("MaBienBan");
-
-                    b.Property<string>("NguoiChiuTrachNhiem");
-
-                    b.Property<string>("NguyenNhan");
-
-                    b.Property<int>("NhanVienId");
-
-                    b.Property<string>("ThoiGian");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NhanVienId");
-
-                    b.ToTable("BIENBANSUCO");
-                });
-
             modelBuilder.Entity("QuanLyNhaHang.Models.BlogBusiness", b =>
                 {
                     b.Property<int>("BusinessId")
@@ -247,295 +459,16 @@ namespace QuanLyNhaHang.Migrations
                     b.ToTable("BlogPermission");
                 });
 
-            modelBuilder.Entity("QuanLyNhaHang.Models.BOPHAN", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("MaBP");
-
-                    b.Property<string>("TenBP");
-
-                    b.Property<int>("TruongBPId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BOPHAN");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.CHEBIEN", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("LuongDung");
-
-                    b.Property<int>("MonAnId");
-
-                    b.Property<int>("NguyenLieuId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MonAnId");
-
-                    b.HasIndex("NguyenLieuId");
-
-                    b.ToTable("CHEBIEN");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.HOADONNHAPHANG", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("NgayLap");
-
-                    b.Property<int>("NhaCungCapId");
-
-                    b.Property<int>("NhanVienId");
-
-                    b.Property<string>("SoHD");
-
-                    b.Property<string>("ThanhTien");
-
-                    b.Property<string>("ThoiGianNhap");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NhaCungCapId");
-
-                    b.HasIndex("NhanVienId");
-
-                    b.ToTable("HOADONNHAHANG");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.LUOTKHACH", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("MaLuot");
-
-                    b.Property<int>("SoBan");
-
-                    b.Property<string>("ThoiGianRa");
-
-                    b.Property<string>("ThoiGianVao");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LUOTKHACH");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.MONAN", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Gia");
-
-                    b.Property<string>("MaMon");
-
-                    b.Property<string>("TenMon");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MONAN");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.NGUYENLIEU", b =>
+            modelBuilder.Entity("THIETHAI", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("DVT");
 
-                    b.Property<string>("Gia");
-
-                    b.Property<string>("MaNL");
-
-                    b.Property<string>("TenNL");
-
-                    b.Property<string>("XuatXu");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("NGUYENLIEU");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.NGUYENLIEUTRONGKHO", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("NguyenLieuId");
-
-                    b.Property<int>("SoLuong");
-
-                    b.Property<bool>("TinhTrang");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NguyenLieuId");
-
-                    b.ToTable("NGUYENLIEUTRONGKHO");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.NHACUNGCAP", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("DiaChi");
-
-                    b.Property<string>("MaNCC");
-
-                    b.Property<string>("SoDT");
-
-                    b.Property<string>("SoNo");
-
-                    b.Property<string>("TenNCC");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("NHACUNGCAP");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.NHANVIEN", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("BoPhanId");
-
-                    b.Property<string>("CMND");
-
-                    b.Property<string>("DiaChi");
-
-                    b.Property<string>("MaNV");
-
-                    b.Property<int>("SoDT");
-
-                    b.Property<string>("TenNV");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BoPhanId")
-                        .IsUnique();
-
-                    b.ToTable("NHANVIEN");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.NHAPHANG", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
                     b.Property<string>("DonGia");
 
-                    b.Property<int?>("HOADONNHAPHANGId");
-
-                    b.Property<int>("HoaDonId");
-
-                    b.Property<string>("MaNCC");
-
-                    b.Property<string>("MaNL");
-
-                    b.Property<string>("SoLuong");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HOADONNHAPHANGId");
-
-                    b.ToTable("NHAPHANG");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.PHIEUCHI", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("MaNCC");
-
-                    b.Property<string>("MaNV");
-
-                    b.Property<string>("MaPC");
-
-                    b.Property<string>("NgayLap");
-
-                    b.Property<int?>("SOTHUCHIId");
-
-                    b.Property<string>("SoHD");
-
-                    b.Property<string>("SoTienChi");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SOTHUCHIId");
-
-                    b.ToTable("PHIEUCHI");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.PHIEUTHU", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("KhuyenMai");
-
-                    b.Property<string>("MaLuot");
-
-                    b.Property<string>("MaNV");
-
-                    b.Property<string>("MaPT");
-
-                    b.Property<string>("NgayLap");
-
-                    b.Property<string>("PhiDichVuKhac");
-
-                    b.Property<int?>("SOTHUCHIId");
-
-                    b.Property<string>("TienHang");
-
-                    b.Property<string>("TongTien");
-
-                    b.Property<string>("VAT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SOTHUCHIId");
-
-                    b.ToTable("PHIEUTHU");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.SOTHUCHI", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("MaPC");
-
-                    b.Property<string>("MaPT");
-
-                    b.Property<string>("Ngay");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SOTHUCHI");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.THIETHAI", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("BIENBANSUCOId");
-
-                    b.Property<int>("BienBanId");
-
-                    b.Property<string>("DVT");
-
-                    b.Property<string>("DonGia");
+                    b.Property<int>("MaBienBan");
 
                     b.Property<int>("SoLuong");
 
@@ -545,29 +478,106 @@ namespace QuanLyNhaHang.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BIENBANSUCOId");
-
                     b.ToTable("THIETHAI");
                 });
 
-            modelBuilder.Entity("QuanLyNhaHang.Models.YEUCAUMONAN", b =>
+            modelBuilder.Entity("THUCHI", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("LuotKhachId");
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
-                    b.Property<int>("MonAnId");
+                    b.Property<bool>("LaPhieuThu");
+
+                    b.Property<string>("NgayLap");
+
+                    b.Property<string>("SoTien");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("THUCHI");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("THUCHI");
+                });
+
+            modelBuilder.Entity("YEUCAUMONAN", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("MaLuot");
+
+                    b.Property<int>("MaMon");
 
                     b.Property<int>("SoLuong");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LuotKhachId");
-
-                    b.HasIndex("MonAnId");
-
                     b.ToTable("YEUCAUMONAN");
+                });
+
+            modelBuilder.Entity("YEUCAUNHAPHANG", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DonGia");
+
+                    b.Property<int>("MaNCC");
+
+                    b.Property<int>("MaNL");
+
+                    b.Property<int>("SoHD");
+
+                    b.Property<int>("SoLuong");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("YEUCAUNHAPHANG");
+                });
+
+            modelBuilder.Entity("PHIEUCHI", b =>
+                {
+                    b.HasBaseType("THUCHI");
+
+                    b.Property<int>("MaHoaDon");
+
+                    b.Property<string>("MaPC");
+
+                    b.Property<string>("SoNo");
+
+                    b.Property<string>("SoTienChi");
+
+                    b.ToTable("PHIEUCHI");
+
+                    b.HasDiscriminator().HasValue("PHIEUCHI");
+                });
+
+            modelBuilder.Entity("PHIEUTHU", b =>
+                {
+                    b.HasBaseType("THUCHI");
+
+                    b.Property<string>("KhuyenMai");
+
+                    b.Property<string>("MaLuot");
+
+                    b.Property<int>("MaNV");
+
+                    b.Property<string>("MaPT");
+
+                    b.Property<string>("PhiDichVuKhac");
+
+                    b.Property<string>("TienHang");
+
+                    b.Property<string>("TongTien");
+
+                    b.Property<string>("VAT");
+
+                    b.ToTable("PHIEUTHU");
+
+                    b.HasDiscriminator().HasValue("PHIEUTHU");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -607,102 +617,11 @@ namespace QuanLyNhaHang.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("QuanLyNhaHang.Models.BIENBANSUCO", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.NHANVIEN", "NHANVIEN")
-                        .WithMany()
-                        .HasForeignKey("NhanVienId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("QuanLyNhaHang.Models.BlogPermission", b =>
                 {
                     b.HasOne("QuanLyNhaHang.Models.BlogBusiness", "BlogBusinesses")
                         .WithMany("BlogPermissions")
                         .HasForeignKey("BlogBusinessesBusinessId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.CHEBIEN", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.MONAN", "MONAN")
-                        .WithMany()
-                        .HasForeignKey("MonAnId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("QuanLyNhaHang.Models.NGUYENLIEU", "NGUYENLIEU")
-                        .WithMany()
-                        .HasForeignKey("NguyenLieuId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.HOADONNHAPHANG", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.NHACUNGCAP", "NHACUNGCAP")
-                        .WithMany()
-                        .HasForeignKey("NhaCungCapId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("QuanLyNhaHang.Models.NHANVIEN", "NHANVIEN")
-                        .WithMany()
-                        .HasForeignKey("NhanVienId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.NGUYENLIEUTRONGKHO", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.NGUYENLIEU", "NGUYENLIEU")
-                        .WithMany()
-                        .HasForeignKey("NguyenLieuId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.NHANVIEN", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.BOPHAN", "BOPHAN")
-                        .WithOne("NHANVIEN")
-                        .HasForeignKey("QuanLyNhaHang.Models.NHANVIEN", "BoPhanId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.NHAPHANG", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.HOADONNHAPHANG", "HOADONNHAPHANG")
-                        .WithMany("NHAPHANG")
-                        .HasForeignKey("HOADONNHAPHANGId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.PHIEUCHI", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.SOTHUCHI", "SOTHUCHI")
-                        .WithMany()
-                        .HasForeignKey("SOTHUCHIId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.PHIEUTHU", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.SOTHUCHI", "SOTHUCHI")
-                        .WithMany()
-                        .HasForeignKey("SOTHUCHIId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.THIETHAI", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.BIENBANSUCO", "BIENBANSUCO")
-                        .WithMany()
-                        .HasForeignKey("BIENBANSUCOId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.YEUCAUMONAN", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.LUOTKHACH", "LUOTKHACH")
-                        .WithMany()
-                        .HasForeignKey("LuotKhachId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("QuanLyNhaHang.Models.MONAN", "MONAN")
-                        .WithMany()
-                        .HasForeignKey("MonAnId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }
