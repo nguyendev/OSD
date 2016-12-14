@@ -49,11 +49,11 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        public string SoTienNo
-        {
-            get;
-            set;
-        }
+        // public string SoTienNo
+        // {
+            // get;
+            // set;
+        // }
 
         //public virtual YEUCAUNHAPHANG NHAPHANG
         //{
