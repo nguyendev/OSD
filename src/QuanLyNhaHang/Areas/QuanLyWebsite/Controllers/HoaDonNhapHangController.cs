@@ -6,6 +6,7 @@ using QuanLyNhaHang.Models;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
+    [Area("QuanLyWebsite")]
     public class HoaDonNhapHangController : Controller
     {
         private readonly IGenericRepository<HOADONNHAPHANG> _context;
