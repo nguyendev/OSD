@@ -8,7 +8,7 @@ using QuanLyNhaHang.Data;
 namespace QuanLyNhaHang.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161215020906_Initial")]
+    [Migration("20161218052911_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
