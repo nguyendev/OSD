@@ -1,0 +1,85 @@
+@model QuanLyNhaHang.Models.PHIEUTHU
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PHIEUTHU</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LaPhieuThu)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LaPhieuThu)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayLap)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NgayLap)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SoTien)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoTien)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KhuyenMai)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.KhuyenMai)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaLuot)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaLuot)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaNV)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaNV)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaPT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaPT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhiDichVuKhac)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhiDichVuKhac)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TienHang)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TienHang)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TongTien)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TongTien)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VAT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VAT)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

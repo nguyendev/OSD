@@ -1,0 +1,80 @@
+@model QuanLyNhaHang.Models.PHIEUCHI
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>PHIEUCHI</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="LaPhieuThu" />
+                    <label asp-for="LaPhieuThu"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NgayLap" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="NgayLap" class="form-control" />
+                <span asp-validation-for="NgayLap" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SoTien" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SoTien" class="form-control" />
+                <span asp-validation-for="SoTien" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="MaHoaDon" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MaHoaDon" class="form-control" />
+                <span asp-validation-for="MaHoaDon" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="MaPC" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MaPC" class="form-control" />
+                <span asp-validation-for="MaPC" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SoNo" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SoNo" class="form-control" />
+                <span asp-validation-for="SoNo" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SoTienChi" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SoTienChi" class="form-control" />
+                <span asp-validation-for="SoTienChi" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
