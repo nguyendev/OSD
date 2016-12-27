@@ -55,5 +55,10 @@ namespace QuanLyNhaHang.Infrastructure
             DbSet.Update(Entity);
             await Save();
         }
+
+        public DbSet<YEUCAUNHAPHANG> GetList()
+        {
+            return DbSet;
+        }
     }
 }

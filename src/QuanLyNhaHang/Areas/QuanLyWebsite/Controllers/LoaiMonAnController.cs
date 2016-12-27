@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Infrastructure;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -17,10 +19,46 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;    
         }
 
-        // GET: LoaiMonAn
-        public async Task<IActionResult> Index()
+        //search
+        public async Task<List<LOAIMONAN>> GetResult(string sortOrder, string maloaimon = null,
+            string tenloaimon = null)
         {
-            return View(await _context.GetAll());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.MaLoaiMonAn = string.IsNullOrEmpty(sortOrder) ? "MaLoaiMonGiam" : "MaLoaiMon";
+            ViewBag.TenLoaiMonAn = string.IsNullOrEmpty(sortOrder) ? "TenLoaiMonGiam" : "TenLoaiMon";
+            IQueryable<LOAIMONAN> result = _context.GetList().Where(c =>
+           (maloaimon == null || c.MaLoaiMon == maloaimon) && (tenloaimon == null || c.TenLoaiMon == tenloaimon)
+            && c.TrangThai == "1");
+            switch (sortOrder)
+            {
+                case "TenLoaiMonGiam":
+                    {
+                        result.OrderByDescending(c => c.TenLoaiMon);
+                        break;
+                    }
+                case "TenLoaiMon":
+                    {
+                        result.OrderBy(c => c.TenLoaiMon);
+                        break;
+                    }
+                case "MaLoaiMonGiam":
+                    {
+                        result.OrderByDescending(c => c.MaLoaiMon);
+                        break;
+                    }
+                default:
+                    {
+                        result.OrderBy(c => c.MaLoaiMon);
+                        break;
+                    }
+            }
+            return await result.ToListAsync();
+        }
+        // GET: LoaiMonAn
+        public async Task<IActionResult> Index(string sortOrder, string maloaimon = null,
+            string tenloaimon = null)
+        {
+            return View(await GetResult(sortOrder, maloaimon, tenloaimon));
         }
 
         // GET: LoaiMonAn/Details/5

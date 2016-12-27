@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLyNhaHang.Models
 {
-    public class BOPHAN
+    public class BOPHAN: HETHONG
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,25 +19,33 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
+
+        [Required]
         public string MaBP
         {
             get;
             set;
         }
 
+        [Required]
         public string TenBP
         {
             get;
             set;
         }
 
-        public int? MaTruongBP
+        public string MaTruongBP
         {
             get;
             set;
         }
 
-
+		//kết bảng
+		public virtual NHANVIEN fNHANVIEN
+		{
+			get;
+			set;
+		}
 
         //public virtual LOAISUCO LOAISUCO
         //{

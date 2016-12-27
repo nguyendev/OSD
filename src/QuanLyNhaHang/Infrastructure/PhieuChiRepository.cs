@@ -56,5 +56,10 @@ namespace QuanLyNhaHang.Infrastructure
             DbSet.Update(Entity);
             await Save();
         }
+
+        public DbSet<PHIEUCHI> GetList()
+        {
+            return DbSet;
+        }
     }
 }

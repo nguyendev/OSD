@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -16,10 +18,45 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;    
         }
 
-        // GET: YeuCauMonAn
-        public async Task<IActionResult> Index()
+        public async Task<List<YEUCAUMONAN>> GetResult(string sortOrder, string maluot = null,
+     string mamon = null)
         {
-            return View(await _context.GetAll());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.MaLuot = string.IsNullOrEmpty(sortOrder) ? "MaLuotGiam" : "MaLuot";
+            ViewBag.MaMon = string.IsNullOrEmpty(sortOrder) ? "MaMonGiam" : "MaMon";
+            IQueryable<YEUCAUMONAN> result = _context.GetList().Where(c =>
+           (maluot == null || c.MaLuot == maluot) && (mamon == null || c.MaMon == mamon)
+           && c.TrangThai == "1");
+            switch (sortOrder)
+            {
+                case "MaMonGiam":
+                    {
+                        result.OrderByDescending(c => c.MaMon);
+                        break;
+                    }
+                case "MaMon":
+                    {
+                        result.OrderBy(c => c.MaMon);
+                        break;
+                    }
+                case "MaLuotGiam":
+                    {
+                        result.OrderByDescending(c => c.MaLuot);
+                        break;
+                    }
+                default:
+                    {
+                        result.OrderBy(c => c.MaLuot);
+                        break;
+                    }
+            }
+            return await result.ToListAsync();
+        }
+        // GET: YeuCauMonAn
+        public async Task<IActionResult> Index(string sortOrder, string maluot = null,
+     string mamon = null)
+        {
+            return View(await GetResult(sortOrder, maluot, mamon));
         }
 
         // GET: YeuCauMonAn/Details/5
@@ -81,7 +118,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MaLuot,MaMon,SoLuong")] YEUCAUMONAN yeucaumonan)
+        public async Task<IActionResult> Edit(int id, [Bind("MaLuot,MaMon,SoLuong")] YEUCAUMONAN yeucaumonan)
         {
             if (id != yeucaumonan.Id)
             {

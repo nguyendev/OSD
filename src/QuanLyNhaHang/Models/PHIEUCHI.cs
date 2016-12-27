@@ -18,39 +18,29 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
+
+        [Required]
         public string MaPC
         {
             get;
             set;
         }
 
-        public string SoTienChi
+        [Required]
+        public string MaHD
         {
             get;
             set;
         }
+		
+		//kết bảng
+		public virtual HOADONNHAPHANG fHOADONNHAPHANG
+		{
+			get;
+			set;
+		}
 
-        public int MaHoaDon
-        {
-            get;
-            set;
-        }
-
-        //public string NgayLap
-        //{
-        //	get;
-        //	set;
-        //}
-
-
-
-        //public virtual string MaNV
-        //{
-        //	get;
-        //	set;
-        //}
-
-        public virtual string SoNo
+        public string SoNo
         {
             get;
             set;

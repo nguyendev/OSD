@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLyNhaHang.Models
 {
-    public class HOADONNHAPHANG
+    public class HOADONNHAPHANG: HETHONG
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,37 +18,64 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
-        public string SoHD
+
+        [Required]
+        public string MaHD
         {
             get;
             set;
         }
 
+        [Required]
+        public string MaYeuCau
+		{
+            get;
+            set;
+        }
+		
+		//kết bảng
+		public YEUCAUNHAPHANG fYEUCAUNHAPHANG
+		{
+			get;
+			set;
+		}
+
+        [Required]
         public string ThoiGianNhap
         {
             get;
             set;
         }
 
-        public int MaNV
+        [Required]
+        public string MaNV
         {
             get;
             set;
         }
+		
+		//kết bảng
+		public NHANVIEN fNHANVIEN
+		{
+			get;
+			set;
+		}
 
-        public int MaNCC
+        [Required]
+        public string MaNCC
         {
             get;
             set;
         }
-
+		
+		//kết bảng
+		public NHACUNGCAP fNHACUNGCAP
+		{
+			get;
+			set;
+		}
+		
         public string ThanhTien
-        {
-            get;
-            set;
-        }
-
-        public string NgayLap
         {
             get;
             set;

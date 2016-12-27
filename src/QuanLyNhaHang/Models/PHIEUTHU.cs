@@ -4,6 +4,7 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,18 +19,36 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
+
+        [Required]
         public string MaPT
         {
             get;
             set;
         }
 
+        [Required]
         public string MaLuot
         {
             get;
             set;
         }
+		
+		//kết bảng
+		public LUOTKHACH fLUOTKHACH
+		{
+			get;
+			set;
+		}
 
+        //kết bảng
+        public List<YEUCAUMONAN> fYEUCAUMONAN
+        {
+            get;
+            set;
+        }
+
+        [Required]
         public string TienHang
         {
             get;
@@ -54,26 +73,17 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        public string TongTien
-        {
-            get;
-            set;
-        }
+        // public string TongTien
+        // {
+            // get;
+            // set;
+        // }
 
         //public override string NgayLap
         //{
         //	get;
         //	set;
         //}
-
-
-
-        public int MaNV
-        {
-            get;
-            set;
-        }
-
         //public virtual LUOTKHACH getLuotKhach()
         //{
         //	throw new System.NotImplementedException();

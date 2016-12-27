@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -16,10 +18,48 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;    
         }
 
-        // GET: BoPhan
-        public async Task<IActionResult> Index()
+        //search
+        public async Task<List<BOPHAN>> GetResult(string sortOrder, string mabp = null, string tenbp = null,
+            string matruongbp = null)
         {
-            return View(await _context.GetAll());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.MaBoPhan = (sortOrder == "MaBoPhan") ? "MaBoPhanGiam" : "MaBoPhan";
+            ViewBag.TenBoPhan = (sortOrder == "TenBoPhan") ? "TenBoPhanGiam" : "TenBoPhan";
+            IQueryable<BOPHAN> result = _context.GetList().Where(c => 
+            (mabp == null || c.MaBP == mabp) && (tenbp == null || c.TenBP == tenbp)
+            && (matruongbp == null || c.MaTruongBP == matruongbp) && c.TrangThai == "1");
+            switch(sortOrder)
+            {
+                case "TenBoPhanGiam":
+                    {
+                        result.OrderByDescending(c => c.TenBP);
+                        break;
+                    }
+                case "TenBoPhan":
+                    {
+                        result.OrderBy(c => c.TenBP);
+                        break;
+                    }
+                case "MaBoPhanGiam":
+                    {
+                        result.OrderByDescending(c => c.MaBP);
+                        break;
+                    }
+                default:
+                    {
+                        result.OrderBy(c => c.MaBP);
+                        break;
+                    }
+            }
+            return await result.ToListAsync();
+
+        }
+
+        // GET: BoPhan
+        public async Task<IActionResult> Index(string sortOrder, string mabp = null, string tenbp = null,
+            string matruongbp = null)
+        {
+            return View(await GetResult(sortOrder,mabp,tenbp,matruongbp));
         }
 
         // GET: BoPhan/Details/5

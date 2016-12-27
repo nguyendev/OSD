@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLyNhaHang.Models
 {
-    public class BIENBANSUCO
+    public class BIENBANSUCO: HETHONG
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,44 +20,61 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [Required]
         public string MaBienBan
         {
             get;
             set;
         }
 
-        public int MaLoaiSuCo
+        [Required]
+        public string MaLoaiSuCo
         {
             get;
             set;
         }
+		
+		//kết bảng
+		public virtual LOAISUCO fLOAISUCO
+		{
+			get;
+			set;
+		}
 
-        public int MaNV
+        [Required]
+        public string MaNV
         {
             get;
             set;
         }
+		
+		//kết bảng
+		public virtual NHANVIEN fNHANVIEN
+		{
+			get;
+			set;
+		}
 
+        [Required]
         public string NguyenNhan
         {
             get;
             set;
         }
 
+        [Required]
         public string ThoiGian
         {
             get;
             set;
         }
 
+        [Required]
         public string HuongGiaiQuyet
         {
             get;
             set;
         }
-
-
-
 
         //public virtual THIETHAI THIETHAI
         //{

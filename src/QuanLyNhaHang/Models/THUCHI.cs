@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLyNhaHang.Models
 {
-    public class THUCHI
+    public class THUCHI: HETHONG
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,14 +18,28 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
+		
+		public string NguoiLap	//Ma nhan vien lap
+		{
+			get;
+			set;
+		}
+		
+		//kết bảng
+		public virtual NHANVIEN fNHANVIEN
+		{
+			get;
+			set;
+		}
+		
+        //public string NgayLap
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public string NgayLap
-        {
-            get;
-            set;
-        }
-
-        public string SoTien
+        [Required]
+        public string ThanhTien
         {
             get;
             set;

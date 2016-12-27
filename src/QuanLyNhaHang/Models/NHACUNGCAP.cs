@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLyNhaHang.Models
 {
-    public class NHACUNGCAP
+    public class NHACUNGCAP: HETHONG
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,12 +19,15 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
+
+        [Required]
         public string MaNCC
         {
             get;
             set;
         }
 
+        [Required]
         public string TenNCC
         {
             get;

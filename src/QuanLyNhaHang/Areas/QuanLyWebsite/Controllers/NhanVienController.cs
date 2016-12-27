@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -16,10 +18,45 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;    
         }
 
-        // GET: NhanVien
-        public async Task<IActionResult> Index()
+        public async Task<List<NHANVIEN>> GetResult(string sortOrder, string manv = null,
+      string tennv = null, string mabp = null)
         {
-            return View(await _context.GetAll());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.MaNV = string.IsNullOrEmpty(sortOrder) ? "MaNVGiam" : "MaNV";
+            ViewBag.TenNV = string.IsNullOrEmpty(sortOrder) ? "TenNVGiam" : "TenNV";
+            IQueryable<NHANVIEN> result = _context.GetList().Where(c =>
+           (manv == null || c.MaNV == manv) && (tennv == null || c.TenNV == tennv)
+           && (mabp == null || c.MaBP == mabp) && c.TrangThai == "1");
+            switch (sortOrder)
+            {
+                case "TenNVGiam":
+                    {
+                        result.OrderByDescending(c => c.TenNV);
+                        break;
+                    }
+                case "TenNV":
+                    {
+                        result.OrderBy(c => c.TenNV);
+                        break;
+                    }
+                case "MaNVGiam":
+                    {
+                        result.OrderByDescending(c => c.MaNV);
+                        break;
+                    }
+                default:
+                    {
+                        result.OrderBy(c => c.MaNV);
+                        break;
+                    }
+            }
+            return await result.ToListAsync();
+        }
+        // GET: NhanVien
+        public async Task<IActionResult> Index(string sortOrder, string manv = null,
+      string tennv = null, string mabp = null)
+        {
+            return View(await GetResult(sortOrder, manv,tennv, mabp));
         }
 
         // GET: NhanVien/Details/5

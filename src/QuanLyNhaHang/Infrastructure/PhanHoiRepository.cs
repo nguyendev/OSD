@@ -4,6 +4,7 @@ using QuanLyNhaHang.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace QuanLyNhaHang.Infrastructure
 {
@@ -53,6 +54,11 @@ namespace QuanLyNhaHang.Infrastructure
         {
             DbSet.Update(Entity);
             await Save();
+        }
+
+        public DbSet<PHANHOI> GetList()
+        {
+            return DbSet;
         }
     }
 }

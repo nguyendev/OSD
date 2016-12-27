@@ -9,10 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace QuanLyNhaHang.Data
 {
-    public class A
-    {
-
-    }
     public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -27,6 +23,29 @@ namespace QuanLyNhaHang.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
             builder.Entity<AppUser>().ToTable("Users");
+            builder.Entity<BIENBANSUCO>().HasAlternateKey(c => c.MaBienBan);
+            builder.Entity<BOPHAN>().HasAlternateKey(c => c.MaBP);
+            builder.Entity<BOPHAN>().HasAlternateKey(c => c.TenBP);
+            builder.Entity<CHEBIEN>().HasAlternateKey(c => new {c.MaMon, c.MaNL });
+            builder.Entity<HOADONNHAPHANG>().HasAlternateKey(c => c.MaHD);
+            builder.Entity<LOAIMONAN>().HasAlternateKey(c => c.MaLoaiMon);
+            builder.Entity<LOAIMONAN>().HasAlternateKey(c => c.TenLoaiMon);
+            builder.Entity<LOAISUCO>().HasAlternateKey(c => c.MaLoaiSuCo);
+            builder.Entity<LOAISUCO>().HasAlternateKey(c => c.TenLoaiSuCo);
+            builder.Entity<LUOTKHACH>().HasAlternateKey(c => c.MaLuot);
+            builder.Entity<LUOTKHACH>().HasAlternateKey(c => new {c.SoBan, c.ThoiGianVao });
+            builder.Entity<MONAN>().HasAlternateKey(c => c.MaMon);
+            builder.Entity<MONAN>().HasAlternateKey(c => c.TenMon);
+            builder.Entity<NGUYENLIEU>().HasAlternateKey(c => c.MaNL);
+            builder.Entity<NGUYENLIEU>().HasAlternateKey(c => c.TenNL);
+            builder.Entity<NGUYENLIEUTRONGKHO>().HasAlternateKey(c => c.MaNL);
+            builder.Entity<NHACUNGCAP>().HasAlternateKey(c => c.MaNCC);
+            builder.Entity<NHACUNGCAP>().HasAlternateKey(c => c.TenNCC);
+            builder.Entity<NHANVIEN>().HasAlternateKey(c => c.MaNV);
+            builder.Entity<NHANVIEN>().HasAlternateKey(c => new {c.TenNV,c.SoDT,c.DiaChi,c.CMND });
+            builder.Entity<PHIEUCHI>().HasAlternateKey(c => c.MaPC);
+            builder.Entity<PHIEUTHU>().HasAlternateKey(c => c.MaPT);
+            builder.Entity<YEUCAUNHAPHANG>().HasAlternateKey(c => c.MaYeuCau);
         }
         public DbSet<BlogBusiness> blogBusiness { get; set; }
         //public DbSet<BlogPost> blogPost { get; set; }
@@ -111,6 +130,5 @@ namespace QuanLyNhaHang.Data
         public DbSet<THUCHI> THUCHI { get; set; }
         public DbSet<YEUCAUMONAN> YEUCAUMONAN { get; set; }
         public DbSet<YEUCAUNHAPHANG> YEUCAUNHAPHANG { get; set; }
-
     }
 }

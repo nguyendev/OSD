@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLyNhaHang.Models
 {
-    public class NGUYENLIEU
+    public class NGUYENLIEU: HETHONG
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,34 +19,38 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [Required]
         public string MaNL
         {
             get;
             set;
         }
 
+        [Required]
         public string TenNL
         {
             get;
             set;
         }
 
+        [Required]
         public string DVT
         {
             get;
             set;
         }
 
+        [Required]
         public string Gia
         {
             get;
             set;
         }
-        //public string XuatXu
-        //{
-        //	get;
-        //	set;
-        //}
+        public string XuatXu
+        {
+        	get;
+        	set;
+        }
 
         //public virtual NGUYENLIEUTRONGKHO KHO
         //{

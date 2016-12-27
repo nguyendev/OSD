@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -16,10 +18,46 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;    
         }
 
-        // GET: NhaCungCap
-        public async Task<IActionResult> Index()
+        public async Task<List<NHACUNGCAP>> GetResult(string sortOrder, string mancc = null,
+      string tenncc = null)
         {
-            return View(await _context.GetAll());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.MaNL = string.IsNullOrEmpty(sortOrder) ? "MaNCCGiam" : "MaNCC";
+            ViewBag.TenNL = string.IsNullOrEmpty(sortOrder) ? "TenNCCGiam" : "TenNCC";
+            IQueryable<NHACUNGCAP> result = _context.GetList().Where(c =>
+           (mancc == null || c.MaNCC == mancc) && (tenncc == null || c.TenNCC == tenncc)
+           && c.TrangThai == "1");
+            switch (sortOrder)
+            {
+                case "TenNCCGiam":
+                    {
+                        result.OrderByDescending(c => c.TenNCC);
+                        break;
+                    }
+                case "TenNCC":
+                    {
+                        result.OrderBy(c => c.TenNCC);
+                        break;
+                    }
+                case "MaNCCGiam":
+                    {
+                        result.OrderByDescending(c => c.MaNCC);
+                        break;
+                    }
+                default:
+                    {
+                        result.OrderBy(c => c.MaNCC);
+                        break;
+                    }
+            }
+            return await result.ToListAsync();
+        }
+
+        // GET: NhaCungCap
+        public async Task<IActionResult> Index(string sortOrder, string mancc = null,
+      string tenncc = null)
+        {
+            return View(await GetResult(sortOrder, mancc, tenncc));
         }
 
         // GET: NhaCungCap/Details/5
@@ -50,7 +88,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DiaChi,MaNCC,TenNCC,SoDT,SoNo,SoTienNo")] NHACUNGCAP nhacungcap)
+        public async Task<IActionResult> Create([Bind("Id,DiaChi,MaNCC,TenNCC,SoDT,SoNo")] NHACUNGCAP nhacungcap)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +119,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DiaChi,MaNCC,TenNCC,SoDT,SoNo,SoTienNo")] NHACUNGCAP nhacungcap)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DiaChi,MaNCC,TenNCC,SoDT,SoNo")] NHACUNGCAP nhacungcap)
         {
             if (id != nhacungcap.Id)
             {

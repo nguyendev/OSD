@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLyNhaHang.Models
 {
-    public class LUOTKHACH
+    public class LUOTKHACH: HETHONG
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,18 +18,22 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
+
+        [Required]
         public string MaLuot
         {
             get;
             set;
         }
 
+        [Required]
         public int SoBan
         {
             get;
             set;
         }
 
+        [Required]
         public string ThoiGianVao
         {
             get;

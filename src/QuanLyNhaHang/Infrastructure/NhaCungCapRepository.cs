@@ -55,5 +55,10 @@ namespace QuanLyNhaHang.Infrastructure
         {
             await Context.SaveChangesAsync();
         }
+
+        public DbSet<NHACUNGCAP> GetList()
+        {
+            return DbSet;
+        }
     }
 }

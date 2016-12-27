@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLyNhaHang.Models
 {
-    public class PHANHOI
+    public class PHANHOI: HETHONG
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,6 +18,8 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
+
+        [Required]
         public string NoiDung
         {
             get;

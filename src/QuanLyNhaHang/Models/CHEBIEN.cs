@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLyNhaHang.Models
 {
-    public class CHEBIEN
+    public class CHEBIEN: HETHONG
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,19 +19,36 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [Required]
         public string MaMon
         {
             get;
             set;
         }
+		
+		//kết bảng
+		public MONAN fMONAN
+		{
+			get;
+			set;
+		}
 
+        [Required]
         public string MaNL
         {
             get;
             set;
         }
+		
+		//kết bảng
+		public NGUYENLIEU fNGUYENLIEU
+		{
+			get;
+			set;
+		}
 
-        public string LuongDung
+        [Required]
+        public int LuongDung
         {
             get;
             set;

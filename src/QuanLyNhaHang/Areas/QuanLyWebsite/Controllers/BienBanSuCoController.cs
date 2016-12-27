@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -10,16 +12,34 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class BienBanSuCoController : Controller
     {
         private readonly IGenericRepository<BIENBANSUCO> _context;
-
         public BienBanSuCoController(IGenericRepository<BIENBANSUCO> context)
         {
             _context = context;    
         }
 
-        // GET: BienBanSuCo
-        public async Task<IActionResult> Index()
+        //Search
+        public async Task<List<BIENBANSUCO>> GetResult(string sortOrder, string mabienban = null,
+            string maloaisuco = null, string manv = null)
         {
-            return View(await _context.GetAll());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.MaBienBan = string.IsNullOrEmpty(sortOrder) ? "MaBienBanGiam" : "MaBienBanTang";
+            IQueryable<BIENBANSUCO> result = _context.GetList().Where(c =>
+                ((mabienban == null || c.MaBienBan == mabienban) &&
+                (maloaisuco == null || c.MaLoaiSuCo == maloaisuco) &&
+                (manv == null || c.MaNV == manv) && c.TrangThai == "1")).OrderBy(c => c.MaBienBan).
+                ThenBy(c => c.MaLoaiSuCo).ThenBy(c => c.MaNV);
+            if (sortOrder == "MaBienBanGiam")
+                result = result.OrderByDescending(c => c.MaBienBan).
+                ThenBy(c => c.MaLoaiSuCo).ThenBy(c => c.MaNV);
+            return await result.ToListAsync();
+        }
+
+        // GET: BienBanSuCo
+        public async Task<IActionResult> Index(string sortOrder, string mabienban = null,
+            string maloaisuco = null, string manv = null)
+        {
+            //return await GetResult(null);
+            return View(await GetResult(sortOrder,mabienban,maloaisuco,manv));
         }
 
         // GET: BienBanSuCo/Details/5

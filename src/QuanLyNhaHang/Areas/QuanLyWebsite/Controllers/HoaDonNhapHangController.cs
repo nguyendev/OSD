@@ -50,7 +50,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MaNCC,MaNV,NgayLap,SoHD,ThanhTien,ThoiGianNhap")] HOADONNHAPHANG hoadonnhaphang)
+        public async Task<IActionResult> Create([Bind("Id,MaHD,MaYeuCau,MaNV,ThoiGianNhap,ThanhTien")] HOADONNHAPHANG hoadonnhaphang)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MaNCC,MaNV,NgayLap,SoHD,ThanhTien,ThoiGianNhap")] HOADONNHAPHANG hoadonnhaphang)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,MaHD,MaYeuCau,MaNV,ThoiGianNhap,ThanhTien")] HOADONNHAPHANG hoadonnhaphang)
         {
             if (id != hoadonnhaphang.Id)
             {

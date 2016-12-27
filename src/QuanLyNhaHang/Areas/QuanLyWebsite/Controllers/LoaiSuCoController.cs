@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -17,10 +19,45 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;
         }
 
-        // GET: LoaiSuCo
-        public async Task<IActionResult> Index()
+        public async Task<List<LOAISUCO>> GetResult(string sortOrder, string maloaisuco = null,
+           string tenloaisuco = null)
         {
-            return View(await _context.GetAll());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.MaLoaiSuCo = string.IsNullOrEmpty(sortOrder) ? "MaLoaiSuCoGiam" : "MaLoaiSuCo";
+            ViewBag.TenLoaiSuCo = string.IsNullOrEmpty(sortOrder) ? "TenLoaiSuCoGiam" : "TenLoaiSuCo";
+            IQueryable<LOAISUCO> result = _context.GetList().Where(c =>
+           (maloaisuco == null || c.MaLoaiSuCo == maloaisuco) && (tenloaisuco == null || c.TenLoaiSuCo == tenloaisuco)
+            && c.TrangThai == "1");
+            switch (sortOrder)
+            {
+                case "TenLoaiSuCoGiam":
+                    {
+                        result.OrderByDescending(c => c.TenLoaiSuCo);
+                        break;
+                    }
+                case "TenLoaiSuCo":
+                    {
+                        result.OrderBy(c => c.TenLoaiSuCo);
+                        break;
+                    }
+                case "MaLoaiSuCoGiam":
+                    {
+                        result.OrderByDescending(c => c.MaLoaiSuCo);
+                        break;
+                    }
+                default:
+                    {
+                        result.OrderBy(c => c.MaLoaiSuCo);
+                        break;
+                    }
+            }
+            return await result.ToListAsync();
+        }
+        // GET: LoaiSuCo
+        public async Task<IActionResult> Index(string sortOrder, string maloaisuco = null,
+           string tenloaisuco = null)
+        {
+            return View(await GetResult(sortOrder, maloaisuco, tenloaisuco));
         }
 
         // GET: LoaiSuCo/Details/5

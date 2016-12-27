@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLyNhaHang.Models
 {
-    public class DATBAN
+    public class DATBAN: HETHONG
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,12 +18,14 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
+        [Required]
         public string Ngay
         {
             get;
             set;
         }
 
+        [Required]
         public string SoNguoi
         {
             get;
@@ -36,12 +38,14 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [Required]
         public string SoDT
         {
             get;
             set;
         }
 
+        [Required]
         public string HoTen
         {
             get;

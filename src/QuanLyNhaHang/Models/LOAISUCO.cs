@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLyNhaHang.Models
 {
-    public class LOAISUCO
+    public class LOAISUCO: HETHONG
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,24 +19,32 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [Required]
         public string MaLoaiSuCo
         {
             get;
             set;
         }
 
+        [Required]
         public string TenLoaiSuCo
         {
             get;
             set;
         }
 
-        public int MaBoPhanXuLy
+        public string MaBoPhanXuLy
         {
             get;
             set;
         }
-
+		
+		//kết bảng
+		public virtual BOPHAN fBOPHAN
+		{
+			get;
+			set;
+		}
         //public virtual BIENBANSUCO BIENBANSUCO
         //{
         //	get;

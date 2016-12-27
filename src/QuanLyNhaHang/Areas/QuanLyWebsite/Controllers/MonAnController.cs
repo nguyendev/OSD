@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -17,10 +19,45 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;
         }
 
-        // GET: MonAn
-        public async Task<IActionResult> Index()
+        public async Task<List<MONAN>> GetResult(string sortOrder, string mamon = null,
+         string tenmon = null, string maloaimon = null)
         {
-            return View(await _context.GetAll());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.MaMon = string.IsNullOrEmpty(sortOrder) ? "MaMonGiam" : "MaMon";
+            ViewBag.TenMon = string.IsNullOrEmpty(sortOrder) ? "TenMonGiam" : "TenMon";
+            IQueryable<MONAN> result = _context.GetList().Where(c =>
+           (mamon == null || c.MaMon == mamon) && (tenmon == null || c.TenMon == tenmon)
+           && (maloaimon == null || c.MaLoaiMon == mamon) && c.TrangThai == "1");
+            switch (sortOrder)
+            {
+                case "TenMonGiam":
+                    {
+                        result.OrderByDescending(c => c.TenMon);
+                        break;
+                    }
+                case "TenMon":
+                    {
+                        result.OrderBy(c => c.TenMon);
+                        break;
+                    }
+                case "MaMonGiam":
+                    {
+                        result.OrderByDescending(c => c.MaMon);
+                        break;
+                    }
+                default:
+                    {
+                        result.OrderBy(c => c.MaMon);
+                        break;
+                    }
+            }
+            return await result.ToListAsync();
+        }
+        // GET: MonAn
+        public async Task<IActionResult> Index(string sortOrder, string mamon = null,
+         string tenmon = null, string maloaimon = null)
+        {
+            return View(await GetResult(sortOrder, mamon, tenmon, maloaimon));
         }
 
         // GET: MonAn/Details/5

@@ -4,6 +4,7 @@ using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System;
 
 namespace QuanLyNhaHang.Infrastructure
 {
@@ -54,6 +55,11 @@ namespace QuanLyNhaHang.Infrastructure
         {
             DbSet.Update(Entity);
             await Save();
+        }
+
+        public DbSet<LOAIMONAN> GetList()
+        {
+            return DbSet;
         }
     }
 }

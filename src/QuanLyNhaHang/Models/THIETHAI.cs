@@ -4,16 +4,12 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 
 namespace QuanLyNhaHang.Models
 {
-    public class THIETHAI
+    public class THIETHAI: HETHONG
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,12 +18,21 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
-        public int MaBienBan
+
+        [Required]
+        public string MaBienBan
         {
             get;
             set;
         }
-
+		
+		//kết bảng
+		public virtual BIENBANSUCO fBIENBANSUCO
+		{
+			get;
+			set;
+		}
+		
         public string Ten
         {
             get;
@@ -52,6 +57,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [Required]
         public string ThanhTien
         {
             get;

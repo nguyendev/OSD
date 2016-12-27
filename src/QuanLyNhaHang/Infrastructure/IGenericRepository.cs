@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace QuanLyNhaHang.Infrastructure
 {
-    public interface IGenericRepository<T>
+    public interface IGenericRepository<T> where T : class
     {
         Task<T> Get(int? id);
         bool Exists(int id);
@@ -14,5 +15,7 @@ namespace QuanLyNhaHang.Infrastructure
         Task Update(T Entity);
 
         Task Delete(int id);
+
+        DbSet<T> GetList();
     }
 }

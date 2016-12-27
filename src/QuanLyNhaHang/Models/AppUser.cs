@@ -13,6 +13,7 @@ namespace QuanLyNhaHang.Models
 
     public class AppUser : IdentityUser
     {
+        public string ImageUrl { get; set; }
         public Cities City { get; set; }
         public QualificationLevels Qualifications { get; set; }
         
