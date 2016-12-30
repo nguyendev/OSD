@@ -19,73 +19,48 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã nguyên liệu")]
+        [Required(ErrorMessage = "Vui lòng nhập mã nguyên liệu")]
+        [MaxLength(12, ErrorMessage = "Mã nguyên liệu không được quá 12 kí tự")]
         public string MaNL
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Tên nguyên liệu")]
+        [Required(ErrorMessage = "Vui lòng nhập tên nguyên liệu")]
+        [MaxLength(50, ErrorMessage = "Tên nguyên liệu không được quá 50 kí tự")]
         public string TenNL
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Đơn vị tính")]
+        [Required(ErrorMessage = "Vui lòng nhập đơn vị tính")]
+        [MaxLength(20, ErrorMessage = "Đơn vị tính không được quá 20 kí tự")]
         public string DVT
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Giá")]
+        [Required(ErrorMessage = "Vui lòng giá nguyên liệu")]
+        [Range(0, int.MaxValue, ErrorMessage = "Giá nguyên liệu không hợp lệ")]
         public string Gia
         {
             get;
             set;
         }
+
+        [Display(Name = "Xuất xứ")]
         public string XuatXu
         {
         	get;
         	set;
         }
-
-        //public virtual NGUYENLIEUTRONGKHO KHO
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual CHEBIEN CHEBIEN
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual NGUYENLIEUTRONGKHO NGUYENLIEUTRONGKHO
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual YEUCAUNHAPHANG NHAPHANG
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual List<MONAN> getListMonAn()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
-        //public virtual NGUYENLIEUTRONGKHO getNguyenLieuTrongKho()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
     }
 
 }

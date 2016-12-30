@@ -19,7 +19,9 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã biên bản")]
+        [Required(ErrorMessage = "Vui lòng nhập mã biên bản")]
+        [StringLength(12, ErrorMessage = "Mã biên bản không quá 12 kí tự")]
         public string MaBienBan
         {
             get;
@@ -32,32 +34,40 @@ namespace QuanLyNhaHang.Models
 			get;
 			set;
 		}
-		
+
+        [Display(Name = "Tên thiệt hại")]
         public string Ten
         {
             get;
             set;
         }
 
+        [Display(Name = "Số lượng")]
+        [Required(ErrorMessage = "Vui lòng nhập số lượng")]
+        [Range(0, int.MaxValue, ErrorMessage = "Số lượng không hợp lệ")]
         public int SoLuong
         {
             get;
             set;
         }
 
+        [Display(Name = "Đơn vị tính")]
+        [Required(ErrorMessage = "Vui lòng nhập đơn vị tính")]
+        [MaxLength(20, ErrorMessage = "Đơn vị tính không được quá 20 kí tự")]
         public string DVT
         {
             get;
             set;
         }
 
+        [Display(Name = "Đơn giá")]
         public string DonGia
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Thành tiền")]
         public string ThanhTien
         {
             get;

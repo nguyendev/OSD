@@ -20,14 +20,18 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã phiếu thu")]
+        [Required(ErrorMessage = "Vui lòng nhập mã phiếu thu")]
+        [MaxLength(12, ErrorMessage = "Mã phiếu thu không quá 12 kí tự")]
         public string MaPT
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã lượt khách")]
+        [Required(ErrorMessage = "Vui lòng nhập mã lượt khách")]
+        [MaxLength(12, ErrorMessage = "Mã lượt khách không quá 12 kí tự")]
         public string MaLuot
         {
             get;
@@ -48,25 +52,29 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name ="Tiền hàng")]
+        [Required(ErrorMessage ="Vui lòng nhập tiền hàng")]
         public string TienHang
         {
             get;
             set;
         }
 
+        [Display(Name = "Phí dịch vụ khác")]
         public string PhiDichVuKhac
         {
             get;
             set;
         }
 
+        [Display(Name = "Khuyến mãi")]
         public string KhuyenMai
         {
             get;
             set;
         }
 
+        [Display(Name = "Thuế VAT")]
         public string VAT
         {
             get;

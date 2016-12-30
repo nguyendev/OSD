@@ -18,34 +18,45 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
-        [Required]
+
+        [Display(Name ="Ngày đặt")]
+        [Required(ErrorMessage = "Vui lòng nhập ngày đặt bàn")]
         public string Ngay
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name ="Số Người")]
+        [Required(ErrorMessage = "Vui lòng nhập số người")]
+        [Range(0,500,ErrorMessage ="Số người chưa hợp lệ")]
         public string SoNguoi
         {
             get;
             set;
         }
 
+        [Display(Name ="Giờ đặt")]
+        [Required(ErrorMessage ="Vui lòng nhập giờ đặt bàn")]
         public string Gio
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name ="Số điện thoại")]
+        [Required(ErrorMessage ="Vui lòng nhập số điện thoại")]
+        [Phone(ErrorMessage ="Số điện thoại chưa hợp lệ")]
+        [StringLength(15, ErrorMessage = "Số điện thoại chưa hợp lệ", MinimumLength = 6)]
         public string SoDT
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name ="Họ tên")]
+        [Required(ErrorMessage ="Vui lòng nhập họ tên")]
+        [MaxLength(50, ErrorMessage ="Họ tên không quá 50 kí tự")]
         public string HoTen
         {
             get;

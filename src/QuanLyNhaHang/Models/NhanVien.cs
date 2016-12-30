@@ -19,41 +19,53 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã nhân viên")]
+        [Required(ErrorMessage = "Vui lòng nhập mã nhân viên")]
+        [MaxLength(12, ErrorMessage = "Mã nhân viên không quá 12 kí tự")]
         public string MaNV
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Tên nhân viên")]
+        [Required(ErrorMessage = "Vui lòng nhập tên nhân viên")]
+        [MaxLength(50, ErrorMessage = "Tên nhân viên không quá 50 kí tự")]
         public string TenNV
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Số điện thoại")]
+        [Required(ErrorMessage ="Vui lòng nhập số điện thoại")]
+        [Phone(ErrorMessage ="Số điện thoại không hợp lệ")]
+        [StringLength(15, ErrorMessage ="Số điện thoại không hợp lệ",MinimumLength = 6)]
         public int SoDT
         {
             get;
             set;
         }
 
+        [Display(Name = "Địa chỉ")]
         public string DiaChi
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Số CMND")]
+        [StringLength(10, ErrorMessage = "Số chứng minh nhân dân không hợp lệ", MinimumLength = 9)]
+        [Required(ErrorMessage = "Vui lòng nhập số chứng minh nhân dân")]
         public string CMND
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã bộ phận")]
+        [Required(ErrorMessage = "Vui lòng nhập mã bộ phận")]
+        [MaxLength(12, ErrorMessage = "Mã bộ phận không quá 12 kí tự")]
         public string MaBP
         {
             get;
@@ -66,51 +78,6 @@ namespace QuanLyNhaHang.Models
 			get;
 			set;
 		}
-
-        //public virtual PHIEUTHU PHIEUTHU
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual BOPHAN BOPHAN
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual BIENBANSUCO BIENBANSUCO
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual HOADONNHAPHANG HOADONNHAPHANG
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual BOPHAN getBoPhan()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
-        //public virtual List<BIENBANSUCO> getListBienBanSuCo()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
-        //public virtual List<HOADONNHAPHANG> getListHoaDonNhapHangi()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
-        //public virtual List<PHIEUTHU> getListPhieuThu()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
     }
 
 }

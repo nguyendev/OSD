@@ -19,48 +19,38 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã lượt khách")]
+        [Required(ErrorMessage = "Vui lòng nhập mã lượt khách")]
+        [MaxLength(12, ErrorMessage = "Mã lượt khách không quá 12 kí tự")]
         public string MaLuot
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name ="Số bàn")]
+        [Required(ErrorMessage ="Vui lòng nhập số bàn")]
         public int SoBan
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name ="Thời gian vào")]
+        [Required(ErrorMessage ="Vui lòng nhập thời gian vào")]
         public string ThoiGianVao
         {
             get;
             set;
         }
 
+        [Display(Name = "Thời gian ra")]
+        [Required(ErrorMessage = "Vui lòng nhập thời gian ra")]
         public string ThoiGianRa
         {
             get;
             set;
         }
-
-   
-
-
-        //public virtual YEUCAUMONAN YEUCAUMONAN
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual PHIEUTHU PHIEUTHU
-        //{
-        //	get;
-        //	set;
-        //}
-
     }
 
 }

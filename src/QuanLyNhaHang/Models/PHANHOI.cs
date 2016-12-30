@@ -19,13 +19,17 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Nội dung")]
+        [Required(ErrorMessage = "Vui lòng nhập nội dung")]
+        [DataType(DataType.MultilineText)]
         public string NoiDung
         {
             get;
             set;
         }
 
+        [Display(Name = "Họ tên")]
+        [MaxLength(50, ErrorMessage = "Họ tên không quá 50 kí tự")]
         public string TenNguoiPH
         {
             get;

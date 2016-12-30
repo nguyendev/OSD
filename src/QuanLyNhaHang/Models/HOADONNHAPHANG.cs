@@ -19,14 +19,18 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name ="Mã hóa đơn")]
+        [Required(ErrorMessage ="Vui lòng nhập mã hóa đơn")]
+        [MaxLength(12, ErrorMessage = "Mã hóa đơn không quá 12 kí tự")]
         public string MaHD
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name ="Mã yêu cầu")]
+        [Required(ErrorMessage = "Vui lòng nhập mã yêu cầu")]
+        [MaxLength(12, ErrorMessage = "Mã yêu cầu không quá 12 kí tự")]
         public string MaYeuCau
 		{
             get;
@@ -40,14 +44,17 @@ namespace QuanLyNhaHang.Models
 			set;
 		}
 
-        [Required]
+        [Display(Name ="Thời gian nhập")]
+        [Required(ErrorMessage ="Vui lòng nhập thời gian nhập")]
         public string ThoiGianNhap
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name ="Mã nhân viên")]
+        [Required(ErrorMessage ="Vui lòng nhập mã nhân viên")]
+        [MaxLength(12, ErrorMessage = "Mã nhân viên không quá 12 kí tự")]
         public string MaNV
         {
             get;
@@ -61,7 +68,8 @@ namespace QuanLyNhaHang.Models
 			set;
 		}
 
-        [Required]
+        [Display(Name ="Nhà cung cấp")]
+        [Required(ErrorMessage = "Vui lòng nhập mã nhà cung cấp")]
         public string MaNCC
         {
             get;
@@ -75,36 +83,12 @@ namespace QuanLyNhaHang.Models
 			set;
 		}
 		
+        [Display(Name ="Thành tiền")]
         public string ThanhTien
         {
             get;
             set;
         }
-
-
-
-        //public virtual PHIEUCHI PHIEUCHI
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual YEUCAUNHAPHANG NHAPHANG
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual PHIEUCHI getPhieuChi()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
-        //public virtual YEUCAUNHAPHANG getYeuCauNhapHang()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
     }
 
 }

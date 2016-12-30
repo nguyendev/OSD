@@ -13,14 +13,18 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name ="Mã loại món")]
+        [Required(ErrorMessage ="Vui lòng nhập mã loại món")]
+        [MaxLength(12, ErrorMessage = "Mã loại món không quá 12 kí tự")]
         public string MaLoaiMon
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name ="Tên loại món")]
+        [Required(ErrorMessage ="Vui lòng nhập tên loại món")]
+        [MaxLength(50, ErrorMessage = "Tên loại món không quá 50 kí tự")]
         public string TenLoaiMon
         {
             get;

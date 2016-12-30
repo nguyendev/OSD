@@ -20,14 +20,18 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name ="Mã biên bản")]
+        [Required(ErrorMessage = "Vui lòng nhập mã biên bản")]
+        [StringLength(12, ErrorMessage = "Mã biên bản không quá 12 kí tự")]
         public string MaBienBan
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name ="Mã loại sự cố")]
+        [Required(ErrorMessage = "Vui lòng nhập mã loại sự cố")]
+        [StringLength(12, ErrorMessage = "Mã loại sự cố không quá 12 kí tự")]
         public string MaLoaiSuCo
         {
             get;
@@ -41,7 +45,9 @@ namespace QuanLyNhaHang.Models
 			set;
 		}
 
-        [Required]
+        [Display(Name ="Mã nhân viên")]
+        [Required(ErrorMessage = "Vui lòng nhập mã nhân viên")]
+        [StringLength(12, ErrorMessage = "Mã nhân viên không quá 12 kí tự")]
         public string MaNV
         {
             get;
@@ -55,43 +61,29 @@ namespace QuanLyNhaHang.Models
 			set;
 		}
 
-        [Required]
+        [Display(Name ="Nguyên nhân")]
+        [DataType(DataType.MultilineText)]
         public string NguyenNhan
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Thời gian")]
+        [Required(ErrorMessage = "Vui lòng nhập thời gian")]
         public string ThoiGian
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Hướng giải quyết")]
+        [DataType(DataType.MultilineText)]
         public string HuongGiaiQuyet
         {
             get;
             set;
         }
-
-        //public virtual THIETHAI THIETHAI
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual LOAISUCO getLoaiSuCo()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
-        //public virtual THIETHAI getThietHai()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
     }
 
 }

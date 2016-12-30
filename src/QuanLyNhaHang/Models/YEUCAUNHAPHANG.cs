@@ -19,14 +19,18 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã yêu cầu nhập")]
+        [Required(ErrorMessage = "Vui lòng nhập mã yêu cầu nhập")]
+        [MaxLength(12,ErrorMessage ="Mã yêu cầu nhập không quá 12 kí tự")]
         public string MaYeuCau
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã nguyên liệu")]
+        [Required(ErrorMessage = "Vui lòng nhập mã nguyên liệu")]
+        [MaxLength(12, ErrorMessage = "Mã nguyên liệu không được quá 12 kí tự")]
         public string MaNL
         {
             get;
@@ -40,14 +44,18 @@ namespace QuanLyNhaHang.Models
 			set;
 		}
 
-        [Required]
+        [Display(Name = "Số lượng")]
+        [Required(ErrorMessage = "Vui lòng nhập số lượng")]
+        [Range(0, int.MaxValue, ErrorMessage = "Số lượng không hợp lệ")]
         public int SoLuong
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã nhà cung cấp")]
+        [Required(ErrorMessage = "Vui lòng nhập mã nhà cung cấp")]
+        [MaxLength(12, ErrorMessage = "Mã nhà cung cấp không được quá 12 kí tự")]
         public string MaNCC
         {
             get;

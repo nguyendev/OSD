@@ -19,20 +19,27 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name ="Mã loại sự cố")]
+        [Required(ErrorMessage ="Vui lòng nhập mã sự cố")]
+        [MaxLength(12, ErrorMessage ="Mã sự cố không quá 12 kí tự")]
         public string MaLoaiSuCo
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name ="Tên loại sự cố")]
+        [Required(ErrorMessage ="Vui lòng nhập tên loại sự cố")]
+        [MaxLength(50, ErrorMessage ="Tên loại sự cố không quá 50 kí tự")]
         public string TenLoaiSuCo
         {
             get;
             set;
         }
 
+        [Display(Name = "Mã bộ phận xử lý")]
+        [Required(ErrorMessage = "Vui lòng nhập mã bộ phận xử lý")]
+        [MaxLength(12, ErrorMessage = "Mã bộ phận xử lý không quá 12 kí tự")]
         public string MaBoPhanXuLy
         {
             get;
@@ -45,22 +52,6 @@ namespace QuanLyNhaHang.Models
 			get;
 			set;
 		}
-        //public virtual BIENBANSUCO BIENBANSUCO
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual List<BIENBANSUCO> getListBienBanSuCo()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
-        //public virtual BOPHAN getBoPhan()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
     }
 }
 

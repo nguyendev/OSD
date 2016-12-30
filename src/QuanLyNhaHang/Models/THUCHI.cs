@@ -18,8 +18,11 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
-		
-		public string NguoiLap	//Ma nhan vien lap
+
+        [Display(Name = "Người lập")]
+        [Required(ErrorMessage = "Vui lòng nhập mã người lập phiếu")]
+        [MaxLength(12, ErrorMessage = "Mã người lập phiếu không quá 12 kí tự")]
+        public string NguoiLap	//Ma nhan vien lap
 		{
 			get;
 			set;
@@ -31,12 +34,6 @@ namespace QuanLyNhaHang.Models
 			get;
 			set;
 		}
-		
-        //public string NgayLap
-        //{
-        //    get;
-        //    set;
-        //}
 
         [Required]
         public string ThanhTien
@@ -45,6 +42,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [Display(Name ="Là phiếu thu")]
         public bool LaPhieuThu
         {
             get;
