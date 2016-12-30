@@ -5,6 +5,7 @@ using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Infrastructure;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -20,45 +21,19 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         //search
-        public async Task<List<LOAIMONAN>> GetResult(string sortOrder, string maloaimon = null,
+        private async Task<List<LOAIMONAN>> GetResult(string maloaimon = null,
             string tenloaimon = null)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.MaLoaiMonAn = string.IsNullOrEmpty(sortOrder) ? "MaLoaiMonGiam" : "MaLoaiMon";
-            ViewBag.TenLoaiMonAn = string.IsNullOrEmpty(sortOrder) ? "TenLoaiMonGiam" : "TenLoaiMon";
             IQueryable<LOAIMONAN> result = _context.GetList().Where(c =>
            (maloaimon == null || c.MaLoaiMon == maloaimon) && (tenloaimon == null || c.TenLoaiMon == tenloaimon)
             && c.TrangThai == "1");
-            switch (sortOrder)
-            {
-                case "TenLoaiMonGiam":
-                    {
-                        result.OrderByDescending(c => c.TenLoaiMon);
-                        break;
-                    }
-                case "TenLoaiMon":
-                    {
-                        result.OrderBy(c => c.TenLoaiMon);
-                        break;
-                    }
-                case "MaLoaiMonGiam":
-                    {
-                        result.OrderByDescending(c => c.MaLoaiMon);
-                        break;
-                    }
-                default:
-                    {
-                        result.OrderBy(c => c.MaLoaiMon);
-                        break;
-                    }
-            }
             return await result.ToListAsync();
         }
         // GET: LoaiMonAn
-        public async Task<IActionResult> Index(string sortOrder, string maloaimon = null,
+        public async Task<IActionResult> Index(string maloaimon = null,
             string tenloaimon = null)
         {
-            return View(await GetResult(sortOrder, maloaimon, tenloaimon));
+            return View(await GetResult(maloaimon, tenloaimon));
         }
 
         // GET: LoaiMonAn/Details/5
@@ -89,10 +64,13 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MaLoaiMon,TenLoaiMon")] LOAIMONAN loaimonan)
+        public async Task<IActionResult> Create(LOAIMONAN loaimonan)
         {
             if (ModelState.IsValid)
             {
+                loaimonan.NgayTao = DateTime.Now;
+                loaimonan.TrangThai = "1";
+                loaimonan.TrangThaiDuyet = "U";
                 await _context.Add(loaimonan);
                 return RedirectToAction("Index");
             }
@@ -120,7 +98,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MaLoaiMon,TenLoaiMon")] LOAIMONAN loaimonan)
+        public async Task<IActionResult> Edit(int id, LOAIMONAN loaimonan)
         {
             if (id != loaimonan.Id)
             {
@@ -131,6 +109,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
+                    loaimonan.TrangThaiDuyet = "U";
                     await _context.Update(loaimonan);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -176,7 +155,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _context.Delete(id);
+            var loaimon = await _context.Get(id);
+            if (ModelState.IsValid)
+            {
+                if (loaimon.TrangThaiDuyet == "A")
+                {
+                    loaimon.TrangThai = "0";
+                    loaimon.TrangThaiDuyet = "U";
+                    await _context.Update(loaimon);
+                }
+                else
+                    await _context.Delete(id);
+            }
             return RedirectToAction("Index");
         }
     }

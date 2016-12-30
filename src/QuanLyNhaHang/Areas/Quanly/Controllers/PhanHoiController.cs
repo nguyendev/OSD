@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -50,10 +51,13 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TenNguoiPH,NoiDung")] PHANHOI phanhoi)
+        public async Task<IActionResult> Create(PHANHOI phanhoi)
         {
             if (ModelState.IsValid)
             {
+                phanhoi.NgayTao = DateTime.Now;
+                phanhoi.TrangThai = "1";
+                phanhoi.TrangThaiDuyet = "U";
                 await _context.Add(phanhoi);
                 return RedirectToAction("Index");
             }
@@ -81,7 +85,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TenNguoiPH,NoiDung")] PHANHOI phanhoi)
+        public async Task<IActionResult> Edit(int id, PHANHOI phanhoi)
         {
             if (id != phanhoi.Id)
             {
@@ -92,6 +96,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
+                    phanhoi.TrangThaiDuyet = "U";
                     await _context.Update(phanhoi);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -137,7 +142,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _context.Delete(id);
+            var phanhoi = await _context.Get(id);
+            if (ModelState.IsValid)
+            {
+                if (phanhoi.TrangThaiDuyet == "A")
+                {
+                    phanhoi.TrangThai = "0";
+                    phanhoi.TrangThaiDuyet = "U";
+                    await _context.Update(phanhoi);
+                }
+                else
+                    await _context.Delete(id);
+            }
             return RedirectToAction("Index");
         }
 

@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -16,10 +19,21 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;    
         }
 
-        // GET: DatBan
-        public async Task<IActionResult> Index()
+        private async Task<List<DATBAN>> GetResult(string ngay = null,
+            string gio = null, string sodt = null)
         {
-            return View(await _context.GetAll());
+            IQueryable<DATBAN> result = _context.GetList().Where(c =>
+            (gio == null || c.Gio == gio) && (ngay == null || c.Ngay == ngay)
+            && (sodt == null || c.SoDT == sodt) && c.TrangThai == "1");
+            return await result.ToListAsync();
+
+        }
+
+        // GET: DatBan
+        public async Task<IActionResult> Index(string ngay = null,
+            string gio = null, string sodt = null)
+        {
+            return View(await GetResult(ngay, gio, sodt));
         }
 
         // GET: DatBan/Details/5
@@ -50,10 +64,13 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Gio,HoTen,Ngay,SoDT,SoNguoi")] DATBAN datban)
+        public async Task<IActionResult> Create(DATBAN datban)
         {
             if (ModelState.IsValid)
             {
+                datban.NgayTao = DateTime.Now;
+                datban.TrangThai = "1";
+                datban.TrangThaiDuyet = "U";
                 await _context.Add(datban);
                 return RedirectToAction("Index");
             }
@@ -81,7 +98,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Gio,HoTen,Ngay,SoDT,SoNguoi")] DATBAN datban)
+        public async Task<IActionResult> Edit(int id, DATBAN datban)
         {
             if (id != datban.Id)
             {
@@ -92,6 +109,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
+                    datban.TrangThaiDuyet = "U";
                     await _context.Update(datban);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -137,7 +155,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _context.Delete(id);
+            var datban = await _context.Get(id);
+            if (ModelState.IsValid)
+            {
+                if (datban.TrangThaiDuyet == "A")
+                {
+                    datban.TrangThai = "0";
+                    datban.TrangThaiDuyet = "U";
+                    await _context.Update(datban);
+                }
+                else
+                    await _context.Delete(id);
+            }
             return RedirectToAction("Index");
         }
     }

@@ -5,6 +5,7 @@ using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -18,46 +19,20 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;    
         }
 
-        public async Task<List<NHACUNGCAP>> GetResult(string sortOrder, string mancc = null,
+        public async Task<List<NHACUNGCAP>> GetResult(string mancc = null,
       string tenncc = null)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.MaNL = string.IsNullOrEmpty(sortOrder) ? "MaNCCGiam" : "MaNCC";
-            ViewBag.TenNL = string.IsNullOrEmpty(sortOrder) ? "TenNCCGiam" : "TenNCC";
             IQueryable<NHACUNGCAP> result = _context.GetList().Where(c =>
            (mancc == null || c.MaNCC == mancc) && (tenncc == null || c.TenNCC == tenncc)
            && c.TrangThai == "1");
-            switch (sortOrder)
-            {
-                case "TenNCCGiam":
-                    {
-                        result.OrderByDescending(c => c.TenNCC);
-                        break;
-                    }
-                case "TenNCC":
-                    {
-                        result.OrderBy(c => c.TenNCC);
-                        break;
-                    }
-                case "MaNCCGiam":
-                    {
-                        result.OrderByDescending(c => c.MaNCC);
-                        break;
-                    }
-                default:
-                    {
-                        result.OrderBy(c => c.MaNCC);
-                        break;
-                    }
-            }
             return await result.ToListAsync();
         }
 
         // GET: NhaCungCap
-        public async Task<IActionResult> Index(string sortOrder, string mancc = null,
+        public async Task<IActionResult> Index(string mancc = null,
       string tenncc = null)
         {
-            return View(await GetResult(sortOrder, mancc, tenncc));
+            return View(await GetResult(mancc, tenncc));
         }
 
         // GET: NhaCungCap/Details/5
@@ -88,10 +63,13 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DiaChi,MaNCC,TenNCC,SoDT,SoNo")] NHACUNGCAP nhacungcap)
+        public async Task<IActionResult> Create(NHACUNGCAP nhacungcap)
         {
             if (ModelState.IsValid)
             {
+                nhacungcap.NgayTao = DateTime.Now;
+                nhacungcap.TrangThai = "1";
+                nhacungcap.TrangThaiDuyet = "U";
                 await _context.Add(nhacungcap);
                 return RedirectToAction("Index");
             }
@@ -119,7 +97,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DiaChi,MaNCC,TenNCC,SoDT,SoNo")] NHACUNGCAP nhacungcap)
+        public async Task<IActionResult> Edit(int id, NHACUNGCAP nhacungcap)
         {
             if (id != nhacungcap.Id)
             {
@@ -130,6 +108,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
+                    nhacungcap.TrangThaiDuyet = "U";
                     await _context.Update(nhacungcap);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -175,7 +154,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _context.Delete(id);
+            var nhacungcap = await _context.Get(id);
+            if (ModelState.IsValid)
+            {
+                if (nhacungcap.TrangThaiDuyet == "A")
+                {
+                    nhacungcap.TrangThai = "0";
+                    nhacungcap.TrangThaiDuyet = "U";
+                    await _context.Update(nhacungcap);
+                }
+                else
+                    await _context.Delete(id);
+            }
             return RedirectToAction("Index");
         }
 

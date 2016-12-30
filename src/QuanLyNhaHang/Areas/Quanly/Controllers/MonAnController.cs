@@ -5,6 +5,7 @@ using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -19,45 +20,19 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;
         }
 
-        public async Task<List<MONAN>> GetResult(string sortOrder, string mamon = null,
+        public async Task<List<MONAN>> GetResult(string mamon = null,
          string tenmon = null, string maloaimon = null)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.MaMon = string.IsNullOrEmpty(sortOrder) ? "MaMonGiam" : "MaMon";
-            ViewBag.TenMon = string.IsNullOrEmpty(sortOrder) ? "TenMonGiam" : "TenMon";
             IQueryable<MONAN> result = _context.GetList().Where(c =>
            (mamon == null || c.MaMon == mamon) && (tenmon == null || c.TenMon == tenmon)
            && (maloaimon == null || c.MaLoaiMon == mamon) && c.TrangThai == "1");
-            switch (sortOrder)
-            {
-                case "TenMonGiam":
-                    {
-                        result.OrderByDescending(c => c.TenMon);
-                        break;
-                    }
-                case "TenMon":
-                    {
-                        result.OrderBy(c => c.TenMon);
-                        break;
-                    }
-                case "MaMonGiam":
-                    {
-                        result.OrderByDescending(c => c.MaMon);
-                        break;
-                    }
-                default:
-                    {
-                        result.OrderBy(c => c.MaMon);
-                        break;
-                    }
-            }
             return await result.ToListAsync();
         }
         // GET: MonAn
-        public async Task<IActionResult> Index(string sortOrder, string mamon = null,
+        public async Task<IActionResult> Index(string mamon = null,
          string tenmon = null, string maloaimon = null)
         {
-            return View(await GetResult(sortOrder, mamon, tenmon, maloaimon));
+            return View(await GetResult(mamon, tenmon, maloaimon));
         }
 
         // GET: MonAn/Details/5
@@ -88,10 +63,13 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MaMon,TenMon,MaLoaiMon,Gia")] MONAN monan)
+        public async Task<IActionResult> Create(MONAN monan)
         {
             if (ModelState.IsValid)
             {
+                monan.NgayTao = DateTime.Now;
+                monan.TrangThai = "1";
+                monan.TrangThaiDuyet = "U";
                 await _context.Add(monan);
                 return RedirectToAction("Index");
             }
@@ -130,6 +108,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
+                    monan.TrangThaiDuyet = "U";
                     await _context.Update(monan);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -175,7 +154,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _context.Delete(id);
+            var monan = await _context.Get(id);
+            if (ModelState.IsValid)
+            {
+                if (monan.TrangThaiDuyet == "A")
+                {
+                    monan.TrangThai = "0";
+                    monan.TrangThaiDuyet = "U";
+                    await _context.Update(monan);
+                }
+                else
+                    await _context.Delete(id);
+            }
             return RedirectToAction("Index");
         }
     }

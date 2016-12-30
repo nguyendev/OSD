@@ -3,27 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using QuanLyNhaHang.Data;
 using QuanLyNhaHang.Models;
+using QuanLyNhaHang.Infrastructure;
 
 namespace QuanLyNhaHang.Areas.Quanly.Controllers
 {
-	[Area("Quanly")]
+    [Area("Quanly")]
     public class BienBanSuCoController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IGenericRepository<BIENBANSUCO> _context;
 
-        public BienBanSuCoController(ApplicationDbContext context)
+        public BienBanSuCoController(IGenericRepository<BIENBANSUCO> context)
         {
             _context = context;    
         }
 
-        // GET: BienBanSuCo
-        public async Task<IActionResult> Index()
+        private async Task<List<BIENBANSUCO>> GetResult(string mabienban = null,
+            string maloaisuco = null, string manv = null, DateTime? thoigian = null)
         {
-            return View(await _context.BIENBANSUCO.ToListAsync());
+            IQueryable<BIENBANSUCO> result = _context.GetList().Where(c =>
+            (mabienban == null || c.MaBienBan == mabienban) && (maloaisuco == null || c.MaLoaiSuCo == maloaisuco)
+            && (manv == null || c.MaNV == manv) 
+            && (thoigian == null || DateTime.Compare(Convert.ToDateTime(c.ThoiGian),thoigian.Value) == 0)
+            && c.TrangThai == "1");
+            return await result.ToListAsync();
+
+        }
+        // GET: BienBanSuCo
+        public async Task<IActionResult> Index(string mabienban = null,
+            string maloaisuco = null, string manv = null, DateTime? thoigian = null)
+        {
+            return View(await GetResult(mabienban, maloaisuco, manv, thoigian = null));
         }
 
         // GET: BienBanSuCo/Details/5
@@ -34,13 +45,12 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
                 return NotFound();
             }
 
-            var bIENBANSUCO = await _context.BIENBANSUCO.SingleOrDefaultAsync(m => m.Id == id);
-            if (bIENBANSUCO == null)
+            var bienbansuco = await _context.Get(id);
+            if (bienbansuco == null)
             {
                 return NotFound();
             }
-
-            return View(bIENBANSUCO);
+            return View(bienbansuco);
         }
 
         // GET: BienBanSuCo/Create
@@ -54,15 +64,17 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,GhiChu,HuongGiaiQuyet,MaBienBan,MaLoaiSuCo,MaNV,NgayDuyet,NgayTao,NguyenNhan,ThoiGian,TrangThai,TrangThaiDuyet")] BIENBANSUCO bIENBANSUCO)
+        public async Task<IActionResult> Create(BIENBANSUCO bienbansuco)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(bIENBANSUCO);
-                await _context.SaveChangesAsync();
+                bienbansuco.NgayTao = DateTime.Now;
+                bienbansuco.TrangThai = "1";
+                bienbansuco.TrangThaiDuyet = "U";
+                await _context.Add(bienbansuco);
                 return RedirectToAction("Index");
             }
-            return View(bIENBANSUCO);
+            return View(bienbansuco);
         }
 
         // GET: BienBanSuCo/Edit/5
@@ -73,12 +85,12 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
                 return NotFound();
             }
 
-            var bIENBANSUCO = await _context.BIENBANSUCO.SingleOrDefaultAsync(m => m.Id == id);
-            if (bIENBANSUCO == null)
+            var bienbansuco = await _context.Get(id);
+            if (bienbansuco == null)
             {
                 return NotFound();
             }
-            return View(bIENBANSUCO);
+            return View(bienbansuco);
         }
 
         // POST: BienBanSuCo/Edit/5
@@ -86,9 +98,9 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,GhiChu,HuongGiaiQuyet,MaBienBan,MaLoaiSuCo,MaNV,NgayDuyet,NgayTao,NguyenNhan,ThoiGian,TrangThai,TrangThaiDuyet")] BIENBANSUCO bIENBANSUCO)
+        public async Task<IActionResult> Edit(int id, BIENBANSUCO bienbansuco)
         {
-            if (id != bIENBANSUCO.Id)
+            if (id != bienbansuco.Id)
             {
                 return NotFound();
             }
@@ -97,12 +109,12 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
             {
                 try
                 {
-                    _context.Update(bIENBANSUCO);
-                    await _context.SaveChangesAsync();
+                    bienbansuco.TrangThaiDuyet = "U";
+                    await _context.Update(bienbansuco);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BIENBANSUCOExists(bIENBANSUCO.Id))
+                    if (!BienBanSuCoExists(bienbansuco.Id))
                     {
                         return NotFound();
                     }
@@ -113,7 +125,7 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            return View(bIENBANSUCO);
+            return View(bienbansuco);
         }
 
         // GET: BienBanSuCo/Delete/5
@@ -124,13 +136,13 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
                 return NotFound();
             }
 
-            var bIENBANSUCO = await _context.BIENBANSUCO.SingleOrDefaultAsync(m => m.Id == id);
-            if (bIENBANSUCO == null)
+            var bienbansuco = await _context.Get(id);
+            if (bienbansuco == null)
             {
                 return NotFound();
             }
 
-            return View(bIENBANSUCO);
+            return View(bienbansuco);
         }
 
         // POST: BienBanSuCo/Delete/5
@@ -138,15 +150,24 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var bIENBANSUCO = await _context.BIENBANSUCO.SingleOrDefaultAsync(m => m.Id == id);
-            _context.BIENBANSUCO.Remove(bIENBANSUCO);
-            await _context.SaveChangesAsync();
+            var bienbansuco = await _context.Get(id);
+            if (ModelState.IsValid)
+            {
+                if (bienbansuco.TrangThaiDuyet == "A")
+                {
+                    bienbansuco.TrangThai = "0";
+                    bienbansuco.TrangThaiDuyet = "U";
+                    await _context.Update(bienbansuco);
+                }
+                else
+                    await _context.Delete(id);
+            }
             return RedirectToAction("Index");
         }
 
-        private bool BIENBANSUCOExists(int id)
+        private bool BienBanSuCoExists(int id)
         {
-            return _context.BIENBANSUCO.Any(e => e.Id == id);
+            return _context.Exists(id);
         }
     }
 }

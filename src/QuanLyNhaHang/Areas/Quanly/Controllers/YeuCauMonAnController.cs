@@ -5,6 +5,7 @@ using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -18,45 +19,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;    
         }
 
-        public async Task<List<YEUCAUMONAN>> GetResult(string sortOrder, string maluot = null,
+        private async Task<List<YEUCAUMONAN>> GetResult(string maluot = null,
      string mamon = null)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.MaLuot = string.IsNullOrEmpty(sortOrder) ? "MaLuotGiam" : "MaLuot";
-            ViewBag.MaMon = string.IsNullOrEmpty(sortOrder) ? "MaMonGiam" : "MaMon";
             IQueryable<YEUCAUMONAN> result = _context.GetList().Where(c =>
            (maluot == null || c.MaLuot == maluot) && (mamon == null || c.MaMon == mamon)
            && c.TrangThai == "1");
-            switch (sortOrder)
-            {
-                case "MaMonGiam":
-                    {
-                        result.OrderByDescending(c => c.MaMon);
-                        break;
-                    }
-                case "MaMon":
-                    {
-                        result.OrderBy(c => c.MaMon);
-                        break;
-                    }
-                case "MaLuotGiam":
-                    {
-                        result.OrderByDescending(c => c.MaLuot);
-                        break;
-                    }
-                default:
-                    {
-                        result.OrderBy(c => c.MaLuot);
-                        break;
-                    }
-            }
             return await result.ToListAsync();
         }
         // GET: YeuCauMonAn
-        public async Task<IActionResult> Index(string sortOrder, string maluot = null,
-     string mamon = null)
+        public async Task<IActionResult> Index(string maluot = null, string mamon = null)
         {
-            return View(await GetResult(sortOrder, maluot, mamon));
+            return View(await GetResult(maluot, mamon));
         }
 
         // GET: YeuCauMonAn/Details/5
@@ -87,10 +61,13 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MaLuot,MaMon,SoLuong")] YEUCAUMONAN yeucaumonan)
+        public async Task<IActionResult> Create(YEUCAUMONAN yeucaumonan)
         {
             if (ModelState.IsValid)
             {
+                yeucaumonan.NgayTao = DateTime.Now;
+                yeucaumonan.TrangThai = "1";
+                yeucaumonan.TrangThaiDuyet = "U";
                 await _context.Add(yeucaumonan);
                 return RedirectToAction("Index");
             }
@@ -118,7 +95,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MaLuot,MaMon,SoLuong")] YEUCAUMONAN yeucaumonan)
+        public async Task<IActionResult> Edit(int id, YEUCAUMONAN yeucaumonan)
         {
             if (id != yeucaumonan.Id)
             {
@@ -129,6 +106,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
+                    yeucaumonan.TrangThaiDuyet = "U";
                     await _context.Update(yeucaumonan);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -174,7 +152,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _context.Delete(id);
+            var yeucaumonan = await _context.Get(id);
+            if (ModelState.IsValid)
+            {
+                if (yeucaumonan.TrangThaiDuyet == "A")
+                {
+                    yeucaumonan.TrangThai = "0";
+                    yeucaumonan.TrangThaiDuyet = "U";
+                    await _context.Update(yeucaumonan);
+                }
+                else
+                    await _context.Delete(id);
+            }
             return RedirectToAction("Index");
         }
     }

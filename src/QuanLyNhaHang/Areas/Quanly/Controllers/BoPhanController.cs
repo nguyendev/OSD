@@ -5,6 +5,7 @@ using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -19,47 +20,21 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         //search
-        public async Task<List<BOPHAN>> GetResult(string sortOrder, string mabp = null, string tenbp = null,
+        public async Task<List<BOPHAN>> GetResult(string mabp = null, string tenbp = null,
             string matruongbp = null)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.MaBoPhan = (sortOrder == "MaBoPhan") ? "MaBoPhanGiam" : "MaBoPhan";
-            ViewBag.TenBoPhan = (sortOrder == "TenBoPhan") ? "TenBoPhanGiam" : "TenBoPhan";
             IQueryable<BOPHAN> result = _context.GetList().Where(c => 
             (mabp == null || c.MaBP == mabp) && (tenbp == null || c.TenBP == tenbp)
             && (matruongbp == null || c.MaTruongBP == matruongbp) && c.TrangThai == "1");
-            switch(sortOrder)
-            {
-                case "TenBoPhanGiam":
-                    {
-                        result.OrderByDescending(c => c.TenBP);
-                        break;
-                    }
-                case "TenBoPhan":
-                    {
-                        result.OrderBy(c => c.TenBP);
-                        break;
-                    }
-                case "MaBoPhanGiam":
-                    {
-                        result.OrderByDescending(c => c.MaBP);
-                        break;
-                    }
-                default:
-                    {
-                        result.OrderBy(c => c.MaBP);
-                        break;
-                    }
-            }
             return await result.ToListAsync();
 
         }
 
         // GET: BoPhan
-        public async Task<IActionResult> Index(string sortOrder, string mabp = null, string tenbp = null,
+        public async Task<IActionResult> Index(string mabp = null, string tenbp = null,
             string matruongbp = null)
         {
-            return View(await GetResult(sortOrder,mabp,tenbp,matruongbp));
+            return View(await GetResult(mabp,tenbp,matruongbp));
         }
 
         // GET: BoPhan/Details/5
@@ -90,10 +65,13 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MaBP,TenBP,MaTruongBP")] BOPHAN bophan)
+        public async Task<IActionResult> Create(BOPHAN bophan)
         {
             if (ModelState.IsValid)
             {
+                bophan.NgayTao = DateTime.Now;
+                bophan.TrangThai = "1";
+                bophan.TrangThaiDuyet = "U";
                 await _context.Add(bophan);
                 return RedirectToAction("Index");
             }
@@ -121,7 +99,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MaBP,TenBP,MaTruongBP")] BOPHAN bophan)
+        public async Task<IActionResult> Edit(int id, BOPHAN bophan)
         {
             if (id != bophan.Id)
             {
@@ -132,6 +110,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
+                    bophan.TrangThaiDuyet = "U";
                     await _context.Update(bophan);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -177,7 +156,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _context.Delete(id);
+            var bophan = await _context.Get(id);
+            if (ModelState.IsValid)
+            {
+                if (bophan.TrangThaiDuyet == "A")
+                {
+                    bophan.TrangThai = "0";
+                    bophan.TrangThaiDuyet = "U";
+                    await _context.Update(bophan);
+                }
+                else
+                    await _context.Delete(id);
+            }
             return RedirectToAction("Index");
         }
     }

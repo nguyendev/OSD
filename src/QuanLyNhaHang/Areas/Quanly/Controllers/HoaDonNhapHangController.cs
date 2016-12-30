@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -15,11 +18,21 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             _context = context;    
         }
-
-        // GET: HoaDonNhapHang
-        public async Task<IActionResult> Index()
+        
+        private async Task<List<HOADONNHAPHANG>> GetResult(string mahd = null,
+            string manv = null, string ngaylap = null, string mayc = null)
         {
-            return View(await _context.GetAll());
+            IQueryable<HOADONNHAPHANG> result = _context.GetList().Where(c =>
+          (mahd == null || c.MaHD == mahd) && (manv == null || c.MaNV == manv)
+          && (mahd == null || c.MaHD == mahd) && (manv == null || c.MaNV == manv)
+          && c.TrangThai == "1");
+            return await result.ToListAsync();
+        }
+        // GET: HoaDonNhapHang
+        public async Task<IActionResult> Index(string mahd = null,
+            string manv = null, string ngaylap = null, string mayc = null)
+        {
+            return View(await GetResult(mahd, manv, ngaylap, mayc));
         }
 
         // GET: HoaDonNhapHang/Details/5
@@ -50,10 +63,13 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MaHD,MaYeuCau,MaNV,ThoiGianNhap,ThanhTien")] HOADONNHAPHANG hoadonnhaphang)
+        public async Task<IActionResult> Create(HOADONNHAPHANG hoadonnhaphang)
         {
             if (ModelState.IsValid)
             {
+                hoadonnhaphang.NgayTao = DateTime.Now;
+                hoadonnhaphang.TrangThai = "1";
+                hoadonnhaphang.TrangThaiDuyet = "U";
                 await _context.Add(hoadonnhaphang);
                 return RedirectToAction("Index");
             }
@@ -81,7 +97,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MaHD,MaYeuCau,MaNV,ThoiGianNhap,ThanhTien")] HOADONNHAPHANG hoadonnhaphang)
+        public async Task<IActionResult> Edit(int id, HOADONNHAPHANG hoadonnhaphang)
         {
             if (id != hoadonnhaphang.Id)
             {
@@ -92,6 +108,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
+                    hoadonnhaphang.TrangThaiDuyet = "U";
                     await _context.Update(hoadonnhaphang);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -137,9 +154,19 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _context.Delete(id);
+            var hoadon = await _context.Get(id);
+            if (ModelState.IsValid)
+            {
+                if (hoadon.TrangThaiDuyet == "A")
+                {
+                    hoadon.TrangThai = "0";
+                    hoadon.TrangThaiDuyet = "U";
+                    await _context.Update(hoadon);
+                }
+                else
+                    await _context.Delete(id);
+            }
             return RedirectToAction("Index");
         }
-
     }
 }

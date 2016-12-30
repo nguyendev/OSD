@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -51,10 +52,13 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MaNL,SoLuong,TinhTrang")] NGUYENLIEUTRONGKHO nguyenlieutrongkho)
+        public async Task<IActionResult> Create(NGUYENLIEUTRONGKHO nguyenlieutrongkho)
         {
             if (ModelState.IsValid)
             {
+                nguyenlieutrongkho.NgayTao = DateTime.Now;
+                nguyenlieutrongkho.TrangThai = "1";
+                nguyenlieutrongkho.TrangThaiDuyet = "U";
                 await _context.Add(nguyenlieutrongkho);
                 return RedirectToAction("Index");
             }
@@ -82,7 +86,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MaNL,SoLuong,TinhTrang")] NGUYENLIEUTRONGKHO nguyenlieutrongkho)
+        public async Task<IActionResult> Edit(int id, NGUYENLIEUTRONGKHO nguyenlieutrongkho)
         {
             if (id != nguyenlieutrongkho.Id)
             {
@@ -93,6 +97,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
+                    nguyenlieutrongkho.TrangThaiDuyet = "U";
                     await _context.Update(nguyenlieutrongkho);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -138,7 +143,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _context.Delete(id);
+            var nguyenlieutrongkho = await _context.Get(id);
+            if (ModelState.IsValid)
+            {
+                if (nguyenlieutrongkho.TrangThaiDuyet == "A")
+                {
+                    nguyenlieutrongkho.TrangThai = "0";
+                    nguyenlieutrongkho.TrangThaiDuyet = "U";
+                    await _context.Update(nguyenlieutrongkho);
+                }
+                else
+                    await _context.Delete(id);
+            }
             return RedirectToAction("Index");
         }
     }

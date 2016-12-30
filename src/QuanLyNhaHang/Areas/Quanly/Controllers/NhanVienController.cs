@@ -5,6 +5,7 @@ using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -18,45 +19,19 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;    
         }
 
-        public async Task<List<NHANVIEN>> GetResult(string sortOrder, string manv = null,
+        public async Task<List<NHANVIEN>> GetResult(string manv = null,
       string tennv = null, string mabp = null)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.MaNV = string.IsNullOrEmpty(sortOrder) ? "MaNVGiam" : "MaNV";
-            ViewBag.TenNV = string.IsNullOrEmpty(sortOrder) ? "TenNVGiam" : "TenNV";
             IQueryable<NHANVIEN> result = _context.GetList().Where(c =>
            (manv == null || c.MaNV == manv) && (tennv == null || c.TenNV == tennv)
            && (mabp == null || c.MaBP == mabp) && c.TrangThai == "1");
-            switch (sortOrder)
-            {
-                case "TenNVGiam":
-                    {
-                        result.OrderByDescending(c => c.TenNV);
-                        break;
-                    }
-                case "TenNV":
-                    {
-                        result.OrderBy(c => c.TenNV);
-                        break;
-                    }
-                case "MaNVGiam":
-                    {
-                        result.OrderByDescending(c => c.MaNV);
-                        break;
-                    }
-                default:
-                    {
-                        result.OrderBy(c => c.MaNV);
-                        break;
-                    }
-            }
             return await result.ToListAsync();
         }
         // GET: NhanVien
-        public async Task<IActionResult> Index(string sortOrder, string manv = null,
+        public async Task<IActionResult> Index(string manv = null,
       string tennv = null, string mabp = null)
         {
-            return View(await GetResult(sortOrder, manv,tennv, mabp));
+            return View(await GetResult(manv,tennv, mabp));
         }
 
         // GET: NhanVien/Details/5
@@ -87,10 +62,13 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MaNV,TenNV,MaBP,CMND,DiaChi,SoDT")] NHANVIEN nhanvien)
+        public async Task<IActionResult> Create(NHANVIEN nhanvien)
         {
             if (ModelState.IsValid)
             {
+                nhanvien.NgayTao = DateTime.Now;
+                nhanvien.TrangThai = "1";
+                nhanvien.TrangThaiDuyet = "U";
                 await _context.Add(nhanvien);
                 return RedirectToAction("Index");
             }
@@ -118,7 +96,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MaNV,TenNV,MaBP,CMND,DiaChi,SoDT")] NHANVIEN nhanvien)
+        public async Task<IActionResult> Edit(int id, NHANVIEN nhanvien)
         {
             if (id != nhanvien.Id)
             {
@@ -129,6 +107,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
+                    nhanvien.TrangThaiDuyet = "U";
                     await _context.Update(nhanvien);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -174,7 +153,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _context.Delete(id);
+            var nhanvien = await _context.Get(id);
+            if (ModelState.IsValid)
+            {
+                if (nhanvien.TrangThaiDuyet == "A")
+                {
+                    nhanvien.TrangThai = "0";
+                    nhanvien.TrangThaiDuyet = "U";
+                    await _context.Update(nhanvien);
+                }
+                else
+                    await _context.Delete(id);
+            }
             return RedirectToAction("Index");
         }
 

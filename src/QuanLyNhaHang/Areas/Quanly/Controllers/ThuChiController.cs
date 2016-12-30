@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Infrastructure;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -15,10 +18,19 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             _context = context;    
         }
 
-        // GET: ThuChi
-        public async Task<IActionResult> Index()
+        private async Task<List<THUCHI>> GetResult(DateTime? ngaylap = null,
+          string nguoilap = null)
         {
-            return View(await _context.GetAll());
+            IQueryable<THUCHI> result = _context.GetList().Where(c =>
+           (ngaylap == null || DateTime.Compare(Convert.ToDateTime(c.NgayTao), ngaylap.Value) == 0)
+           && (nguoilap == null || c.NguoiLap == nguoilap) && c.TrangThai == "1");
+            return await result.ToListAsync();
+        }
+        // GET: ThuChi
+        public async Task<IActionResult> Index(DateTime? ngaylap = null,
+          string nguoilap = null)
+        {
+            return View(await GetResult(ngaylap, nguoilap));
         }
 
         // GET: ThuChi/Details/5
@@ -49,10 +61,13 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LaPhieuThu,NgayLap,ThanhTien")] THUCHI thuchi)
+        public async Task<IActionResult> Create(THUCHI thuchi)
         {
             if (ModelState.IsValid)
             {
+                thuchi.NgayTao = DateTime.Now;
+                thuchi.TrangThai = "1";
+                thuchi.TrangThaiDuyet = "U";
                 await _context.Add(thuchi);
                 return RedirectToAction("Index");
             }
@@ -80,7 +95,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LaPhieuThu,NgayLap,ThanhTien")] THUCHI thuchi)
+        public async Task<IActionResult> Edit(int id, THUCHI thuchi)
         {
             if (id != thuchi.Id)
             {
@@ -91,6 +106,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
+                    thuchi.TrangThaiDuyet = "U";
                     await _context.Update(thuchi);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -136,7 +152,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _context.Delete(id);
+            var thuchi = await _context.Get(id);
+            if (ModelState.IsValid)
+            {
+                if (thuchi.TrangThaiDuyet == "A")
+                {
+                    thuchi.TrangThai = "0";
+                    thuchi.TrangThaiDuyet = "U";
+                    await _context.Update(thuchi);
+                }
+                else
+                    await _context.Delete(id);
+            }
             return RedirectToAction("Index");
         }
     }
