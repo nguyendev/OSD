@@ -1,0 +1,229 @@
+﻿@{
+    @using Microsoft.AspNetCore.Identity
+    @using QuanLyNhaHang.Models
+    @inject SignInManager<AppUser> SignInManager
+    @inject UserManager<AppUser> UserManager
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+            @*<form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                    </li>
+                    <li>
+                        <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
+                    </li>
+                </ul>
+            </form>*@
+        }
+        //else
+        //    RedirectToActionResult("login");
+}
+
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>@ViewData["Title"] - QuanLyNhaHang</title>
+
+            <environment names="Development">
+                <link href="~/gentelella/vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+                @*<link rel="stylesheet" href="~/css/site.css" />*@
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/gentelella/vendors/bootstrap/dist/css/bootstrap.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        @*<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />*@
+    </environment>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Font Awesome -->
+    <link href="~/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/gentelella/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="~/gentelella/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="~/gentelella/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="~/gentelella/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="~/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="~/gentelella/build/css/custom.min.css" rel="stylesheet">
+
+
+
+
+
+    @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
+</head>
+ <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="admin/index" class="site_title"><i class="fa fa-paw"></i> <span>Quản Lý Nhà Hàng</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile">
+              <div class="profile_pic">
+                <img src="~/gentelella/production/images/img.jpg" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome,</span>
+                <h2>@UserManager.GetUserName(User)</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            @await Html.PartialAsync("_Sidebar")
+            
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        @await Html.PartialAsync("_Topnavigation")
+        <!-- /top navigation -->
+
+        <!-- page content -->
+       <div class="right_col" role="main">
+           <div class="">
+               @RenderBody()
+           </div>
+        </div>
+
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+              <p>&copy; 2016 - QuanLyNhaHang</p>
+            
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+    
+    <!-- /gauge.js -->
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">QuanLyNhaHang</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                </ul>
+                @await Html.PartialAsync("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">*@
+        
+        @*<hr />
+        <footer>
+            <p>&copy; 2016 - QuanLyNhaHang</p>
+        </footer>
+    </div>*@
+
+    <environment names="Development">
+        <!-- jQuery -->
+        <script src="~/gentelella/vendors/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="~/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+        @*<script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>*@
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.4.min.js"
+                asp-fallback-src="~/gentelella/vendors/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+     <!-- FastClick -->
+     <script src="~/gentelella/vendors/fastclick/lib/fastclick.js"></script>
+     <!-- NProgress -->
+     <script src="~/gentelella/vendors/nprogress/nprogress.js"></script>
+     <!-- Chart.js -->
+     <script src="~/gentelella/vendors/Chart.js/dist/Chart.min.js"></script>
+     <!-- gauge.js -->
+     <script src="~/gentelella/vendors/gauge.js/dist/gauge.min.js"></script>
+     <!-- bootstrap-progressbar -->
+     <script src="~/gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+     <!-- iCheck -->
+     <script src="~/gentelella/vendors/iCheck/icheck.min.js"></script>
+     <!-- Skycons -->
+     <script src="~/gentelella/vendors/skycons/skycons.js"></script>
+     <!-- Flot -->
+     <script src="~/gentelella/vendors/Flot/jquery.flot.js"></script>
+     <script src="~/gentelella/vendors/Flot/jquery.flot.pie.js"></script>
+     <script src="~/gentelella/vendors/Flot/jquery.flot.time.js"></script>
+     <script src="~/gentelella/vendors/Flot/jquery.flot.stack.js"></script>
+     <script src="~/gentelella/vendors/Flot/jquery.flot.resize.js"></script>
+     <!-- Flot plugins -->
+     <script src="~/gentelella/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+     <script src="~/gentelella/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+     <script src="~/gentelella/vendors/flot.curvedlines/curvedLines.js"></script>
+     <!-- DateJS -->
+     <script src="~/gentelella/vendors/DateJS/build/date.js"></script>
+     <!-- JQVMap -->
+     <script src="~/gentelella/vendors/jqvmap/dist/jquery.vmap.js"></script>
+     <script src="~/gentelella/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+     <script src="~/gentelella/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+     <!-- bootstrap-daterangepicker -->
+     <script src="~/gentelella/vendors/moment/min/moment.min.js"></script>
+     <script src="~/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+     <!-- Custom Theme Scripts -->
+     <script src="~/gentelella/build/js/custom.min.js"></script>
+     <!-- Flot -->
+    @RenderSection("scripts", required: false)
+</body>
+</html>

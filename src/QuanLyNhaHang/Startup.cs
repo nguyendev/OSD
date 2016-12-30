@@ -153,6 +153,7 @@ namespace QuanLyNhaHang
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
             ApplicationDbContext.CreateExampleAccount(app.ApplicationServices, Configuration).Wait();
+            ApplicationDbContext.CreateExampleQuanly(app.ApplicationServices).Wait();
         }
     }
 }

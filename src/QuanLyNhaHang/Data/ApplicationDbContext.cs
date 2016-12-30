@@ -6,6 +6,7 @@ using QuanLyNhaHang.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace QuanLyNhaHang.Data
 {
@@ -43,8 +44,8 @@ namespace QuanLyNhaHang.Data
             builder.Entity<NHACUNGCAP>().HasAlternateKey(c => c.TenNCC);
             builder.Entity<NHANVIEN>().HasAlternateKey(c => c.MaNV);
             builder.Entity<NHANVIEN>().HasAlternateKey(c => new {c.TenNV,c.SoDT,c.DiaChi,c.CMND });
-            builder.Entity<PHIEUCHI>().HasAlternateKey(c => c.MaPC);
-            builder.Entity<PHIEUTHU>().HasAlternateKey(c => c.MaPT);
+            //builder.Entity<PHIEUCHI>().HasAlternateKey(c => c.MaPC);
+            //builder.Entity<PHIEUTHU>().HasAlternateKey(c => c.MaPT);
             builder.Entity<YEUCAUNHAPHANG>().HasAlternateKey(c => c.MaYeuCau);
         }
         public DbSet<BlogBusiness> blogBusiness { get; set; }
@@ -107,6 +108,13 @@ namespace QuanLyNhaHang.Data
                     await userManager.AddToRoleAsync(userguest, roleguest);
                 }
             }
+        }
+        public static async Task CreateExampleQuanly(IServiceProvider serviceProvider,
+        IConfiguration configuration)
+        {
+            SeedData.CreateExampleBienbansuco(serviceProvider).Wait();
+
+
         }
         // public DbSet<BlogCategory> blogCategory { get; set; }
         // public DbSet<GrantPermission> grantPermission { get; set; }
