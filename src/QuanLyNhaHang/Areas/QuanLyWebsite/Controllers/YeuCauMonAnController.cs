@@ -118,7 +118,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaLuot,MaMon,SoLuong")] YEUCAUMONAN yeucaumonan)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,MaLuot,MaMon,SoLuong")] YEUCAUMONAN yeucaumonan)
         {
             if (id != yeucaumonan.Id)
             {
