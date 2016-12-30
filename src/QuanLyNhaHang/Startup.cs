@@ -9,6 +9,7 @@ using QuanLyNhaHang.Data;
 using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Services;
 using QuanLyNhaHang.Infrastructure;
+using Microsoft.AspNetCore.Http;
 
 namespace QuanLyNhaHang
 {
@@ -73,7 +74,7 @@ namespace QuanLyNhaHang
             services.AddIdentity<AppUser, IdentityRole>(opts =>
             {
 
-                //opts.Cookies.ApplicationCookie.LoginPath = "/QuanLyWebsite/Account/Login";
+                opts.Cookies.ApplicationCookie.LoginPath = "/Quan-Ly/Account/Login";
                 //opts.User.RequireUniqueEmail = true;
                 //// opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
                 //opts.Password.RequiredLength = 6;
@@ -136,7 +137,28 @@ namespace QuanLyNhaHang
             app.UseStaticFiles();
 
             app.UseIdentity();
-
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404)
+                {
+                    context.Request.Path = "/Home/NotFound";
+                    await next();
+                }
+                if (context.Response.StatusCode == 401)
+                {
+                    context.Request.Path = "/Home/Unauthorized";
+                    await next();
+                }
+            });
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = "MyCookies",
+                SlidingExpiration = true,
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                LoginPath = new PathString("/quan-ly/tai-khoan/dang-nhap")
+            });
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseGoogleAuthentication(new GoogleOptions
@@ -147,7 +169,7 @@ namespace QuanLyNhaHang
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "areaRoute",
-                     template: "{area:exists}/{controller=Admin}/{action=Index}");
+                     template: "{area:exists}/{controller=Trangchu}/{action=Index}");
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

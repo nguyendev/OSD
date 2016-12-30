@@ -9,7 +9,7 @@ namespace QuanLyNhaHang.Controllers
 {
     public class HomeController : Controller
     {
-        
+
         public IActionResult Index() => View(GetData(nameof(Index)));
 
         public IActionResult About()
@@ -26,10 +26,16 @@ namespace QuanLyNhaHang.Controllers
             return View();
         }
 
-        public IActionResult Error()
+        public IActionResult NotFound()
         {
             return View();
         }
+        public IActionResult Unauthorized()
+        {
+            return LocalRedirect("~/quan-ly/tai-khoan/dang-nhap");
+        }
+
+
         [Authorize(Roles = "Guest")]
         public IActionResult OtherAction() => View("Index",
 GetData(nameof(OtherAction)));
