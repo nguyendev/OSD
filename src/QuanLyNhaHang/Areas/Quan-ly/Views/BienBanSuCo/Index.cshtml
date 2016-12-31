@@ -7,7 +7,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Danh sách biên bản sự cố</h2>
+                <h2><strong>Danh sách tìm kiếm</strong></h2>
                 <ul class="nav navbar-right panel_toolbox">
 
                     <li class="dropdown">
@@ -32,7 +32,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Danh sách biên bản sự cố</h2>
+                <h2><strong>Danh sách biên bản sự cố</strong></h2>
                 <ul class="nav navbar-right panel_toolbox">
 
                     <li class="dropdown">
@@ -42,7 +42,7 @@
                     </li>
                     @*<li><a class="close-link" style="visibility:hidden"><i class="fa fa-close"></i></a></li>*@
                     <li>
-                        <a asp-action="create" class="btn btn-primary" style="color: white" role="button" aria-expanded="false">
+                        <a asp-action="create" class="btn btn-primary them" style="color: white" role="button">
                             Thêm mới
                         </a>
                     </li>
@@ -85,6 +85,7 @@
     </div>
 </div>
 @section css{        <!-- Datatables -->
+    <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/gentelella/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="~/gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="~/gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
