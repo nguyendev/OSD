@@ -32,56 +32,31 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Đăng nhập </title>
-    <!-- Bootstrap -->
-    <link href="~/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="~/gentelella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="~/gentelella/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="~/gentelella/vendors/animate.css/animate.min.css" rel="stylesheet">
-    <!-- Custom Theme Style -->
-    <link href="~/gentelella/build/css/custom.min.css" rel="stylesheet">
+    <title>Đăng nhập hệ thống</title>
+    <link href="~/login/style.css" rel="stylesheet">
+    <link href="~/lib/bootstrap/dist/css/bootstrap-theme.css"  rel="stylesheet"/>
 </head>
-<body class="login">
-    <div>
-        <a class="hiddenanchor" id="signin"></a>
-        <div class="login_wrapper">
-            <div class="animate form login_form">
-                <section class="login_content">
-                    <div class="text-danger" asp-validation-summary="All"></div>
-                    <form asp-action="Login" method="post">
-                        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
-                        <h1>Login Form</h1>
-                        <div>
-                            <input asp-for="Email" class="form-control" placeholder="Email" required />
-                        </div>
-                        <div>
-                            <input asp-for="Password" class="form-control" placeholder="Password" required />
-                        </div>
-                        <div>
-                            <button class="btn btn-default submit" type="submit">Log In</button>
-                            <a class="reset_pass" href="#">Lost your password?</a>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="separator">
-                            <p class="change_link">
-                                New to site?
-                                <a href="#signup" class="to_register"> Create Account </a>
-                            </p>
-                            <div class="clearfix"></div>
-                            <br />
-                            <div>
-                                <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                                <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-                            </div>
-                        </div>
-                    </form>
-                </section>
+<body>
+    <br /><br />
+    <div id="boxForm">
+        <h2 id="title">Đăng nhập hệ thống</h2>
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <form asp-action="Login" method="post">
+            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+            <input asp-for="Email" type="email" class="text" placeholder="Email" required />
+            <br />
+            <input asp-for="Password" type="password" class="text" placeholder="Password" required />
+            <br /> <br />
+            <input id='rememberMe' name='rememberMe' type='checkbox'> <label>Nhớ mật khẩu</label>
+            <br /> <br />
+            <div class="text-center">
+                <input class='button' type='submit' value='Đăng nhập'>
             </div>
-          
-        </div>
+            
+            <a class="reset_pass" asp-area="Quan-ly" asp-controller="QuanLyTaiKhoan" asp-action="SetPassword">Quên mật khẩu</a>
+            <div class="clearfix"></div>
+            <br />
+        </form>
     </div>
 </body>
 </html>

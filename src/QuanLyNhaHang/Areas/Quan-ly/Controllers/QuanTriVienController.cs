@@ -4,6 +4,12 @@ using Microsoft.AspNetCore.Identity;
 using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Areas.Admin.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using System;
+using System.Collections.Generic;
+using ImageSharp;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,15 +24,18 @@ namespace QuanLyNhaHang.Areas.Admin.Controllers
         private IUserValidator<AppUser> _userValidator;
         private IPasswordValidator<AppUser> _passwordValidator;
         private IPasswordHasher<AppUser> _passwordHasher;
+        private IHostingEnvironment _environment;
+
         public QuanTriVienController(UserManager<AppUser> userManager,
             IUserValidator<AppUser> userValid,
             IPasswordValidator<AppUser> passValid,
-            IPasswordHasher<AppUser> passwordHash)
+            IPasswordHasher<AppUser> passwordHash, IHostingEnvironment environment)
         {
             _userManager = userManager;
             _userValidator = userValid;
             _passwordHasher = passwordHash;
             _passwordValidator = passValid;
+            _environment = environment;
         }
         [Route("quan-ly/quan-tri-vien")]
         public ViewResult Index()
@@ -37,16 +46,44 @@ namespace QuanLyNhaHang.Areas.Admin.Controllers
         public ViewResult Create() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateModel model)
+        [Route("quan-ly/quan-tri-vien/tao-nguoi-dung")]
+        public async Task<IActionResult> Create(CreateModel model, IFormFile file)
         {
             if (ModelState.IsValid)
             {
+                var uploads = Path.Combine(_environment.WebRootPath, "uploads");
+                model.Avatar = Path.Combine(uploads, file.FileName);
+                if (file.Length > 0)
+                {
+                    try
+                    {
+                        using (var fileStream = new FileStream(model.Avatar, FileMode.Create))
+                        {
+                            
+                            Image image = new Image(file.OpenReadStream());
+                            image.Resize(128,128)
+                                 .Save(fileStream);
+                            model.Avatar = Path.Combine("~\\uploads", file.FileName);
+                            file.CopyTo(fileStream);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                    }
+
+                    
+
+
+                }
                 AppUser user = new AppUser
                 {
                     UserName = model.Name,
-                    Email = model.Email
+                    Email = model.Email,
+                    ImageUrl = model.Avatar
+
                 };
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+                
 
                 if (result.Succeeded)
                 {
@@ -156,5 +193,7 @@ namespace QuanLyNhaHang.Areas.Admin.Controllers
             }
             return View(user);
         }
+        
+
     }
 }

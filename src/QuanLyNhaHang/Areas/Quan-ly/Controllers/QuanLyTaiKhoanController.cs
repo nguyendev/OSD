@@ -12,7 +12,7 @@ using QuanLyNhaHang.ViewModels.Manage;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
-    [Area("Quanly")]
+    [Area("Quan-ly")]
     [Authorize]
     public class QuanLyTaiKhoanController : Controller
     {
