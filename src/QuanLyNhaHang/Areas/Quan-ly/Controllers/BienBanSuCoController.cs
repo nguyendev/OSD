@@ -35,10 +35,11 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         }
         // GET: BienBanSuCo
         [Route("quan-ly/bien-ban-su-co")]
-        public async Task<IActionResult> Index(string mabienban = null,
-            string maloaisuco = null, string manv = null, DateTime? thoigian = null)
+        public async Task<IActionResult> Index(/*string mabienban = null,
+            string maloaisuco = null, string manv = null, DateTime? thoigian = null*/)
         {
-            return View(await GetResult(mabienban, maloaisuco, manv, thoigian = null));
+            return View(await _context.GetAll());
+            //return View(await GetResult(mabienban, maloaisuco, manv, thoigian = null));
         }
 
         // GET: BienBanSuCo/Details/5
