@@ -48,3 +48,8 @@ textarea {
     display: none
   }
 }
+
+ a.them:hover {
+    background-color:#00b1ff !important;
+    border-color:#0893fc;
+}
