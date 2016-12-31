@@ -2,84 +2,78 @@
 
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
-<h2>Details</h2>
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Ch?nh s?a báo cáo s? c?</h2>
+            <ul class="nav navbar-right panel_toolbox">
 
-<div>
-    <h4>BIENBANSUCO</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.GhiChu)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.GhiChu)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HuongGiaiQuyet)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HuongGiaiQuyet)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MaBienBan)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MaBienBan)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MaLoaiSuCo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MaLoaiSuCo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MaNV)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MaNV)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayDuyet)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NgayDuyet)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayTao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NgayTao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NguyenNhan)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NguyenNhan)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ThoiGian)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ThoiGian)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TrangThai)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TrangThaiDuyet)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TrangThaiDuyet)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="visibility:hidden;" role="button" aria-expanded="false">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a></li>
+                        <li><a href="#">Settings 2</a></li>
+                    </ul>
+                </li>
+                <li><a class="close-link" style="visibility:hidden"><i class="fa fa-close"></i></a></li>
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br>
+            <form asp-action="Edit" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea asp-for="GhiChu" required="required" disabled class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                            <span asp-validation-for="GhiChu" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HuongGiaiQuyet" class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea asp-for="HuongGiaiQuyet" required="required" disabled class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                            <span asp-validation-for="HuongGiaiQuyet" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MaNV" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select asp-for="MaNV" class="select2_group form-control" disabled asp-items="ViewBag.MaNV"></select>
+                            <span asp-validation-for="MaNV" class="text-danger" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="NgayTao" class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="ngaytao" asp-for="NgayTao" disabled class="date-picker form-control col-md-7 col-xs-12 parsley-success" required="required" type="text" data-parsley-id="16">
+                            <span asp-validation-for="NgayTao" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <a asp-action="index" asp-controller="bienbansuco" class="btn btn-default pull-left">Quay la?</a>
+                            <a asp-action="edit" asp-controller="bienbansuco" class="btn btn-warning pull-right">Ch?nh s?a</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
