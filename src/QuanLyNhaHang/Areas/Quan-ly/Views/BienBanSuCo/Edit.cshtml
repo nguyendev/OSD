@@ -1,4 +1,4 @@
-@model QuanLyNhaHang.Models.BIENBANSUCO
+﻿@model QuanLyNhaHang.Models.BIENBANSUCO
 
 @{
     ViewData["Title"] = "Edit";
@@ -7,17 +7,14 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Ch?nh s?a b�o c�o s? c?</h2>
+            <h2>Thay đổi biên bản sự cố</h2>
             <ul class="nav navbar-right panel_toolbox">
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="visibility:hidden;" role="button" aria-expanded="false">
                         <i class="fa fa-wrench"></i>
                     </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a></li>
-                        <li><a href="#">Settings 2</a></li>
-                    </ul>
+                    
                 </li>
                 <li><a class="close-link" style="visibility:hidden"><i class="fa fa-close"></i></a></li>
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -30,19 +27,17 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-horizontal">
                     <div class="form-group">
-                        <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12">
-                            <span class="required">*</span>
-                        </label>
+                        <label asp-for="MaBienBan" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea asp-for="GhiChu" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
-                            <span asp-validation-for="GhiChu" class="text-danger" />
+                            <select asp-for="MaBienBan" class="select2_group form-control" asp-items="ViewBag.MaNV"></select>
+                            <span asp-validation-for="MaBienBan" class="text-danger" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label asp-for="HuongGiaiQuyet" class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">*</span></label>
+                        <label asp-for="MaLoaiSuCo" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea asp-for="HuongGiaiQuyet" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
-                            <span asp-validation-for="HuongGiaiQuyet" class="text-danger" />
+                            <select asp-for="MaLoaiSuCo" class="select2_group form-control" asp-items="ViewBag.MaNV"></select>
+                            <span asp-validation-for="MaLoaiSuCo" class="text-danger" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -55,19 +50,41 @@
 
 
                     <div class="form-group">
-                        <label asp-for="NgayTao" class="control-label col-md-3 col-sm-3 col-xs-12">
-                            <span class="required">*</span>
-                        </label>
+                        <label asp-for="NgayTao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="ngaytao" asp-for="NgayTao" class="date-picker form-control col-md-7 col-xs-12 parsley-success" required="required" type="text" data-parsley-id="16">
+                            <input asp-for="NgayTao" class="ngaytao date-picker form-control col-md-7 col-xs-12 parsley-success" required="required" type="text" data-parsley-id="16">
                             <span asp-validation-for="NgayTao" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ThoiGian" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input asp-for="ThoiGian" class="ngaytao date-picker form-control col-md-7 col-xs-12 parsley-success" required="required" type="text" data-parsley-id="16">
+                            <span asp-validation-for="ThoiGian" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="NguyenNhan" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea asp-for="NguyenNhan" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                            <span asp-validation-for="NguyenNhan" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="HuongGiaiQuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea asp-for="HuongGiaiQuyet" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                            <span asp-validation-for="HuongGiaiQuyet" class="text-danger" />
                         </div>
                     </div>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <a asp-action="index" asp-controller="bienbansuco" class="btn btn-primary pull-left">Quay la?</a>
-                            <input type="submit" value="L?u" class="btn btn-success pull-right" />
+                            <a asp-action="index" asp-controller="bienbansuco" class="btn btn-primary pull-left">Quay lại</a>
+                            <input type="submit" value="Lưu" class="btn btn-success pull-left" />
                         </div>
                     </div>
                 </div>
