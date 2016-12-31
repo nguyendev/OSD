@@ -5,8 +5,8 @@ using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -15,28 +15,51 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class NhaCungCapController : Controller
     {
         private readonly IGenericRepository<NHACUNGCAP> _context;
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
 
         public NhaCungCapController(IGenericRepository<NHACUNGCAP> context)
         {
             _context = context;    
         }
 
-        public async Task<List<NHACUNGCAP>> GetResult(string mancc = null,
+        public async Task<IActionResult> GetResult(string mancc = null,
       string tenncc = null)
         {
             IQueryable<NHACUNGCAP> result = _context.GetList().Where(c =>
            (mancc == null || c.MaNCC == mancc) && (tenncc == null || c.TenNCC == tenncc)
            && c.TrangThai == "1");
-            return await result.ToListAsync();
+            return View(await result.ToListAsync());
         }
 
         // GET: NhaCungCap
         public async Task<IActionResult> Index(string mancc = null,
       string tenncc = null)
         {
-            return View(await GetResult(mancc, tenncc));
+            return await GetResult(mancc, tenncc);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+           string mancc = null, string tenncc = null)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var nhacungcap = await _context.Get(id);
+            if (nhacungcap == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _context.SetState(nhacungcap, EntityState.Modified);
+                await _context.Update(nhacungcap, trangthaiduyet, "1", UserManager.GetUserId(User));
+            }
+            return await GetResult(mancc, tenncc);
+        }
         // GET: NhaCungCap/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -69,10 +92,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                nhacungcap.NgayTao = DateTime.Now;
-                nhacungcap.TrangThai = "1";
-                nhacungcap.TrangThaiDuyet = "U";
-                await _context.Add(nhacungcap);
+                await _context.Add(nhacungcap, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(nhacungcap);
@@ -110,7 +130,6 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
-                    nhacungcap.TrangThaiDuyet = "U";
                     await _context.Update(nhacungcap);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -160,11 +179,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             if (ModelState.IsValid)
             {
                 if (nhacungcap.TrangThaiDuyet == "A")
-                {
-                    nhacungcap.TrangThai = "0";
-                    nhacungcap.TrangThaiDuyet = "U";
-                    await _context.Update(nhacungcap);
-                }
+                    await _context.Update(nhacungcap,"U","0");
                 else
                     await _context.Delete(id);
             }

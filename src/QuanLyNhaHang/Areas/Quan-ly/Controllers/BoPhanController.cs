@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -15,30 +17,57 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class BoPhanController : Controller
     {
         private readonly IGenericRepository<BOPHAN> _context;
+        private readonly IGenericRepository<NHANVIEN> _nhanviencontext;
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
 
-        public BoPhanController(IGenericRepository<BOPHAN> context)
+        public BoPhanController(IGenericRepository<BOPHAN> context,
+            IGenericRepository<NHANVIEN> nhanviencontext)
         {
-            _context = context;    
+            _context = context;
+            _nhanviencontext = nhanviencontext;   
         }
 
         //search
-        public async Task<List<BOPHAN>> GetResult(string mabp = null, string tenbp = null,
+        public async Task<IActionResult> GetResult(string mabp = null, string tenbp = null,
             string matruongbp = null)
         {
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaTruongBP"] = new SelectList(nhanvienlist, "MaNV", "MaNV", matruongbp);
             IQueryable<BOPHAN> result = _context.GetList().Where(c => 
             (mabp == null || c.MaBP == mabp) && (tenbp == null || c.TenBP == tenbp)
             && (matruongbp == null || c.MaTruongBP == matruongbp) && c.TrangThai == "1");
-            return await result.ToListAsync();
-
+            return View(await result.ToListAsync());
         }
 
         // GET: BoPhan
         public async Task<IActionResult> Index(string mabp = null, string tenbp = null,
             string matruongbp = null)
         {
-            return View(await GetResult(mabp,tenbp,matruongbp));
+            return await GetResult(mabp,tenbp,matruongbp);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet, string mabp = null, string tenbp = null,
+            string matruongbp = null)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var bophan = await _context.Get(id);
+            if (bophan == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _context.SetState(bophan, EntityState.Modified);
+                await _context.Update(bophan,trangthaiduyet, "1", UserManager.GetUserId(User));
+            }
+            return await GetResult(mabp, tenbp, matruongbp);
+        }
         // GET: BoPhan/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -59,6 +88,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // GET: BoPhan/Create
         public IActionResult Create()
         {
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaTruongBP"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
             return View();
         }
 
@@ -71,10 +102,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                bophan.NgayTao = DateTime.Now;
-                bophan.TrangThai = "1";
-                bophan.TrangThaiDuyet = "U";
-                await _context.Add(bophan);
+                await _context.Add(bophan, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(bophan);
@@ -93,6 +121,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaTruongBP"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
             return View(bophan);
         }
 
@@ -112,7 +142,6 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
-                    bophan.TrangThaiDuyet = "U";
                     await _context.Update(bophan);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -163,9 +192,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 if (bophan.TrangThaiDuyet == "A")
                 {
-                    bophan.TrangThai = "0";
-                    bophan.TrangThaiDuyet = "U";
-                    await _context.Update(bophan);
+                    await _context.Update(bophan,"U","0");
                 }
                 else
                     await _context.Delete(id);

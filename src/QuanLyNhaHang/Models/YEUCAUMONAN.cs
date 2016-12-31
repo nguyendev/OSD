@@ -19,9 +19,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Display(Name = "Mã lượt khách")]
-        [Required(ErrorMessage = "Vui lòng nhập mã lượt khách")]
-        [MaxLength(12, ErrorMessage = "Mã lượt khách không quá 12 kí tự")]
+        [Required]
         public string MaLuot
         {
             get;
@@ -29,15 +27,13 @@ namespace QuanLyNhaHang.Models
         }
 		
 		//kết bảng
-		public virtual LUOTKHACH fLUOTKHACH
-		{
-			get;
-			set;
-		}
+		//public virtual LUOTKHACH fLUOTKHACH
+		//{
+		//	get;
+		//	set;
+		//}
 
-        [Display(Name = "Mã món ăn")]
-        [Required(ErrorMessage = "Vui lòng nhập mã món ăn")]
-        [MaxLength(12, ErrorMessage = "Mã món ăn không quá 12 kí tự")]
+        [Required]
         public string MaMon
         {
             get;
@@ -45,15 +41,13 @@ namespace QuanLyNhaHang.Models
         }
 		
 		//kết bảng
-		public virtual MONAN fMONAN
-		{
-			get;
-			set;
-		}
+		//public virtual MONAN fMONAN
+		//{
+		//	get;
+		//	set;
+		//}
 
-        [Display(Name = "Số lượng")]
-        [Required(ErrorMessage = "Vui lòng nhập số lượng")]
-        [Range(0, int.MaxValue, ErrorMessage = "Số lượng không hợp lệ")]
+        [Required]
         public int SoLuong
         {
             get;

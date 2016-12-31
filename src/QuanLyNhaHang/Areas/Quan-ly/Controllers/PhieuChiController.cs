@@ -5,8 +5,9 @@ using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Infrastructure;
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -15,48 +16,76 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class PhieuChiController : Controller
     {
         private readonly IGenericRepository<PHIEUCHI> _context;
+        private readonly IGenericRepository<HOADONNHAPHANG> _hoadoncontext;
+        private readonly IGenericRepository<NHANVIEN> _nhanviencontext;
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
 
-        public PhieuChiController(IGenericRepository<PHIEUCHI> context)
+        public PhieuChiController(IGenericRepository<PHIEUCHI> context,
+            IGenericRepository<HOADONNHAPHANG> hoadoncontext,
+            IGenericRepository<NHANVIEN> nhanviencontext)
         {
-            _context = context;    
+            _context = context;
+            _hoadoncontext = hoadoncontext;
+            _nhanviencontext = nhanviencontext;
         }
 
-        private async Task<List<PHIEUCHI>> GetResult(string mapc = null, string mahd = null, DateTime? ngaylap = null,
+        private async Task<IActionResult> GetResult(string mapc = null, string mahd = null, DateTime? ngaylap = null,
             string nguoilap = null)
         {
+            var hoadonlist = _hoadoncontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaHD"] = new SelectList(hoadonlist, "MaHD", "MaHD", mahd);
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV", nguoilap);
             IQueryable<PHIEUCHI> result = _context.GetList().Where(c =>
            (mapc == null || c.MaPC == mapc) && (mahd == null || c.MaHD == mahd)
            && (ngaylap == null || DateTime.Compare(Convert.ToDateTime(c.NgayTao) , ngaylap.Value) == 0) 
            && (nguoilap == null || c.NguoiLap == nguoilap) && c.TrangThai == "1");
-            return await result.ToListAsync();
+            return View(await result.ToListAsync());
         }
         // GET: PhieuChi
         public async Task<IActionResult> Index(string mapc = null, string mahd = null, DateTime? ngaylap = null,
             string nguoilap = null)
         {
-            return View(await GetResult(mapc, mahd, ngaylap, nguoilap));
+            return await GetResult(mapc, mahd, ngaylap, nguoilap);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+  string mapc = null, string mahd = null, DateTime? ngaylap = null,
+            string nguoilap = null)
+        {
+            if (id == null)
+                return NotFound();
+            var phieuchi = await _context.Get(id);
+            if (phieuchi == null)
+                return NotFound();
+            if (ModelState.IsValid)
+            {
+                _context.SetState(phieuchi, EntityState.Modified);
+                await _context.Update(phieuchi, trangthaiduyet, "1", UserManager.GetUserId(User));
+            }
+            return await GetResult(mapc, mahd, ngaylap, nguoilap);
+        }
         // GET: PhieuChi/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var phieuchi = await _context.Get(id);
             if (phieuchi == null)
-            {
                 return NotFound();
-            }
-
             return View(phieuchi);
         }
 
         // GET: PhieuChi/Create
         public IActionResult Create()
         {
+            var hoadonlist = _hoadoncontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaHD"] = new SelectList(hoadonlist, "MaHD", "MaHD");
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
             return View();
         }
 
@@ -69,10 +98,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                phieuchi.NgayTao = DateTime.Now;
-                phieuchi.TrangThai = "1";
-                phieuchi.TrangThaiDuyet = "U";
-                await _context.Add(phieuchi);
+                await _context.Add(phieuchi, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(phieuchi);
@@ -82,15 +108,14 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var phieuchi = await _context.Get(id);
             if (phieuchi == null)
-            {
                 return NotFound();
-            }
+            var hoadonlist = _hoadoncontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaHD"] = new SelectList(hoadonlist, "MaHD", "MaHD");
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
             return View(phieuchi);
         }
 
@@ -102,27 +127,19 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Edit(int id, PHIEUCHI phieuchi)
         {
             if (id != phieuchi.Id)
-            {
                 return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    phieuchi.TrangThaiDuyet = "U";
                     await _context.Update(phieuchi);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!PhieuChiExists(phieuchi.Id))
-                    {
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction("Index");
             }
@@ -138,16 +155,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var phieuchi = await _context.Get(id);
             if (phieuchi == null)
-            {
                 return NotFound();
-            }
-
             return View(phieuchi);
         }
 
@@ -160,11 +171,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             if (ModelState.IsValid)
             {
                 if (phieuchi.TrangThaiDuyet == "A")
-                {
-                    phieuchi.TrangThai = "0";
-                    phieuchi.TrangThaiDuyet = "U";
-                    await _context.Update(phieuchi);
-                }
+                    await _context.Update(phieuchi,"U","0");
                 else
                     await _context.Delete(id);
             }

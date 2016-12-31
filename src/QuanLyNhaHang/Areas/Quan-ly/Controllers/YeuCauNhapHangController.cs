@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -15,46 +15,73 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class YeuCauNhapHangController : Controller
     {
         private readonly IGenericRepository<YEUCAUNHAPHANG> _context;
+        private readonly IGenericRepository<NGUYENLIEU> _nguyenlieucontext;
+        private readonly IGenericRepository<NHACUNGCAP> _nhacungcapcontext;
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
 
-        public YeuCauNhapHangController(IGenericRepository<YEUCAUNHAPHANG> context)
+        public YeuCauNhapHangController(IGenericRepository<YEUCAUNHAPHANG> context,
+            IGenericRepository<NGUYENLIEU> nguyenlieucontext,
+            IGenericRepository<NHACUNGCAP> nhacungcapcontext)
         {
-            _context = context;    
+            _context = context;
+            _nguyenlieucontext = nguyenlieucontext;
+            _nhacungcapcontext = nhacungcapcontext;   
         }
 
-        private async Task<List<YEUCAUNHAPHANG>> GetResult(string mayc = null,
+        private async Task<IActionResult> GetResult(string mayc = null,
      string manl = null, string mancc = null)
         {
+            var nguyenlieulist = _nguyenlieucontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaNL"] = new SelectList(nguyenlieulist, "MaNL", "TenNL", manl);
+            var ncclist = _nhacungcapcontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaNCC"] = new SelectList(ncclist, "MaNCC", "TenNCC", mancc);
             IQueryable<YEUCAUNHAPHANG> result = _context.GetList().Where(c =>
            (mayc == null || c.MaYeuCau == mayc) && (manl == null || c.MaNL == manl)
            && (mancc == null || c.MaNCC == mancc) && c.TrangThai == "1");
-            return await result.ToListAsync();
+            return View(await result.ToListAsync());
         }
         // GET: YeuCauNhapHang
         public async Task<IActionResult> Index(string mayc = null, string manl = null, string mancc = null)
         {
-            return View(await GetResult(mayc, manl, mancc));
+            return await GetResult(mayc, manl, mancc);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+        string mayc = null, string manl = null, string mancc = null)
+        {
+            if (id == null)
+                return NotFound();
+            var yeucau = await _context.Get(id);
+            if (yeucau == null)
+                return NotFound();
+            if (ModelState.IsValid)
+            {
+                _context.SetState(yeucau, EntityState.Modified);
+                await _context.Update(yeucau, trangthaiduyet, "1", UserManager.GetUserId(User));
+            }
+            return await GetResult(mayc, manl, mancc);
+        }
         // GET: YeuCauNhapHang/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var yeucaunhaphang = await _context.Get(id);
             if (yeucaunhaphang == null)
-            {
                 return NotFound();
-            }
-
             return View(yeucaunhaphang);
         }
 
         // GET: YeuCauNhapHang/Create
         public IActionResult Create()
         {
+            var nguyenlieulist = _nguyenlieucontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaNL"] = new SelectList(nguyenlieulist, "MaNL", "TenNL");
+            var ncclist = _nhacungcapcontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaNCC"] = new SelectList(ncclist, "MaNCC", "TenNCC");
             return View();
         }
 
@@ -67,10 +94,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                yeucaunhaphang.NgayTao = DateTime.Now;
-                yeucaunhaphang.TrangThai = "1";
-                yeucaunhaphang.TrangThaiDuyet = "U";
-                await _context.Add(yeucaunhaphang);
+                await _context.Add(yeucaunhaphang, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(yeucaunhaphang);
@@ -81,15 +105,14 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var yeucaunhaphang = await _context.Get(id);
             if (yeucaunhaphang == null)
-            {
                 return NotFound();
-            }
+            var nguyenlieulist = _nguyenlieucontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaNL"] = new SelectList(nguyenlieulist, "MaNL", "TenNL");
+            var ncclist = _nhacungcapcontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaNCC"] = new SelectList(ncclist, "MaNCC", "TenNCC");
             return View(yeucaunhaphang);
         }
 
@@ -101,27 +124,19 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Edit(int id, YEUCAUNHAPHANG yeucaunhaphang)
         {
             if (id != yeucaunhaphang.Id)
-            {
                 return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    yeucaunhaphang.TrangThaiDuyet = "U";
                     await _context.Update(yeucaunhaphang);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!YeuCauNhapHangExists(yeucaunhaphang.Id))
-                    {
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction("Index");
             }
@@ -137,16 +152,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var yeucaunhaphang = await _context.Get(id);
             if (yeucaunhaphang == null)
-            {
                 return NotFound();
-            }
-
             return View(yeucaunhaphang);
         }
 
@@ -159,11 +168,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             if (ModelState.IsValid)
             {
                 if (yeucaunhaphang.TrangThaiDuyet == "A")
-                {
-                    yeucaunhaphang.TrangThai = "0";
-                    yeucaunhaphang.TrangThaiDuyet = "U";
-                    await _context.Update(yeucaunhaphang);
-                }
+                    await _context.Update(yeucaunhaphang, "U", "0");
                 else
                     await _context.Delete(id);
             }

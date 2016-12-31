@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
-using System.Collections.Generic;
 using System.Linq;
-using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -16,25 +16,54 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class LoaiSuCoController : Controller
     {
         private readonly IGenericRepository<LOAISUCO> _context;
+        private readonly IGenericRepository<BOPHAN> _bophancontext;
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
 
-        public LoaiSuCoController(IGenericRepository<LOAISUCO> context)
+        public LoaiSuCoController(IGenericRepository<LOAISUCO> context,
+            IGenericRepository<BOPHAN> bophancontext)
         {
             _context = context;
+            _bophancontext = bophancontext;
         }
 
-        private async Task<List<LOAISUCO>> GetResult(string maloaisuco = null,
-           string tenloaisuco = null)
+        private async Task<IActionResult> GetResult(string maloaisuco = null,
+           string tenloaisuco = null, string mabp = null)
         {
+            var bophanxulylist = _bophancontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["BoPhanXuLy"] = new SelectList(bophanxulylist, "MaBP", "MaBP",mabp);
             IQueryable<LOAISUCO> result = _context.GetList().Where(c =>
            (maloaisuco == null || c.MaLoaiSuCo == maloaisuco) && (tenloaisuco == null || c.TenLoaiSuCo == tenloaisuco)
-            && c.TrangThai == "1");
-            return await result.ToListAsync();
+            && (mabp == null || c.MaBoPhanXuLy == mabp) && c.TrangThai == "1");
+            return View(await result.ToListAsync());
         }
         // GET: LoaiSuCo
         public async Task<IActionResult> Index(string maloaisuco = null,
-           string tenloaisuco = null)
+           string tenloaisuco = null, string mabp = null)
         {
-            return View(await GetResult(maloaisuco, tenloaisuco));
+            return await GetResult(maloaisuco, tenloaisuco,mabp);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+    string maloaisuco = null, string tenloaisuco = null, string mabp = null)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var loaisuco = await _context.Get(id);
+            if (loaisuco == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _context.SetState(loaisuco, EntityState.Modified);
+                await _context.Update(loaisuco, trangthaiduyet,"1", UserManager.GetUserId(User));
+            }
+            return await GetResult(maloaisuco, tenloaisuco, mabp);
         }
 
         // GET: LoaiSuCo/Details/5
@@ -57,6 +86,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // GET: LoaiSuCo/Create
         public IActionResult Create()
         {
+            var bophanxulylist = _bophancontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["BoPhanXuLy"] = new SelectList(bophanxulylist, "MaBP", "MaBP");
             return View();
         }
 
@@ -69,10 +100,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                loaisuco.NgayTao = DateTime.Now;
-                loaisuco.TrangThai = "1";
-                loaisuco.TrangThaiDuyet = "U";
-                await _context.Add(loaisuco);
+                await _context.Add(loaisuco, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(loaisuco);
@@ -91,6 +119,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
+            var bophanxulylist = _bophancontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["BoPhanXuLy"] = new SelectList(bophanxulylist, "MaBP", "MaBP");
             return View(loaisuco);
         }
 
@@ -110,7 +140,6 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
-                    loaisuco.TrangThaiDuyet = "U";
                     await _context.Update(loaisuco);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -161,9 +190,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 if (loaisuco.TrangThaiDuyet == "A")
                 {
-                    loaisuco.TrangThai = "0";
-                    loaisuco.TrangThaiDuyet = "U";
-                    await _context.Update(loaisuco);
+                    await _context.Update(loaisuco, "U", "0");
                 }
                 else
                     await _context.Delete(id);

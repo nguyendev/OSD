@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
-using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -13,6 +13,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class PhanHoiController : Controller
     {
         private readonly IGenericRepository<PHANHOI> _context;
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
 
         public PhanHoiController(IGenericRepository<PHANHOI> context)
         {
@@ -29,16 +31,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var phanhoi = await _context.Get(id);
             if (phanhoi == null)
-            {
                 return NotFound();
-            }
-
             return View(phanhoi);
         }
 
@@ -57,10 +53,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                phanhoi.NgayTao = DateTime.Now;
-                phanhoi.TrangThai = "1";
-                phanhoi.TrangThaiDuyet = "U";
-                await _context.Add(phanhoi);
+                await _context.Add(phanhoi, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(phanhoi);
@@ -70,15 +63,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var phanhoi = await _context.Get(id);
             if (phanhoi == null)
-            {
                 return NotFound();
-            }
             return View(phanhoi);
         }
 
@@ -90,27 +78,19 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Edit(int id, PHANHOI phanhoi)
         {
             if (id != phanhoi.Id)
-            {
                 return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    phanhoi.TrangThaiDuyet = "U";
                     await _context.Update(phanhoi);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!PhanHoiExists(phanhoi.Id))
-                    {
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction("Index");
             }
@@ -126,16 +106,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var phanhoi = await _context.Get(id);
             if (phanhoi == null)
-            {
                 return NotFound();
-            }
-
             return View(phanhoi);
         }
 
@@ -148,11 +122,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             if (ModelState.IsValid)
             {
                 if (phanhoi.TrangThaiDuyet == "A")
-                {
-                    phanhoi.TrangThai = "0";
-                    phanhoi.TrangThaiDuyet = "U";
-                    await _context.Update(phanhoi);
-                }
+                    await _context.Update(phanhoi,"U","0");
                 else
                     await _context.Delete(id);
             }

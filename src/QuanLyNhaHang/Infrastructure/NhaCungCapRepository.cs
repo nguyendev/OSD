@@ -18,8 +18,12 @@ namespace QuanLyNhaHang.Infrastructure
             Context = context;
             DbSet = context.Set<NHACUNGCAP>();
         }
-        public async Task Add(NHACUNGCAP Entity)
+        public async Task Add(NHACUNGCAP Entity, string nguoitao)
         {
+            Entity.NguoiTao = nguoitao;
+            Entity.NgayTao = DateTime.Now;
+            Entity.TrangThai = "1";
+            Entity.TrangThaiDuyet = "U";
             Context.Add(Entity);
             await Save();
         }
@@ -38,8 +42,16 @@ namespace QuanLyNhaHang.Infrastructure
             return await DbSet.ToListAsync();
         }
 
-        public async Task Update(NHACUNGCAP Entity)
+        public async Task Update(NHACUNGCAP Entity, string trangthaiduyet = "U", string trangthai = "1", string nguoiduyet = null)
         {
+            Entity.NgayTao = DateTime.Now;
+            if (trangthaiduyet == "A" && Entity.TrangThaiDuyet == "U")
+            {
+                Entity.NgayDuyet = DateTime.Now;
+                Entity.NguoiDuyet = nguoiduyet;
+            }
+            Entity.TrangThaiDuyet = trangthaiduyet;
+            Entity.TrangThai = trangthai;
             DbSet.Update(Entity);
             await Save();
         }
@@ -59,6 +71,11 @@ namespace QuanLyNhaHang.Infrastructure
         public DbSet<NHACUNGCAP> GetList()
         {
             return DbSet;
+        }
+
+        public void SetState(NHACUNGCAP Entity, EntityState state)
+        {
+            Context.Entry(Entity).State = state;
         }
     }
 }

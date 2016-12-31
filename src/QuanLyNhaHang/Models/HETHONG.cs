@@ -11,38 +11,39 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
-
-        [Display(Name ="Ngày tạo")]
         public DateTime? NgayTao
         {
             get;
             set;
         }
-
-        [Display(Name ="Ngày duyệt")]
         public DateTime? NgayDuyet
         {
             get;
             set;
         }
-
-        [Display(Name ="Trạng thái")]
         public string TrangThai
         {
             get;
             set;
         }
-
-        [Display(Name ="Trạng thái duyệt")]
         public string TrangThaiDuyet
         {
             get;
             set;
         }
-
-        [Display(Name ="Ghi chú")]
-        [DataType(DataType.MultilineText)]
         public string GhiChu
+        {
+            get;
+            set;
+        }
+
+        public string NguoiTao
+        {
+            get;
+            set;
+        }
+
+        public string NguoiDuyet
         {
             get;
             set;

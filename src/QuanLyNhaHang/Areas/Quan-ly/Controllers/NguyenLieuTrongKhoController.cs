@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
-using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -13,18 +15,54 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class NguyenLieuTrongKhoController : Controller
     {
         private readonly IGenericRepository<NGUYENLIEUTRONGKHO> _context;
+        private readonly IGenericRepository<NGUYENLIEU> _nguyenlieucontext;
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
 
-        public NguyenLieuTrongKhoController(IGenericRepository<NGUYENLIEUTRONGKHO> context)
+        public NguyenLieuTrongKhoController(IGenericRepository<NGUYENLIEUTRONGKHO> context,
+            IGenericRepository<NGUYENLIEU> nguyenlieucontext)
         {
-            _context = context;    
+            _context = context;
+            _nguyenlieucontext = nguyenlieucontext;
         }
 
+        public async Task<IActionResult> GetResult(string manl = null)
+        {
+            var nguyenlieulist = _nguyenlieucontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaNL"] = new SelectList(nguyenlieulist, "MaNL", "TenNL", manl);
+
+            IQueryable<NGUYENLIEUTRONGKHO> result = _context.GetList().Where(c =>
+           (manl == null || c.MaNL == manl)
+           && c.TrangThai == "1");
+            return View(await result.ToListAsync());
+        }
         // GET: NguyenLieuTrongKho
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string manl = null)
         {
-            return View(await _context.GetAll());
+            return await GetResult(manl);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+     string manl = null)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var nguyenlieu = await _context.Get(id);
+            if (nguyenlieu == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _context.SetState(nguyenlieu, EntityState.Modified);
+                await _context.Update(nguyenlieu, trangthaiduyet,"1",UserManager.GetUserId(User));
+            }
+            return await GetResult(manl);
+        }
         // GET: NguyenLieuTrongKho/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,6 +83,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // GET: NguyenLieuTrongKho/Create
         public IActionResult Create()
         {
+            var nguyenlieulist = _nguyenlieucontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaNL"] = new SelectList(nguyenlieulist, "MaNL", "TenNL");
             return View();
         }
 
@@ -57,10 +97,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                nguyenlieutrongkho.NgayTao = DateTime.Now;
-                nguyenlieutrongkho.TrangThai = "1";
-                nguyenlieutrongkho.TrangThaiDuyet = "U";
-                await _context.Add(nguyenlieutrongkho);
+                await _context.Add(nguyenlieutrongkho, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(nguyenlieutrongkho);
@@ -79,6 +116,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
+            var nguyenlieulist = _nguyenlieucontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaNL"] = new SelectList(nguyenlieulist, "MaNL", "TenNL");
             return View(nguyenlieutrongkho);
         }
 
@@ -98,7 +137,6 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
-                    nguyenlieutrongkho.TrangThaiDuyet = "U";
                     await _context.Update(nguyenlieutrongkho);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -149,9 +187,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 if (nguyenlieutrongkho.TrangThaiDuyet == "A")
                 {
-                    nguyenlieutrongkho.TrangThai = "0";
-                    nguyenlieutrongkho.TrangThaiDuyet = "U";
-                    await _context.Update(nguyenlieutrongkho);
+                    await _context.Update(nguyenlieutrongkho,"U","0");
                 }
                 else
                     await _context.Delete(id);

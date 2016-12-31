@@ -20,36 +20,28 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Display(Name = "Mã món ăn")]
-        [Required(ErrorMessage = "Vui lòng nhập mã món ăn")]
-        [MaxLength(12, ErrorMessage = "Mã món ăn không quá 12 kí tự")]
+        [Required]
         public string MaMon
         {
             get;
             set;
         }
 
-        [Display(Name = "Tên món ăn")]
-        [Required(ErrorMessage = "Vui lòng nhập tên món ăn")]
-        [MaxLength(50, ErrorMessage = "Tên món ăn không quá 50 kí tự")]
+        [Required]
         public string TenMon
         {
             get;
             set;
         }
 
-        [Display(Name = "Giá")]
-        [Required(ErrorMessage = "Vui lòng giá của món ăn")]
-        [Range(0,int.MaxValue,ErrorMessage ="Giá món ăn không hợp lệ")]
+        [Required]
         public string Gia
         {
             get;
             set;
         }
 
-        [Display(Name = "Mã loại món")]
-        [Required(ErrorMessage = "Vui lòng nhập mã loại món")]
-        [MaxLength(12, ErrorMessage = "Mã loại món không được quá 12 kí tự")]
+        [Required]
         public string MaLoaiMon
         {
             get;
@@ -57,11 +49,33 @@ namespace QuanLyNhaHang.Models
         }
 		
 		//kết bảng
-		public virtual LOAIMONAN fLOAIMONAN
-		{
-			get;
-			set;
-		}
+		//public virtual LOAIMONAN fLOAIMONAN
+		//{
+		//	get;
+		//	set;
+		//}
+        //public virtual YEUCAUMONAN YEUCAUMONAN
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual CHEBIEN CHEBIEN
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual List<NGUYENLIEU> getListNguyenLieu()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual List<YEUCAUMONAN> getListYeuCauMonAn()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
 
 }

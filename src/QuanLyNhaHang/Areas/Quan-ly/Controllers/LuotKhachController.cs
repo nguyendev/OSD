@@ -5,8 +5,8 @@ using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -15,27 +15,50 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class LuotKhachController : Controller
     {
         private readonly IGenericRepository<LUOTKHACH> _context;
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
 
         public LuotKhachController(IGenericRepository<LUOTKHACH> context)
         {
             _context = context;
         }
 
-        private async Task<List<LUOTKHACH>> GetResult(string maluot = null,
+        private async Task<IActionResult> GetResult(string maluot = null,
            int? soban = null, string thoigianvao = null)
         {
             IQueryable<LUOTKHACH> result = _context.GetList().Where(c =>
           (maluot == null || c.MaLuot == maluot) && (soban == null || c.SoBan == soban.Value)
           && (thoigianvao == null || c.ThoiGianVao == thoigianvao) && c.TrangThai == "1");
-            return await result.ToListAsync();
+            return View(await result.ToListAsync());
         }
         // GET: LuotKhach
         public async Task<IActionResult> Index(string maluot = null,
            int? soban = null, string thoigianvao = null)
         {
-            return View(await GetResult(maluot, soban, thoigianvao));
+            return await GetResult(maluot, soban, thoigianvao);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+    string maluot = null, int? soban = null, string thoigianvao = null)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var luotkhach = await _context.Get(id);
+            if (luotkhach == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _context.SetState(luotkhach, EntityState.Modified);
+                await _context.Update(luotkhach, trangthaiduyet,"1", UserManager.GetUserId(User));
+            }
+            return await GetResult(maluot, soban, thoigianvao);
+        }
         // GET: LuotKhach/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -68,10 +91,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                luotkhach.NgayTao = DateTime.Now;
-                luotkhach.TrangThai = "1";
-                luotkhach.TrangThaiDuyet = "U";
-                await _context.Add(luotkhach);
+                await _context.Add(luotkhach, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(luotkhach);
@@ -109,7 +129,6 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
-                    luotkhach.TrangThaiDuyet = "U";
                     await _context.Update(luotkhach);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -160,9 +179,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 if (luotkhach.TrangThaiDuyet == "A")
                 {
-                    luotkhach.TrangThai = "0";
-                    luotkhach.TrangThaiDuyet = "U";
-                    await _context.Update(luotkhach);
+                    await _context.Update(luotkhach, "U", "0");
                 }
                 else
                     await _context.Delete(id);

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -15,15 +17,23 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class NhanVienController : Controller
     {
         private readonly IGenericRepository<NHANVIEN> _context;
+        private readonly IGenericRepository<BOPHAN> _bophancontext;
 
-        public NhanVienController(IGenericRepository<NHANVIEN> context)
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
+
+        public NhanVienController(IGenericRepository<NHANVIEN> context,
+            IGenericRepository<BOPHAN> bophancontext)
         {
-            _context = context;    
+            _context = context;
+            _bophancontext = bophancontext;
         }
 
         public async Task<List<NHANVIEN>> GetResult(string manv = null,
       string tennv = null, string mabp = null)
         {
+            var bophanlist = _bophancontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaBP"] = new SelectList(bophanlist, "MaBP", "TenBP", mabp);
             IQueryable<NHANVIEN> result = _context.GetList().Where(c =>
            (manv == null || c.MaNV == manv) && (tennv == null || c.TenNV == tennv)
            && (mabp == null || c.MaBP == mabp) && c.TrangThai == "1");
@@ -36,6 +46,27 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             return View(await GetResult(manv,tennv, mabp));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+          string manv = null, string tennv = null, string mabp = null)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var nhanvien = await _context.Get(id);
+            if (nhanvien == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _context.SetState(nhanvien, EntityState.Modified);
+                await _context.Update(nhanvien, trangthaiduyet, "1", UserManager.GetUserId(User));
+            }
+            return View(await GetResult(manv, tennv, mabp));
+        }
         // GET: NhanVien/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -56,6 +87,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // GET: NhanVien/Create
         public IActionResult Create()
         {
+            var bophanlist = _bophancontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaBP"] = new SelectList(bophanlist, "MaBP", "TenBP");
             return View();
         }
 
@@ -68,10 +101,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                nhanvien.NgayTao = DateTime.Now;
-                nhanvien.TrangThai = "1";
-                nhanvien.TrangThaiDuyet = "U";
-                await _context.Add(nhanvien);
+                await _context.Add(nhanvien, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(nhanvien);
@@ -90,6 +120,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
+            var bophanlist = _bophancontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaBP"] = new SelectList(bophanlist, "MaBP", "TenBP");
             return View(nhanvien);
         }
 
@@ -109,7 +141,6 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
-                    nhanvien.TrangThaiDuyet = "U";
                     await _context.Update(nhanvien);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -159,11 +190,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             if (ModelState.IsValid)
             {
                 if (nhanvien.TrangThaiDuyet == "A")
-                {
-                    nhanvien.TrangThai = "0";
-                    nhanvien.TrangThaiDuyet = "U";
-                    await _context.Update(nhanvien);
-                }
+                    await _context.Update(nhanvien,"U","0");
                 else
                     await _context.Delete(id);
             }

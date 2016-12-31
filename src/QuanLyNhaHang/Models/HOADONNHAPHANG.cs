@@ -19,18 +19,14 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Display(Name ="Mã hóa đơn")]
-        [Required(ErrorMessage ="Vui lòng nhập mã hóa đơn")]
-        [MaxLength(12, ErrorMessage = "Mã hóa đơn không quá 12 kí tự")]
+        [Required]
         public string MaHD
         {
             get;
             set;
         }
 
-        [Display(Name ="Mã yêu cầu")]
-        [Required(ErrorMessage = "Vui lòng nhập mã yêu cầu")]
-        [MaxLength(12, ErrorMessage = "Mã yêu cầu không quá 12 kí tự")]
+        [Required]
         public string MaYeuCau
 		{
             get;
@@ -38,23 +34,20 @@ namespace QuanLyNhaHang.Models
         }
 		
 		//kết bảng
-		public YEUCAUNHAPHANG fYEUCAUNHAPHANG
-		{
-			get;
-			set;
-		}
+		//public YEUCAUNHAPHANG fYEUCAUNHAPHANG
+		//{
+		//	get;
+		//	set;
+		//}
 
-        [Display(Name ="Thời gian nhập")]
-        [Required(ErrorMessage ="Vui lòng nhập thời gian nhập")]
+        [Required]
         public string ThoiGianNhap
         {
             get;
             set;
         }
 
-        [Display(Name ="Mã nhân viên")]
-        [Required(ErrorMessage ="Vui lòng nhập mã nhân viên")]
-        [MaxLength(12, ErrorMessage = "Mã nhân viên không quá 12 kí tự")]
+        [Required]
         public string MaNV
         {
             get;
@@ -62,14 +55,13 @@ namespace QuanLyNhaHang.Models
         }
 		
 		//kết bảng
-		public NHANVIEN fNHANVIEN
-		{
-			get;
-			set;
-		}
+		//public NHANVIEN fNHANVIEN
+		//{
+		//	get;
+		//	set;
+		//}
 
-        [Display(Name ="Nhà cung cấp")]
-        [Required(ErrorMessage = "Vui lòng nhập mã nhà cung cấp")]
+        [Required]
         public string MaNCC
         {
             get;
@@ -77,18 +69,42 @@ namespace QuanLyNhaHang.Models
         }
 		
 		//kết bảng
-		public NHACUNGCAP fNHACUNGCAP
-		{
-			get;
-			set;
-		}
+		//public NHACUNGCAP fNHACUNGCAP
+		//{
+		//	get;
+		//	set;
+		//}
 		
-        [Display(Name ="Thành tiền")]
         public string ThanhTien
         {
             get;
             set;
         }
+
+
+
+        //public virtual PHIEUCHI PHIEUCHI
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual YEUCAUNHAPHANG NHAPHANG
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual PHIEUCHI getPhieuChi()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual YEUCAUNHAPHANG getYeuCauNhapHang()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
 
 }

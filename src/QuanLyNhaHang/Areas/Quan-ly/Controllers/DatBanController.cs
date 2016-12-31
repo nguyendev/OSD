@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -15,19 +16,21 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class DatBanController : Controller
     {
         private readonly IGenericRepository<DATBAN> _context;
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
 
         public DatBanController(IGenericRepository<DATBAN> context)
         {
             _context = context;    
         }
 
-        private async Task<List<DATBAN>> GetResult(string ngay = null,
+        private async Task<IActionResult> GetResult(string ngay = null,
             string gio = null, string sodt = null)
         {
             IQueryable<DATBAN> result = _context.GetList().Where(c =>
             (gio == null || c.Gio == gio) && (ngay == null || c.Ngay == ngay)
             && (sodt == null || c.SoDT == sodt) && c.TrangThai == "1");
-            return await result.ToListAsync();
+            return View(await result.ToListAsync());
 
         }
 
@@ -35,9 +38,30 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Index(string ngay = null,
             string gio = null, string sodt = null)
         {
-            return View(await GetResult(ngay, gio, sodt));
+            return await GetResult(ngay, gio, sodt);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet, string ngay = null,
+            string gio = null, string sodt = null)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var datban = await _context.Get(id);
+            if (datban == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _context.SetState(datban, EntityState.Modified);
+                await _context.Update(datban, trangthaiduyet, "1", UserManager.GetUserId(User));
+            }
+            return await GetResult(ngay, gio, sodt);
+        }
         // GET: DatBan/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -70,10 +94,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                datban.NgayTao = DateTime.Now;
-                datban.TrangThai = "1";
-                datban.TrangThaiDuyet = "U";
-                await _context.Add(datban);
+                await _context.Add(datban, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(datban);
@@ -111,7 +132,6 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
-                    datban.TrangThaiDuyet = "U";
                     await _context.Update(datban);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -162,9 +182,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 if (datban.TrangThaiDuyet == "A")
                 {
-                    datban.TrangThai = "0";
-                    datban.TrangThaiDuyet = "U";
-                    await _context.Update(datban);
+                    await _context.Update(datban,"U","0");
                 }
                 else
                     await _context.Delete(id);

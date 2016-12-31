@@ -5,8 +5,9 @@ using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -15,27 +16,56 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class MonAnController : Controller
     {
         private readonly IGenericRepository<MONAN> _context;
+        private readonly IGenericRepository<LOAIMONAN> _loaimonancontext;
 
-        public MonAnController(IGenericRepository<MONAN> context)
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
+
+        public MonAnController(IGenericRepository<MONAN> context, 
+            IGenericRepository<LOAIMONAN> loaimonancontext)
         {
             _context = context;
+            _loaimonancontext = loaimonancontext;
         }
 
-        public async Task<List<MONAN>> GetResult(string mamon = null,
+        public async Task<IActionResult> GetResult(string mamon = null,
          string tenmon = null, string maloaimon = null)
         {
+            var loaimonanlist = _loaimonancontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["LoaiMonAn"] = new SelectList(loaimonanlist, "MaLoaiMon", "TenLoaiMon", maloaimon);
             IQueryable<MONAN> result = _context.GetList().Where(c =>
            (mamon == null || c.MaMon == mamon) && (tenmon == null || c.TenMon == tenmon)
            && (maloaimon == null || c.MaLoaiMon == mamon) && c.TrangThai == "1");
-            return await result.ToListAsync();
+            return View(await result.ToListAsync());
         }
         // GET: MonAn
         public async Task<IActionResult> Index(string mamon = null,
          string tenmon = null, string maloaimon = null)
         {
-            return View(await GetResult(mamon, tenmon, maloaimon));
+            return await GetResult(mamon, tenmon, maloaimon);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+    string mamon = null, string tenmon = null, string maloaimon = null)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var monan = await _context.Get(id);
+            if (monan == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _context.SetState(monan, EntityState.Modified);
+                await _context.Update(monan, trangthaiduyet,"1", UserManager.GetUserId(User));
+            }
+            return await GetResult(mamon, tenmon, maloaimon);
+        }
         // GET: MonAn/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -56,6 +86,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // GET: MonAn/Create
         public IActionResult Create()
         {
+            var loaimonanlist = _loaimonancontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["LoaiMonAn"] = new SelectList(loaimonanlist, "MaLoaiMon", "TenLoaiMon");
             return View();
         }
 
@@ -68,10 +100,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                monan.NgayTao = DateTime.Now;
-                monan.TrangThai = "1";
-                monan.TrangThaiDuyet = "U";
-                await _context.Add(monan);
+                await _context.Add(monan, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(monan);
@@ -90,6 +119,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
+            var loaimonanlist = _loaimonancontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["LoaiMonAn"] = new SelectList(loaimonanlist, "MaLoaiMon", "TenLoaiMon");
             return View(monan);
         }
 
@@ -98,7 +129,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MaMon,TenMon,MaLoaiMon,Gia")] MONAN monan)
+        public async Task<IActionResult> Edit(int id, MONAN monan)
         {
             if (id != monan.Id)
             {
@@ -109,7 +140,6 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
-                    monan.TrangThaiDuyet = "U";
                     await _context.Update(monan);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -160,9 +190,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 if (monan.TrangThaiDuyet == "A")
                 {
-                    monan.TrangThai = "0";
-                    monan.TrangThaiDuyet = "U";
-                    await _context.Update(monan);
+                    await _context.Update(monan,"U","0");
                 }
                 else
                     await _context.Delete(id);

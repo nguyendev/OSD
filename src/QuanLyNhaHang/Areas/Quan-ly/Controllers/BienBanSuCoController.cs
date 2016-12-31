@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Models;
 using QuanLyNhaHang.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLyNhaHang.Areas.Quanly.Controllers
 {
@@ -16,46 +16,70 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
     public class BienBanSuCoController : Controller
     {
         private readonly IGenericRepository<BIENBANSUCO> _context;
+        private readonly IGenericRepository<LOAISUCO> _loaisucocontext;
+        private readonly IGenericRepository<NHANVIEN> _nhanviencontext;
 
-        public BienBanSuCoController(IGenericRepository<BIENBANSUCO> context)
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
+
+        public BienBanSuCoController(IGenericRepository<BIENBANSUCO> context,
+            IGenericRepository<LOAISUCO> loaisucocontext,
+            IGenericRepository<NHANVIEN> nhanviencontext)
         {
-            _context = context;    
+            _context = context;
+            _loaisucocontext = loaisucocontext;
+            _nhanviencontext = nhanviencontext;
         }
 
-        private async Task<List<BIENBANSUCO>> GetResult(string mabienban = null,
+        private async Task<IActionResult> GetResult(string mabienban = null,
             string maloaisuco = null, string manv = null, DateTime? thoigian = null)
         {
+            var loaisucolist = _loaisucocontext.GetList().Where(c => c.TrangThai == "1");
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaLoaiSuCo"] = new SelectList(loaisucolist, "MaLoaiSuCo", "MaLoaiSuCo", maloaisuco);
+            ViewData["MaNV"] = new SelectList(nhanvienlist, "MaNV", "MaNV", manv);
             IQueryable<BIENBANSUCO> result = _context.GetList().Where(c =>
             (mabienban == null || c.MaBienBan == mabienban) && (maloaisuco == null || c.MaLoaiSuCo == maloaisuco)
             && (manv == null || c.MaNV == manv) 
             && (thoigian == null || DateTime.Compare(Convert.ToDateTime(c.ThoiGian),thoigian.Value) == 0)
             && c.TrangThai == "1");
-            return await result.ToListAsync();
+            return View(await result.ToListAsync());
 
         }
         // GET: BienBanSuCo
         [Route("quan-ly/bien-ban-su-co")]
-        public async Task<IActionResult> Index(/*string mabienban = null,
-            string maloaisuco = null, string manv = null, DateTime? thoigian = null*/)
+        public async Task<IActionResult> Index(string mabienban = null,
+            string maloaisuco = null, string manv = null, DateTime? thoigian = null)
         {
-            return View(await _context.GetAll());
-            //return View(await GetResult(mabienban, maloaisuco, manv, thoigian = null));
+            return await GetResult(mabienban, maloaisuco, manv, thoigian = null);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet, string mabienban = null,
+            string maloaisuco = null, string manv = null, DateTime? thoigian = null)
+        {
+            if (id == null)
+                return NotFound();
+            var bienbansuco = await _context.Get(id);
+            if (bienbansuco == null)
+                return NotFound();
+            if (ModelState.IsValid)
+            {
+                _context.SetState(bienbansuco, EntityState.Modified);
+                await _context.Update(bienbansuco,trangthaiduyet,"1", UserManager.GetUserId(User));
+            }
+            return await GetResult(mabienban, maloaisuco, manv, thoigian = null);
+        }
         // GET: BienBanSuCo/Details/5
         [Route("quan-ly/bien-ban-su-co/chi-tiet/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var bienbansuco = await _context.Get(id);
             if (bienbansuco == null)
-            {
                 return NotFound();
-            }
             return View(bienbansuco);
         }
 
@@ -63,6 +87,10 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         [Route("quan-ly/bien-ban-su-co/tao-moi")]
         public IActionResult Create()
         {
+            var loaisucolist = _loaisucocontext.GetList().Where(c => c.TrangThai == "1");
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaLoaiSuCo"] = new SelectList(loaisucolist, "MaLoaiSuCo", "MaLoaiSuCo");
+            ViewData["MaNV"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
             return View();
         }
 
@@ -76,10 +104,7 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         {
             if (ModelState.IsValid)
             {
-                bienbansuco.NgayTao = DateTime.Now;
-                bienbansuco.TrangThai = "1";
-                bienbansuco.TrangThaiDuyet = "U";
-                await _context.Add(bienbansuco);
+                await _context.Add(bienbansuco, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(bienbansuco);
@@ -90,16 +115,14 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var bienbansuco = await _context.Get(id);
             if (bienbansuco == null)
-            {
                 return NotFound();
-            }
-            //ViewData["MaNV"] = new SelectList(_context.Get., "MaNV", "MaNV", bienbansuco.MaNV);
+            var loaisucolist = _loaisucocontext.GetList().Where(c => c.TrangThai == "1");
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaLoaiSuCo"] = new SelectList(loaisucolist, "MaLoaiSuCo", "MaLoaiSuCo");
+            ViewData["MaNV"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
             return View(bienbansuco);
         }
 
@@ -112,27 +135,19 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         public async Task<IActionResult> Edit(int id, BIENBANSUCO bienbansuco)
         {
             if (id != bienbansuco.Id)
-            {
                 return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    bienbansuco.TrangThaiDuyet = "U";
                     await _context.Update(bienbansuco);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!BienBanSuCoExists(bienbansuco.Id))
-                    {
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction("Index");
             }
@@ -143,16 +158,10 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var bienbansuco = await _context.Get(id);
             if (bienbansuco == null)
-            {
                 return NotFound();
-            }
-
             return View(bienbansuco);
         }
 
@@ -166,11 +175,7 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
             if (ModelState.IsValid)
             {
                 if (bienbansuco.TrangThaiDuyet == "A")
-                {
-                    bienbansuco.TrangThai = "0";
-                    bienbansuco.TrangThaiDuyet = "U";
-                    await _context.Update(bienbansuco);
-                }
+                    await _context.Update(bienbansuco,"U","0");
                 else
                     await _context.Delete(id);
             }

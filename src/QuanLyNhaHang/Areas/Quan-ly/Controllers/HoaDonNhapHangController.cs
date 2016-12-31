@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -15,26 +16,50 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
     public class HoaDonNhapHangController : Controller
     {
         private readonly IGenericRepository<HOADONNHAPHANG> _context;
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
 
         public HoaDonNhapHangController(IGenericRepository<HOADONNHAPHANG> context)
         {
             _context = context;    
         }
         
-        private async Task<List<HOADONNHAPHANG>> GetResult(string mahd = null,
+        private async Task<IActionResult> GetResult(string mahd = null,
             string manv = null, string ngaylap = null, string mayc = null)
         {
             IQueryable<HOADONNHAPHANG> result = _context.GetList().Where(c =>
           (mahd == null || c.MaHD == mahd) && (manv == null || c.MaNV == manv)
           && (mahd == null || c.MaHD == mahd) && (manv == null || c.MaNV == manv)
           && c.TrangThai == "1");
-            return await result.ToListAsync();
+            return View(await result.ToListAsync());
         }
         // GET: HoaDonNhapHang
         public async Task<IActionResult> Index(string mahd = null,
             string manv = null, string ngaylap = null, string mayc = null)
         {
-            return View(await GetResult(mahd, manv, ngaylap, mayc));
+            return await GetResult(mahd, manv, ngaylap, mayc);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet, string mahd = null,
+            string manv = null, string ngaylap = null, string mayc = null)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var hoadon = await _context.Get(id);
+            if (hoadon == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _context.SetState(hoadon, EntityState.Modified);
+                await _context.Update(hoadon, trangthaiduyet, "1", UserManager.GetUserId(User));
+            }
+            return await GetResult(mahd, manv, ngaylap, mayc);
         }
 
         // GET: HoaDonNhapHang/Details/5
@@ -69,10 +94,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                hoadonnhaphang.NgayTao = DateTime.Now;
-                hoadonnhaphang.TrangThai = "1";
-                hoadonnhaphang.TrangThaiDuyet = "U";
-                await _context.Add(hoadonnhaphang);
+                await _context.Add(hoadonnhaphang, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(hoadonnhaphang);
@@ -110,7 +132,6 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 try
                 {
-                    hoadonnhaphang.TrangThaiDuyet = "U";
                     await _context.Update(hoadonnhaphang);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -161,9 +182,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 if (hoadon.TrangThaiDuyet == "A")
                 {
-                    hoadon.TrangThai = "0";
-                    hoadon.TrangThaiDuyet = "U";
-                    await _context.Update(hoadon);
+                    await _context.Update(hoadon, "U", "0");
                 }
                 else
                     await _context.Delete(id);

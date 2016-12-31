@@ -18,8 +18,13 @@ namespace QuanLyNhaHang.Infrastructure
             Context = context;
             DbSet = context.Set<HOADONNHAPHANG>();
         }
-        public async Task Add(HOADONNHAPHANG Entity)
+        public async Task Add(HOADONNHAPHANG Entity, string nguoitao)
         {
+            Entity.NguoiTao = nguoitao;
+            Entity.NgayTao = DateTime.Now;
+            Entity.TrangThai = "1";
+            Entity.TrangThaiDuyet = "U";
+            Entity.MaNCC = Context.YEUCAUNHAPHANG.Where(c => c.MaYeuCau == Entity.MaYeuCau).FirstOrDefault().MaNCC;
             Context.Add(Entity);
             await Save();
         }
@@ -51,8 +56,17 @@ namespace QuanLyNhaHang.Infrastructure
             return await DbSet.ToListAsync();
         }
 
-        public async Task Update(HOADONNHAPHANG Entity)
+        public async Task Update(HOADONNHAPHANG Entity, string trangthaiduyet = "U", string trangthai = "1", string nguoiduyet = null)
         {
+            Entity.NgayTao = DateTime.Now;
+            if (trangthaiduyet == "A" && Entity.TrangThaiDuyet == "U")
+            {
+                Entity.NgayDuyet = DateTime.Now;
+                Entity.NguoiDuyet = nguoiduyet;
+            }
+            Entity.TrangThaiDuyet = trangthaiduyet;
+            Entity.TrangThai = trangthai;
+            Entity.MaNCC = Context.YEUCAUNHAPHANG.Where(c => c.MaYeuCau == Entity.MaYeuCau).FirstOrDefault().MaNCC;
             DbSet.Update(Entity);
             await Save();
         }
@@ -60,6 +74,11 @@ namespace QuanLyNhaHang.Infrastructure
         public DbSet<HOADONNHAPHANG> GetList()
         {
             return DbSet;
+        }
+
+        public void SetState(HOADONNHAPHANG Entity, EntityState state)
+        {
+            Context.Entry(Entity).State = state;
         }
     }
 }

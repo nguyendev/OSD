@@ -201,6 +201,10 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<string>("NguyenNhan")
                         .IsRequired();
 
@@ -211,15 +215,11 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("TrangThaiDuyet");
 
-                    b.Property<int?>("fLOAISUCOId");
-
                     b.Property<int?>("fNHANVIENId");
 
                     b.HasKey("Id");
 
                     b.HasAlternateKey("MaBienBan");
-
-                    b.HasIndex("fLOAISUCOId");
 
                     b.HasIndex("fNHANVIENId");
 
@@ -287,6 +287,10 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<string>("TenBP")
                         .IsRequired();
 
@@ -294,17 +298,12 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("TrangThaiDuyet");
 
-                    b.Property<int?>("fNHANVIENId");
-
                     b.HasKey("Id");
 
                     b.HasAlternateKey("MaBP");
 
 
                     b.HasAlternateKey("TenBP");
-
-                    b.HasIndex("fNHANVIENId")
-                        .IsUnique();
 
                     b.ToTable("BOPHAN");
                 });
@@ -316,7 +315,7 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("GhiChu");
 
-                    b.Property<int>("LuongDung");
+                    b.Property<float>("LuongDung");
 
                     b.Property<string>("MaMon")
                         .IsRequired();
@@ -328,21 +327,21 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<string>("TrangThai");
 
                     b.Property<string>("TrangThaiDuyet");
 
                     b.Property<int?>("fMONANId");
 
-                    b.Property<int?>("fNGUYENLIEUId");
-
                     b.HasKey("Id");
 
                     b.HasAlternateKey("MaMon", "MaNL");
 
                     b.HasIndex("fMONANId");
-
-                    b.HasIndex("fNGUYENLIEUId");
 
                     b.ToTable("CHEBIEN");
                 });
@@ -354,10 +353,12 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("GhiChu");
 
-                    b.Property<string>("Gio");
+                    b.Property<string>("Gio")
+                        .IsRequired();
 
                     b.Property<string>("HoTen")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 50);
 
                     b.Property<string>("Ngay")
                         .IsRequired();
@@ -366,8 +367,13 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<string>("SoDT")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 15);
 
                     b.Property<string>("SoNguoi")
                         .IsRequired();
@@ -404,6 +410,10 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<string>("ThanhTien");
 
                     b.Property<string>("ThoiGianNhap")
@@ -413,21 +423,9 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("TrangThaiDuyet");
 
-                    b.Property<int?>("fNHACUNGCAPId");
-
-                    b.Property<int?>("fNHANVIENId");
-
-                    b.Property<int?>("fYEUCAUNHAPHANGId");
-
                     b.HasKey("Id");
 
                     b.HasAlternateKey("MaHD");
-
-                    b.HasIndex("fNHACUNGCAPId");
-
-                    b.HasIndex("fNHANVIENId");
-
-                    b.HasIndex("fYEUCAUNHAPHANGId");
 
                     b.ToTable("HOADONNHAHANG");
                 });
@@ -440,14 +438,20 @@ namespace QuanLyNhaHang.Migrations
                     b.Property<string>("GhiChu");
 
                     b.Property<string>("MaLoaiMon")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 12);
 
                     b.Property<DateTime?>("NgayDuyet");
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<string>("TenLoaiMon")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 50);
 
                     b.Property<string>("TrangThai");
 
@@ -479,6 +483,10 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<string>("TenLoaiSuCo")
                         .IsRequired();
 
@@ -486,16 +494,12 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("TrangThaiDuyet");
 
-                    b.Property<int?>("fBOPHANId");
-
                     b.HasKey("Id");
 
                     b.HasAlternateKey("MaLoaiSuCo");
 
 
                     b.HasAlternateKey("TenLoaiSuCo");
-
-                    b.HasIndex("fBOPHANId");
 
                     b.ToTable("LOAISUCO");
                 });
@@ -508,15 +512,21 @@ namespace QuanLyNhaHang.Migrations
                     b.Property<string>("GhiChu");
 
                     b.Property<string>("MaLuot")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 12);
 
                     b.Property<DateTime?>("NgayDuyet");
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<int>("SoBan");
 
-                    b.Property<string>("ThoiGianRa");
+                    b.Property<string>("ThoiGianRa")
+                        .IsRequired();
 
                     b.Property<string>("ThoiGianVao")
                         .IsRequired();
@@ -555,6 +565,10 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<string>("TenMon")
                         .IsRequired();
 
@@ -562,16 +576,12 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("TrangThaiDuyet");
 
-                    b.Property<int?>("fLOAIMONANId");
-
                     b.HasKey("Id");
 
                     b.HasAlternateKey("MaMon");
 
 
                     b.HasAlternateKey("TenMon");
-
-                    b.HasIndex("fLOAIMONANId");
 
                     b.ToTable("MONAN");
                 });
@@ -582,7 +592,8 @@ namespace QuanLyNhaHang.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("DVT")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 20);
 
                     b.Property<string>("GhiChu");
 
@@ -590,14 +601,20 @@ namespace QuanLyNhaHang.Migrations
                         .IsRequired();
 
                     b.Property<string>("MaNL")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 12);
 
                     b.Property<DateTime?>("NgayDuyet");
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<string>("TenNL")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 50);
 
                     b.Property<string>("TrangThai");
 
@@ -629,6 +646,10 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<int>("SoLuong");
 
                     b.Property<bool>("TinhTrang");
@@ -637,13 +658,9 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("TrangThaiDuyet");
 
-                    b.Property<int?>("fNGUYENLIEUId");
-
                     b.HasKey("Id");
 
                     b.HasAlternateKey("MaNL");
-
-                    b.HasIndex("fNGUYENLIEUId");
 
                     b.ToTable("NGUYENLIEUTRONGKHO");
                 });
@@ -658,18 +675,26 @@ namespace QuanLyNhaHang.Migrations
                     b.Property<string>("GhiChu");
 
                     b.Property<string>("MaNCC")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 12);
 
                     b.Property<DateTime?>("NgayDuyet");
 
                     b.Property<DateTime?>("NgayTao");
 
-                    b.Property<string>("SoDT");
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
+                    b.Property<string>("SoDT")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 15);
 
                     b.Property<string>("SoNo");
 
                     b.Property<string>("TenNCC")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 50);
 
                     b.Property<string>("TrangThai");
 
@@ -708,6 +733,10 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<int>("SoDT");
 
                     b.Property<string>("TenNV")
@@ -738,10 +767,15 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<string>("NoiDung")
                         .IsRequired();
 
-                    b.Property<string>("TenNguoiPH");
+                    b.Property<string>("TenNguoiPH")
+                        .HasAnnotation("MaxLength", 50);
 
                     b.Property<string>("TrangThai");
 
@@ -770,6 +804,10 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
                     b.Property<int>("SoLuong");
 
                     b.Property<string>("Ten");
@@ -781,11 +819,7 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("TrangThaiDuyet");
 
-                    b.Property<int?>("fBIENBANSUCOId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("fBIENBANSUCOId");
 
                     b.ToTable("THIETHAI");
                 });
@@ -806,7 +840,11 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
+                    b.Property<string>("NguoiDuyet");
+
                     b.Property<string>("NguoiLap");
+
+                    b.Property<string>("NguoiTao");
 
                     b.Property<string>("ThanhTien")
                         .IsRequired();
@@ -815,11 +853,7 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("TrangThaiDuyet");
 
-                    b.Property<int?>("fNHANVIENId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("fNHANVIENId");
 
                     b.ToTable("THUCHI");
 
@@ -843,7 +877,9 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
-                    b.Property<int?>("PHIEUTHUId");
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
 
                     b.Property<int>("SoLuong");
 
@@ -851,17 +887,7 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("TrangThaiDuyet");
 
-                    b.Property<int?>("fLUOTKHACHId");
-
-                    b.Property<int?>("fMONANId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PHIEUTHUId");
-
-                    b.HasIndex("fLUOTKHACHId");
-
-                    b.HasIndex("fMONANId");
 
                     b.ToTable("YEUCAUMONAN");
                 });
@@ -886,23 +912,19 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<DateTime?>("NgayTao");
 
-                    b.Property<int>("SoLuong");
+                    b.Property<string>("NguoiDuyet");
+
+                    b.Property<string>("NguoiTao");
+
+                    b.Property<float>("SoLuong");
 
                     b.Property<string>("TrangThai");
 
                     b.Property<string>("TrangThaiDuyet");
 
-                    b.Property<int?>("fNGUYENLIEUId");
-
-                    b.Property<int?>("fNHACUNGCAPId");
-
                     b.HasKey("Id");
 
                     b.HasAlternateKey("MaYeuCau");
-
-                    b.HasIndex("fNGUYENLIEUId");
-
-                    b.HasIndex("fNHACUNGCAPId");
 
                     b.ToTable("YEUCAUNHAPHANG");
                 });
@@ -918,10 +940,6 @@ namespace QuanLyNhaHang.Migrations
                         .IsRequired();
 
                     b.Property<string>("SoNo");
-
-                    b.Property<int?>("fHOADONNHAPHANGId");
-
-                    b.HasIndex("fHOADONNHAPHANGId");
 
                     b.ToTable("PHIEUCHI");
 
@@ -946,10 +964,6 @@ namespace QuanLyNhaHang.Migrations
                         .IsRequired();
 
                     b.Property<string>("VAT");
-
-                    b.Property<int?>("fLUOTKHACHId");
-
-                    b.HasIndex("fLUOTKHACHId");
 
                     b.ToTable("PHIEUTHU");
 
@@ -995,10 +1009,6 @@ namespace QuanLyNhaHang.Migrations
 
             modelBuilder.Entity("QuanLyNhaHang.Models.BIENBANSUCO", b =>
                 {
-                    b.HasOne("QuanLyNhaHang.Models.LOAISUCO", "fLOAISUCO")
-                        .WithMany()
-                        .HasForeignKey("fLOAISUCOId");
-
                     b.HasOne("QuanLyNhaHang.Models.NHANVIEN", "fNHANVIEN")
                         .WithMany()
                         .HasForeignKey("fNHANVIENId");
@@ -1011,112 +1021,11 @@ namespace QuanLyNhaHang.Migrations
                         .HasForeignKey("BlogBusinessesBusinessId");
                 });
 
-            modelBuilder.Entity("QuanLyNhaHang.Models.BOPHAN", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.NHANVIEN", "fNHANVIEN")
-                        .WithOne("fBOPHAN")
-                        .HasForeignKey("QuanLyNhaHang.Models.BOPHAN", "fNHANVIENId");
-                });
-
             modelBuilder.Entity("QuanLyNhaHang.Models.CHEBIEN", b =>
                 {
                     b.HasOne("QuanLyNhaHang.Models.MONAN", "fMONAN")
                         .WithMany()
                         .HasForeignKey("fMONANId");
-
-                    b.HasOne("QuanLyNhaHang.Models.NGUYENLIEU", "fNGUYENLIEU")
-                        .WithMany()
-                        .HasForeignKey("fNGUYENLIEUId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.HOADONNHAPHANG", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.NHACUNGCAP", "fNHACUNGCAP")
-                        .WithMany()
-                        .HasForeignKey("fNHACUNGCAPId");
-
-                    b.HasOne("QuanLyNhaHang.Models.NHANVIEN", "fNHANVIEN")
-                        .WithMany()
-                        .HasForeignKey("fNHANVIENId");
-
-                    b.HasOne("QuanLyNhaHang.Models.YEUCAUNHAPHANG", "fYEUCAUNHAPHANG")
-                        .WithMany()
-                        .HasForeignKey("fYEUCAUNHAPHANGId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.LOAISUCO", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.BOPHAN", "fBOPHAN")
-                        .WithMany()
-                        .HasForeignKey("fBOPHANId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.MONAN", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.LOAIMONAN", "fLOAIMONAN")
-                        .WithMany()
-                        .HasForeignKey("fLOAIMONANId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.NGUYENLIEUTRONGKHO", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.NGUYENLIEU", "fNGUYENLIEU")
-                        .WithMany()
-                        .HasForeignKey("fNGUYENLIEUId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.THIETHAI", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.BIENBANSUCO", "fBIENBANSUCO")
-                        .WithMany()
-                        .HasForeignKey("fBIENBANSUCOId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.THUCHI", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.NHANVIEN", "fNHANVIEN")
-                        .WithMany()
-                        .HasForeignKey("fNHANVIENId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.YEUCAUMONAN", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.PHIEUTHU")
-                        .WithMany("fYEUCAUMONAN")
-                        .HasForeignKey("PHIEUTHUId");
-
-                    b.HasOne("QuanLyNhaHang.Models.LUOTKHACH", "fLUOTKHACH")
-                        .WithMany()
-                        .HasForeignKey("fLUOTKHACHId");
-
-                    b.HasOne("QuanLyNhaHang.Models.MONAN", "fMONAN")
-                        .WithMany()
-                        .HasForeignKey("fMONANId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.YEUCAUNHAPHANG", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.NGUYENLIEU", "fNGUYENLIEU")
-                        .WithMany()
-                        .HasForeignKey("fNGUYENLIEUId");
-
-                    b.HasOne("QuanLyNhaHang.Models.NHACUNGCAP", "fNHACUNGCAP")
-                        .WithMany()
-                        .HasForeignKey("fNHACUNGCAPId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.PHIEUCHI", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.HOADONNHAPHANG", "fHOADONNHAPHANG")
-                        .WithMany()
-                        .HasForeignKey("fHOADONNHAPHANGId");
-                });
-
-            modelBuilder.Entity("QuanLyNhaHang.Models.PHIEUTHU", b =>
-                {
-                    b.HasOne("QuanLyNhaHang.Models.LUOTKHACH", "fLUOTKHACH")
-                        .WithMany()
-                        .HasForeignKey("fLUOTKHACHId");
                 });
         }
     }

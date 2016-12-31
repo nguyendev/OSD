@@ -6,33 +6,60 @@ using QuanLyNhaHang.Infrastructure;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
     public class ThuChiController : Controller
     {
         private readonly IGenericRepository<THUCHI> _context;
+        private readonly IGenericRepository<NHANVIEN> _nhanviencontext;
 
-        public ThuChiController(IGenericRepository<THUCHI> context)
+        private SignInManager<AppUser> SignInManager;
+        private UserManager<AppUser> UserManager;
+
+        public ThuChiController(IGenericRepository<THUCHI> context,
+            IGenericRepository<NHANVIEN> nhanviencontext)
         {
-            _context = context;    
+            _context = context;
+            _nhanviencontext = nhanviencontext;
         }
 
-        private async Task<List<THUCHI>> GetResult(DateTime? ngaylap = null,
+        private async Task<IActionResult> GetResult(DateTime? ngaylap = null,
           string nguoilap = null)
         {
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV", nguoilap);
             IQueryable<THUCHI> result = _context.GetList().Where(c =>
            (ngaylap == null || DateTime.Compare(Convert.ToDateTime(c.NgayTao), ngaylap.Value) == 0)
            && (nguoilap == null || c.NguoiLap == nguoilap) && c.TrangThai == "1");
-            return await result.ToListAsync();
+            return View(await result.ToListAsync());
         }
         // GET: ThuChi
         public async Task<IActionResult> Index(DateTime? ngaylap = null,
           string nguoilap = null)
         {
-            return View(await GetResult(ngaylap, nguoilap));
+            return await GetResult(ngaylap, nguoilap);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+DateTime? ngaylap = null, string nguoilap = null)
+        {
+            if (id == null)
+                return NotFound();
+            var thuchi = await _context.Get(id);
+            if (thuchi == null)
+                return NotFound();
+            if (ModelState.IsValid)
+            {
+                _context.SetState(thuchi, EntityState.Modified);
+                await _context.Update(thuchi, trangthaiduyet, "1", UserManager.GetUserId(User));
+            }
+            return await GetResult(ngaylap, nguoilap);
+        }
         // GET: ThuChi/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -53,6 +80,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // GET: ThuChi/Create
         public IActionResult Create()
         {
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
             return View();
         }
 
@@ -65,10 +94,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                thuchi.NgayTao = DateTime.Now;
-                thuchi.TrangThai = "1";
-                thuchi.TrangThaiDuyet = "U";
-                await _context.Add(thuchi);
+                await _context.Add(thuchi, UserManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(thuchi);
@@ -78,15 +104,12 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var thuchi = await _context.Get(id);
             if (thuchi == null)
-            {
                 return NotFound();
-            }
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
             return View(thuchi);
         }
 
@@ -98,27 +121,19 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Edit(int id, THUCHI thuchi)
         {
             if (id != thuchi.Id)
-            {
                 return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    thuchi.TrangThaiDuyet = "U";
                     await _context.Update(thuchi);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!ThuChiExists(thuchi.Id))
-                    {
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction("Index");
             }
@@ -134,16 +149,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var thuchi = await _context.Get(id);
             if (thuchi == null)
-            {
                 return NotFound();
-            }
-
             return View(thuchi);
         }
 
@@ -156,11 +165,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             if (ModelState.IsValid)
             {
                 if (thuchi.TrangThaiDuyet == "A")
-                {
-                    thuchi.TrangThai = "0";
-                    thuchi.TrangThaiDuyet = "U";
-                    await _context.Update(thuchi);
-                }
+                    await _context.Update(thuchi,"U","0");
                 else
                     await _context.Delete(id);
             }

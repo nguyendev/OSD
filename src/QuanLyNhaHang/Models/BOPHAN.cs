@@ -41,11 +41,11 @@ namespace QuanLyNhaHang.Models
         }
 
 		//kết bảng
-		public virtual NHANVIEN fNHANVIEN
-		{
-			get;
-			set;
-		}
+		//public virtual NHANVIEN fNHANVIEN
+		//{
+		//	get;
+		//	set;
+		//}
 
         //public virtual LOAISUCO LOAISUCO
         //{

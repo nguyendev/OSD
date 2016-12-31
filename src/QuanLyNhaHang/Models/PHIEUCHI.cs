@@ -19,18 +19,14 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Display(Name = "Mã phiếu chi")]
-        [Required(ErrorMessage = "Vui lòng nhập mã phiếu chi")]
-        [MaxLength(12, ErrorMessage = "Mã phiếu chi không quá 12 kí tự")]
+        [Required]
         public string MaPC
         {
             get;
             set;
         }
 
-        [Display(Name = "Mã hóa đơn")]
-        [Required(ErrorMessage = "Vui lòng nhập mã hóa đơn")]
-        [MaxLength(12, ErrorMessage = "Mã hóa đơn không quá 12 kí tự")]
+        [Required]
         public string MaHD
         {
             get;
@@ -38,13 +34,12 @@ namespace QuanLyNhaHang.Models
         }
 		
 		//kết bảng
-		public virtual HOADONNHAPHANG fHOADONNHAPHANG
-		{
-			get;
-			set;
-		}
+		//public virtual HOADONNHAPHANG fHOADONNHAPHANG
+		//{
+		//	get;
+		//	set;
+		//}
 
-        [Display(Name ="Số nợ")]
         public string SoNo
         {
             get;

@@ -20,18 +20,14 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Display(Name ="Mã biên bản")]
-        [Required(ErrorMessage = "Vui lòng nhập mã biên bản")]
-        [StringLength(12, ErrorMessage = "Mã biên bản không quá 12 kí tự")]
+        [Required]
         public string MaBienBan
         {
             get;
             set;
         }
 
-        [Display(Name ="Mã loại sự cố")]
-        [Required(ErrorMessage = "Vui lòng nhập mã loại sự cố")]
-        [StringLength(12, ErrorMessage = "Mã loại sự cố không quá 12 kí tự")]
+        [Required]
         public string MaLoaiSuCo
         {
             get;
@@ -39,15 +35,13 @@ namespace QuanLyNhaHang.Models
         }
 		
 		//kết bảng
-		public virtual LOAISUCO fLOAISUCO
-		{
-			get;
-			set;
-		}
+		//public virtual LOAISUCO fLOAISUCO
+		//{
+		//	get;
+		//	set;
+		//}
 
-        [Display(Name ="Mã nhân viên")]
-        [Required(ErrorMessage = "Vui lòng nhập mã nhân viên")]
-        [StringLength(12, ErrorMessage = "Mã nhân viên không quá 12 kí tự")]
+        [Required]
         public string MaNV
         {
             get;
@@ -61,29 +55,43 @@ namespace QuanLyNhaHang.Models
 			set;
 		}
 
-        [Display(Name ="Nguyên nhân")]
-        [DataType(DataType.MultilineText)]
+        [Required]
         public string NguyenNhan
         {
             get;
             set;
         }
 
-        [Display(Name = "Thời gian")]
-        [Required(ErrorMessage = "Vui lòng nhập thời gian")]
+        [Required]
         public string ThoiGian
         {
             get;
             set;
         }
 
-        [Display(Name = "Hướng giải quyết")]
-        [DataType(DataType.MultilineText)]
+        [Required]
         public string HuongGiaiQuyet
         {
             get;
             set;
         }
+
+        //public virtual THIETHAI THIETHAI
+        //{
+        //	get;
+        //	set;
+        //}
+
+        //public virtual LOAISUCO getLoaiSuCo()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual THIETHAI getThietHai()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
 
 }

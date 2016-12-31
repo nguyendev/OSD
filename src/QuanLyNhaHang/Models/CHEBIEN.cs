@@ -19,9 +19,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Display(Name ="Mã món")]
-        [Required(ErrorMessage = "Vui lòng nhập mã món")]
-        [MaxLength(12, ErrorMessage = "Mã món không quá 12 kí tự")]
+        [Required]
         public string MaMon
         {
             get;
@@ -35,9 +33,7 @@ namespace QuanLyNhaHang.Models
 			set;
 		}
 
-        [Display(Name ="Mã nguyên liệu")]
-        [Required(ErrorMessage = "Vui lòng nhập mã nguyên liệu")]
-        [MaxLength(12, ErrorMessage = "Mã nguyên liệu không quá 12 kí tự")]
+        [Required]
         public string MaNL
         {
             get;
@@ -45,20 +41,30 @@ namespace QuanLyNhaHang.Models
         }
 		
 		//kết bảng
-		public NGUYENLIEU fNGUYENLIEU
-		{
-			get;
-			set;
-		}
+		//public NGUYENLIEU fNGUYENLIEU
+		//{
+		//	get;
+		//	set;
+		//}
 
-        [Display(Name ="Lượng dùng")]
-        [Required(ErrorMessage = "Vui lòng nhập lượng dùng")]
-        [Range(0,int.MaxValue,ErrorMessage ="Lượng dùng không nhỏ hơn 0")]
+        [Required]
         public float LuongDung
         {
             get;
             set;
         }
+
+
+        //public virtual NGUYENLIEU getNguyenLieu()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
+        //public virtual MONAN getMonAn()
+        //{
+        //	throw new System.NotImplementedException();
+        //}
+
     }
 
 }
