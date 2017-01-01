@@ -51,6 +51,7 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         public async Task<IActionResult> Index(string mabienban = null,
             string maloaisuco = null, string manv = null, DateTime? thoigian = null)
         {
+            //return View(await _context.GetAll());
             return await GetResult(mabienban, maloaisuco, manv, thoigian = null);
         }
 
