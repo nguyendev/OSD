@@ -39,6 +39,7 @@ namespace QuanLyNhaHang.Models
         //}
 
         [Required]
+        [DataType(DataType.Currency)]
         public string ThanhTien
         {
             get;

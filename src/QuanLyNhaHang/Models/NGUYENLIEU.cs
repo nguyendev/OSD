@@ -46,6 +46,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [DataType(DataType.Currency)]
         [Display(Name = "Giá")]
         [Required(ErrorMessage = "Vui lòng giá nguyên liệu")]
         [Range(0, int.MaxValue, ErrorMessage = "Giá nguyên liệu không hợp lệ")]

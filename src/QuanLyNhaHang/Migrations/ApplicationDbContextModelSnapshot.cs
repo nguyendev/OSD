@@ -652,7 +652,8 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<int>("SoLuong");
 
-                    b.Property<bool>("TinhTrang");
+                    b.Property<string>("TinhTrang")
+                        .IsRequired();
 
                     b.Property<string>("TrangThai");
 

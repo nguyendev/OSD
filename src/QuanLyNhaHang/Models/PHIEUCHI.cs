@@ -32,14 +32,15 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
-		
-		//kết bảng
-		//public virtual HOADONNHAPHANG fHOADONNHAPHANG
-		//{
-		//	get;
-		//	set;
-		//}
 
+        //kết bảng
+        //public virtual HOADONNHAPHANG fHOADONNHAPHANG
+        //{
+        //	get;
+        //	set;
+        //}
+
+        [DataType(DataType.Currency)]
         public string SoNo
         {
             get;

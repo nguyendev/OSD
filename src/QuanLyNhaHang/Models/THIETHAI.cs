@@ -51,12 +51,14 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [DataType(DataType.Currency)]
         public string DonGia
         {
             get;
             set;
         }
 
+        [DataType(DataType.Currency)]
         [Required]
         public string ThanhTien
         {

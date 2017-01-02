@@ -41,7 +41,7 @@ namespace QuanLyNhaHang.Models
         }
 
         [Required]
-        public bool TinhTrang
+        public string TinhTrang
         {
             get;
             set;

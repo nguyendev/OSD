@@ -49,24 +49,28 @@ namespace QuanLyNhaHang.Models
         //}
 
         [Required]
+        [DataType(DataType.Currency)]
         public string TienHang
         {
             get;
             set;
         }
 
+        [DataType(DataType.Currency)]
         public string PhiDichVuKhac
         {
             get;
             set;
         }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:P2}")]
         public string KhuyenMai
         {
             get;
             set;
         }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:P2}")]
         public string VAT
         {
             get;
