@@ -43,6 +43,7 @@ namespace QuanLyNhaHang.Models
         //	set;
         //}
 
+        [Display(Name ="Số nợ")]
         [DataType(DataType.Currency)]
         public string SoNo
         {

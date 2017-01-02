@@ -1,71 +1,69 @@
-@model QuanLyNhaHang.Models.HOADONNHAPHANG
+﻿@model QuanLyNhaHang.Models.HOADONNHAPHANG
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
+    ViewData["Title"] = "Tạo hóa đơn nhập hàng mới | Quản lý";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Hóa đơn nhập hàng";
+    ViewData["action"] = "Tạo mới";
+    ViewData["h2"] = "Tạo hóa đơn nhập hàng";
 }
-
-<h2>Create</h2>
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>HOADONNHAPHANG</h4>
-        <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="MaNCC" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="MaNCC" class="form-control" />
-                <span asp-validation-for="MaNCC" class="text-danger" />
+            <label asp-for="MaHD" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="MaHD" class="form-control" />
+                <span asp-validation-for="MaHD" class="text-danger" />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label asp-for="MaYeuCau" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select asp-for="MaYeuCau" class="select2_group form-control" asp-items="ViewBag.MaYeuCau"></select>
+                <span asp-validation-for="MaYeuCau" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="MaNV" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="MaNV" class="form-control" />
+            <label asp-for="MaNV" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select asp-for="MaNV" class="select2_group form-control" asp-items="ViewBag.MaNV"></select>
                 <span asp-validation-for="MaNV" class="text-danger" />
             </div>
         </div>
+    
         <div class="form-group">
-            <label asp-for="NgayLap" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="NgayLap" class="form-control" />
-                <span asp-validation-for="NgayLap" class="text-danger" />
-            </div>
+            <label asp-for="ThanhTien" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                
+                    <input asp-for="ThanhTien" class="form-control" />
+                    <span asp-validation-for="ThanhTien" class="text-danger" />
+   
+             </div>
         </div>
         <div class="form-group">
-            <label asp-for="SoHD" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="SoHD" class="form-control" />
-                <span asp-validation-for="SoHD" class="text-danger" />
+            <label asp-for="ThoiGianNhap" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="input-group date datetimepicker1">
+                    <input asp-for="ThoiGianNhap" type="date" id="date" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
             </div>
+            <span asp-validation-for="ThoiGianNhap" class="text-danger" />
+            
         </div>
+        <div class="ln_solid"></div>
         <div class="form-group">
-            <label asp-for="ThanhTien" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ThanhTien" class="form-control" />
-                <span asp-validation-for="ThanhTien" class="text-danger" />
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <a asp-action="search" asp-controller="bienbansuco" class="btn btn-success pull-left">Quay lại</a>
+                <input type="submit" value="Thêm" class="btn btn-primary pull-left" />
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="ThoiGianNhap" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ThoiGianNhap" class="form-control" />
-                <span asp-validation-for="ThoiGianNhap" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+
     </div>
 </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

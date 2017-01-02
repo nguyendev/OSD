@@ -28,31 +28,27 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Display(Name = "Mã món ăn")]
+        [Display(Name = "Mã yêu cầu")]
         [Required(ErrorMessage = "Vui lòng chọn mã yêu cầu")]
+        [MaxLength(12, ErrorMessage = "Mã yêu cầu không quá 12 kí tự")]
         public string MaYeuCau
 		{
             get;
             set;
         }
+        
 
-        //kết bảng
-        //public YEUCAUNHAPHANG fYEUCAUNHAPHANG
-        //{
-        //	get;
-        //	set;
-        //}
-
-        [Display(Name = "Thời gian nhập")]
-        [Required(ErrorMessage = "Vui lòng nhập thời gian nhập")]
+        [Display(Name = "Ngày nhập")]
+        [Required(ErrorMessage = "Vui lòng nhập ngày nhập")]
         public string ThoiGianNhap
         {
             get;
             set;
         }
 
-        [Display(Name = "Thời gian nhập")]
-        [Required(ErrorMessage = "Vui lòng nhập thời gian nhập")]
+        [Display(Name = "Người lập")]
+        [Required(ErrorMessage = "Vui lòng nhập người lập")]
+        [MaxLength(12, ErrorMessage = "Mã người lập không quá 12 kí tự")]
         public string MaNV
         {
             get;
@@ -87,30 +83,6 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
-
-
-
-        //public virtual PHIEUCHI PHIEUCHI
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual YEUCAUNHAPHANG NHAPHANG
-        //{
-        //	get;
-        //	set;
-        //}
-
-        //public virtual PHIEUCHI getPhieuChi()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
-
-        //public virtual YEUCAUNHAPHANG getYeuCauNhapHang()
-        //{
-        //	throw new System.NotImplementedException();
-        //}
 
     }
 

@@ -1,72 +1,60 @@
 @model QuanLyNhaHang.Models.NHACUNGCAP
 
 @{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
+    ViewData["Title"] = "Thêm nhà cung c?p | Qu?n lý";
+    ViewData["areas"] = "Qu?n lý";
+    ViewData["controller"] = "Nhà cung c?p";
+    ViewData["action"] = "T?o m?i";
+    ViewData["h2"] = "Thêm nhà cung c?p";
 }
-
-<h2>Edit</h2>
-
-<form asp-action="Edit">
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-horizontal">
-        <h4>NHACUNGCAP</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id" />
+
         <div class="form-group">
-            <label asp-for="DiaChi" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="DiaChi" class="form-control" />
-                <span asp-validation-for="DiaChi" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="MaNCC" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
+            <label asp-for="MaNCC" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
                 <input asp-for="MaNCC" class="form-control" />
                 <span asp-validation-for="MaNCC" class="text-danger" />
             </div>
         </div>
+
         <div class="form-group">
-            <label asp-for="TenNCC" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
+            <label asp-for="TenNCC" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
                 <input asp-for="TenNCC" class="form-control" />
                 <span asp-validation-for="TenNCC" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="SoDT" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
+            <label asp-for="DiaChi" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="DiaChi" class="form-control" />
+                <span asp-validation-for="DiaChi" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SoDT" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
                 <input asp-for="SoDT" class="form-control" />
                 <span asp-validation-for="SoDT" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="SoNo" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
+            <label asp-for="SoNo" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
                 <input asp-for="SoNo" class="form-control" />
                 <span asp-validation-for="SoNo" class="text-danger" />
             </div>
         </div>
+        <div class="ln_solid"></div>
         <div class="form-group">
-            <label asp-for="SoTienNo" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="SoTienNo" class="form-control" />
-                <span asp-validation-for="SoTienNo" class="text-danger" />
-            </div>
-        </div>       
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <a asp-action="search" asp-controller="bienbansuco" class="btn btn-success pull-left">Quay l?i</a>
+                <input type="submit" value="L?u" class="btn btn-warning pull-left" />
             </div>
         </div>
     </div>
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
