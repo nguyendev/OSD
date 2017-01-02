@@ -279,5 +279,215 @@ namespace QuanLyNhaHang.Data
                 await context.SaveChangesAsync();
             }
         }
+        public static async Task CreateExampleBophan(IServiceProvider serviceProvider)
+        {
+            using (var context = new ApplicationDbContext(
+                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
+            {
+                if (context.BOPHAN.Any())
+                {
+                    return;   // DB has been seeded
+                }
+                context.BOPHAN.AddRange(
+                 new BOPHAN
+                 {
+                     MaBP = "1",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "2",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "3",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "4",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "5",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "6",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "8",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "7",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "9",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "10",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "11",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "12",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "13",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "14",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "15",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "16",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+                 },
+                 new BOPHAN
+                 {
+                     MaBP = "17",
+                     TenBP = "ahsjdkfajksd",
+                     MaTruongBP = "1",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+                 }
+                );
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }

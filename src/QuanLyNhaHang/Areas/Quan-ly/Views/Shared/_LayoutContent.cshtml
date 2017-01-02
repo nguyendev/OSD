@@ -1,0 +1,217 @@
+﻿@{
+    Layout = "~/Areas/Quan-ly/Views/Shared/_Layout.cshtml";
+    ViewData["select"] = "index";
+}
+@switch (ViewContext.RouteData.Values["action"].ToString())
+{
+    case "Index":
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="">
+                <ol class="breadcrumb">
+                    <li><span class="fa fa-home"></span></li>
+                    <li><span>@ViewData["areas"]</span></li>
+                    <li><span>@ViewData["controller"]</span></li>
+                    <li class="active">@ViewData["action"]</li>
+                </ol>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>@ViewData["h2"]</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="visibility:hidden;" role="button" aria-expanded="false">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-action="create" class="btn btn-primary them" style="color: white" role="button">
+                                Thêm mới
+                            </a>
+                        </li>
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    @RenderBody();
+                </div>
+            </div>
+        </div>
+        @section css{
+            <link href="~/css/site.css" rel="stylesheet" />
+            <!-- Datatables -->
+            <link href="~/gentelella/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+            <link href="~/gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+            <link href="~/gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+            <link href="~/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+            <link href="~/gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+        }
+        @section scripts{
+            <!-- datatables -->
+            <script src="~/gentelella/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
+            <script src="~/gentelella/vendors/jszip/dist/jszip.min.js"></script>
+            <script src="~/gentelella/vendors/pdfmake/build/pdfmake.min.js"></script>
+            <script src="~/gentelella/vendors/pdfmake/build/vfs_fonts.js"></script>        <!-- Database-->
+            <!-- Datatables-->
+            <!-- User Datatable-->
+            <script src="~/js/datatableUser.js"></script>
+        }
+        break;
+    case "Search":
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="">
+                <ol class="breadcrumb">
+                    <li><span class="fa fa-home"></span></li>
+                    <li><span>@ViewData["areas"]</span></li>
+                    <li><span>@ViewData["controller"]</span></li>
+                    <li class="active">@ViewData["action"]</li>
+                </ol>
+            </div>
+            @RenderBody();
+        </div>
+        @section css{
+            <link href="~/css/site.css" rel="stylesheet" />
+            <!-- Datatables -->
+            <link href="~/gentelella/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+            <link href="~/gentelella/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+            <link href="~/gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+            <link href="~/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+            <link href="~/gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+        }
+        @section scripts{
+            <!-- datatables -->
+            <script src="~/gentelella/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+            <script src="~/gentelella/vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
+            <script src="~/gentelella/vendors/jszip/dist/jszip.min.js"></script>
+            <script src="~/gentelella/vendors/pdfmake/build/pdfmake.min.js"></script>
+            <script src="~/gentelella/vendors/pdfmake/build/vfs_fonts.js"></script>        <!-- Database-->
+            <!-- Datatables-->
+            <!-- User Datatable-->
+            <script src="~/js/datatableUser.js"></script>
+        }
+        break;
+    default:
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="">
+                <ol class="breadcrumb">
+                    <li><span class="fa fa-home"></span></li>
+                    <li><span>@ViewData["areas"]</span></li>
+                    <li><span>@ViewData["controller"]</span></li>
+                    <li class="active">@ViewData["action"]</li>
+                </ol>
+            </div>
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>@ViewData["h2"]</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="visibility:hidden;" role="button" aria-expanded="false">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-action="create" class="btn btn-primary them" style="color: white" role="button">
+                                Thêm mới
+                            </a>
+                        </li>
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    @RenderBody();
+                </div>
+            </div>
+        </div>
+        @section css{
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet" /> 
+            
+<link href="~/lib/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+        }
+        @section Scripts {
+            <!-- bootstrap-daterangepicker -->
+            <script src="~/gentelella/vendors/moment/moment.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.44/js/bootstrap-datetimepicker.min.js"></script>
+            <script src="~/lib/wickedpicker/wickedpicker.js"></script>
+<script src="~/lib/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+            <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker1').datetimepicker();
+                    });
+		            $(document).ready(function()
+		{
+			$('#date').bootstrapMaterialDatePicker
+			({
+				time: false,
+				clearButton: true
+			});
+
+			$('#time').bootstrapMaterialDatePicker
+			({
+				date: false,
+				shortTime: false,
+				format: 'HH:mm'
+			});
+
+			$('#date-format').bootstrapMaterialDatePicker
+			({
+				format: 'dddd DD MMMM YYYY - HH:mm'
+			});
+			$('#date-fr').bootstrapMaterialDatePicker
+			({
+				format: 'DD/MM/YYYY HH:mm',
+				lang: 'fr',
+				weekStart: 1,
+				cancelText : 'ANNULER',
+				nowButton : true,
+				switchOnClick : true
+			});
+
+			$('#date-end').bootstrapMaterialDatePicker
+			({
+				weekStart: 0, format: 'DD/MM/YYYY HH:mm'
+			});
+			$('#date-start').bootstrapMaterialDatePicker
+			({
+				weekStart: 0, format: 'DD/MM/YYYY HH:mm', shortTime : true
+			}).on('change', function(e, date)
+			{
+				$('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
+			});
+
+			$('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+
+			$.material.init()
+		});
+            </script>
+            <!-- js default -->
+            @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            }
+        }
+
+                    break;
+                }
+
+

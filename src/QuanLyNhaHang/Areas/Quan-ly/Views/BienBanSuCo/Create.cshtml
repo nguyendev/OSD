@@ -1,114 +1,69 @@
 ﻿@model QuanLyNhaHang.Models.BIENBANSUCO
-
 @{
-    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
+    ViewData["Title"] = "Tạo báo cáo sự cố mới | Quản lý";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Báo cáo sự cố";
+    ViewData["action"] = "Tạo mới";
+    ViewData["h2"] = "Tạo biên bản báo cáo sự cố";
 }
-<div class="clearfix"></div>
-<div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="x_panel">
-        <div class="x_title">
-            <h2><strong>Thêm biên bản sự cố</strong></h2>
-            <ul class="nav navbar-right panel_toolbox">
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="visibility:hidden;" role="button" aria-expanded="false">
-                        <i class="fa fa-wrench"></i>
-                    </a>
-                </li>
-                <li><a class="close-link" style="visibility:hidden"><i class="fa fa-close"></i></a></li>
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-            </ul>
-            <div class="clearfix"></div>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label asp-for="MaBienBan" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="MaBienBan" class="form-control" />
+                <span asp-validation-for="MaBienBan" class="text-danger" />
+            </div>
         </div>
-        <div class="x_content">
-            <br>
-            <form asp-action="Create" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <label asp-for="MaBienBan" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <select asp-for="MaBienBan" class="select2_group form-control" asp-items="ViewBag.MaNV"></select>
-                            <span asp-validation-for="MaBienBan" class="text-danger" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="MaLoaiSuCo" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <select asp-for="MaLoaiSuCo" class="select2_group form-control" asp-items="ViewBag.MaNV"></select>
-                            <span asp-validation-for="MaLoaiSuCo" class="text-danger" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="MaNV" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <select asp-for="MaNV" class="select2_group form-control" asp-items="ViewBag.MaNV"></select>
-                            <span asp-validation-for="MaNV" class="text-danger" />
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label asp-for="NgayTao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input asp-for="NgayTao" class="ngaytao date-picker form-control col-md-7 col-xs-12 parsley-success" required="required" type="text" data-parsley-id="16">
-                            <span asp-validation-for="NgayTao" class="text-danger" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="ThoiGian" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input asp-for="ThoiGian" class="ngaytao date-picker form-control col-md-7 col-xs-12 parsley-success" required="required" type="text" data-parsley-id="16">
-                            <span asp-validation-for="ThoiGian" class="text-danger" />
-                        </div>
-                    </div>
-
-        
-                    <div class="form-group">
-                        <label asp-for="NguyenNhan" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea asp-for="NguyenNhan" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
-                            <span asp-validation-for="NguyenNhan" class="text-danger" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="HuongGiaiQuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea asp-for="HuongGiaiQuyet" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
-                            <span asp-validation-for="HuongGiaiQuyet" class="text-danger" />
-                        </div>
-                    </div>
-                    <div class="ln_solid"></div>
-                    <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <a asp-action="index" asp-controller="bienbansuco" class="btn btn-primary pull-left">Quay lại</a>
-                            <input type="submit" value="Thêm" class="btn btn-success pull-left" />
-                        </div>
-                    </div>
+        <div class="form-group">
+            <label asp-for="MaLoaiSuCo" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select asp-for="MaLoaiSuCo" class="select2_group form-control" asp-items="ViewBag.MaNV"></select>
+                <span asp-validation-for="MaLoaiSuCo" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="MaNV" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select asp-for="MaNV" class="select2_group form-control" asp-items="ViewBag.MaNV"></select>
+                <span asp-validation-for="MaNV" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ThoiGian" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="input-group date" id='datetimepicker1'>
+                    <input type="datetime" asp-for="ThoiGian" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    <span asp-validation-for="ThoiGian" class="text-danger" />
                 </div>
-            </form>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NguyenNhan" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <textarea asp-for="NguyenNhan" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <span asp-validation-for="NguyenNhan" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="HuongGiaiQuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <textarea asp-for="HuongGiaiQuyet" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <span asp-validation-for="HuongGiaiQuyet" class="text-danger" />
+            </div>
+        </div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <a asp-action="index" asp-controller="bienbansuco" class="btn btn-default pull-left">Quay lại</a>
+                <input type="submit" value="Thêm" class="btn btn-primary pull-right" />
+            </div>
         </div>
     </div>
-</div>
-@section css{
-    <link href="~/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
-}
-@section Scripts {
-    <!-- bootstrap-daterangepicker -->
-    <script src="~/gentelella/vendors/moment/moment.js"></script>
-    <script src="~/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script>
-      $(document).ready(function() {
-        $('.ngaytao').daterangepicker({
-          singleDatePicker: true,
-          calender_style: "picker_4"
-        }, function(start, end, label) {
-          console.log(start.toISOString(), end.toISOString(), label);
-        });
-      });
-    </script>
-    <!-- js default -->
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+</form>
+           

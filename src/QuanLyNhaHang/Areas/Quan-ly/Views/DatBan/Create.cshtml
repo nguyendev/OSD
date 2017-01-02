@@ -1,64 +1,58 @@
 @model QuanLyNhaHang.Models.DATBAN
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
+    ViewData["Title"] = "Đặt bàn mới | Quản lý";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Đặt bàn";
+    ViewData["action"] = "Tạo";
+    ViewData["h2"] = "Đặt một bàn mới";
 }
-
-<h2>Create</h2>
-
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>DATBAN</h4>
-        <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="Gio" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Gio" class="form-control" />
+            <label asp-for="Gio" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="Gio" id="time" class="form-control"/>
                 <span asp-validation-for="Gio" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="HoTen" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="HoTen" class="form-control" />
+            <label asp-for="HoTen" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="HoTen" type="text" class="form-control" />
                 <span asp-validation-for="HoTen" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Ngay" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Ngay" class="form-control" />
+            <label asp-for="Ngay" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="Ngay" type="date" id="date" class="form-control" />
                 <span asp-validation-for="Ngay" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="SoDT" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="SoDT" class="form-control" />
+            <label asp-for="SoDT" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="SoDT" type="number" class="form-control" />
                 <span asp-validation-for="SoDT" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="SoNguoi" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="SoNguoi" class="form-control" />
+            <label asp-for="SoNguoi" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="SoNguoi" type="number" class="form-control" />
                 <span asp-validation-for="SoNguoi" class="text-danger" />
             </div>
         </div>
+        <div class="ln_solid"></div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <a asp-action="search" asp-controller="datban" class="btn btn-default pull-left">Quay lại</a>
+                <input type="submit" value="Thêm" class="btn btn-primary pull-right" />
             </div>
         </div>
-    </div>
+    </div> 
 </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    

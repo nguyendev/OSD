@@ -63,6 +63,11 @@ namespace QuanLyNhaHang.Data
             string passwordadmin = configuration["Data:AdminUser:Password"];
             string roleadmin = configuration["Data:AdminUser:Role"];
 
+            string usernamemanager = configuration["Data:ManagerUser:Name"];
+            string emailmanager = configuration["Data:ManagertUser:Email"];
+            string passwordmanager = configuration["Data:ManagerUser:Password"];
+            string rolemanager = configuration["Data:ManagerUser:Role"];
+
             string usernameguest = configuration["Data:GuestUser:Name"];
             string emailguest = configuration["Data:GuestUser:Email"];
             string passwordguest = configuration["Data:GuestUser:Password"];
@@ -86,6 +91,25 @@ namespace QuanLyNhaHang.Data
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(useradmin, roleadmin);
+                }
+            }
+            //Tao tai khoan manager
+            if (await userManager.FindByNameAsync(usernamemanager) == null)
+            {
+                if (await roleManager.FindByNameAsync(rolemanager) == null)
+                {
+                    await roleManager.CreateAsync(new IdentityRole(rolemanager));
+                }
+                AppUser usermanager = new AppUser
+                {
+                    UserName = usernamemanager,
+                    Email = emailmanager
+                };
+                IdentityResult result = await userManager
+                .CreateAsync(usermanager, passwordmanager);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(usermanager, roleadmin);
                 }
             }
 

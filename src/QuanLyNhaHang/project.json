@@ -46,8 +46,7 @@
       "type": "build"
     },
     "Microsoft.AspNetCore.Authentication.Google": "1.1.0-preview2-22535",
-    "Neostore.ImageSharp": "1.0.0"
-  },
+    "Neostore.ImageSharp": "1.0.0"  },
 
   "tools": {
     "BundlerMinifier.Core": "2.0.238",

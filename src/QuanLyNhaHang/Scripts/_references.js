@@ -1872,3 +1872,4 @@
 /// <reference path="../wwwroot/lib/jquery/dist/jquery.js" />
 /// <reference path="../wwwroot/lib/jquery-validation/dist/jquery.validate.js" />
 /// <reference path="../wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
+/// <reference path="../wwwroot/login/index.js" />

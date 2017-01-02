@@ -238,7 +238,6 @@ E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Program.cs
 E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Startup.cs
 E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\BienBanSuCoController.cs
 E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\BoPhanController.cs
-E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\BusinessController.cs
 E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\DatBanController.cs
 E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\HoaDonNhapHangController.cs
 E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\LoaiMonAnController.cs
@@ -297,8 +296,8 @@ E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Infrastructure\ThietHaiRepository.cs
 E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Infrastructure\ThuChiRepository.cs
 E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Infrastructure\YeuCauMonAnRepository.cs
 E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Infrastructure\YeuCauNhapHangRepository.cs
-E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Migrations\20161230023412_init.cs
-E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Migrations\20161230023412_init.Designer.cs
+E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Migrations\20170102020122_init.cs
+E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Migrations\20170102020122_init.Designer.cs
 E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Migrations\ApplicationDbContextModelSnapshot.cs
 E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Models\AppUser.cs
 E:\Project\OOD\1.6\trunk\src\QuanLyNhaHang\Models\BIENBANSUCO.cs

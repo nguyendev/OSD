@@ -8,6 +8,7 @@ using QuanLyNhaHang.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace QuanLyNhaHang.Areas.Quanly.Controllers
 {
@@ -19,16 +20,20 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         private readonly IGenericRepository<LOAISUCO> _loaisucocontext;
         private readonly IGenericRepository<NHANVIEN> _nhanviencontext;
 
-        private SignInManager<AppUser> SignInManager;
-        private UserManager<AppUser> UserManager;
+        private SignInManager<AppUser> _signInManager;
+        private UserManager<AppUser> _userManager;
 
         public BienBanSuCoController(IGenericRepository<BIENBANSUCO> context,
             IGenericRepository<LOAISUCO> loaisucocontext,
-            IGenericRepository<NHANVIEN> nhanviencontext)
+            IGenericRepository<NHANVIEN> nhanviencontext, UserManager<AppUser> userMgr,
+        SignInManager<AppUser> signinMgr)
         {
             _context = context;
             _loaisucocontext = loaisucocontext;
             _nhanviencontext = nhanviencontext;
+            _signInManager = signinMgr;
+            _userManager = userMgr;
+            
         }
 
         private async Task<IActionResult> GetResult(string mabienban = null,
@@ -38,26 +43,31 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
             var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
             ViewData["MaLoaiSuCo"] = new SelectList(loaisucolist, "MaLoaiSuCo", "MaLoaiSuCo", maloaisuco);
             ViewData["MaNV"] = new SelectList(nhanvienlist, "MaNV", "MaNV", manv);
-            IQueryable<BIENBANSUCO> result = _context.GetList().Where(c =>
+            IQueryable<BIENBANSUCO> result = _context.GetList()/*.Where(c =>
             (mabienban == null || c.MaBienBan == mabienban) && (maloaisuco == null || c.MaLoaiSuCo == maloaisuco)
             && (manv == null || c.MaNV == manv) 
             && (thoigian == null || DateTime.Compare(Convert.ToDateTime(c.ThoiGian),thoigian.Value) == 0)
-            && c.TrangThai == "1");
+            && c.TrangThai == "1")*/;
             return View(await result.ToListAsync());
 
         }
         // GET: BienBanSuCo
         [Route("quan-ly/bien-ban-su-co")]
-        public async Task<IActionResult> Index(string mabienban = null,
+        public async Task<IActionResult> Search(string mabienban = null,
             string maloaisuco = null, string manv = null, DateTime? thoigian = null)
         {
             //return View(await _context.GetAll());
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
+            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
             return await GetResult(mabienban, maloaisuco, manv, thoigian = null);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(int? id, string trangthaiduyet, string mabienban = null,
+        [Route("quan-ly/bien-ban-su-co")]
+        public async Task<IActionResult> Search(int? id, string trangthaiduyet, string mabienban = null,
             string maloaisuco = null, string manv = null, DateTime? thoigian = null)
         {
             if (id == null)
@@ -68,9 +78,9 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
             if (ModelState.IsValid)
             {
                 _context.SetState(bienbansuco, EntityState.Modified);
-                await _context.Update(bienbansuco,trangthaiduyet,"1", UserManager.GetUserId(User));
+                await _context.Update(bienbansuco,trangthaiduyet,"1", _userManager.GetUserId(User));
             }
-            return await GetResult(mabienban, maloaisuco, manv, thoigian = null);
+            return await Search(mabienban, maloaisuco, manv, thoigian = null);
         }
         // GET: BienBanSuCo/Details/5
         [Route("quan-ly/bien-ban-su-co/chi-tiet/{id}")]
@@ -105,7 +115,7 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _context.Add(bienbansuco, UserManager.GetUserId(User));
+                await _context.Add(bienbansuco, _userManager.GetUserId(User));
                 return RedirectToAction("Index");
             }
             return View(bienbansuco);
