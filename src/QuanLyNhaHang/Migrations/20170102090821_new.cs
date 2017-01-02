@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace QuanLyNhaHang.Migrations
 {
-    public partial class init : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,6 +66,32 @@ namespace QuanLyNhaHang.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BIENBANSUCO",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    GhiChu = table.Column<string>(nullable: true),
+                    HuongGiaiQuyet = table.Column<string>(nullable: true),
+                    MaBienBan = table.Column<string>(maxLength: 12, nullable: false),
+                    MaLoaiSuCo = table.Column<string>(nullable: false),
+                    MaNV = table.Column<string>(nullable: false),
+                    NgayDuyet = table.Column<DateTime>(nullable: true),
+                    NgayTao = table.Column<DateTime>(nullable: true),
+                    NguoiDuyet = table.Column<string>(nullable: true),
+                    NguoiTao = table.Column<string>(nullable: true),
+                    NguyenNhan = table.Column<string>(nullable: true),
+                    ThoiGian = table.Column<string>(nullable: false),
+                    TrangThai = table.Column<string>(nullable: true),
+                    TrangThaiDuyet = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BIENBANSUCO", x => x.Id);
+                    table.UniqueConstraint("AK_BIENBANSUCO_MaBienBan", x => x.MaBienBan);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BlogBusiness",
                 columns: table => new
                 {
@@ -86,13 +112,13 @@ namespace QuanLyNhaHang.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     GhiChu = table.Column<string>(nullable: true),
-                    MaBP = table.Column<string>(nullable: false),
+                    MaBP = table.Column<string>(maxLength: 12, nullable: false),
                     MaTruongBP = table.Column<string>(nullable: true),
                     NgayDuyet = table.Column<DateTime>(nullable: true),
                     NgayTao = table.Column<DateTime>(nullable: true),
                     NguoiDuyet = table.Column<string>(nullable: true),
                     NguoiTao = table.Column<string>(nullable: true),
-                    TenBP = table.Column<string>(nullable: false),
+                    TenBP = table.Column<string>(maxLength: 50, nullable: false),
                     TrangThai = table.Column<string>(nullable: true),
                     TrangThaiDuyet = table.Column<string>(nullable: true)
                 },
@@ -101,6 +127,29 @@ namespace QuanLyNhaHang.Migrations
                     table.PrimaryKey("PK_BOPHAN", x => x.Id);
                     table.UniqueConstraint("AK_BOPHAN_MaBP", x => x.MaBP);
                     table.UniqueConstraint("AK_BOPHAN_TenBP", x => x.TenBP);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CHEBIEN",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    GhiChu = table.Column<string>(nullable: true),
+                    LuongDung = table.Column<float>(nullable: false),
+                    MaMon = table.Column<string>(nullable: false),
+                    MaNL = table.Column<string>(nullable: false),
+                    NgayDuyet = table.Column<DateTime>(nullable: true),
+                    NgayTao = table.Column<DateTime>(nullable: true),
+                    NguoiDuyet = table.Column<string>(nullable: true),
+                    NguoiTao = table.Column<string>(nullable: true),
+                    TrangThai = table.Column<string>(nullable: true),
+                    TrangThaiDuyet = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CHEBIEN", x => x.Id);
+                    table.UniqueConstraint("AK_CHEBIEN_MaMon_MaNL", x => new { x.MaMon, x.MaNL });
                 });
 
             migrationBuilder.CreateTable(
@@ -134,7 +183,7 @@ namespace QuanLyNhaHang.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     GhiChu = table.Column<string>(nullable: true),
-                    MaHD = table.Column<string>(nullable: false),
+                    MaHD = table.Column<string>(maxLength: 12, nullable: false),
                     MaNCC = table.Column<string>(nullable: false),
                     MaNV = table.Column<string>(nullable: false),
                     MaYeuCau = table.Column<string>(nullable: false),
@@ -184,12 +233,12 @@ namespace QuanLyNhaHang.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     GhiChu = table.Column<string>(nullable: true),
                     MaBoPhanXuLy = table.Column<string>(nullable: true),
-                    MaLoaiSuCo = table.Column<string>(nullable: false),
+                    MaLoaiSuCo = table.Column<string>(maxLength: 12, nullable: false),
                     NgayDuyet = table.Column<DateTime>(nullable: true),
                     NgayTao = table.Column<DateTime>(nullable: true),
                     NguoiDuyet = table.Column<string>(nullable: true),
                     NguoiTao = table.Column<string>(nullable: true),
-                    TenLoaiSuCo = table.Column<string>(nullable: false),
+                    TenLoaiSuCo = table.Column<string>(maxLength: 12, nullable: false),
                     TrangThai = table.Column<string>(nullable: true),
                     TrangThaiDuyet = table.Column<string>(nullable: true)
                 },
@@ -213,7 +262,7 @@ namespace QuanLyNhaHang.Migrations
                     NguoiDuyet = table.Column<string>(nullable: true),
                     NguoiTao = table.Column<string>(nullable: true),
                     SoBan = table.Column<int>(nullable: false),
-                    ThoiGianRa = table.Column<string>(nullable: false),
+                    ThoiGianRa = table.Column<string>(nullable: true),
                     ThoiGianVao = table.Column<string>(nullable: false),
                     TrangThai = table.Column<string>(nullable: true),
                     TrangThaiDuyet = table.Column<string>(nullable: true)
@@ -234,12 +283,12 @@ namespace QuanLyNhaHang.Migrations
                     GhiChu = table.Column<string>(nullable: true),
                     Gia = table.Column<string>(nullable: false),
                     MaLoaiMon = table.Column<string>(nullable: false),
-                    MaMon = table.Column<string>(nullable: false),
+                    MaMon = table.Column<string>(maxLength: 12, nullable: false),
                     NgayDuyet = table.Column<DateTime>(nullable: true),
                     NgayTao = table.Column<DateTime>(nullable: true),
                     NguoiDuyet = table.Column<string>(nullable: true),
                     NguoiTao = table.Column<string>(nullable: true),
-                    TenMon = table.Column<string>(nullable: false),
+                    TenMon = table.Column<string>(maxLength: 50, nullable: false),
                     TrangThai = table.Column<string>(nullable: true),
                     TrangThaiDuyet = table.Column<string>(nullable: true)
                 },
@@ -288,7 +337,7 @@ namespace QuanLyNhaHang.Migrations
                     NgayTao = table.Column<DateTime>(nullable: true),
                     NguoiDuyet = table.Column<string>(nullable: true),
                     NguoiTao = table.Column<string>(nullable: true),
-                    SoLuong = table.Column<int>(nullable: false),
+                    SoLuong = table.Column<float>(nullable: false),
                     TinhTrang = table.Column<string>(nullable: false),
                     TrangThai = table.Column<string>(nullable: true),
                     TrangThaiDuyet = table.Column<string>(nullable: true)
@@ -335,13 +384,13 @@ namespace QuanLyNhaHang.Migrations
                     DiaChi = table.Column<string>(nullable: false),
                     GhiChu = table.Column<string>(nullable: true),
                     MaBP = table.Column<string>(nullable: false),
-                    MaNV = table.Column<string>(nullable: false),
+                    MaNV = table.Column<string>(maxLength: 12, nullable: false),
                     NgayDuyet = table.Column<DateTime>(nullable: true),
                     NgayTao = table.Column<DateTime>(nullable: true),
                     NguoiDuyet = table.Column<string>(nullable: true),
                     NguoiTao = table.Column<string>(nullable: true),
-                    SoDT = table.Column<int>(nullable: false),
-                    TenNV = table.Column<string>(nullable: false),
+                    SoDT = table.Column<int>(maxLength: 15, nullable: false),
+                    TenNV = table.Column<string>(maxLength: 50, nullable: false),
                     TrangThai = table.Column<string>(nullable: true),
                     TrangThaiDuyet = table.Column<string>(nullable: true)
                 },
@@ -410,17 +459,17 @@ namespace QuanLyNhaHang.Migrations
                     NgayDuyet = table.Column<DateTime>(nullable: true),
                     NgayTao = table.Column<DateTime>(nullable: true),
                     NguoiDuyet = table.Column<string>(nullable: true),
-                    NguoiLap = table.Column<string>(nullable: true),
+                    NguoiLap = table.Column<string>(nullable: false),
                     NguoiTao = table.Column<string>(nullable: true),
                     ThanhTien = table.Column<string>(nullable: false),
                     TrangThai = table.Column<string>(nullable: true),
                     TrangThaiDuyet = table.Column<string>(nullable: true),
                     MaHD = table.Column<string>(nullable: true),
-                    MaPC = table.Column<string>(nullable: true),
+                    MaPC = table.Column<string>(maxLength: 12, nullable: true),
                     SoNo = table.Column<string>(nullable: true),
                     KhuyenMai = table.Column<string>(nullable: true),
                     MaLuot = table.Column<string>(nullable: true),
-                    MaPT = table.Column<string>(nullable: true),
+                    MaPT = table.Column<string>(maxLength: 12, nullable: true),
                     PhiDichVuKhac = table.Column<string>(nullable: true),
                     TienHang = table.Column<string>(nullable: true),
                     VAT = table.Column<string>(nullable: true)
@@ -461,7 +510,7 @@ namespace QuanLyNhaHang.Migrations
                     GhiChu = table.Column<string>(nullable: true),
                     MaNCC = table.Column<string>(nullable: false),
                     MaNL = table.Column<string>(nullable: false),
-                    MaYeuCau = table.Column<string>(nullable: false),
+                    MaYeuCau = table.Column<string>(maxLength: 12, nullable: false),
                     NgayDuyet = table.Column<DateTime>(nullable: true),
                     NgayTao = table.Column<DateTime>(nullable: true),
                     NguoiDuyet = table.Column<string>(nullable: true),
@@ -584,69 +633,6 @@ namespace QuanLyNhaHang.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "CHEBIEN",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    GhiChu = table.Column<string>(nullable: true),
-                    LuongDung = table.Column<float>(nullable: false),
-                    MaMon = table.Column<string>(nullable: false),
-                    MaNL = table.Column<string>(nullable: false),
-                    NgayDuyet = table.Column<DateTime>(nullable: true),
-                    NgayTao = table.Column<DateTime>(nullable: true),
-                    NguoiDuyet = table.Column<string>(nullable: true),
-                    NguoiTao = table.Column<string>(nullable: true),
-                    TrangThai = table.Column<string>(nullable: true),
-                    TrangThaiDuyet = table.Column<string>(nullable: true),
-                    fMONANId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CHEBIEN", x => x.Id);
-                    table.UniqueConstraint("AK_CHEBIEN_MaMon_MaNL", x => new { x.MaMon, x.MaNL });
-                    table.ForeignKey(
-                        name: "FK_CHEBIEN_MONAN_fMONANId",
-                        column: x => x.fMONANId,
-                        principalTable: "MONAN",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BIENBANSUCO",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    GhiChu = table.Column<string>(nullable: true),
-                    HuongGiaiQuyet = table.Column<string>(nullable: false),
-                    MaBienBan = table.Column<string>(nullable: false),
-                    MaLoaiSuCo = table.Column<string>(nullable: false),
-                    MaNV = table.Column<string>(nullable: false),
-                    NgayDuyet = table.Column<DateTime>(nullable: true),
-                    NgayTao = table.Column<DateTime>(nullable: true),
-                    NguoiDuyet = table.Column<string>(nullable: true),
-                    NguoiTao = table.Column<string>(nullable: true),
-                    NguyenNhan = table.Column<string>(nullable: false),
-                    ThoiGian = table.Column<string>(nullable: false),
-                    TrangThai = table.Column<string>(nullable: true),
-                    TrangThaiDuyet = table.Column<string>(nullable: true),
-                    fNHANVIENId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BIENBANSUCO", x => x.Id);
-                    table.UniqueConstraint("AK_BIENBANSUCO_MaBienBan", x => x.MaBienBan);
-                    table.ForeignKey(
-                        name: "FK_BIENBANSUCO_NHANVIEN_fNHANVIENId",
-                        column: x => x.fNHANVIENId,
-                        principalTable: "NHANVIEN",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
@@ -689,19 +675,9 @@ namespace QuanLyNhaHang.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_BIENBANSUCO_fNHANVIENId",
-                table: "BIENBANSUCO",
-                column: "fNHANVIENId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_BlogPermission_BlogBusinessesBusinessId",
                 table: "BlogPermission",
                 column: "BlogBusinessesBusinessId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CHEBIEN_fMONANId",
-                table: "CHEBIEN",
-                column: "fMONANId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -749,6 +725,9 @@ namespace QuanLyNhaHang.Migrations
                 name: "LUOTKHACH");
 
             migrationBuilder.DropTable(
+                name: "MONAN");
+
+            migrationBuilder.DropTable(
                 name: "NGUYENLIEU");
 
             migrationBuilder.DropTable(
@@ -756,6 +735,9 @@ namespace QuanLyNhaHang.Migrations
 
             migrationBuilder.DropTable(
                 name: "NHACUNGCAP");
+
+            migrationBuilder.DropTable(
+                name: "NHANVIEN");
 
             migrationBuilder.DropTable(
                 name: "PHANHOI");
@@ -779,13 +761,7 @@ namespace QuanLyNhaHang.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "NHANVIEN");
-
-            migrationBuilder.DropTable(
                 name: "BlogBusiness");
-
-            migrationBuilder.DropTable(
-                name: "MONAN");
         }
     }
 }

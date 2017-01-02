@@ -1,20 +1,89 @@
-﻿@{ 
+﻿@model QuanLyNhaHang.Areas.Quan_ly.ViewModels.DashboardViewModels
+
+@{
     ViewData["Title"] = "Quản lý nhà hàng";
-
 }
-
-
-<div id="calendar">
-
+<div class="row top_tiles">
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
+            <div class="count">@Model._datban.Count()</div>
+            <h3>Lượt đặt bàn</h3>
+            <p>Lorem ipsum psdea itgum rixt.</p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-comments-o"></i></div>
+            <div class="count">@Model._quantri.Count()</div>
+            <h3>New Sign ups</h3>
+            <p>Lorem ipsum psdea itgum rixt.</p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-sort-amount-desc"></i></div>
+            <div class="count">179</div>
+            <h3>New Sign ups</h3>
+            <p>Lorem ipsum psdea itgum rixt.</p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-check-square-o"></i></div>
+            <div class="count">179</div>
+            <h3>New Sign ups</h3>
+            <p>Lorem ipsum psdea itgum rixt.</p>
+        </div>
+    </div>
 </div>
+@*<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Calendar Events <small>Sessions</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <div id="calendar">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>*@
 
 
-@section Orther_styles{
+
+@section css{
     <!-- fullCalendar 2.2.5-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.print.css" media="print">
 }
-@section Orther_scripts{
+@section scripts{
     <!-- Slimscroll -->
     <!-- fullCalendar 2.2.5 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
@@ -32,52 +101,19 @@
                     left: 'prev,next today',
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
-            },
-            buttonText: {
-                today: 'today',
+                },
+                buttonText: {
+                    today: 'today',
                     month: 'month',
                     week: 'week',
                     day: 'day'
                 },
-                editble: true,
-                droppable: true, // this allows things to be dropped onto the calendar !!!
-                allDaySlot: false,
+                editble: false,
+                droppable: false, // this allows things to be dropped onto the calendar !!!
+                allDaySlot: true,
                 selectable: true,
                 slotMinutes: 15,
                 events: "@Url.Action("GetCalendarEvents")"
-            });
-
-            /* ADDING EVENTS */
-                var currColor = "#3c8dbc"; //Red by default
-                //Color chooser button
-                var colorChooser = $("#color-chooser-btn");
-                $("#color-chooser > li > a").click(function (e) {
-                    e.preventDefault();
-                    //Save color
-                    currColor = $(this).css("color");
-                    //Add color effect to button
-                $('#add-new-event').css({ "background-color": currColor, "border-color": currColor });
-            });
-
-            $("#add-new-event").click(function (e) {
-            e.preventDefault();
-            //Get value and make sure it is not null
-            var val = $("#new-event").val();
-            if (val.length == 0) {
-            return;
-        }
-
-        //Create events
-        var event = $("<div />");
-        event.css({ "background-color": currColor, "border-color": currColor, "color": "#fff" }).addClass("external-event");
-        event.html(val);
-        $('#external-events').prepend(event);
-
-                    //Add draggable funtionality
-        ini_events(event);
-
-        //Remove event from text input
-        $("#new-event").val("");
             });
         });
     </script>

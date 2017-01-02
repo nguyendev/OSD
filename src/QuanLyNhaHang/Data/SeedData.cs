@@ -489,5 +489,115 @@ namespace QuanLyNhaHang.Data
                 await context.SaveChangesAsync();
             }
         }
+        public static async Task CreateExampleDatban(IServiceProvider serviceProvider)
+        {
+            using (var context = new ApplicationDbContext(
+                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
+            {
+                if (context.DATBAN.Any())
+                {
+                    return;   // DB has been seeded
+                }
+                context.DATBAN.AddRange(
+                 new DATBAN
+                 {
+                     Gio = "10:00 AM",
+                     HoTen = "Nguyen Van A",
+                     Ngay = "2016-12-29",
+                     SoDT = "0968784717",
+                     SoNguoi = "3",
+                     NgayDuyet = DateTime.Now,
+                     TrangThai = "1",
+                     TrangThaiDuyet = "A",
+                     NgayTao = DateTime.Now,
+                     GhiChu = "ahsdjfka",
+
+                 },
+                  new DATBAN
+                  {
+                      Gio = "10:00 AM",
+                      HoTen = "Nguyen Van A",
+                      Ngay = "2016-12-30",
+                      SoDT = "0968784717",
+                      SoNguoi = "3",
+                      NgayDuyet = DateTime.Now,
+                      TrangThai = "1",
+                      TrangThaiDuyet = "A",
+                      NgayTao = DateTime.Now,
+                      GhiChu = "ahsdjfka",
+
+                  },
+                  new DATBAN
+                  {
+                      Gio = "10:00 AM",
+                      HoTen = "Nguyen Van A",
+                      Ngay = "2016-01-01",
+                      SoDT = "0968784717",
+                      SoNguoi = "3",
+                      NgayDuyet = DateTime.Now,
+                      TrangThai = "1",
+                      TrangThaiDuyet = "A",
+                      NgayTao = DateTime.Now,
+                      GhiChu = "ahsdjfka",
+
+                  },
+                  new DATBAN
+                  {
+                      Gio = "10:00 AM",
+                      HoTen = "Nguyen Van A",
+                      Ngay = "2016-01-02",
+                      SoDT = "0968784717",
+                      SoNguoi = "3",
+                      NgayDuyet = DateTime.Now,
+                      TrangThai = "1",
+                      TrangThaiDuyet = "A",
+                      NgayTao = DateTime.Now,
+                      GhiChu = "ahsdjfka",
+
+                  },
+                  new DATBAN
+                  {
+                      Gio = "10:00 AM",
+                      HoTen = "Nguyen Van A",
+                      Ngay = "2016-01-02",
+                      SoDT = "0968784717",
+                      SoNguoi = "3",
+                      NgayDuyet = DateTime.Now,
+                      TrangThai = "1",
+                      TrangThaiDuyet = "A",
+                      NgayTao = DateTime.Now,
+                      GhiChu = "ahsdjfka",
+
+                  },
+                  new DATBAN
+                  {
+                      Gio = "10:00 AM",
+                      HoTen = "Nguyen Van A",
+                      Ngay = "2016-01-03",
+                      SoDT = "0968784717",
+                      SoNguoi = "3",
+                      NgayDuyet = DateTime.Now,
+                      TrangThai = "1",
+                      TrangThaiDuyet = "A",
+                      NgayTao = DateTime.Now,
+                      GhiChu = "ahsdjfka",
+                  },
+                  new DATBAN
+                  {
+                      Gio = "10:00 AM",
+                      HoTen = "Nguyen Van A",
+                      Ngay = "2016-01-02",
+                      SoDT = "0968784717",
+                      SoNguoi = "3",
+                      NgayDuyet = DateTime.Now,
+                      TrangThai = "1",
+                      TrangThaiDuyet = "A",
+                      NgayTao = DateTime.Now,
+                      GhiChu = "ahsdjfka",
+                  }
+                );
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }
