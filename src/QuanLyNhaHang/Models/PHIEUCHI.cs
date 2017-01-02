@@ -19,14 +19,17 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã phiếu chi")]
+        [Required(ErrorMessage = "Vui lòng nhập mã phiếu chi")]
+        [MaxLength(12, ErrorMessage = "Mã phiếu chi không được quá 12 kí tự")]
         public string MaPC
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã hóa đơn")]
+        [Required(ErrorMessage = "Vui lòng chọn mã hóa đơn")]
         public string MaHD
         {
             get;

@@ -1,1 +1,84 @@
-﻿
+﻿@{ 
+    ViewData["Title"] = "Quản lý nhà hàng";
+
+}
+
+
+<div id="calendar">
+
+</div>
+
+
+@section Orther_styles{
+    <!-- fullCalendar 2.2.5-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.print.css" media="print">
+}
+@section Orther_scripts{
+    <!-- Slimscroll -->
+    <!-- fullCalendar 2.2.5 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.min.js"></script>
+    <script type="text/javascript">
+        $(".datetimepicker").datetimepicker(
+        {
+            defaultDate: new Date(),
+            format: 'YYYY-MM-DD HH:mm:ss.mmm'
+        });
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+            },
+            buttonText: {
+                today: 'today',
+                    month: 'month',
+                    week: 'week',
+                    day: 'day'
+                },
+                editble: true,
+                droppable: true, // this allows things to be dropped onto the calendar !!!
+                allDaySlot: false,
+                selectable: true,
+                slotMinutes: 15,
+                events: "@Url.Action("GetCalendarEvents")"
+            });
+
+            /* ADDING EVENTS */
+                var currColor = "#3c8dbc"; //Red by default
+                //Color chooser button
+                var colorChooser = $("#color-chooser-btn");
+                $("#color-chooser > li > a").click(function (e) {
+                    e.preventDefault();
+                    //Save color
+                    currColor = $(this).css("color");
+                    //Add color effect to button
+                $('#add-new-event').css({ "background-color": currColor, "border-color": currColor });
+            });
+
+            $("#add-new-event").click(function (e) {
+            e.preventDefault();
+            //Get value and make sure it is not null
+            var val = $("#new-event").val();
+            if (val.length == 0) {
+            return;
+        }
+
+        //Create events
+        var event = $("<div />");
+        event.css({ "background-color": currColor, "border-color": currColor, "color": "#fff" }).addClass("external-event");
+        event.html(val);
+        $('#external-events').prepend(event);
+
+                    //Add draggable funtionality
+        ini_events(event);
+
+        //Remove event from text input
+        $("#new-event").val("");
+            });
+        });
+    </script>
+}

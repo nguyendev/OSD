@@ -19,35 +19,37 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã lượt khách")]
+        [Required(ErrorMessage = "Vui lòng chọn mã lượt khách")]
         public string MaLuot
         {
             get;
             set;
         }
-		
-		//kết bảng
-		//public virtual LUOTKHACH fLUOTKHACH
-		//{
-		//	get;
-		//	set;
-		//}
 
-        [Required]
+        //kết bảng
+        //public virtual LUOTKHACH fLUOTKHACH
+        //{
+        //	get;
+        //	set;
+        //}
+
+        [Display(Name = "Mã món")]
+        [Required(ErrorMessage = "Vui lòng chọn mã món")]
         public string MaMon
         {
             get;
             set;
         }
-		
-		//kết bảng
-		//public virtual MONAN fMONAN
-		//{
-		//	get;
-		//	set;
-		//}
 
-        [Required]
+        //kết bảng
+        //public virtual MONAN fMONAN
+        //{
+        //	get;
+        //	set;
+        //}
+        [Display(Name = "Số phần")]
+        [Required(ErrorMessage = "Vui lòng chọn số phần")]
         public int SoLuong
         {
             get;

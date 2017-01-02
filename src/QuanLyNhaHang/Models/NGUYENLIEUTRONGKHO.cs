@@ -19,28 +19,31 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã nguyên liệu")]
+        [Required(ErrorMessage = "Vui lòng chọn mã nguyên liệu")]
         public string MaNL
         {
             get;
             set;
         }
-		
-		//kết bảng
-		//public virtual NGUYENLIEU fNGUYENLIEU
-		//{
-		//	get;
-		//	set;
-		//}
 
-        [Required]
-        public int SoLuong
+        //kết bảng
+        //public virtual NGUYENLIEU fNGUYENLIEU
+        //{
+        //	get;
+        //	set;
+        //}
+
+        [Display(Name = "Số lượng")]
+        [Required(ErrorMessage = "Vui lòng nhập số lượng")]
+        public float SoLuong
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Tình trạng")]
+        [Required(ErrorMessage = "Vui lòng nhập tình trạng")]
         public string TinhTrang
         {
             get;

@@ -19,35 +19,40 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã yêu cầu")]
+        [Required(ErrorMessage = "Vui lòng nhập mã yêu cầu")]
+        [MaxLength(12, ErrorMessage = "Mã yêu cầu không được quá 12 kí tự")]
         public string MaYeuCau
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã nguyên liệu")]
+        [Required(ErrorMessage = "Vui lòng chọn mã nguyên liệu")]
         public string MaNL
         {
             get;
             set;
         }
-		
-		//kết bảng
-		//public virtual NGUYENLIEU fNGUYENLIEU
-		//{
-		//	get;
-		//	set;
-		//}
 
-        [Required]
+        //kết bảng
+        //public virtual NGUYENLIEU fNGUYENLIEU
+        //{
+        //	get;
+        //	set;
+        //}
+
+        [Display(Name = "Số lượng")]
+        [Required(ErrorMessage = "Vui lòng nhập số lượng")]
         public float SoLuong
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã nhà cung cấp")]
+        [Required(ErrorMessage = "Vui lòng chọn mã nhà cung cấp")]
         public string MaNCC
         {
             get;

@@ -19,20 +19,25 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã loại sự cố")]
+        [Required(ErrorMessage = "Vui lòng nhập mã loại sự cố")]
+        [MaxLength(12, ErrorMessage = "Mã loại sự cố không quá 12 kí tự")]
         public string MaLoaiSuCo
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Tên loại sự cố")]
+        [Required(ErrorMessage = "Vui lòng nhập tên loại sự cố")]
+        [MaxLength(12, ErrorMessage = "Tên loại sự cố không quá 50 kí tự")]
         public string TenLoaiSuCo
         {
             get;
             set;
         }
 
+        [Display(Name = "Mã bộ phận xử lý")]
         public string MaBoPhanXuLy
         {
             get;

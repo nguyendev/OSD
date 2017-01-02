@@ -19,35 +19,38 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã món ăn")]
+        [Required(ErrorMessage = "Vui lòng chọn mã món ăn")]
         public string MaMon
         {
             get;
             set;
         }
-		
-		//kết bảng
-		public MONAN fMONAN
-		{
-			get;
-			set;
-		}
 
-        [Required]
+        //kết bảng
+        //public MONAN fMONAN
+        //{
+        //	get;
+        //	set;
+        //}
+
+        [Display(Name = "Mã nguyên liệu")]
+        [Required(ErrorMessage = "Vui lòng chọn mã nguyên liệu")]
         public string MaNL
         {
             get;
             set;
         }
-		
-		//kết bảng
-		//public NGUYENLIEU fNGUYENLIEU
-		//{
-		//	get;
-		//	set;
-		//}
 
-        [Required]
+        //kết bảng
+        //public NGUYENLIEU fNGUYENLIEU
+        //{
+        //	get;
+        //	set;
+        //}
+
+        [Display(Name = "Lượng dùng")]
+        [Required(ErrorMessage = "Vui lòng nhập lượng dùng")]
         public float LuongDung
         {
             get;

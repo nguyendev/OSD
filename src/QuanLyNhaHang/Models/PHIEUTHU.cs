@@ -4,7 +4,6 @@
 //     Changes to this file will be lost if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,26 +19,29 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã phiếu thu")]
+        [Required(ErrorMessage = "Vui lòng nhập mã phiếu thu")]
+        [MaxLength(12, ErrorMessage = "Mã phiếu thu không được quá 12 kí tự")]
         public string MaPT
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã lượt khách")]
+        [Required(ErrorMessage = "Vui lòng chọn mã lượt khách")]
         public string MaLuot
         {
             get;
             set;
         }
-		
-		//kết bảng
-		//public LUOTKHACH fLUOTKHACH
-		//{
-		//	get;
-		//	set;
-		//}
+
+        //kết bảng
+        //public LUOTKHACH fLUOTKHACH
+        //{
+        //	get;
+        //	set;
+        //}
 
         //kết bảng
         //public List<YEUCAUMONAN> fYEUCAUMONAN
@@ -47,7 +49,7 @@ namespace QuanLyNhaHang.Models
         //    get;
         //    set;
         //}
-
+        [Display(Name = "Tiền hàng")]
         [Required]
         [DataType(DataType.Currency)]
         public string TienHang
@@ -56,6 +58,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [Display(Name = "Phí dịch vụ khác")]
         [DataType(DataType.Currency)]
         public string PhiDichVuKhac
         {
@@ -63,6 +66,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [Display(Name = "Khuyến mãi (%)")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:P2}")]
         public string KhuyenMai
         {
@@ -70,6 +74,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [Display(Name = "VAT (%)")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:P2}")]
         public string VAT
         {

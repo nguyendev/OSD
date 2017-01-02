@@ -55,6 +55,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [DataType(DataType.Currency)]
         [Display(Name ="Số nợ")]
         public string SoNo
         {

@@ -20,28 +20,35 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã món")]
+        [Required(ErrorMessage = "Vui lòng nhập mã món")]
+        [MaxLength(12, ErrorMessage = "Mã món không quá 12 kí tự")]
         public string MaMon
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Tên món")]
+        [Required(ErrorMessage = "Vui lòng nhập tên món")]
+        [MaxLength(50, ErrorMessage = "Tên món không quá 12 kí tự")]
         public string TenMon
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Giá")]
+        [Required(ErrorMessage = "Vui lòng nhập giá")]
+        [DataType(DataType.Currency)]
         public string Gia
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã loại món")]
+        [Required(ErrorMessage = "Vui lòng chọn mã loại món")]
         public string MaLoaiMon
         {
             get;

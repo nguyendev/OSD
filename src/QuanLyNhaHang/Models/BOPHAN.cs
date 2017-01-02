@@ -20,20 +20,25 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã bộ phận")]
+        [Required(ErrorMessage = "Vui lòng nhập mã bộ phận")]
+        [MaxLength(12, ErrorMessage = "Mã bộ phận không quá 12 kí tự")]
         public string MaBP
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Tên bộ phận")]
+        [Required(ErrorMessage = "Vui lòng nhập tên bộ phận")]
+        [MaxLength(50, ErrorMessage = "Tên bộ phận không quá 50 kí tự")]
         public string TenBP
         {
             get;
             set;
         }
 
+        [Display(Name = "Trưởng bộ phận")]
         public string MaTruongBP
         {
             get;

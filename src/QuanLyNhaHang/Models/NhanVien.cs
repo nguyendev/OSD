@@ -19,41 +19,50 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã nhân viên")]
+        [Required(ErrorMessage = "Vui lòng nhập mã nhân viên")]
+        [MaxLength(12, ErrorMessage = "Mã nhân viên không được quá 12 kí tự")]
         public string MaNV
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Tên nhân viên")]
+        [Required(ErrorMessage = "Vui lòng nhập tên nhân viên")]
+        [MaxLength(50, ErrorMessage = "Tên nhân viên không được quá 12 kí tự")]
         public string TenNV
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Số điện thoại")]
+        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
+        [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
+        [StringLength(15, ErrorMessage = "Số điện thoại không hợp lệ", MinimumLength = 6)]
         public int SoDT
         {
             get;
             set;
         }
 
+        [Display(Name = "Địa chỉ")]
         public string DiaChi
         {
             get;
             set;
         }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập CMND")]
         public string CMND
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã bộ phận")]
+        [Required(ErrorMessage = "Vui lòng chọn mã bộ phận")]
         public string MaBP
         {
             get;

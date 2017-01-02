@@ -45,7 +45,7 @@ namespace QuanLyNhaHang.Models
         }
 
         [Display(Name = "Thời gian ra")]
-        [Required(ErrorMessage = "Vui lòng nhập thời gian ra")]
+        //[Required(ErrorMessage = "Vui lòng nhập thời gian ra")]
         public string ThoiGianRa
         {
             get;

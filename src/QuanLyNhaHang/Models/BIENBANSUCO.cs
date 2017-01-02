@@ -20,56 +20,62 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã biên bản")]
+        [Required(ErrorMessage = "Vui lòng nhập mã biên bản")]
+        [MaxLength(12, ErrorMessage = "Mã biên bản không quá 12 kí tự")]
         public string MaBienBan
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã loại sự cố")]
+        [Required(ErrorMessage = "Vui lòng chọn mã loại sự cố")]
         public string MaLoaiSuCo
         {
             get;
             set;
         }
-		
-		//kết bảng
-		//public virtual LOAISUCO fLOAISUCO
-		//{
-		//	get;
-		//	set;
-		//}
 
-        [Required]
+        //kết bảng
+        //public virtual LOAISUCO fLOAISUCO
+        //{
+        //	get;
+        //	set;
+        //}
+
+        [Display(Name = "Mã nhân viên")]
+        [Required(ErrorMessage = "Vui lòng chọn mã nhân viên")]
         public string MaNV
         {
             get;
             set;
         }
-		
-		//kết bảng
-		public virtual NHANVIEN fNHANVIEN
-		{
-			get;
-			set;
-		}
 
-        [Required]
+        //kết bảng
+        //public virtual NHANVIEN fNHANVIEN
+        //{
+        //	get;
+        //	set;
+        //}
+        [Display(Name = "Nguyên nhân")]
+        //[Required]
         public string NguyenNhan
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Thời gian")]
+        [Required(ErrorMessage = "Vui lòng nhập thời gian")]
         public string ThoiGian
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Hướng giải quyết")]
+        //[Required]
         public string HuongGiaiQuyet
         {
             get;

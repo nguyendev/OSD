@@ -19,38 +19,42 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã biên bản")]
+        [Required(ErrorMessage = "Vui lòng nhập mã biên bản")]
         public string MaBienBan
         {
             get;
             set;
         }
-		
-		//kết bảng
-		//public virtual BIENBANSUCO fBIENBANSUCO
-		//{
-		//	get;
-		//	set;
-		//}
-		
+
+        //kết bảng
+        //public virtual BIENBANSUCO fBIENBANSUCO
+        //{
+        //	get;
+        //	set;
+        //}
+        [Display(Name = "Tên đồ hư hại")]
         public string Ten
         {
             get;
             set;
         }
 
+        [Display(Name = "Số lượng")]
         public int SoLuong
         {
             get;
             set;
         }
 
+        [Display(Name = "Đơn vị tính")]
         public string DVT
         {
             get;
             set;
         }
 
+        [Display(Name = "Đơn giá")]
         [DataType(DataType.Currency)]
         public string DonGia
         {
@@ -58,6 +62,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
+        [Display(Name = "Thành tiền")]
         [DataType(DataType.Currency)]
         [Required]
         public string ThanhTien

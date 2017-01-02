@@ -19,62 +19,69 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã hóa đơn")]
+        [Required(ErrorMessage = "Vui lòng nhập mã hóa đơn")]
+        [MaxLength(12, ErrorMessage = "Mã hóa đơn không quá 12 kí tự")]
         public string MaHD
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Mã món ăn")]
+        [Required(ErrorMessage = "Vui lòng chọn mã yêu cầu")]
         public string MaYeuCau
 		{
             get;
             set;
         }
-		
-		//kết bảng
-		//public YEUCAUNHAPHANG fYEUCAUNHAPHANG
-		//{
-		//	get;
-		//	set;
-		//}
 
-        [Required]
+        //kết bảng
+        //public YEUCAUNHAPHANG fYEUCAUNHAPHANG
+        //{
+        //	get;
+        //	set;
+        //}
+
+        [Display(Name = "Thời gian nhập")]
+        [Required(ErrorMessage = "Vui lòng nhập thời gian nhập")]
         public string ThoiGianNhap
         {
             get;
             set;
         }
 
-        [Required]
+        [Display(Name = "Thời gian nhập")]
+        [Required(ErrorMessage = "Vui lòng nhập thời gian nhập")]
         public string MaNV
         {
             get;
             set;
         }
-		
-		//kết bảng
-		//public NHANVIEN fNHANVIEN
-		//{
-		//	get;
-		//	set;
-		//}
 
-        [Required]
+        //kết bảng
+        //public NHANVIEN fNHANVIEN
+        //{
+        //	get;
+        //	set;
+        //}
+
+        [Display(Name = "Mã nhà cung cấp")]
+        [Required(ErrorMessage = "Vui lòng chọn mã nhà cung cấp")]
         public string MaNCC
         {
             get;
             set;
         }
-		
-		//kết bảng
-		//public NHACUNGCAP fNHACUNGCAP
-		//{
-		//	get;
-		//	set;
-		//}
-		
+
+        //kết bảng
+        //public NHACUNGCAP fNHACUNGCAP
+        //{
+        //	get;
+        //	set;
+        //}
+        [Display(Name = "Thành tiền")]
+        [DataType(DataType.Currency)]
         public string ThanhTien
         {
             get;

@@ -18,26 +18,29 @@ namespace QuanLyNhaHang.Models
             get;
             set;
         }
-		
-		public string NguoiLap	//Ma nhan vien lap
+
+        [Display(Name = "Mã người lập phiếu")]
+        [Required(ErrorMessage = "Vui lòng chọn mã người lập phiếu")]
+        public string NguoiLap	//Ma nhan vien lap
 		{
 			get;
 			set;
 		}
-		
-		//kết bảng
-		//public virtual NHANVIEN fNHANVIEN
-		//{
-		//	get;
-		//	set;
-		//}
-		
+
+        //kết bảng
+        //public virtual NHANVIEN fNHANVIEN
+        //{
+        //	get;
+        //	set;
+        //}
+
         //public string NgayLap
         //{
         //    get;
         //    set;
         //}
 
+        [Display(Name = "Thành tiền")]
         [Required]
         [DataType(DataType.Currency)]
         public string ThanhTien
