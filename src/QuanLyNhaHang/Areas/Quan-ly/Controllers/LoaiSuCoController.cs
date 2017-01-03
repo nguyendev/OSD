@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
@@ -7,12 +7,12 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
-    [Area("Quan-ly")]
+    [Area("quan-ly")]
     [Authorize]
-
     public class LoaiSuCoController : Controller
     {
         private readonly IGenericRepository<LOAISUCO> _context;
@@ -21,32 +21,46 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         private UserManager<AppUser> UserManager;
 
         public LoaiSuCoController(IGenericRepository<LOAISUCO> context,
-            IGenericRepository<BOPHAN> bophancontext)
+            IGenericRepository<BOPHAN> bophancontext, UserManager<AppUser> userMgr,
+        SignInManager<AppUser> signinMgr)
         {
             _context = context;
             _bophancontext = bophancontext;
+            SignInManager = signinMgr;
+            UserManager = userMgr;
+        }
+
+        private void AllViewBag()
+        {
+            var bophanxulylist = _bophancontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaBP"] = new SelectList(bophanxulylist, "MaBP", "MaBP");
         }
 
         private async Task<IActionResult> GetResult(string maloaisuco = null,
            string tenloaisuco = null, string mabp = null)
         {
             var bophanxulylist = _bophancontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["BoPhanXuLy"] = new SelectList(bophanxulylist, "MaBP", "MaBP",mabp);
+            ViewData["mabp"] = new SelectList(bophanxulylist, "MaBP", "MaBP",mabp);
             IQueryable<LOAISUCO> result = _context.GetList().Where(c =>
            (maloaisuco == null || c.MaLoaiSuCo == maloaisuco) && (tenloaisuco == null || c.TenLoaiSuCo == tenloaisuco)
             && (mabp == null || c.MaBoPhanXuLy == mabp) && c.TrangThai == "1");
             return View(await result.ToListAsync());
         }
         // GET: LoaiSuCo
-        public async Task<IActionResult> Index(string maloaisuco = null,
+        [Route("quan-ly/loai-su-co")]
+        public async Task<IActionResult> Search(string maloaisuco = null,
            string tenloaisuco = null, string mabp = null)
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
             return await GetResult(maloaisuco, tenloaisuco,mabp);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+        [Route("quan-ly/loai-su-co")]
+        public async Task<IActionResult> Search(int? id, string trangthaiduyet,
     string maloaisuco = null, string tenloaisuco = null, string mabp = null)
         {
             if (id == null)
@@ -63,10 +77,11 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 _context.SetState(loaisuco, EntityState.Modified);
                 await _context.Update(loaisuco, trangthaiduyet,"1", UserManager.GetUserId(User));
             }
-            return await GetResult(maloaisuco, tenloaisuco, mabp);
+            return await Search(maloaisuco, tenloaisuco, mabp);
         }
 
         // GET: LoaiSuCo/Details/5
+        [Route("quan-ly/loai-su-co/chi-tiet/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -79,15 +94,15 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
-
+            AllViewBag();
             return View(loaisuco);
         }
 
         // GET: LoaiSuCo/Create
+        [Route("quan-ly/loai-su-co/tao-moi")]
         public IActionResult Create()
         {
-            var bophanxulylist = _bophancontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["BoPhanXuLy"] = new SelectList(bophanxulylist, "MaBP", "MaBP");
+            AllViewBag();
             return View();
         }
 
@@ -96,6 +111,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/loai-su-co/tao-moi")]
         public async Task<IActionResult> Create(LOAISUCO loaisuco)
         {
             if (ModelState.IsValid)
@@ -107,6 +123,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: LoaiSuCo/Edit/5
+        [Route("quan-ly/loai-su-co/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -119,8 +136,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
-            var bophanxulylist = _bophancontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["BoPhanXuLy"] = new SelectList(bophanxulylist, "MaBP", "MaBP");
+            AllViewBag();
             return View(loaisuco);
         }
 
@@ -129,6 +145,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/loai-su-co/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int id, LOAISUCO loaisuco)
         {
             if (id != loaisuco.Id)
@@ -164,6 +181,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: LoaiSuCo/Delete/5
+        [Route("quan-ly/loai-su-co/xoa/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -176,13 +194,14 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
-
+            AllViewBag();
             return View(loaisuco);
         }
 
         // POST: LoaiSuCo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/loai-su-co/xoa/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var loaisuco = await _context.Get(id);

@@ -20,6 +20,14 @@ namespace QuanLyNhaHang.Infrastructure
         }
         public async Task Add(PHIEUCHI Entity, string nguoitao)
         {
+            HoaDonNhapHangRepository hoadonrep = new HoaDonNhapHangRepository(Context);
+            NhaCungCapRepository nccrep = new NhaCungCapRepository(Context);
+            var hoadon = hoadonrep.GetList().Where(c => c.MaHD == Entity.MaHD).SingleOrDefault();
+            Entity.SoNo = (Convert.ToDouble(hoadon.ThanhTien) - Convert.ToDouble(Entity.ThanhTien)).ToString();
+            var nhacungcap = nccrep.GetList().Where(c => c.MaNCC == hoadon.MaNCC).SingleOrDefault();
+            nccrep.SetState(nhacungcap, EntityState.Modified);
+            nhacungcap.SoNo = (Convert.ToDouble(nhacungcap.SoNo) + Convert.ToDouble(Entity.SoNo)).ToString();
+            await nccrep.Update(nhacungcap);
             Entity.LaPhieuThu = false;
             Entity.NguoiTao = nguoitao;
             Entity.NgayTao = DateTime.Now;
@@ -58,7 +66,6 @@ namespace QuanLyNhaHang.Infrastructure
 
         public async Task Update(PHIEUCHI Entity, string trangthaiduyet = "U", string trangthai = "1", string nguoiduyet = null)
         {
-            Entity.NgayTao = DateTime.Now;
             if (trangthaiduyet == "A" && Entity.TrangThaiDuyet == "U")
             {
                 Entity.NgayDuyet = DateTime.Now;

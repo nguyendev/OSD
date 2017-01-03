@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Models;
@@ -8,10 +8,11 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
-    [Area("Quan-ly")]
+    [Area("quan-ly")]
     [Authorize]
     public class PhieuChiController : Controller
     {
@@ -23,20 +24,32 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 
         public PhieuChiController(IGenericRepository<PHIEUCHI> context,
             IGenericRepository<HOADONNHAPHANG> hoadoncontext,
-            IGenericRepository<NHANVIEN> nhanviencontext)
+            IGenericRepository<NHANVIEN> nhanviencontext, UserManager<AppUser> userMgr,
+        SignInManager<AppUser> signinMgr)
         {
             _context = context;
             _hoadoncontext = hoadoncontext;
             _nhanviencontext = nhanviencontext;
+            SignInManager = signinMgr;
+            UserManager = userMgr;
+        }
+
+        private void AllViewBag()
+        {
+            var hoadonlist = _hoadoncontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaHD"] = new SelectList(hoadonlist, "MaHD", "MaHD");
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
+
         }
 
         private async Task<IActionResult> GetResult(string mapc = null, string mahd = null, DateTime? ngaylap = null,
             string nguoilap = null)
         {
             var hoadonlist = _hoadoncontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["MaHD"] = new SelectList(hoadonlist, "MaHD", "MaHD", mahd);
+            ViewData["mahd"] = new SelectList(hoadonlist, "MaHD", "MaHD", mahd);
             var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV", nguoilap);
+            ViewData["nguoilap"] = new SelectList(nguoilaplist, "MaNV", "MaNV", nguoilap);
             IQueryable<PHIEUCHI> result = _context.GetList().Where(c =>
            (mapc == null || c.MaPC == mapc) && (mahd == null || c.MaHD == mahd)
            && (ngaylap == null || DateTime.Compare(Convert.ToDateTime(c.NgayTao) , ngaylap.Value) == 0) 
@@ -44,15 +57,20 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             return View(await result.ToListAsync());
         }
         // GET: PhieuChi
-        public async Task<IActionResult> Index(string mapc = null, string mahd = null, DateTime? ngaylap = null,
+        [Route("quan-ly/phieu-chi")]
+        public async Task<IActionResult> Search(string mapc = null, string mahd = null, DateTime? ngaylap = null,
             string nguoilap = null)
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
             return await GetResult(mapc, mahd, ngaylap, nguoilap);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+        [Route("quan-ly/phieu-chi")]
+        public async Task<IActionResult> Search(int? id, string trangthaiduyet,
   string mapc = null, string mahd = null, DateTime? ngaylap = null,
             string nguoilap = null)
         {
@@ -66,9 +84,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 _context.SetState(phieuchi, EntityState.Modified);
                 await _context.Update(phieuchi, trangthaiduyet, "1", UserManager.GetUserId(User));
             }
-            return await GetResult(mapc, mahd, ngaylap, nguoilap);
+            return await Search(mapc, mahd, ngaylap, nguoilap);
         }
         // GET: PhieuChi/Details/5
+        [Route("quan-ly/phieu-chi/chi-tiet/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -76,16 +95,15 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             var phieuchi = await _context.Get(id);
             if (phieuchi == null)
                 return NotFound();
+            AllViewBag();
             return View(phieuchi);
         }
 
         // GET: PhieuChi/Create
+        [Route("quan-ly/phieu-chi/tao-moi")]
         public IActionResult Create()
         {
-            var hoadonlist = _hoadoncontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["MaHD"] = new SelectList(hoadonlist, "MaHD", "MaHD");
-            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
+            AllViewBag();
             return View();
         }
 
@@ -94,6 +112,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/phieu-chi/tao-moi")]
         public async Task<IActionResult> Create(PHIEUCHI phieuchi)
         {
             if (ModelState.IsValid)
@@ -105,6 +124,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: PhieuChi/Edit/5
+        [Route("quan-ly/phieu-chi/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -112,10 +132,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             var phieuchi = await _context.Get(id);
             if (phieuchi == null)
                 return NotFound();
-            var hoadonlist = _hoadoncontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["MaHD"] = new SelectList(hoadonlist, "MaHD", "MaHD");
-            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
+            AllViewBag();
             return View(phieuchi);
         }
 
@@ -124,6 +141,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/phieu-chi/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int id, PHIEUCHI phieuchi)
         {
             if (id != phieuchi.Id)
@@ -152,6 +170,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: PhieuChi/Delete/5
+        [Route("quan-ly/phieu-chi/xoa/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -159,12 +178,14 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             var phieuchi = await _context.Get(id);
             if (phieuchi == null)
                 return NotFound();
+            AllViewBag();
             return View(phieuchi);
         }
 
         // POST: PhieuChi/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/phieu-chi/xoa/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var phieuchi = await _context.Get(id);

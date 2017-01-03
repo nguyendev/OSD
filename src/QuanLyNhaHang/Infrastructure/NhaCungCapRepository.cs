@@ -24,6 +24,7 @@ namespace QuanLyNhaHang.Infrastructure
             Entity.NgayTao = DateTime.Now;
             Entity.TrangThai = "1";
             Entity.TrangThaiDuyet = "U";
+            Entity.SoNo = "0";
             Context.Add(Entity);
             await Save();
         }
@@ -44,7 +45,6 @@ namespace QuanLyNhaHang.Infrastructure
 
         public async Task Update(NHACUNGCAP Entity, string trangthaiduyet = "U", string trangthai = "1", string nguoiduyet = null)
         {
-            Entity.NgayTao = DateTime.Now;
             if (trangthaiduyet == "A" && Entity.TrangThaiDuyet == "U")
             {
                 Entity.NgayDuyet = DateTime.Now;

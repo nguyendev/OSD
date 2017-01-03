@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace QuanLyNhaHang.Areas.Admin.Controllers
 {
-    [Area("Quan-ly")]
+    [Area("quan-ly")]
     [Authorize(Roles = "Admins")]
     public class PhanQuyenController : Controller
     {

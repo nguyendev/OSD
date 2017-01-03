@@ -1,42 +1,46 @@
-@model IEnumerable<QuanLyNhaHang.Models.PHANHOI>
+﻿@model IEnumerable<QuanLyNhaHang.Models.PHANHOI>
 
 @{
-    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Danh sách phản hồi | Quản lý";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Phản hồi";
+    ViewData["action"] = "Danh sách phản hồi";
 }
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap text-center" cellspacing="0" width="100%">
     <thead>
-        <tr>         
-            <th>
-                @Html.DisplayNameFor(model => model.TenNguoiPH)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NoiDung)
-            </th>
-            <th></th>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.TenNguoiPH)</th>
+            <th>@Html.DisplayNameFor(model => model.NgayTao)</th>
+            <th>Thao tác</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenNguoiPH)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoiDung)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TenNguoiPH)</td>
+                <td>@Html.DisplayFor(modelItem => item.NgayTao)</td>
+                <td>
+                    @if (User.IsInRole("Admins") || User.IsInRole("Manager"))
+                    {
+                        <form asp-action="Search" method="post" asp-route-id=@item.Id role="form" enctype="multipart/form-data">
+                            <select name="trangthaiduyet" id="trangthaiduyet" asp-for=@item.TrangThaiDuyet class="select2_group form-control" asp-items="ViewBag.TrangThaiDuyet"></select>
+                            <input type="submit" value="Lưu" class="btn btn-success btn-sm" />
+                        </form>
+                    }
+                    else
+                    {
+                        <select asp-for=@item.TrangThaiDuyet disabled class="select2_group form-control" asp-items="ViewBag.TrangThaiDuyet"></select>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" class="label label-success" asp-route-id="@item.Id">Sửa</a> |
+                    <a asp-action="Details" class="label label-warning" asp-route-id="@item.Id">Chi tiết</a> |
+                    <a asp-action="Delete" class="label label-danger" asp-route-id="@item.Id">Xóa</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

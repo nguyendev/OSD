@@ -395,10 +395,12 @@ namespace QuanLyNhaHang.Migrations
                         .IsRequired();
 
                     b.Property<string>("MaNV")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 12);
 
                     b.Property<string>("MaYeuCau")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 12);
 
                     b.Property<DateTime?>("NgayDuyet");
 

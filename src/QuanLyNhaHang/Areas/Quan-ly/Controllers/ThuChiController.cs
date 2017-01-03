@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Models;
@@ -20,33 +20,47 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         private UserManager<AppUser> UserManager;
 
         public ThuChiController(IGenericRepository<THUCHI> context,
-            IGenericRepository<NHANVIEN> nhanviencontext)
+            IGenericRepository<NHANVIEN> nhanviencontext, UserManager<AppUser> userMgr,
+        SignInManager<AppUser> signinMgr)
         {
             _context = context;
             _nhanviencontext = nhanviencontext;
+            SignInManager = signinMgr;
+            UserManager = userMgr;
+        }
+
+        private void AllViewBag()
+        {
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
         }
 
         private async Task<IActionResult> GetResult(DateTime? ngaylap = null,
           string nguoilap = null)
         {
             var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV", nguoilap);
+            ViewData["nguoilap"] = new SelectList(nguoilaplist, "MaNV", "MaNV", nguoilap);
             IQueryable<THUCHI> result = _context.GetList().Where(c =>
            (ngaylap == null || DateTime.Compare(Convert.ToDateTime(c.NgayTao), ngaylap.Value) == 0)
            && (nguoilap == null || c.NguoiLap == nguoilap) && c.TrangThai == "1");
             return View(await result.ToListAsync());
         }
         // GET: ThuChi
-        public async Task<IActionResult> Index(DateTime? ngaylap = null,
+        [Route("quan-ly/thu-chi")]
+        public async Task<IActionResult> Search(DateTime? ngaylap = null,
           string nguoilap = null)
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
             return await GetResult(ngaylap, nguoilap);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
-DateTime? ngaylap = null, string nguoilap = null)
+        [Route("quan-ly/thu-chi")]
+        public async Task<IActionResult> Search(int? id, string trangthaiduyet,
+            DateTime? ngaylap = null, string nguoilap = null)
         {
             if (id == null)
                 return NotFound();
@@ -58,9 +72,10 @@ DateTime? ngaylap = null, string nguoilap = null)
                 _context.SetState(thuchi, EntityState.Modified);
                 await _context.Update(thuchi, trangthaiduyet, "1", UserManager.GetUserId(User));
             }
-            return await GetResult(ngaylap, nguoilap);
+            return await Search(ngaylap, nguoilap);
         }
         // GET: ThuChi/Details/5
+        [Route("quan-ly/thu-chi/chi-tiet/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -73,15 +88,15 @@ DateTime? ngaylap = null, string nguoilap = null)
             {
                 return NotFound();
             }
-
+            AllViewBag();
             return View(thuchi);
         }
 
         // GET: ThuChi/Create
+        [Route("quan-ly/thu-chi/tao-moi")]
         public IActionResult Create()
         {
-            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
+            AllViewBag();
             return View();
         }
 
@@ -90,6 +105,7 @@ DateTime? ngaylap = null, string nguoilap = null)
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/thu-chi/tao-moi")]
         public async Task<IActionResult> Create(THUCHI thuchi)
         {
             if (ModelState.IsValid)
@@ -101,6 +117,7 @@ DateTime? ngaylap = null, string nguoilap = null)
         }
 
         // GET: ThuChi/Edit/5
+        [Route("quan-ly/thu-chi/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -108,8 +125,7 @@ DateTime? ngaylap = null, string nguoilap = null)
             var thuchi = await _context.Get(id);
             if (thuchi == null)
                 return NotFound();
-            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
+            AllViewBag();
             return View(thuchi);
         }
 
@@ -118,6 +134,7 @@ DateTime? ngaylap = null, string nguoilap = null)
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/thu-chi/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int id, THUCHI thuchi)
         {
             if (id != thuchi.Id)
@@ -146,6 +163,7 @@ DateTime? ngaylap = null, string nguoilap = null)
         }
 
         // GET: ThuChi/Delete/5
+        [Route("quan-ly/thu-chi/xoa/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -153,12 +171,14 @@ DateTime? ngaylap = null, string nguoilap = null)
             var thuchi = await _context.Get(id);
             if (thuchi == null)
                 return NotFound();
+            AllViewBag();
             return View(thuchi);
         }
 
         // POST: ThuChi/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/thu-chi/xoa/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var thuchi = await _context.Get(id);

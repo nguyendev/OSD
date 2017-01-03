@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
@@ -7,10 +7,11 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
-    [Area("Quan-ly")]
+    [Area("quan-ly")]
     [Authorize]
     public class BoPhanController : Controller
     {
@@ -20,10 +21,19 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         private UserManager<AppUser> UserManager;
 
         public BoPhanController(IGenericRepository<BOPHAN> context,
-            IGenericRepository<NHANVIEN> nhanviencontext)
+            IGenericRepository<NHANVIEN> nhanviencontext, UserManager<AppUser> userMgr,
+        SignInManager<AppUser> signinMgr)
         {
             _context = context;
-            _nhanviencontext = nhanviencontext;   
+            _nhanviencontext = nhanviencontext;
+            SignInManager = signinMgr;
+            UserManager = userMgr;
+        }
+
+        private void AllViewBag()
+        {
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaTruongBP"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
         }
 
         //search
@@ -31,7 +41,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             string matruongbp = null)
         {
             var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["MaTruongBP"] = new SelectList(nhanvienlist, "MaNV", "MaNV", matruongbp);
+            ViewData["matruongbp"] = new SelectList(nhanvienlist, "MaNV", "MaNV", matruongbp);
             IQueryable<BOPHAN> result = _context.GetList().Where(c => 
             (mabp == null || c.MaBP == mabp) && (tenbp == null || c.TenBP == tenbp)
             && (matruongbp == null || c.MaTruongBP == matruongbp) && c.TrangThai == "1");
@@ -39,15 +49,21 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: BoPhan
-        public async Task<IActionResult> Index(string mabp = null, string tenbp = null,
+        [Route("quan-ly/bo-phan")]
+        public async Task<IActionResult> Searh(string mabp = null, string tenbp = null,
             string matruongbp = null)
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
+            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
             return await GetResult(mabp,tenbp,matruongbp);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(int? id, string trangthaiduyet, string mabp = null, string tenbp = null,
+        [Route("quan-ly/bo-phan")]
+        public async Task<IActionResult> Searh(int? id, string trangthaiduyet, string mabp = null, string tenbp = null,
             string matruongbp = null)
         {
             if (id == null)
@@ -64,9 +80,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 _context.SetState(bophan, EntityState.Modified);
                 await _context.Update(bophan,trangthaiduyet, "1", UserManager.GetUserId(User));
             }
-            return await GetResult(mabp, tenbp, matruongbp);
+            return await Searh(mabp, tenbp, matruongbp);
         }
         // GET: BoPhan/Details/5
+        [Route("quan-ly/bo-phan/chi-tiet/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -79,15 +96,15 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
-
+            AllViewBag();
             return View(bophan);
         }
 
         // GET: BoPhan/Create
+        [Route("quan-ly/bo-phan/tao-moi")]
         public IActionResult Create()
         {
-            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["MaTruongBP"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
+            AllViewBag();
             return View();
         }
 
@@ -96,6 +113,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/bo-phan/tao-moi")]
         public async Task<IActionResult> Create(BOPHAN bophan)
         {
             if (ModelState.IsValid)
@@ -107,6 +125,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: BoPhan/Edit/5
+        [Route("quan-ly/bo-phan/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -119,8 +138,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
-            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["MaTruongBP"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
+            AllViewBag();
             return View(bophan);
         }
 
@@ -129,6 +147,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/bo-phan/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int id, BOPHAN bophan)
         {
             if (id != bophan.Id)
@@ -164,6 +183,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: BoPhan/Delete/5
+        [Route("quan-ly/bo-phan/xoa/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -176,13 +196,14 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
-
+            AllViewBag();
             return View(bophan);
         }
 
         // POST: BoPhan/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/bo-phan/xoa/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var bophan = await _context.Get(id);

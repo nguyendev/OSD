@@ -1,48 +1,76 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
-    [Area("Quan-ly")]
+    [Area("quan-ly")]
     [Authorize]
     public class HoaDonNhapHangController : Controller
     {
         private readonly IGenericRepository<HOADONNHAPHANG> _context;
+        private readonly IGenericRepository<NHANVIEN> _nhanviencontext;
+        private readonly IGenericRepository<YEUCAUNHAPHANG> _yeucaunhaphangcontext;
         private SignInManager<AppUser> SignInManager;
         private UserManager<AppUser> UserManager;
 
-        public HoaDonNhapHangController(IGenericRepository<HOADONNHAPHANG> context)
+        public HoaDonNhapHangController(IGenericRepository<HOADONNHAPHANG> context,
+            IGenericRepository<NHANVIEN> nhanviencontext,
+            IGenericRepository<YEUCAUNHAPHANG> yeucaunhaphangcontext,
+            UserManager<AppUser> userMgr,
+        SignInManager<AppUser> signinMgr)
         {
-            _context = context;    
+            _context = context;
+            _nhanviencontext = nhanviencontext;
+            _yeucaunhaphangcontext = yeucaunhaphangcontext;
+            SignInManager = signinMgr;
+            UserManager = userMgr;
         }
         
+        private void AllViewBag()
+        {
+            var yeucaunhaphanglist = _yeucaunhaphangcontext.GetList().Where(c => c.TrangThai == "1");
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaNV"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
+            ViewData["MaYC"] = new SelectList(nhanvienlist, "MaYeuCau", "MaYeuCau");
+        }
         private async Task<IActionResult> GetResult(string mahd = null,
             string manv = null, string ngaylap = null, string mayc = null)
         {
+            var yeucaunhaphanglist = _yeucaunhaphangcontext.GetList().Where(c => c.TrangThai == "1");
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["manv"] = new SelectList(nhanvienlist, "MaNV", "MaNV", manv);
+            ViewData["mayc"] = new SelectList(nhanvienlist, "MaYeuCau", "MaYeuCau", mayc);
             IQueryable<HOADONNHAPHANG> result = _context.GetList().Where(c =>
           (mahd == null || c.MaHD == mahd) && (manv == null || c.MaNV == manv)
-          && (mahd == null || c.MaHD == mahd) && (manv == null || c.MaNV == manv)
+          && (mahd == null || c.MaHD == mahd) && (ngaylap == null || Convert.ToDateTime(ngaylap).Date 
+          == Convert.ToDateTime(c.ThoiGianNhap).Date)
           && c.TrangThai == "1");
             return View(await result.ToListAsync());
         }
         // GET: HoaDonNhapHang
-        public async Task<IActionResult> Index(string mahd = null,
+        [Route("quan-ly/hoa-don-nhap-hang")]
+        public async Task<IActionResult> Search(string mahd = null,
             string manv = null, string ngaylap = null, string mayc = null)
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
             return await GetResult(mahd, manv, ngaylap, mayc);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(int? id, string trangthaiduyet, string mahd = null,
+        [Route("quan-ly/hoa-don-nhap-hang")]
+        public async Task<IActionResult> Search(int? id, string trangthaiduyet, string mahd = null,
             string manv = null, string ngaylap = null, string mayc = null)
         {
             if (id == null)
@@ -59,10 +87,11 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 _context.SetState(hoadon, EntityState.Modified);
                 await _context.Update(hoadon, trangthaiduyet, "1", UserManager.GetUserId(User));
             }
-            return await GetResult(mahd, manv, ngaylap, mayc);
+            return await Search(mahd, manv, ngaylap, mayc);
         }
 
         // GET: HoaDonNhapHang/Details/5
+        [Route("quan-ly/hoa-don-nhap-hang/chi-tiet/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -75,13 +104,15 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
-
+            AllViewBag();
             return View(hoadonnhaphang);
         }
 
         // GET: HoaDonNhapHang/Create
+        [Route("quan-ly/hoa-don-nhap-hang/tao-moi")]
         public IActionResult Create()
         {
+            AllViewBag();
             return View();
         }
 
@@ -90,6 +121,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/hoa-don-nhap-hang/tao-moi")]
         public async Task<IActionResult> Create(HOADONNHAPHANG hoadonnhaphang)
         {
             if (ModelState.IsValid)
@@ -101,6 +133,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: HoaDonNhapHang/Edit/5
+        [Route("quan-ly/hoa-don-nhap-hang/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -113,6 +146,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
+            AllViewBag();
             return View(hoadonnhaphang);
         }
 
@@ -121,6 +155,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/hoa-don-nhap-hang/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int id, HOADONNHAPHANG hoadonnhaphang)
         {
             if (id != hoadonnhaphang.Id)
@@ -156,6 +191,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: HoaDonNhapHang/Delete/5
+        [Route("quan-ly/hoa-don-nhap-hang/xoa/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -168,13 +204,14 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             {
                 return NotFound();
             }
-
+            AllViewBag();
             return View(hoadonnhaphang);
         }
 
         // POST: HoaDonNhapHang/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/hoa-don-nhap-hang/xoa/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var hoadon = await _context.Get(id);

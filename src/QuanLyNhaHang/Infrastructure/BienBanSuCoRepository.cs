@@ -43,7 +43,6 @@ namespace QuanLyNhaHang.Infrastructure
 
         public async Task Update(BIENBANSUCO Entity, string trangthaiduyet = "U", string trangthai = "1", string nguoiduyet = null)
         {
-            Entity.NgayTao = DateTime.Now;
             if(trangthaiduyet == "A" && Entity.TrangThaiDuyet == "U")
             {
                 Entity.NgayDuyet = DateTime.Now;

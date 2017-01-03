@@ -1,14 +1,16 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
-    [Area("Quan-Ly")]
+    [Area("quan-ly")]
     [Authorize]
     public class PhanHoiController : Controller
     {
@@ -16,18 +18,26 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         private SignInManager<AppUser> SignInManager;
         private UserManager<AppUser> UserManager;
 
-        public PhanHoiController(IGenericRepository<PHANHOI> context)
+        public PhanHoiController(IGenericRepository<PHANHOI> context, UserManager<AppUser> userMgr,
+        SignInManager<AppUser> signinMgr)
         {
-            _context = context;    
+            _context = context;
+            SignInManager = signinMgr;
+            UserManager = userMgr;
         }
 
         // GET: PhanHoi
+        [Route("quan-ly/phan-hoi")]
         public async Task<IActionResult> Index()
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
             return View(await _context.GetAll());
         }
 
         // GET: PhanHoi/Details/5
+        [Route("quan-ly/phan-hoi/chi-tiet/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,6 +49,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: PhanHoi/Create
+        [Route("quan-ly/phan-hoi/tao-moi")]
         public IActionResult Create()
         {
             return View();
@@ -49,6 +60,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/phan-hoi/tao-moi")]
         public async Task<IActionResult> Create(PHANHOI phanhoi)
         {
             if (ModelState.IsValid)
@@ -60,6 +72,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: PhanHoi/Edit/5
+        [Route("quan-ly/phan-hoi/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,6 +88,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/phan-hoi/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int id, PHANHOI phanhoi)
         {
             if (id != phanhoi.Id)
@@ -103,6 +117,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: PhanHoi/Delete/5
+        [Route("quan-ly/phan-hoi/xoa/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -116,6 +131,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // POST: PhanHoi/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/phan-hoi/xoa/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var phanhoi = await _context.Get(id);

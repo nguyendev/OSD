@@ -1,0 +1,122 @@
+﻿@model IEnumerable<QuanLyNhaHang.Models.LOAISUCO>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Danh sách loại sự cố | Quản lý";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Loại sự cố";
+    ViewData["action"] = "Danh sách loại sự cố";
+}
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><strong>Tìm kiếm</strong></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="visibility:hidden" role="button" aria-expanded="false">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                    </li>
+                    <li><a class="close-link" style="visibility:hidden"><i class="fa fa-close"></i></a></li>
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <p class="text-muted font-13 m-b-30">
+                </p>
+                <form asp-action="Search" method="get" role="form" enctype="multipart/form-data">
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Mã loại sự cố</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            @Html.TextBox("maloaisuco", "", new { @class = "select2_group form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tên loại sự cố</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            @Html.TextBox("tenloaisuco","", new { @class = "select2_group form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Mã bộ phận xử lý</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            @Html.DropDownList("mabp", null, "tất cả", new { @class = "select2_group form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><strong>Danh sách loại sự cố</strong></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="visibility:hidden" role="button" aria-expanded="false">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-action="create" class="btn btn-primary them" style="color: white" role="button">
+                            Thêm mới
+                        </a>
+                    </li>
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap text-center" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.MaLoaiSuCo)</th>
+                            <th>@Html.DisplayNameFor(model => model.TenLoaiSuCo)</th>
+                            <th>@Html.DisplayNameFor(model => model.MaBoPhanXuLy)</th>
+                            <th>@Html.DisplayNameFor(model => model.TrangThaiDuyet)</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.MaLoaiSuCo)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TenLoaiSuCo)</td>
+                                <td>@Html.DisplayFor(modelItem => item.MaBoPhanXuLy)</td>
+                                <td>
+                                    @if (User.IsInRole("Admins") || User.IsInRole("Manager"))
+                                    {
+                                        <form asp-action="Search" method="post" asp-route-id=@item.Id role="form" enctype="multipart/form-data">
+                                            <select name="trangthaiduyet" id="trangthaiduyet" asp-for=@item.TrangThaiDuyet class="select2_group form-control" asp-items="ViewBag.TrangThaiDuyet"></select>
+                                            <input type="submit" value="Lưu" class="btn btn-success btn-sm" />
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <select asp-for=@item.TrangThaiDuyet disabled class="select2_group form-control" asp-items="ViewBag.TrangThaiDuyet"></select>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" class="label label-warning" asp-route-id="@item.Id">Sửa</a> |
+                                    <a asp-action="Details" class="label label-success" asp-route-id="@item.Id">Chi tiết</a> |
+                                    <a asp-action="Delete" class="label label-danger" asp-route-id="@item.Id">Xóa</a>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

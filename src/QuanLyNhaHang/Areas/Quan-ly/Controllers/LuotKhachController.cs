@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
@@ -7,10 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
-    [Area("Quan-ly")]
+    [Area("quan-ly")]
     [Authorize]
     public class LuotKhachController : Controller
     {
@@ -18,9 +20,12 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         private SignInManager<AppUser> SignInManager;
         private UserManager<AppUser> UserManager;
 
-        public LuotKhachController(IGenericRepository<LUOTKHACH> context)
+        public LuotKhachController(IGenericRepository<LUOTKHACH> context, UserManager<AppUser> userMgr,
+        SignInManager<AppUser> signinMgr)
         {
             _context = context;
+            SignInManager = signinMgr;
+            UserManager = userMgr;
         }
 
         private async Task<IActionResult> GetResult(string maluot = null,
@@ -28,19 +33,25 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         {
             IQueryable<LUOTKHACH> result = _context.GetList().Where(c =>
           (maluot == null || c.MaLuot == maluot) && (soban == null || c.SoBan == soban.Value)
-          && (thoigianvao == null || c.ThoiGianVao == thoigianvao) && c.TrangThai == "1");
+          && (thoigianvao == null || Convert.ToDateTime(c.ThoiGianVao).Date == 
+          Convert.ToDateTime(thoigianvao).Date) && c.TrangThai == "1");
             return View(await result.ToListAsync());
         }
         // GET: LuotKhach
-        public async Task<IActionResult> Index(string maluot = null,
+        [Route("quan-ly/luot-khach")]
+        public async Task<IActionResult> Search(string maluot = null,
            int? soban = null, string thoigianvao = null)
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
             return await GetResult(maluot, soban, thoigianvao);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+        [Route("quan-ly/luot-khach")]
+        public async Task<IActionResult> Search(int? id, string trangthaiduyet,
     string maluot = null, int? soban = null, string thoigianvao = null)
         {
             if (id == null)
@@ -57,9 +68,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 _context.SetState(luotkhach, EntityState.Modified);
                 await _context.Update(luotkhach, trangthaiduyet,"1", UserManager.GetUserId(User));
             }
-            return await GetResult(maluot, soban, thoigianvao);
+            return await Search(maluot, soban, thoigianvao);
         }
         // GET: LuotKhach/Details/5
+        [Route("quan-ly/luot-khach/chi-tiet/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -77,6 +89,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: LuotKhach/Create
+        [Route("quan-ly/luot-khach")]
         public IActionResult Create()
         {
             return View();
@@ -87,6 +100,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/luot-khach")]
         public async Task<IActionResult> Create(LUOTKHACH luotkhach)
         {
             if (ModelState.IsValid)
@@ -98,6 +112,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: LuotKhach/Edit/5
+        [Route("quan-ly/luot-khach/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -118,6 +133,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/luot-khach/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int id, LUOTKHACH luotkhach)
         {
             if (id != luotkhach.Id)
@@ -153,6 +169,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: LuotKhach/Delete/5
+        [Route("quan-ly/luot-khach/xoa/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -172,6 +189,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // POST: LuotKhach/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/luot-khach/xoa/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var luotkhach = await _context.Get(id);

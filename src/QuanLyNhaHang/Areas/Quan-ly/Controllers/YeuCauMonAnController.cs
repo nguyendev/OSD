@@ -1,18 +1,17 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
-    [Area("Quan-ly")]
+    [Area("quan-ly")]
     [Authorize]
     public class YeuCauMonAnController : Controller
     {
@@ -24,34 +23,49 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         private UserManager<AppUser> UserManager;
 
         public YeuCauMonAnController(IGenericRepository<YEUCAUMONAN> context,
-            IGenericRepository<MONAN> monancontext, IGenericRepository<LUOTKHACH> luotkhachcontext)
+            IGenericRepository<MONAN> monancontext, IGenericRepository<LUOTKHACH> luotkhachcontext,
+             UserManager<AppUser> userMgr, SignInManager<AppUser> signinMgr)
         {
             _context = context;
             _monancontext = monancontext;
-            _luotkhachcontext = luotkhachcontext;  
+            _luotkhachcontext = luotkhachcontext;
+            SignInManager = signinMgr;
+            UserManager = userMgr;
         }
 
+        private void AllViewBag()
+        {
+            var monanlist = _monancontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaMon"] = new SelectList(monanlist, "MaMon", "TenMon");
+            var nguoilaplist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1");
+            ViewData["MaLuot"] = new SelectList(nguoilaplist, "MaLuot", "MaLuot");
+        }
         private async Task<IActionResult> GetResult(string maluot = null,
      string mamon = null)
         {
             var monanlist = _monancontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["MaMon"] = new SelectList(monanlist, "MaMon", "TenMon", mamon);
+            ViewData["mamon"] = new SelectList(monanlist, "MaMon", "TenMon", mamon);
             var nguoilaplist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["MaLuot"] = new SelectList(nguoilaplist, "MaLuot", "MaLuot", maluot);
+            ViewData["maluot"] = new SelectList(nguoilaplist, "MaLuot", "MaLuot", maluot);
             IQueryable<YEUCAUMONAN> result = _context.GetList().Where(c =>
            (maluot == null || c.MaLuot == maluot) && (mamon == null || c.MaMon == mamon)
            && c.TrangThai == "1");
             return View(await result.ToListAsync());
         }
         // GET: YeuCauMonAn
-        public async Task<IActionResult> Index(string maluot = null, string mamon = null)
+        [Route("quan-ly/yeu-cau-mon-an")]
+        public async Task<IActionResult> Search(string maluot = null, string mamon = null)
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
             return await GetResult(maluot, mamon);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(int? id, string trangthaiduyet,
+        [Route("quan-ly/yeu-cau-mon-an")]
+        public async Task<IActionResult> Search(int? id, string trangthaiduyet,
         string maluot = null, string mamon = null)
         {
             if (id == null)
@@ -64,9 +78,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 _context.SetState(yeucau, EntityState.Modified);
                 await _context.Update(yeucau, trangthaiduyet, "1", UserManager.GetUserId(User));
             }
-            return await GetResult(maluot, mamon);
+            return await Search(maluot, mamon);
         }
         // GET: YeuCauMonAn/Details/5
+        [Route("quan-ly/yeu-cau-mon-an/chi-tiet/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -74,16 +89,15 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             var yeucaumonan = await _context.Get(id);
             if (yeucaumonan == null)
                 return NotFound();
+            AllViewBag();
             return View(yeucaumonan);
         }
 
         // GET: YeuCauMonAn/Create
+        [Route("quan-ly/yeu-cau-mon-an/tao-moi")]
         public IActionResult Create()
         {
-            var monanlist = _monancontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["MaMon"] = new SelectList(monanlist, "MaMon", "TenMon");
-            var nguoilaplist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["MaLuot"] = new SelectList(nguoilaplist, "MaLuot", "MaLuot");
+            AllViewBag();
             return View();
         }
 
@@ -92,6 +106,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/yeu-cau-mon-an/tao-moi")]
         public async Task<IActionResult> Create(YEUCAUMONAN yeucaumonan)
         {
             if (ModelState.IsValid)
@@ -103,6 +118,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: YeuCauMonAn/Edit/5
+        [Route("quan-ly/yeu-cau-mon-an/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -110,10 +126,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             var yeucaumonan = await _context.Get(id);
             if (yeucaumonan == null)
                 return NotFound();
-            var monanlist = _monancontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["MaMon"] = new SelectList(monanlist, "MaMon", "TenMon");
-            var nguoilaplist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1");
-            ViewData["MaLuot"] = new SelectList(nguoilaplist, "MaLuot", "MaLuot");
+            AllViewBag();
             return View(yeucaumonan);
         }
 
@@ -122,6 +135,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/yeu-cau-mon-an/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(int id, YEUCAUMONAN yeucaumonan)
         {
             if (id != yeucaumonan.Id)
@@ -150,6 +164,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: YeuCauMonAn/Delete/5
+        [Route("quan-ly/yeu-cau-mon-an/xoa/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -157,12 +172,14 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             var yeucaumonan = await _context.Get(id);
             if (yeucaumonan == null)
                 return NotFound();
+            AllViewBag();
             return View(yeucaumonan);
         }
 
         // POST: YeuCauMonAn/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/yeu-cau-mon-an/xoa/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var yeucaumonan = await _context.Get(id);

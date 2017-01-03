@@ -21,6 +21,7 @@ namespace QuanLyNhaHang.Infrastructure
 
         public async Task Add(THIETHAI Entity, string nguoitao)
         {
+            Entity.ThanhTien = (Convert.ToDouble(Entity.DonGia) * Entity.SoLuong).ToString();
             Entity.NguoiTao = nguoitao;
             Entity.NgayTao = DateTime.Now;
             Entity.TrangThai = "1";
@@ -58,7 +59,7 @@ namespace QuanLyNhaHang.Infrastructure
 
         public async Task Update(THIETHAI Entity, string trangthaiduyet = "U", string trangthai = "1", string nguoiduyet = null)
         {
-            Entity.NgayTao = DateTime.Now;
+            Entity.ThanhTien = (Convert.ToDouble(Entity.DonGia) * Entity.SoLuong).ToString();
             if (trangthaiduyet == "A" && Entity.TrangThaiDuyet == "U")
             {
                 Entity.NgayDuyet = DateTime.Now;

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace QuanLyNhaHang.Migrations
 {
-    public partial class @new : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -185,8 +185,8 @@ namespace QuanLyNhaHang.Migrations
                     GhiChu = table.Column<string>(nullable: true),
                     MaHD = table.Column<string>(maxLength: 12, nullable: false),
                     MaNCC = table.Column<string>(nullable: false),
-                    MaNV = table.Column<string>(nullable: false),
-                    MaYeuCau = table.Column<string>(nullable: false),
+                    MaNV = table.Column<string>(maxLength: 12, nullable: false),
+                    MaYeuCau = table.Column<string>(maxLength: 12, nullable: false),
                     NgayDuyet = table.Column<DateTime>(nullable: true),
                     NgayTao = table.Column<DateTime>(nullable: true),
                     NguoiDuyet = table.Column<string>(nullable: true),

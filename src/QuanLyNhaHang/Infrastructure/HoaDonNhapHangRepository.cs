@@ -20,11 +20,16 @@ namespace QuanLyNhaHang.Infrastructure
         }
         public async Task Add(HOADONNHAPHANG Entity, string nguoitao)
         {
+            YeuCauNhapHangRepository yeucaurep = new YeuCauNhapHangRepository(Context);
+            NguyenLieuRepository nccrep = new NguyenLieuRepository(Context);
+            var yeucaunhaphang = yeucaurep.GetList().Where(c => c.MaYeuCau == Entity.MaYeuCau).SingleOrDefault();
+            var nguyenlieu = nccrep.GetList().Where(c => c.MaNL == yeucaunhaphang.MaNL).SingleOrDefault();
+            Entity.ThanhTien = (yeucaunhaphang.SoLuong * Convert.ToDouble(nguyenlieu.Gia)).ToString(); 
             Entity.NguoiTao = nguoitao;
             Entity.NgayTao = DateTime.Now;
             Entity.TrangThai = "1";
             Entity.TrangThaiDuyet = "U";
-            Entity.MaNCC = Context.YEUCAUNHAPHANG.Where(c => c.MaYeuCau == Entity.MaYeuCau).FirstOrDefault().MaNCC;
+            Entity.MaNCC = yeucaunhaphang.MaNCC;
             Context.Add(Entity);
             await Save();
         }
@@ -58,7 +63,11 @@ namespace QuanLyNhaHang.Infrastructure
 
         public async Task Update(HOADONNHAPHANG Entity, string trangthaiduyet = "U", string trangthai = "1", string nguoiduyet = null)
         {
-            Entity.NgayTao = DateTime.Now;
+            YeuCauNhapHangRepository yeucaurep = new YeuCauNhapHangRepository(Context);
+            NguyenLieuRepository nccrep = new NguyenLieuRepository(Context);
+            var yeucaunhaphang = yeucaurep.GetList().Where(c => c.MaYeuCau == Entity.MaYeuCau).SingleOrDefault();
+            var nguyenlieu = nccrep.GetList().Where(c => c.MaNL == yeucaunhaphang.MaNL).SingleOrDefault();
+            Entity.ThanhTien = (yeucaunhaphang.SoLuong * Convert.ToDouble(nguyenlieu.Gia)).ToString();
             if (trangthaiduyet == "A" && Entity.TrangThaiDuyet == "U")
             {
                 Entity.NgayDuyet = DateTime.Now;
@@ -66,7 +75,7 @@ namespace QuanLyNhaHang.Infrastructure
             }
             Entity.TrangThaiDuyet = trangthaiduyet;
             Entity.TrangThai = trangthai;
-            Entity.MaNCC = Context.YEUCAUNHAPHANG.Where(c => c.MaYeuCau == Entity.MaYeuCau).FirstOrDefault().MaNCC;
+            Entity.MaNCC = yeucaunhaphang.MaNCC;
             DbSet.Update(Entity);
             await Save();
         }
