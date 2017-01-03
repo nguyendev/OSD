@@ -12,16 +12,17 @@ namespace QuanLyNhaHang.Infrastructure
     {
         protected readonly ApplicationDbContext Context;
         protected DbSet<HOADONNHAPHANG> DbSet;
-
+        private readonly YeuCauNhapHangRepository yeucaurep;
+        private readonly NguyenLieuRepository nccrep;
         public HoaDonNhapHangRepository(ApplicationDbContext context)
         {
             Context = context;
             DbSet = context.Set<HOADONNHAPHANG>();
+            yeucaurep = new YeuCauNhapHangRepository(Context);
+            nccrep = new NguyenLieuRepository(Context);
         }
         public async Task Add(HOADONNHAPHANG Entity, string nguoitao)
         {
-            YeuCauNhapHangRepository yeucaurep = new YeuCauNhapHangRepository(Context);
-            NguyenLieuRepository nccrep = new NguyenLieuRepository(Context);
             var yeucaunhaphang = yeucaurep.GetList().Where(c => c.MaYeuCau == Entity.MaYeuCau).SingleOrDefault();
             var nguyenlieu = nccrep.GetList().Where(c => c.MaNL == yeucaunhaphang.MaNL).SingleOrDefault();
             Entity.ThanhTien = (yeucaunhaphang.SoLuong * Convert.ToDouble(nguyenlieu.Gia)).ToString(); 
@@ -63,8 +64,6 @@ namespace QuanLyNhaHang.Infrastructure
 
         public async Task Update(HOADONNHAPHANG Entity, string trangthaiduyet = "U", string trangthai = "1", string nguoiduyet = null)
         {
-            YeuCauNhapHangRepository yeucaurep = new YeuCauNhapHangRepository(Context);
-            NguyenLieuRepository nccrep = new NguyenLieuRepository(Context);
             var yeucaunhaphang = yeucaurep.GetList().Where(c => c.MaYeuCau == Entity.MaYeuCau).SingleOrDefault();
             var nguyenlieu = nccrep.GetList().Where(c => c.MaNL == yeucaunhaphang.MaNL).SingleOrDefault();
             Entity.ThanhTien = (yeucaunhaphang.SoLuong * Convert.ToDouble(nguyenlieu.Gia)).ToString();

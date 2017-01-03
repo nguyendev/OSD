@@ -36,18 +36,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 
         private void AllViewBag()
         {
-            var luotkhachlist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1");
+            var luotkhachlist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaLuot"] = new SelectList(luotkhachlist, "MaLuot", "MaLuot");
-            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
         }
 
         private async Task<IActionResult> GetResult(string mapt = null, string maluot = null, string ngaylap = null,
            string nguoilap = null)
         {
-            var luotkhachlist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1");
+            var luotkhachlist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["maluot"] = new SelectList(luotkhachlist, "MaLuot", "MaLuot", maluot);
-            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["nguoilap"] = new SelectList(nguoilaplist, "MaNV", "MaNV", nguoilap);
             IQueryable<PHIEUTHU> result = _context.GetList().Where(c =>
            (mapt == null || c.MaPT == mapt) && (maluot == null || c.MaLuot == maluot)

@@ -32,14 +32,14 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 
         private void AllViewBag()
         {
-            var bophanxulylist = _bophancontext.GetList().Where(c => c.TrangThai == "1");
+            var bophanxulylist = _bophancontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaBP"] = new SelectList(bophanxulylist, "MaBP", "MaBP");
         }
 
         private async Task<IActionResult> GetResult(string maloaisuco = null,
            string tenloaisuco = null, string mabp = null)
         {
-            var bophanxulylist = _bophancontext.GetList().Where(c => c.TrangThai == "1");
+            var bophanxulylist = _bophancontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["mabp"] = new SelectList(bophanxulylist, "MaBP", "MaBP",mabp);
             IQueryable<LOAISUCO> result = _context.GetList().Where(c =>
            (maloaisuco == null || c.MaLoaiSuCo == maloaisuco) && (tenloaisuco == null || c.TenLoaiSuCo == tenloaisuco)

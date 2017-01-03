@@ -8,7 +8,7 @@
     ViewData["action"] = "Chi tiết";
     ViewData["h2"] = "Chi tiết bộ phận";
 }
-<form asp-action="Details">
+<form asp-action="Details" id="demo-form2" data-parsley-validate="" class="" novalidate="">
     <div class="form-horizontal">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
@@ -81,7 +81,7 @@
         <div class="form-group">
             <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <textarea disabled asp-for="GhiChu" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <textarea disabled asp-for="GhiChu" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
                 <span asp-validation-for="GhiChu" class="text-danger" />
             </div>
         </div>
@@ -89,7 +89,7 @@
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <a asp-action="search" asp-controller="bophan" class="btn btn-success pull-left">Quay lại</a>
-                <a asp-action="edit" asp-controller="bophan" class="btn btn-warning pull-right">Chỉnh sửa</a>
+                <a asp-action="edit" asp-controller="bophan" class="btn btn-warning pull-left">Chỉnh sửa</a>
             </div>
         </div>
     </div>

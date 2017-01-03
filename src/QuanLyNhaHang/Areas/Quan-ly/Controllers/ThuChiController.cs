@@ -8,9 +8,12 @@ using System.Linq;
 using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
+    [Area("Quan-ly")]
+    [Authorize]
     public class ThuChiController : Controller
     {
         private readonly IGenericRepository<THUCHI> _context;
@@ -31,14 +34,14 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 
         private void AllViewBag()
         {
-            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
         }
 
         private async Task<IActionResult> GetResult(string ngaylap = null,
           string nguoilap = null)
         {
-            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["nguoilap"] = new SelectList(nguoilaplist, "MaNV", "MaNV", nguoilap);
             IQueryable<THUCHI> result = _context.GetList().Where(c =>
            (ngaylap == null || DateTime.Compare(Convert.ToDateTime(c.NgayTao), Convert.ToDateTime(ngaylap)) == 0)

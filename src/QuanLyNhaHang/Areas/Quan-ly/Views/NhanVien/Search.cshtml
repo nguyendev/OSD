@@ -99,7 +99,7 @@
                                     {
                                         <form asp-action="Search" method="post" asp-route-id=@item.Id role="form" enctype="multipart/form-data">
                                             <select name="trangthaiduyet" id="trangthaiduyet" asp-for=@item.TrangThaiDuyet class="select2_group form-control" asp-items="ViewBag.TrangThaiDuyet"></select>
-                                            <input type="submit" value="L?u" class="btn btn-success btn-sm" />
+                                            <input type="submit" value="Lưu" class="btn btn-success btn-sm" />
                                         </form>
                                     }
                                     else
@@ -108,10 +108,9 @@
                                     }
                                 </td>
                                 <td>
-                                    <a asp-action="Edit" class="label label-warning" asp-route-id="@item.Id">S?a</a> |
-                                    <a asp-action="Details" class="label label-success" asp-route-id="@item.Id">Chi ti?t</a> |
+                                    <a asp-action="Edit" class="label label-warning" asp-route-id="@item.Id">Sửa</a> |
+                                    <a asp-action="Details" class="label label-success" asp-route-id="@item.Id">Chi tiết</a> |
                                     <a asp-action="Delete" class="label label-danger" asp-route-id="@item.Id">Xóa</a>
-
                                 </td>
                             </tr>
                         }

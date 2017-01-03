@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
@@ -35,9 +35,9 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 
         private void AllViewBag()
         {
-            var nguyenlieulist = _nguyenlieucontext.GetList().Where(c => c.TrangThai == "1");
+            var nguyenlieulist = _nguyenlieucontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaNL"] = new SelectList(nguyenlieulist, "MaNL", "TenNL");
-            var ncclist = _nhacungcapcontext.GetList().Where(c => c.TrangThai == "1");
+            var ncclist = _nhacungcapcontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaNCC"] = new SelectList(ncclist, "MaNCC", "TenNCC");
 
         }
@@ -45,9 +45,9 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         private async Task<IActionResult> GetResult(string mayc = null,
      string manl = null, string mancc = null)
         {
-            var nguyenlieulist = _nguyenlieucontext.GetList().Where(c => c.TrangThai == "1");
+            var nguyenlieulist = _nguyenlieucontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["manl"] = new SelectList(nguyenlieulist, "MaNL", "TenNL", manl);
-            var ncclist = _nhacungcapcontext.GetList().Where(c => c.TrangThai == "1");
+            var ncclist = _nhacungcapcontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["mancc"] = new SelectList(ncclist, "MaNCC", "TenNCC", mancc);
             IQueryable<YEUCAUNHAPHANG> result = _context.GetList().Where(c =>
            (mayc == null || c.MaYeuCau == mayc) && (manl == null || c.MaNL == manl)
@@ -59,8 +59,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Search(string mayc = null, string manl = null, string mancc = null)
         {
             List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
-            listTrangThaiDuyet.Add(new SelectListItem { Text = "?� duy?t", Value = "A" });
-            listTrangThaiDuyet.Add(new SelectListItem { Text = "Ch?a duy?t", Value = "U" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
             ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
             return await GetResult(mayc, manl, mancc);
         }

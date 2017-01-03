@@ -1,14 +1,14 @@
-@model QuanLyNhaHang.Models.NHACUNGCAP
+﻿@model QuanLyNhaHang.Models.NHACUNGCAP
 
 @{
     Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
-    ViewData["Title"] = "Th�m nh� cung c?p | Qu?n l�";
-    ViewData["areas"] = "Qu?n l�";
-    ViewData["controller"] = "Nh� cung c?p";
-    ViewData["action"] = "T?o m?i";
-    ViewData["h2"] = "Th�m nh� cung c?p";
+    ViewData["Title"] = "Cập nhật nhà cung cấp";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Nhà cung cấp";
+    ViewData["action"] = "Cập nhật ";
+    ViewData["h2"] = "Cập nhật nhà cung cấp";
 }
-<form asp-action="Create">
+<form asp-action="Edit" id="demo-form2" data-parsley-validate="" class="" novalidate="">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-horizontal">
 
@@ -48,11 +48,18 @@
                 <span asp-validation-for="SoNo" class="text-danger" />
             </div>
         </div>
+        <div class="form-group">
+            <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <textarea disabled asp-for="GhiChu" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <span asp-validation-for="GhiChu" class="text-danger" />
+            </div>
+        </div>
         <div class="ln_solid"></div>
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <a asp-action="search" asp-controller="bienbansuco" class="btn btn-success pull-left">Quay l?i</a>
-                <input type="submit" value="L?u" class="btn btn-warning pull-left" />
+                <a asp-action="search" asp-controller="nhacungcap" class="btn btn-success pull-left">Quay lại</a>
+                <input type="submit" value="Lưu" class="btn btn-warning pull-left" />
             </div>
         </div>
     </div>

@@ -29,7 +29,7 @@
         <div class="form-group">
             <label asp-for="KhuyenMai" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input asp-for="KhuyenMai" class="form-control" />
+                <input asp-for="KhuyenMai" class="form-control" type="number" min="1" max="100" />
                 <span asp-validation-for="KhuyenMai" class="text-danger" />
             </div>
         </div>
@@ -47,10 +47,24 @@
                 <span asp-validation-for="TienHang" class="text-danger" />
             </div>
         </div>
+        <div class="form-group">
+            <label asp-for="VAT" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="VAT" class="form-control" type="number" min="1" max="100"/>
+                <span asp-validation-for="VAT" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <textarea asp-for="GhiChu" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <span asp-validation-for="GhiChu" class="text-danger" />
+            </div>
+        </div>
         <div class="ln_solid"></div>
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <a asp-action="search" asp-controller="bienbansuco" class="btn btn-success pull-left">Quay lại</a>
+                <a asp-action="search" asp-controller="phieuthu" class="btn btn-success pull-left">Quay lại</a>
                 <input type="submit" value="Thêm" class="btn btn-primary pull-left" />
             </div>
         </div>

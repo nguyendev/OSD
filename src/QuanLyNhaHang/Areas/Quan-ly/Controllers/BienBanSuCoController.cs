@@ -38,16 +38,16 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
 
         private void AllViewBag()
         {
-            var loaisucolist = _loaisucocontext.GetList().Where(c => c.TrangThai == "1");
-            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            var loaisucolist = _loaisucocontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaLoaiSuCo"] = new SelectList(loaisucolist, "MaLoaiSuCo", "MaLoaiSuCo");
             ViewData["MaNV"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
         }
         private async Task<IActionResult> GetResult(string thoigian = null,string mabienban = null,
             string maloaisuco = null, string manv = null)
         {
-            var loaisucolist = _loaisucocontext.GetList().Where(c => c.TrangThai == "1");
-            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            var loaisucolist = _loaisucocontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["maloaisuco"] = new SelectList(loaisucolist, "MaLoaiSuCo", "MaLoaiSuCo", maloaisuco);
             ViewData["manv"] = new SelectList(nhanvienlist, "MaNV", "MaNV", manv);
             //var result = from s in _context.GetList() where

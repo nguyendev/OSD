@@ -35,17 +35,17 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 
         private void AllViewBag()
         {
-            var monanlist = _monancontext.GetList().Where(c => c.TrangThai == "1");
+            var monanlist = _monancontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaMon"] = new SelectList(monanlist, "MaMon", "TenMon");
-            var nguoilaplist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1");
+            var nguoilaplist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaLuot"] = new SelectList(nguoilaplist, "MaLuot", "MaLuot");
         }
         private async Task<IActionResult> GetResult(string maluot = null,
      string mamon = null)
         {
-            var monanlist = _monancontext.GetList().Where(c => c.TrangThai == "1");
+            var monanlist = _monancontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["mamon"] = new SelectList(monanlist, "MaMon", "TenMon", mamon);
-            var nguoilaplist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1");
+            var nguoilaplist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["maluot"] = new SelectList(nguoilaplist, "MaLuot", "MaLuot", maluot);
             IQueryable<YEUCAUMONAN> result = _context.GetList().Where(c =>
            (maluot == null || c.MaLuot == maluot) && (mamon == null || c.MaMon == mamon)

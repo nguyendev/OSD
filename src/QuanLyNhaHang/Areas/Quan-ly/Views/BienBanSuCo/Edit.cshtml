@@ -8,7 +8,7 @@
     ViewData["action"] = "Chỉnh sửa";
     ViewData["h2"] = "Chỉnh sửa biên bản sự cố";
 }
-<form asp-action="Edit">
+<form asp-action="Edit" id="demo-form2" data-parsley-validate="" class="" novalidate="">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-horizontal">
         <div class="form-group">
@@ -58,6 +58,13 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <textarea asp-for="HuongGiaiQuyet" class="form-control"></textarea>
                 <span asp-validation-for="HuongGiaiQuyet" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <textarea asp-for="GhiChu" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <span asp-validation-for="GhiChu" class="text-danger" />
             </div>
         </div>
         <div class="ln_solid"></div>

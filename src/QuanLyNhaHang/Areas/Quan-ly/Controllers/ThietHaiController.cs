@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Infrastructure;
 using QuanLyNhaHang.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace QuanLyNhaHang.Areas.Quan_ly.Controllers
@@ -15,26 +16,34 @@ namespace QuanLyNhaHang.Areas.Quan_ly.Controllers
     public class ThietHaiController : Controller
     {
         private readonly IGenericRepository<THIETHAI> _context;
-        private readonly IGenericRepository<LOAISUCO> _loaisucocontext;
+        private readonly IGenericRepository<BIENBANSUCO> _bienbansucocontext;
         private SignInManager<AppUser> _signInManager;
         private UserManager<AppUser> _userManager;
 
         public ThietHaiController(IGenericRepository<THIETHAI> context,
-         IGenericRepository<LOAISUCO> loaisucocontext,
+         IGenericRepository<BIENBANSUCO> loaisucocontext,
          UserManager<AppUser> userMgr,
      SignInManager<AppUser> signinMgr)
         {
             _context = context;
-            _loaisucocontext = loaisucocontext;
+            _bienbansucocontext = loaisucocontext;
             _signInManager = signinMgr;
             _userManager = userMgr;
         }
+
+        private void AllViewBag()
+        {
+            var loaisucolist = _bienbansucocontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
+            ViewData["MaBienBan"] = new SelectList(loaisucolist, "MaBienBan", "MaBienBan");
+        }
+
         [Route("quan-ly/thiet-hai")]
         public async Task<IActionResult> Index()
         {
             List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
             listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
             listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
+            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
             return View(await _context.GetAll());
         }
 
@@ -47,6 +56,7 @@ namespace QuanLyNhaHang.Areas.Quan_ly.Controllers
             var thiethai = await _context.Get(id);
             if (thiethai == null)
                 return NotFound();
+            AllViewBag();
             return View(thiethai);
         }
 
@@ -54,6 +64,7 @@ namespace QuanLyNhaHang.Areas.Quan_ly.Controllers
         [Route("quan-ly/thiet-hai/tao-moi")]
         public IActionResult Create()
         {
+            AllViewBag();
             return View();
         }
 
@@ -82,6 +93,7 @@ namespace QuanLyNhaHang.Areas.Quan_ly.Controllers
             var thiethai = await _context.Get(id);
             if (thiethai == null)
                 return NotFound();
+            AllViewBag();
             return View(thiethai);
         }
 
@@ -127,6 +139,7 @@ namespace QuanLyNhaHang.Areas.Quan_ly.Controllers
             var thiethai = await _context.Get(id);
             if (thiethai == null)
                 return NotFound();
+            AllViewBag();
             return View(thiethai);
         }
 

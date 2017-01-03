@@ -36,9 +36,9 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 
         private void AllViewBag()
         {
-            var hoadonlist = _hoadoncontext.GetList().Where(c => c.TrangThai == "1");
+            var hoadonlist = _hoadoncontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaHD"] = new SelectList(hoadonlist, "MaHD", "MaHD");
-            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
 
         }
@@ -46,9 +46,9 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         private async Task<IActionResult> GetResult(string mapc = null, string mahd = null, string ngaylap = null,
             string nguoilap = null)
         {
-            var hoadonlist = _hoadoncontext.GetList().Where(c => c.TrangThai == "1");
+            var hoadonlist = _hoadoncontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["mahd"] = new SelectList(hoadonlist, "MaHD", "MaHD", mahd);
-            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["nguoilap"] = new SelectList(nguoilaplist, "MaNV", "MaNV", nguoilap);
             IQueryable<PHIEUCHI> result = _context.GetList().Where(c =>
            (mapc == null || c.MaPC == mapc) && (mahd == null || c.MaHD == mahd)

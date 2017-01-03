@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
-    ViewData["Title"] = "Tạo hóa đơn nhập hàng mới | Quản lý";
+    ViewData["Title"] = "Tạo hóa đơn nhập hàng mới";
     ViewData["areas"] = "Quản lý";
     ViewData["controller"] = "Hóa đơn nhập hàng";
     ViewData["action"] = "Tạo mới";
@@ -34,16 +34,6 @@
                 <span asp-validation-for="MaNV" class="text-danger" />
             </div>
         </div>
-    
-        <div class="form-group">
-            <label asp-for="ThanhTien" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                
-                    <input asp-for="ThanhTien" class="form-control" />
-                    <span asp-validation-for="ThanhTien" class="text-danger" />
-   
-             </div>
-        </div>
         <div class="form-group">
             <label asp-for="ThoiGianNhap" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -55,7 +45,13 @@
                 </div>
             </div>
             <span asp-validation-for="ThoiGianNhap" class="text-danger" />
-            
+        </div>
+        <div class="form-group">
+            <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <textarea asp-for="GhiChu" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <span asp-validation-for="GhiChu" class="text-danger" />
+            </div>
         </div>
         <div class="ln_solid"></div>
         <div class="form-group">

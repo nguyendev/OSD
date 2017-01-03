@@ -3,12 +3,12 @@
 @{
     Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
     ViewData["Title"] = "Xóa nguyên liệu trong kho";
-    ViewData["areas"] = "Qu?n lý";
+    ViewData["areas"] = "Quản lý";
     ViewData["controller"] = "Nguyên liệu trong kho";
     ViewData["action"] = "Xóa";
     ViewData["h2"] = "Xóa nguyên liệu trong kho";
 }
-<form asp-action="Delete">
+<form asp-action="Delete" id="demo-form2" data-parsley-validate="" class="" novalidate="">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-horizontal">
 
@@ -82,7 +82,7 @@
         <div class="form-group">
             <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <textarea disabled asp-for="GhiChu" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <textarea disabled asp-for="GhiChu" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
                 <span asp-validation-for="GhiChu" class="text-danger" />
             </div>
         </div>
@@ -90,7 +90,7 @@
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <a asp-action="search" asp-controller="nguyenlieutrongkho" class="btn btn-success pull-left">Quay lại</a>
-                <input disabled type="submit" value="Xóa" class="btn btn-danger pull-left" />
+                <input type="submit" value="Xóa" class="btn btn-danger pull-left" />
             </div>
         </div>
     </div>

@@ -1,14 +1,14 @@
-@model QuanLyNhaHang.Models.YEUCAUNHAPHANG
+﻿@model QuanLyNhaHang.Models.YEUCAUNHAPHANG
 
 @{
     Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
-    ViewData["Title"] = "Th�m y�u c?u nh?p h�ng | Qu?n l�";
-    ViewData["areas"] = "Qu?n l�";
-    ViewData["controller"] = "Y�u c?u nh?p h�ng";
-    ViewData["action"] = "T?o m?i";
-    ViewData["h2"] = "Th�m y�u c?u nh?p h�ng";
+    ViewData["Title"] = "Cập nhật yêu cầu nhập hàng | Quản lý";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Yêu cầu nhập hàng";
+    ViewData["action"] = "Cập nhật";
+    ViewData["h2"] = "Cập nhật cầu nhập hàng";
 }
-<form asp-action="Create">
+<form asp-action="Edit" id="demo-form2" data-parsley-validate="" class="" novalidate="">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-horizontal">
 
@@ -41,11 +41,18 @@
                 <span asp-validation-for="SoLuong" class="text-danger" />
             </div>
         </div>
+        <div class="form-group">
+            <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <textarea asp-for="GhiChu" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <span asp-validation-for="GhiChu" class="text-danger" />
+            </div>
+        </div>
         <div class="ln_solid"></div>
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <a asp-action="search" asp-controller="bienbansuco" class="btn btn-success pull-left">Quay l?i</a>
-                <input type="submit" value="Th�m" class="btn btn-warning pull-left" />
+                <a asp-action="search" asp-controller="yeucaunhaphang" class="btn btn-success pull-left">Quay l?i</a>
+                <input type="submit" value="Lưu" class="btn btn-warning pull-left" />
             </div>
         </div>
     </div>

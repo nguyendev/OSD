@@ -32,7 +32,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 
         private void AllViewBag()
         {
-            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaTruongBP"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
         }
 
@@ -40,7 +40,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> GetResult(string mabp = null, string tenbp = null,
             string matruongbp = null)
         {
-            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
+            var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["matruongbp"] = new SelectList(nhanvienlist, "MaNV", "MaNV", matruongbp);
             IQueryable<BOPHAN> result = _context.GetList().Where(c => 
             (mabp == null || c.MaBP == mabp) && (tenbp == null || c.TenBP == tenbp)

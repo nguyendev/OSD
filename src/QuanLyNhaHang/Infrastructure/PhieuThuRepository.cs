@@ -12,13 +12,34 @@ namespace QuanLyNhaHang.Infrastructure
     {
         protected readonly ApplicationDbContext Context;
         protected DbSet<PHIEUTHU> DbSet;
+        private readonly YeuCauMonAnRepository yeucaurep;
+        private readonly MonAnRepository monanrep;
         public PhieuThuRepository(ApplicationDbContext context)
         {
             Context = context;
             DbSet = context.Set<PHIEUTHU>();
+            monanrep = new MonAnRepository(context);
+            yeucaurep = new YeuCauMonAnRepository(context);
         }
         public async Task Add(PHIEUTHU Entity, string nguoitao)
         {
+            Entity.TienHang = "0";
+            var collection = yeucaurep.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A"
+            && c.MaLuot == Entity.MaLuot).ToList();
+            foreach (var item in collection)
+            {
+                var monan = monanrep.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A"
+                && c.MaMon == item.MaMon).SingleOrDefault();
+                Entity.TienHang = (float.Parse(Entity.ThanhTien) + float.Parse(monan.Gia)).ToString();
+            }
+            double thanhtien = float.Parse(Entity.TienHang);
+            if (Entity.PhiDichVuKhac != null)
+                thanhtien += float.Parse(Entity.PhiDichVuKhac);
+            if (Entity.KhuyenMai != null)
+                thanhtien *= (1 - (float.Parse(Entity.KhuyenMai) / 100));
+            if (Entity.VAT != null)
+                thanhtien += thanhtien * (float.Parse(Entity.VAT) / 100);
+            Entity.ThanhTien = thanhtien.ToString();   
             Entity.LaPhieuThu = true;
             Entity.NguoiTao = nguoitao;
             Entity.NgayTao = DateTime.Now;

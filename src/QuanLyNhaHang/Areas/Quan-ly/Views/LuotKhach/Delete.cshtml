@@ -1,14 +1,14 @@
-@model QuanLyNhaHang.Models.LUOTKHACH
+﻿@model QuanLyNhaHang.Models.LUOTKHACH
 
 @{
     Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
-    ViewData["Title"] = "X�a l??t kh�ch";
-    ViewData["areas"] = "Qu?n l�";
-    ViewData["controller"] = "L??t kh�ch";
-    ViewData["action"] = "X�a";
-    ViewData["h2"] = "X�a l??t kh�ch";
+    ViewData["Title"] = "Xóa lượt khách";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Lượt khách";
+    ViewData["action"] = "Xóa";
+    ViewData["h2"] = "Xóa lượt khách";
 }
-<form asp-action="Create">
+<form asp-action="Delete" id="demo-form2" data-parsley-validate="" class="" novalidate="">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-horizontal">
 
@@ -99,15 +99,15 @@
         <div class="form-group">
             <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <textarea disabled asp-for="GhiChu" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <textarea disabled asp-for="GhiChu" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
                 <span asp-validation-for="GhiChu" class="text-danger" />
             </div>
         </div>
         <div class="ln_solid"></div>
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <a asp-action="search" asp-controller="bienbansuco" class="btn btn-success pull-left">Quay l?i</a>
-                <input disabled type="submit" value="X�a" class="btn btn-danger pull-left" />
+                <a asp-action="search" asp-controller="luotkhach" class="btn btn-success pull-left">Quay l?i</a>
+                <input type="submit" value="Xóa" class="btn btn-danger pull-left" />
             </div>
         </div>
     </div>
