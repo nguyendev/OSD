@@ -1,0 +1,29 @@
+/* Bottom to Top*/
+.scrolltop {
+	display:none;
+}
+.scroll {
+	position: absolute;
+	border-radius: 50%;
+}
+.scroll:hover {
+	background:rgba(178,178,178,1.0);
+	transition: 0.5s;
+	-moz-transition: 0.5s;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s; 	
+}
+.scroll:hover .fa {
+	/*padding-top:-10px;*/
+}
+.scroll .fa {
+	/*<!--font-size:30px;
+	margin-top:-5px;
+	
+	margin-left:1px;
+	transition: 0.5s;
+	-moz-transition: 0.5s;
+	-webkit-transition: 0.5s;
+	-o-transition: 0.5s; 	-->*/
+	top: 20px;
+}

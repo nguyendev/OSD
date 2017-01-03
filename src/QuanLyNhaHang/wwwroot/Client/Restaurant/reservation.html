@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon" />
+    <title>Đặt bàn</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/user.css">
+	<link rel="stylesheet" href="assets/css/Hoa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/bottomtotop.css">
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/_all-skins.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-touch-slider.css">
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">-->
+	    <!-- <link rel="stylesheet" href="assets/css/AdminLTE.min.css"> -->
+
+</head>
+<style>
+  .carousel-inner > img,
+  .carousel-inner > .item > a > img {
+      width: 100%;
+     
+  }
+</style>
+<body>
+	
+    <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top bs-docs-nav navbar-static-top" id="top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                </div>
+                <div class="collapse navbar-collapse" id="bs-navbar">
+                    <ul class="nav navbar-nav">       
+                    	<li role="presentation" class="menu-item ">
+                        	<a href="index.html"><span class="glyphicon glyphicon-home"></span></a>
+                        </li>              
+                        <li role="presentation" class="menu-item"><a href="intro.html"><strong>Giới thiệu</strong></a></li>
+                        <li role="presentation" class="menu-item"><a href="thuc-don.html">Thực đơn</a></li>
+                        <li role="presentation" class="menu-item"><a href="news.html">Tin tức</a></li>
+                        <li role="presentation" class="menu-item"><a href="khuyen_mai.html">Khuyến mãi</a></li>
+                        <li role="presentation" class="menu-item"><a href="kien_thuc.html">Kiến thức ẩm thực</a></li>
+                        <li role="presentation" class="menu-item active"><a href="reservation.html">Đặt bàn</a></li>
+                        <li role="presentation" class="menu-item dropdown">
+                        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                            aria-haspopup="true" aria-expanded="false">Liên hệ <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">Tuyển dụng</a></li>
+                            <li><a href="feedback.html">Phản hồi</a></li>
+                            <li><a href="contact.html">Liên hệ</a></li>
+                            
+                          </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li role="presentation" class="social-top">
+                            <a href="http://facebook.com"> <span class="fa fa-facebook"></span></a>
+                            <a href="https://www.instagram.com/"> <i class="fa fa-instagram"></i></a>
+                            <a href="http://facebook.com"> <i class="fa fa-rss"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class='thetop'></div>
+    <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>
+            <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <!--li data-target="#myCarousel" data-slide-to="3"></li>-->
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+
+            <div class="item active">
+
+                <img src="assets/img/new-slider.jpg" class="slide-image" alt="Hai san">
+                <div class="bs-slider-overlay"></div>
+
+                <div class="container">
+                    <div class="row">
+                        <!-- Slide Text Layer -->
+                        <div class="slide-text slide_style_center">
+                            <h1 data-animation="animated zoomInRight" class="">Nhà hàng Sóng</h1>
+                            <p data-animation="animated fadeInLeft" class="">Vui lòng khách đến, vừa lòng khách đi</p>
+                            <a href="intro.html" target="_blank" class="btn btn-default" data-animation="animated fadeInLeft">Giới thiệu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="assets/img/new-slider2.jpg" class="slide-image" alt="không an tâm">
+                <div class="bs-slider-overlay"></div>
+                <!-- Slide Text Layer -->
+                <div class="slide-text slide_style_center">
+                    <h1 data-animation="animated flipInX">Nhà hàng Sóng</h1>
+                    <p data-animation="animated lightSpeedIn">Những thông tin khuyến mãi mới nhất dành cho bạn</p>
+                    <a href="khuyen_mai.html" target="_blank" class="btn btn-primary" data-animation="animated fadeInDown">Đặt bàn</a>
+                </div>
+            </div>
+            <div class="item">
+                <img src="assets/img/new-slider3.png" class="slide-image" alt="không an tâm">
+                <div class="bs-slider-overlay"></div>
+                <!-- Slide Text Layer -->
+                <div class="slide-text slide_style_center">
+                    <h1 data-animation="animated flipInX">Nhà hàng Sóng</h1>
+                    <p data-animation="animated lightSpeedIn">Còn chần chờ gì nữa mà không đặt bàn ngay</p>
+                    <a href="reservation.html" target="_blank" class="btn btn-primary" data-animation="animated fadeInDown">Đặt bàn</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
+            <span class="fa fa-angle-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
+            <span class="fa fa-angle-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <section class="background-content">
+    		
+    		<div id="new-foodCarousel" class="new-food carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+				<br/>
+                <h2 class="text-primary">Đặt bàn trực tuyến</h2>
+                <p class="text-center text-primary">Khi có nhu cầu đặt tiệc, liên hoan, cưới hỏi..., bạn có thể đặt bàn trực tiếp ngay dưới đây vào bất kì thời gian nào trong ngày. Trong vòng 48 giờ sau khi đặt bàn, nhà hàng chúng tôi sẽ liên lạc trực tiếp với quý khách để xác nhận thông tin
+				</p>
+				<br/>
+				<div class="form-group px1">
+					<div class="box box-info px2">
+
+							<div class="form-group">
+								<div class="control-label col-md-6">
+                                    <div class="my-control-label col-md-3 px3">
+                                        <b>Họ tên</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-user"></i></span>
+											<input type="text" class="form-control" placeholder="Nguyễn Văn A">
+										</div>
+                                    </div>
+								</div>
+								<div class="control-label col-md-6">
+                                    <div class="my-control-label col-md-3">
+                                        <b>Số người</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-user-plus"></i></span>
+											<input type="number" class="form-control" placeholder="2">
+										</div>
+                                    </div>
+								</div>
+							</div>
+							<br/>
+							<br/>
+							<div class="form-group">
+								<div class="control-label col-md-6">
+                                    <div class="my-control-label col-md-3 px3">
+                                        <b>Ngày</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+											<input type="date" class="form-control">
+										</div>
+                                    </div>
+								</div>
+								<div class="control-label col-md-6">
+                                    <div class="my-control-label col-md-3">
+                                       <b>Giờ</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+											<input type="time" class="form-control">
+										</div>
+                                    </div>
+								</div>								
+							</div>
+							<br/>
+							<br/>
+                            <div class="form-group">
+								<div class="control-label col-md-6">
+                                    <div class="my-control-label col-md-3 px3">
+                                        <b>Email</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+											<input type="mail" class="form-control" placeholder="abc@gmail.com">
+										</div>
+                                    </div>
+								</div>
+								<div class="control-label col-md-6">
+                                    <div class="my-control-label col-md-3">
+                                        <b>Số điện thoại</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-phone"></i></span>
+											<input type="tel" class="form-control" placeholder="0123456789">
+										</div>
+                                    </div>
+								</div>				
+							</div>
+							<br/>
+							<br/>
+							<br/>
+							<div class="form-group">
+								<div class="text-center">
+									<a href="#" class="button1">Đặt bàn</a>
+								</div>	
+							</div>
+					</div>
+				</div>                   
+			</div>
+    		<div class="container">
+    		<hr class="special-food-hr">
+            </div> 
+            <div id="special-foodCarousel" class="special-food carousel slide" data-ride="carousel">
+                <h2 class="text-primary">Đặt bàn qua điện thoại</h2>
+                <p class="text-center text-primary">Nếu không tiện đặt bàn qua website, quý khách cũng có thể đặt bàn bằng cách gọi điện thoại trực tiếp cho chúng tôi thông qua 1 trong 2 số điện thoại như sau:</p>
+                   <!-- Left and right controls -->
+				   <div class="text-center">
+						 <div class="input-group phone-reservation">
+							<span class="input-group-addon"><i class="fa fa-phone"></i></span>
+							<input type="tel" class="form-control text-primary" value="0123456789" disabled>
+						</div>
+					</div>
+					<br/>
+					<div class="text-center">
+						 <div class="input-group phone-reservation">
+							<span class="input-group-addon"><i class="fa fa-phone"></i></span>
+							<input type="tel" class=" text-primary form-control" value="0123113113" disabled>
+						</div>
+					</div>
+            </div>
+			<br>
+    </section>
+    <footer id="footer">
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 bordered">
+                    	<h3></h3>
+                       
+                        	<div class="col-sm-3">
+                        	<img class="" src="assets/img/logo.png" width="60" height="60">
+                        	</div>
+                            <div class="col-sm-9 special-text" style="text-align:justify">
+                        	<p>"Sự hài lòng của quý khách là niềm hạnh phúc lớn nhất của chúng tôi"</p>
+                        	</div>
+                     
+                        <div class="text-center">
+                        <a href="" class="button1 ">Giới thiệu</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                    	
+                            <h3>Liên hệ</h3>
+                            <div class="form-group">
+                                <i class="fa fa-location-arrow"></i>
+                                123 Võ Văn Ngân, Bình Thọ, Thủ Đức, Hồ Chí Minh 
+                            </div>
+                            <div class="form-group">
+                                <i class="fa fa-mail-forward"></i>
+                                nhahangsong@gmail.com
+                            </div>
+                            <div class="form-group">
+                                <i class="fa fa-phone"></i>
+                                0123 456 789
+                            </div>
+                    </div>
+                    <div class="col-sm-4">
+                    	<h3>Hình ảnh</h3>
+                        <div class="footer-picture">
+                        	<ul>
+                            	<li>
+                                	<a href="assets/img/f1.jpg" data-lightbox="roadtrip">
+                                    	<img class="img-responsive" src="assets/img/f1.jpg" >
+                                    </a>
+                                </li>
+                                <li>
+                                	<a href="assets/img/f2.jpg" data-lightbox="roadtrip">
+                                    	<img class="img-responsive" src="assets/img/f2.jpg" >
+                                    </a>
+                                </li>
+                                <li>
+                                	<a href="assets/img/f3.jpg" data-lightbox="roadtrip">
+                                    	<img class="img-responsive" src="assets/img/f3.jpg" data-lightbox="roadtrip">
+                                    </a>
+                                </li>
+                                <li>
+                                	<a href="assets/img/f4.jpg" data-lightbox="roadtrip">
+                                    	<img class="img-responsive" src="assets/img/f4.jpg" >
+                                    </a>
+                                </li>
+                                <li>
+                                	<a href="assets/img/f5.jpg" data-lightbox="roadtrip">
+                                    	<img class="img-responsive" src="assets/img/f5.jpg" >
+                                    </a>
+                                </li>
+                                <li>
+                                	<a href="assets/img/f6.jpg" data-lightbox="roadtrip">
+                                    	<img class="img-responsive" src="assets/img/f6.jpg">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                   	</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    		
+    		
+            <div class="block-quydinhgiaohang2 hidden-xs">
+                
+                <div class="icon icon-2">
+                    <div class="quydinh-tip quydinh-tip-2">
+                    	
+                        (+84-8) 123 4567 <br>
+                         123 Võ Văn Ngân, Bình Thọ <br>
+                         Thủ Đức, Hồ Chí Minh 
+                      
+                    </div>
+                    <img src="assets/img/2.png" width="74" height="75">
+                </div>
+                
+                <div class="icon icon-1 scrolltop">
+                    
+                    <!--i class="fa fa-4x fa-angle-up "></i-->
+                    <img src="assets/img/1.png"  class="scroll" width="74" height="75">
+                </div>
+            </div>
+            <div class=''>
+                    <div class=' button-top'>
+                        
+                    </div>
+            </div>
+            
+    </div>
+    
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox-plus-jquery.min.js"></script>
+	<script type="text/javascript">
+			$(window).scroll(function() {
+			if ($(this).scrollTop() > 50 ) {
+				$('.scrolltop:hidden').stop(true, true).fadeIn();
+			}
+			else {
+				$('.scrolltop').stop(true, true).fadeOut();
+			}
+		});
+			$(function(){$(".scroll").click(function(){$("html,body").animate({scrollTop:$(".thetop").offset().top},"1000");return false})})      
+    </script>
+</body>
+<style>
+
+</style>
+</html>
