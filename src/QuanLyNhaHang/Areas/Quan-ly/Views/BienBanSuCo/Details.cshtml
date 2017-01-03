@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
-    ViewData["Title"] = "Chi tiết biên bản sự cố | Quản lý";
+    ViewData["Title"] = "Chi tiết biên bản sự cố";
     ViewData["areas"] = "Quản lý";
     ViewData["controller"] = "Biên bản sự cố";
     ViewData["action"] = "Chi tiết";
@@ -120,4 +120,9 @@
             </div>
         </div>
     </div>
-</form>            
+</form>
+<form asp-action="Details" id="demo-form2" data-parsley-validate="" class="" novalidate="">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-horizontal">
+</div>
+</form>
