@@ -29,10 +29,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         private async Task<IActionResult> GetResult(string maluot = null,
-           int? soban = null, string thoigianvao = null)
+           string soban = null, string thoigianvao = null)
         {
             IQueryable<LUOTKHACH> result = _context.GetList().Where(c =>
-          (maluot == null || c.MaLuot == maluot) && (soban == null || c.SoBan == soban.Value)
+          (maluot == null || c.MaLuot == maluot) && (soban == null || c.SoBan == int.Parse(soban))
           && (thoigianvao == null || Convert.ToDateTime(c.ThoiGianVao).Date == 
           Convert.ToDateTime(thoigianvao).Date) && c.TrangThai == "1");
             return View(await result.ToListAsync());
@@ -40,7 +40,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // GET: LuotKhach
         [Route("quan-ly/luot-khach")]
         public async Task<IActionResult> Search(string maluot = null,
-           int? soban = null, string thoigianvao = null)
+           string soban = null, string thoigianvao = null)
         {
             List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
             listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
@@ -52,7 +52,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         [Route("quan-ly/luot-khach")]
         public async Task<IActionResult> Search(int? id, string trangthaiduyet,
-    string maluot = null, int? soban = null, string thoigianvao = null)
+    string maluot = null, string soban = null, string thoigianvao = null)
         {
             if (id == null)
             {

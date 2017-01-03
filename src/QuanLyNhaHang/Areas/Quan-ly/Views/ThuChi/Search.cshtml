@@ -1,11 +1,11 @@
-@model IEnumerable<QuanLyNhaHang.Models.THUCHI>
+Ôªø@model IEnumerable<QuanLyNhaHang.Models.THUCHI>
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Danh s·ch phi?u thu chi | Qu?n l˝";
-    ViewData["areas"] = "Qu?n l˝";
+    Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
+    ViewData["Title"] = "Danh s√°ch phi·∫øu thu chi | Qu?n l√Ω";
+    ViewData["areas"] = "Qu·∫£n l√Ω";
     ViewData["controller"] = "Thu chi";
-    ViewData["action"] = "Danh s·ch phi?u thu chi";
+    ViewData["action"] = "Danh s√°ch phi·∫øu thu chi";
 }
 
 <div class="clearfix"></div>
@@ -13,7 +13,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2><strong>TÏm ki?m</strong></h2>
+                <h2><strong>T√¨m ki·∫øm</strong></h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="visibility:hidden" role="button" aria-expanded="false">
@@ -30,7 +30,7 @@
                 </p>
                 <form asp-action="Search" method="get" role="form" enctype="multipart/form-data">
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Ng‡y l?p</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Ng√†y l?p</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <input id="date" name="ngaylap" class="date-picker form-control col-md-7 col-xs-12" type="text">
                         </div>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="submit" class="btn btn-success">TÏm ki?m</button>
+                        <button type="submit" class="btn btn-success">T√¨m ki?m</button>
                     </div>
                 </form>
             </div>
@@ -54,7 +54,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2><strong>Danh s·ch phi?u chi</strong></h2>
+                <h2><strong>Danh s√°ch phi·∫øu chi</strong></h2>
                 <ul class="nav navbar-right panel_toolbox">
 
                     <li class="dropdown">

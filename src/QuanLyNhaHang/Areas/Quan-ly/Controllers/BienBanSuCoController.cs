@@ -43,47 +43,46 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
             ViewData["MaLoaiSuCo"] = new SelectList(loaisucolist, "MaLoaiSuCo", "MaLoaiSuCo");
             ViewData["MaNV"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
         }
-        private async Task<IActionResult> GetResult(string mabienban = null,
-            string maloaisuco = null, string manv = null, DateTime? thoigian = null)
+        private async Task<IActionResult> GetResult(string thoigian = null,string mabienban = null,
+            string maloaisuco = null, string manv = null)
         {
             var loaisucolist = _loaisucocontext.GetList().Where(c => c.TrangThai == "1");
             var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
             ViewData["maloaisuco"] = new SelectList(loaisucolist, "MaLoaiSuCo", "MaLoaiSuCo", maloaisuco);
             ViewData["manv"] = new SelectList(nhanvienlist, "MaNV", "MaNV", manv);
-            //var a = _context.GetList();
-            var result = from s in _context.GetList() where
-                         (mabienban == null || s.MaBienBan == mabienban)
-                         && (maloaisuco == null || s.MaLoaiSuCo == maloaisuco)
-                         && (manv == null || s.MaNV == manv)
-                         && (thoigian == null || DateTime.Compare(Convert.ToDateTime(s.ThoiGian), thoigian.Value) == 0)
-                         && s.TrangThai == "1"
-                         select s;
-            //IQueryable<BIENBANSUCO> result = _context.GetList().Where(c =>
-            //(mabienban == null || c.MaBienBan == mabienban) && (maloaisuco == null || c.MaLoaiSuCo == maloaisuco)
-            //&& (manv == null || c.MaNV == manv)
-            //&& (thoigian == null || DateTime.Compare(Convert.ToDateTime(c.ThoiGian), thoigian.Value) == 0)
-            //&& c.TrangThai == "1");
+            //var result = from s in _context.GetList() where
+            //             (mabienban == null || s.MaBienBan == mabienban)
+            //             && (maloaisuco == null || s.MaLoaiSuCo == maloaisuco)
+            //             && (manv == null || s.MaNV == manv)
+            //             && (thoigian == null || (DateTime.Compare(Convert.ToDateTime(s.ThoiGian), Convert.ToDateTime(thoigian)) == 0))
+            //             && s.TrangThai == "1"
+            //             select s;
+            IQueryable<BIENBANSUCO> result = _context.GetList().Where(c =>
+            (mabienban == null || c.MaBienBan == mabienban) && (maloaisuco == null || c.MaLoaiSuCo == maloaisuco)
+            && (manv == null || c.MaNV == manv)
+            && (thoigian == null || (DateTime.Compare(Convert.ToDateTime(c.ThoiGian), Convert.ToDateTime(thoigian)) == 0))
+            && c.TrangThai == "1");
             return View(await result.ToListAsync());
 
         }
         // GET: BienBanSuCo
         [Route("quan-ly/bien-ban-su-co")]
-        public async Task<IActionResult> Search(string mabienban = null,
-            string maloaisuco = null, string manv = null, DateTime? thoigian = null)
+        public async Task<IActionResult> Search(string thoigian = null, string mabienban = null,
+            string maloaisuco = null, string manv = null)
         {
             //return View(await _context.GetAll());
             List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
             listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
             listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
             ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
-            return await GetResult(mabienban, maloaisuco, manv, thoigian = null);
+            return await GetResult(thoigian,mabienban, maloaisuco, manv);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("quan-ly/bien-ban-su-co")]
-        public async Task<IActionResult> Search(int? id, string trangthaiduyet, string mabienban = null,
-            string maloaisuco = null, string manv = null, DateTime? thoigian = null)
+        public async Task<IActionResult> Search(int? id, string trangthaiduyet, string thoigian = null, string mabienban = null,
+            string maloaisuco = null, string manv = null)
         {
             if (id == null)
                 return NotFound();
@@ -95,7 +94,7 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
                 _context.SetState(bienbansuco, EntityState.Modified);
                 await _context.Update(bienbansuco, trangthaiduyet, "1", _userManager.GetUserId(User));
             }
-            return await Search(mabienban, maloaisuco, manv, thoigian = null);
+            return await GetResult(thoigian, mabienban, maloaisuco, manv);
         }
         // GET: BienBanSuCo/Details/5
         [Route("quan-ly/bien-ban-su-co/chi-tiet/{id}")]

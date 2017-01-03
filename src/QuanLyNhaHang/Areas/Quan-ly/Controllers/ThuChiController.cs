@@ -35,19 +35,19 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
         }
 
-        private async Task<IActionResult> GetResult(DateTime? ngaylap = null,
+        private async Task<IActionResult> GetResult(string ngaylap = null,
           string nguoilap = null)
         {
             var nguoilaplist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1");
             ViewData["nguoilap"] = new SelectList(nguoilaplist, "MaNV", "MaNV", nguoilap);
             IQueryable<THUCHI> result = _context.GetList().Where(c =>
-           (ngaylap == null || DateTime.Compare(Convert.ToDateTime(c.NgayTao), ngaylap.Value) == 0)
+           (ngaylap == null || DateTime.Compare(Convert.ToDateTime(c.NgayTao), Convert.ToDateTime(ngaylap)) == 0)
            && (nguoilap == null || c.NguoiLap == nguoilap) && c.TrangThai == "1");
             return View(await result.ToListAsync());
         }
         // GET: ThuChi
         [Route("quan-ly/thu-chi")]
-        public async Task<IActionResult> Search(DateTime? ngaylap = null,
+        public async Task<IActionResult> Search(string ngaylap = null,
           string nguoilap = null)
         {
             List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
@@ -60,7 +60,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         [Route("quan-ly/thu-chi")]
         public async Task<IActionResult> Search(int? id, string trangthaiduyet,
-            DateTime? ngaylap = null, string nguoilap = null)
+            string ngaylap = null, string nguoilap = null)
         {
             if (id == null)
                 return NotFound();

@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyNhaHang.Models;
@@ -39,7 +39,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             ViewData["NguoiLap"] = new SelectList(nguoilaplist, "MaNV", "MaNV");
         }
 
-        private async Task<IActionResult> GetResult(string mapt = null, string maluot = null, DateTime? ngaylap = null,
+        private async Task<IActionResult> GetResult(string mapt = null, string maluot = null, string ngaylap = null,
            string nguoilap = null)
         {
             var luotkhachlist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1");
@@ -48,18 +48,18 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             ViewData["nguoilap"] = new SelectList(nguoilaplist, "MaNV", "MaNV", nguoilap);
             IQueryable<PHIEUTHU> result = _context.GetList().Where(c =>
            (mapt == null || c.MaPT == mapt) && (maluot == null || c.MaLuot == maluot)
-           && (ngaylap == null || DateTime.Compare(Convert.ToDateTime(c.NgayTao), ngaylap.Value) == 0)
+           && (ngaylap == null || DateTime.Compare(Convert.ToDateTime(c.NgayTao), Convert.ToDateTime(ngaylap)) == 0)
            && (nguoilap == null || c.NguoiLap == nguoilap) && c.TrangThai == "1");
             return View(await result.ToListAsync());
         }
         // GET: PhieuThu
         [Route("quan-ly/phieu-thu")]
-        public async Task<IActionResult> Search(string mapt = null, string maluot = null, DateTime? ngaylap = null,
+        public async Task<IActionResult> Search(string mapt = null, string maluot = null, string ngaylap = null,
            string nguoilap = null)
         {
             List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
-            listTrangThaiDuyet.Add(new SelectListItem { Text = "?� duy?t", Value = "A" });
-            listTrangThaiDuyet.Add(new SelectListItem { Text = "Ch?a duy?t", Value = "U" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
             return await GetResult(mapt,maluot,ngaylap,nguoilap);
         }
 
@@ -67,7 +67,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [ValidateAntiForgeryToken]
         [Route("quan-ly/phieu-thu")]
         public async Task<IActionResult> Search(int? id, string trangthaiduyet,
-            string mapt = null, string maluot = null, DateTime? ngaylap = null,
+            string mapt = null, string maluot = null, string ngaylap = null,
            string nguoilap = null)
         {
             if (id == null)

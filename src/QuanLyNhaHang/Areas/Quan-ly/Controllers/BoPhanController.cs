@@ -50,7 +50,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 
         // GET: BoPhan
         [Route("quan-ly/bo-phan")]
-        public async Task<IActionResult> Searh(string mabp = null, string tenbp = null,
+        public async Task<IActionResult> Search(string mabp = null, string tenbp = null,
             string matruongbp = null)
         {
             List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
@@ -63,7 +63,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("quan-ly/bo-phan")]
-        public async Task<IActionResult> Searh(int? id, string trangthaiduyet, string mabp = null, string tenbp = null,
+        public async Task<IActionResult> Search(int? id, string trangthaiduyet, string mabp = null, string tenbp = null,
             string matruongbp = null)
         {
             if (id == null)
@@ -80,7 +80,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 _context.SetState(bophan, EntityState.Modified);
                 await _context.Update(bophan,trangthaiduyet, "1", UserManager.GetUserId(User));
             }
-            return await Searh(mabp, tenbp, matruongbp);
+            return await Search(mabp, tenbp, matruongbp);
         }
         // GET: BoPhan/Details/5
         [Route("quan-ly/bo-phan/chi-tiet/{id}")]
