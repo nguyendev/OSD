@@ -30,7 +30,7 @@ namespace QuanLyNhaHang.Models
         }
 
         [Display(Name = "Mã loại sự cố")]
-        [Required(ErrorMessage = "Vui lòng chọn mã loại sự cố")]
+        //[Required(ErrorMessage = "Vui lòng chọn mã loại sự cố")]
         public string MaLoaiSuCo
         {
             get;
@@ -44,8 +44,8 @@ namespace QuanLyNhaHang.Models
         //	set;
         //}
 
-        [Display(Name = "Mã nhân viên")]
-        [Required(ErrorMessage = "Vui lòng chọn mã nhân viên")]
+        [Display(Name = "Người lập biên bản")]
+       // [Required(ErrorMessage = "Vui lòng chọn mã nhân viên")]
         public string MaNV
         {
             get;

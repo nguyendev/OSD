@@ -28,7 +28,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Display(Name ="Số bàn")]
+        [Display(Name ="Số thứ tự bàn")]
         [Required(ErrorMessage ="Vui lòng nhập số bàn")]
         public int SoBan
         {
