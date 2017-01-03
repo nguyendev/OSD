@@ -2,11 +2,11 @@
 
 @{
     Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
-    ViewData["Title"] = "Chỉnh sửa báo cáo sự cố " + Model.MaBienBan + " | Quản lý";
+    ViewData["Title"] = "Chỉnh sửa biên bản sự cố";
     ViewData["areas"] = "Quản lý";
-    ViewData["controller"] = "Biên bản báo cáo sự cố";
+    ViewData["controller"] = "Biên bản sự cố";
     ViewData["action"] = "Chỉnh sửa";
-    ViewData["h2"] = "Chỉnh sửa biên bản báo cáo sự cố";
+    ViewData["h2"] = "Chỉnh sửa biên bản sự cố";
 }
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -35,7 +35,7 @@
         <div class="form-group">
             <label asp-for="ThoiGian" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="input-group date" id='datetimepicker1'>
+                <div class="input-group date datetimepicker1">
                     <input type="datetime" asp-for="ThoiGian" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
@@ -56,7 +56,7 @@
         <div class="form-group">
             <label asp-for="HuongGiaiQuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <textarea asp-for="HuongGiaiQuyet" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <textarea asp-for="HuongGiaiQuyet" class="form-control"></textarea>
                 <span asp-validation-for="HuongGiaiQuyet" class="text-danger" />
             </div>
         </div>
@@ -64,7 +64,7 @@
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <a asp-action="search" asp-controller="bienbansuco" class="btn btn-success pull-left">Quay lại</a>
-                <input type="submit" value="Lưu" class="btn btn-warning pull-right" />
+                <input type="submit" value="Lưu" class="btn btn-warning pull-left" />
             </div>
         </div>
     </div>

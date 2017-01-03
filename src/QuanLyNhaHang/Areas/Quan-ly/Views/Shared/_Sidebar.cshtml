@@ -3,193 +3,53 @@
         <h3>General</h3>
         <ul class="nav side-menu">
             <li>
-                <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                <a asp-action="index" asp-controller="trangchu"><i class="fa fa-home"></i> Home </a>
+            </li>
+            <li>
+                <a><i class="fa fa-lemon-o"></i> Nhập hàng <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="index.html">Dashboard</a></li>
-                    <li><a href="index2.html">Dashboard2</a></li>
-                    <li><a href="index3.html">Dashboard3</a></li>
+                    <li><a asp-action="search" asp-controller="yeucaunhaphang">Yêu cầu nhập hàng</a></li>
+                    <li><a asp-action="search" asp-controller="hoadonnhaphang">Hóa đơn nhập hàng</a></li>
+                    <li><a asp-action="search" asp-controller="phieuchi">Phiếu chi</a></li>
                 </ul>
             </li>
             <li>
-                <a><i class="fa fa-edit"></i> Biên bản sự cố<span class="fa fa-chevron-down"></span></a>
+                <a><i class="fa fa-diamond"></i> Bán hàng <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
+                    <li><a asp-action="search" asp-controller="luotkhach">Lượt khách</a></li>
+                    <li><a asp-action="search" asp-controller="yeucaumonan">Yêu cầu món ăn</a></li>
+                    <li><a asp-action="search" asp-controller="phieuthu">Phiếu thu</a></li>
                 </ul>
             </li>
             <li>
-                <a><i class="fa fa-edit"></i> Bộ phận<span class="fa fa-chevron-down"></span></a>
+                <a asp-action="search" asp-controller="datban"><i class="fa fa-list"></i> Đặt bàn </a>
+            </li>
+            <li>
+                <a><i class="fa fa-beer"></i> Xử lý sự cố <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
+                    <li><a asp-action="search" asp-controller="loaisuco">Loại sự cố</a></li>
+                    <li><a asp-action="search" asp-controller="bienbansuco">Biên bản sự cố</a></li>
+                    <li><a asp-action="search" asp-controller="thiethai">Thiệt hại</a></li>
                 </ul>
             </li>
             <li>
-                <a><i class="fa fa-edit"></i> Đặt bàn<span class="fa fa-chevron-down"></span></a>
+                <a><i class="fa fa-lastfm-square"></i> Thông tin chung <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
+                    <li><a asp-action="search" asp-controller="nhanvien">Nhân viên</a></li>
+                    <li><a asp-action="search" asp-controller="nhacungcap">Nhà cung cấp</a></li>
+                    <li><a asp-action="search" asp-controller="nguyenlieu">Nguyên liệu</a></li>
+                    <li><a asp-action="search" asp-controller="nguyenlieutrongkho">Nguyên liệu trong kho</a></li>
+                    <li><a asp-action="search" asp-controller="loaimonan">Loại món ăn</a></li>
+                    <li><a asp-action="search" asp-controller="monan">Món ăn</a></li>
                 </ul>
             </li>
             <li>
-                <a><i class="fa fa-edit"></i>Hóa đơn nhập hàng<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="hoadonnhaphang">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
+                <a asp-action="index" asp-controller="phanhoi"><i class="fa fa-bullhorn"></i> Phản hồi </a>
+             </li>
             <li>
-                <a><i class="fa fa-list"></i> Loại món ăn<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
+                <a href="~/Client/Restaurant/index.html"><i class="fa fa-info"></i>Giới thiệu</a>
             </li>
-            <li>
-                <a><i class="fa fa-apple"></i> Loại sự cố<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-bell"></i> Lượt khách<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-mercury"></i>Món ăn<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-certificate"></i>Nguyên liệu<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-database"></i>Nguyên liệu trong kho<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-renren"></i>Nhà cung cấp<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-spin"></i>Nhân viên<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-reply-all"></i>Phản hồi<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-caret-square-o-up"></i>Phiếu thu<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-caret-square-o-down"></i>Phiếu chi<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-subway"></i>Thu chi<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-moon-o"></i>Yêu cầu món ăn<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
-            <li>
-                <a><i class="fa fa-random"></i>Yêu cầu nhập hàng<span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a asp-action="search" asp-controller="bienbansuco">Danh sách</a></li>
-                    <li><a href="form_advanced.html">Thêm</a></li>
-                    <li><a href="form_validation.html">Xóa</a></li>
-                    <li><a href="form_wizards.html">Sửa</a></li>
-                    <li><a href="form_upload.html">Chi tiết</a></li>
-                </ul>
-            </li>
+            
         </ul>
     </div>
     <div class="menu_section">
@@ -213,29 +73,7 @@
                     <li><a href="pricing_tables.html">Pricing Tables</a></li>
                 </ul>
             </li>
-            <li>
-                <a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="#level1_1">Level One</a>
-                    <li>
-                        <a>Level One<span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li class="sub_menu">
-                                <a href="level2.html">Level Two</a>
-                            </li>
-                            <li>
-                                <a href="#level2_1">Level Two</a>
-                            </li>
-                            <li>
-                                <a href="#level2_2">Level Two</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#level1_2">Level One</a>
-                    </li>
-                </ul>
-            </li>
+           
             <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
         </ul>
     </div>

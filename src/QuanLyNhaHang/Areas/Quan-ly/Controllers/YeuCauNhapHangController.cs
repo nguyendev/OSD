@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
@@ -57,6 +58,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [Route("quan-ly/yeu-cau-nhap-hang")]
         public async Task<IActionResult> Search(string mayc = null, string manl = null, string mancc = null)
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "?ã duy?t", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Ch?a duy?t", Value = "U" });
+            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
             return await GetResult(mayc, manl, mancc);
         }
 
@@ -76,6 +81,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 _context.SetState(yeucau, EntityState.Modified);
                 await _context.Update(yeucau, trangthaiduyet, "1", UserManager.GetUserId(User));
             }
+
             return await Search(mayc, manl, mancc);
         }
         // GET: YeuCauNhapHang/Details/5

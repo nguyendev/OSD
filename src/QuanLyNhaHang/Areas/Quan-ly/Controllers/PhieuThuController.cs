@@ -8,9 +8,12 @@ using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 {
+    [Area("quan-ly")]
+    [Authorize]
     public class PhieuThuController : Controller
     {
         private readonly IGenericRepository<PHIEUTHU> _context;
@@ -60,6 +63,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
             listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
             listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
+            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
+
             return await GetResult(mapt,maluot,ngaylap,nguoilap);
         }
 

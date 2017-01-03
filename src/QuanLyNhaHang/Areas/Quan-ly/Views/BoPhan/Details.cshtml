@@ -1,12 +1,12 @@
-@model QuanLyNhaHang.Models.BOPHAN
+﻿@model QuanLyNhaHang.Models.BOPHAN
 
 @{
     Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
-    ViewData["Title"] = "Chi ti?t b? ph?n " + Model.MaBP + " | Qu?n l�";
-    ViewData["areas"] = "Qu?n l�";
-    ViewData["controller"] = "B? ph?n";
-    ViewData["action"] = "Chi ti?t";
-    ViewData["h2"] = "Chi ti?t b? ph?n";
+    ViewData["Title"] = "Chi tiết bộ phận ";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Bộ phận";
+    ViewData["action"] = "Chi tiết";
+    ViewData["h2"] = "Chi tiết bộ phận";
 }
 <form asp-action="Details">
     <div class="form-horizontal">
@@ -33,11 +33,63 @@
                 <span asp-validation-for="MaTruongBP" class="text-danger" />
             </div>
         </div>
+        <div class="form-group">
+            <label asp-for="NgayTao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="input-group date" id='datetimepicker1'>
+                    <input disabled type="datetime" asp-for="NgayTao" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    <span asp-validation-for="NgayTao" class="text-danger" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NgayDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="input-group date" id='datetimepicker1'>
+                    <input disabled type="datetime" asp-for="NgayDuyet" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    <span asp-validation-for="NgayDuyet" class="text-danger" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NguoiTao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input disabled asp-for="NguoiTao" class="form-control" />
+                <span asp-validation-for="NguoiTao" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NguoiDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input disabled asp-for="NguoiDuyet" class="form-control" />
+                <span asp-validation-for="NguoiDuyet" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TrangThaiDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input disabled asp-for="TrangThaiDuyet" class="form-control" />
+                <span asp-validation-for="TrangThaiDuyet" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <textarea disabled asp-for="GhiChu" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <span asp-validation-for="GhiChu" class="text-danger" />
+            </div>
+        </div>
         <div class="ln_solid"></div>
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <a asp-action="search" asp-controller="bophan" class="btn btn-default pull-left">Quay l?i</a>
-                <a asp-action="edit" asp-controller="bophan" class="btn btn-warning pull-right">Ch?nh s?a</a>
+                <a asp-action="search" asp-controller="bophan" class="btn btn-success pull-left">Quay lại</a>
+                <a asp-action="edit" asp-controller="bophan" class="btn btn-warning pull-right">Chỉnh sửa</a>
             </div>
         </div>
     </div>

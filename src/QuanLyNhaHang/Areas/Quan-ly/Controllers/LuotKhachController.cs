@@ -29,10 +29,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         private async Task<IActionResult> GetResult(string maluot = null,
-           string soban = null, string thoigianvao = null)
+           string thoigianvao = null)
         {
             IQueryable<LUOTKHACH> result = _context.GetList().Where(c =>
-          (maluot == null || c.MaLuot == maluot) && (soban == null || c.SoBan == int.Parse(soban))
+          (maluot == null || c.MaLuot == maluot)
           && (thoigianvao == null || Convert.ToDateTime(c.ThoiGianVao).Date == 
           Convert.ToDateTime(thoigianvao).Date) && c.TrangThai == "1");
             return View(await result.ToListAsync());
@@ -40,19 +40,21 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // GET: LuotKhach
         [Route("quan-ly/luot-khach")]
         public async Task<IActionResult> Search(string maluot = null,
-           string soban = null, string thoigianvao = null)
+            string thoigianvao = null)
         {
             List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
             listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
             listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
-            return await GetResult(maluot, soban, thoigianvao);
+            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
+
+            return await GetResult(maluot, thoigianvao);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("quan-ly/luot-khach")]
         public async Task<IActionResult> Search(int? id, string trangthaiduyet,
-    string maluot = null, string soban = null, string thoigianvao = null)
+    string maluot = null, string thoigianvao = null)
         {
             if (id == null)
             {
@@ -68,7 +70,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 _context.SetState(luotkhach, EntityState.Modified);
                 await _context.Update(luotkhach, trangthaiduyet,"1", UserManager.GetUserId(User));
             }
-            return await Search(maluot, soban, thoigianvao);
+            return await Search(maluot, thoigianvao);
         }
         // GET: LuotKhach/Details/5
         [Route("quan-ly/luot-khach/chi-tiet/{id}")]
@@ -89,7 +91,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         }
 
         // GET: LuotKhach/Create
-        [Route("quan-ly/luot-khach")]
+        [Route("quan-ly/luot-khach/tao-moi")]
         public IActionResult Create()
         {
             return View();
@@ -100,7 +102,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("quan-ly/luot-khach")]
+        [Route("quan-ly/luot-khach/tao-moi")]
         public async Task<IActionResult> Create(LUOTKHACH luotkhach)
         {
             if (ModelState.IsValid)

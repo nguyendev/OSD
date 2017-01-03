@@ -1,49 +1,109 @@
-@model QuanLyNhaHang.Models.DATBAN
+﻿@model QuanLyNhaHang.Models.DATBAN
 
 @{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
+    ViewData["Title"] = "Chi tiết đặt bàn";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Đặt bàn";
+    ViewData["action"] = "Chi tiết";
+    ViewData["h2"] = "Chi tiết đặt bàn";
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>DATBAN</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Gio)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Gio)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HoTen)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HoTen)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Ngay)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Ngay)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SoDT)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SoDT)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SoNguoi)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SoNguoi)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Gio" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="Gio" id="time" class="form-control" />
+                <span asp-validation-for="Gio" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="HoTen" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="HoTen" type="text" class="form-control" />
+                <span asp-validation-for="HoTen" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Ngay" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="Ngay" type="date" id="date" class="form-control" />
+                <span asp-validation-for="Ngay" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SoDT" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="SoDT" type="number" class="form-control" />
+                <span asp-validation-for="SoDT" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SoNguoi" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input asp-for="SoNguoi" type="number" class="form-control" />
+                <span asp-validation-for="SoNguoi" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NgayTao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="input-group date" id='datetimepicker1'>
+                    <input disabled type="datetime" asp-for="NgayTao" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    <span asp-validation-for="NgayTao" class="text-danger" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NgayDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="input-group date" id='datetimepicker1'>
+                    <input disabled type="datetime" asp-for="NgayDuyet" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    <span asp-validation-for="NgayDuyet" class="text-danger" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NguoiTao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input disabled asp-for="NguoiTao" class="form-control" />
+                <span asp-validation-for="NguoiTao" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NguoiDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input disabled asp-for="NguoiDuyet" class="form-control" />
+                <span asp-validation-for="NguoiDuyet" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TrangThaiDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input disabled asp-for="TrangThaiDuyet" class="form-control" />
+                <span asp-validation-for="TrangThaiDuyet" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <textarea disabled asp-for="GhiChu" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>
+                <span asp-validation-for="GhiChu" class="text-danger" />
+            </div>
+        </div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <a asp-action="search" asp-controller="datban" class="btn btn-success pull-left">Quay lại</a>
+                <input type="submit" value="Chi tiết" class="btn btn-primary pull-left" />
+            </div>
+        </div>
+    </div>
+</form>

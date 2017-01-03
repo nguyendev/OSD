@@ -1,11 +1,11 @@
-@model IEnumerable<QuanLyNhaHang.Models.NGUYENLIEU>
+ï»¿@model IEnumerable<QuanLyNhaHang.Models.NGUYENLIEU>
 
 @{
     Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
-    ViewData["Title"] = "Danh sách nguyên li?u | Qu?n lý";
-    ViewData["areas"] = "Qu?n lý";
-    ViewData["controller"] = "Nguyên li?u";
-    ViewData["action"] = "Danh sách nguyên li?u";
+    ViewData["Title"] = "Danh sÃ¡ch nguyÃªn liá»‡u | Quáº£n lÃ½";
+    ViewData["areas"] = "Qu?n lÃ½";
+    ViewData["controller"] = "NguyÃªn liá»‡u";
+    ViewData["action"] = "Danh sÃ¡ch nguyÃªn liá»‡u";
 }
 
 <div class="clearfix"></div>
@@ -13,7 +13,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2><strong>Tìm ki?m</strong></h2>
+                <h2><strong>TÃ¬m kiáº¿m</strong></h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="visibility:hidden" role="button" aria-expanded="false">
@@ -30,19 +30,19 @@
                 </p>
                 <form asp-action="Search" method="get" role="form" enctype="multipart/form-data">
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Mã nguyên li?u</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">MÃ£ nguyÃªn liá»‡u</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             @Html.TextBox("manl", "", new { @class = "select2_group form-control" })
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tên nguyên li?u</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">TÃªn nguyÃªn liá»‡u</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             @Html.TextBox("tennl", "", new { @class = "select2_group form-control" })
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="submit" class="btn btn-success">Tìm ki?m</button>
+                        <button type="submit" class="btn btn-success">TÃ¬m kiáº¿m</button>
                     </div>
                 </form>
             </div>
@@ -54,7 +54,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2><strong>Danh sách nguyên li?u</strong></h2>
+                <h2><strong>Danh sÃ¡ch nguyÃªn liá»‡u</strong></h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="visibility:hidden" role="button" aria-expanded="false">
@@ -63,7 +63,7 @@
                     </li>
                     <li>
                         <a asp-action="create" class="btn btn-primary them" style="color: white" role="button">
-                            Thêm m?i
+                            ThÃªm má»›i
                         </a>
                     </li>
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -77,7 +77,7 @@
                             <th>@Html.DisplayNameFor(model => model.MaNL)</th>
                             <th>@Html.DisplayNameFor(model => model.TenNL)</th>
                             <th>@Html.DisplayNameFor(model => model.TrangThaiDuyet)</th>
-                            <th>Thao tác</th>
+                            <th>Thao tÃ¡c</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -91,7 +91,7 @@
                                     {
                                         <form asp-action="Search" method="post" asp-route-id=@item.Id role="form" enctype="multipart/form-data">
                                             <select name="trangthaiduyet" id="trangthaiduyet" asp-for=@item.TrangThaiDuyet class="select2_group form-control" asp-items="ViewBag.TrangThaiDuyet"></select>
-                                            <input type="submit" value="L?u" class="btn btn-success btn-sm" />
+                                            <input type="submit" value="LÆ°u" class="btn btn-success btn-sm" />
                                         </form>
                                     }
                                     else
@@ -100,9 +100,9 @@
                                     }
                                 </td>
                                 <td>
-                                    <a asp-action="Edit" class="label label-warning" asp-route-id="@item.Id">S?a</a> |
-                                    <a asp-action="Details" class="label label-success" asp-route-id="@item.Id">Chi ti?t</a> |
-                                    <a asp-action="Delete" class="label label-danger" asp-route-id="@item.Id">Xóa</a>
+                                    <a asp-action="Edit" class="label label-warning" asp-route-id="@item.Id">Sá»­a</a> |
+                                    <a asp-action="Details" class="label label-success" asp-route-id="@item.Id">Chi tiáº¿t</a> |
+                                    <a asp-action="Delete" class="label label-danger" asp-route-id="@item.Id">XÃ³a</a>
 
                                 </td>
                             </tr>

@@ -55,6 +55,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
             listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
             listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
+            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
+
             return await GetResult(mamon, tenmon, maloaimon);
         }
 
