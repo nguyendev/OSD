@@ -118,7 +118,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             if (ModelState.IsValid)
             {
                 await _context.Add(phieuchi, UserManager.GetUserId(User));
-                return RedirectToAction("Index");
+                return RedirectToAction("Search");
             }
             return View(phieuchi);
         }
@@ -159,7 +159,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                     else
                         throw;
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Search");
             }
             return View(phieuchi);
         }
@@ -196,7 +196,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                 else
                     await _context.Delete(id);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Search");
         }
     }
 }

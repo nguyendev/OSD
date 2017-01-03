@@ -128,7 +128,7 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
             if (ModelState.IsValid)
             {
                 await _context.Add(bienbansuco, _userManager.GetUserId(User));
-                return RedirectToAction("Index");
+                return RedirectToAction("Search");
             }
             return View(bienbansuco);
         }
@@ -171,7 +171,7 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
                     else
                         throw;
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Search");
             }
             return View(bienbansuco);
         }
@@ -202,7 +202,7 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
                 else
                     await _context.Delete(id);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Search");
         }
 
         private bool BienBanSuCoExists(int id)
