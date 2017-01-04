@@ -29,6 +29,7 @@ namespace QuanLyNhaHang.Areas.Admin.Controllers
         [Route("quan-ly/quan-tri-vien/phan-quyen/tao")]
         public IActionResult Create() => View();
         [HttpPost]
+        [Route("quan-ly/quan-tri-vien/phan-quyen/tao")]
         public async Task<IActionResult> Create([Required]string name)
         {
             if (ModelState.IsValid)
@@ -95,6 +96,7 @@ namespace QuanLyNhaHang.Areas.Admin.Controllers
             });
         }
         [HttpPost]
+        [Route("quan-ly/quan-tri-vien/phan-quyen/chinh-sua/{id}")]
         public async Task<IActionResult> Edit(RoleModificationModel model)
         {
             IdentityResult result;

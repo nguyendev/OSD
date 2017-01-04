@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Contact";
 }
+<br />
 <div class='thetop'></div>
 <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000">
     <!-- Indicators -->
@@ -135,3 +136,32 @@
         </div>
     </div>
 </section>
+@section scripts{
+<script type="text/javascript">
+			$(window).scroll(function() {
+			if ($(this).scrollTop() > 50 ) {
+				$('.scrolltop:hidden').stop(true, true).fadeIn();
+			}
+			else {
+				$('.scrolltop').stop(true, true).fadeOut();
+			}
+		});
+			$(function(){$(".scroll").click(function(){$("html,body").animate({scrollTop:$(".thetop").offset().top},"1000");return false})})
+</script>
+<script type="text/javascript">
+      function initMap() {
+        var uluru = {lat: 10.762622, lng: 106.660172};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoKr27kWgFaBBtF8VCX3CcXR5Ke3n4oWQ&callback=initMap">
+</script>
+}

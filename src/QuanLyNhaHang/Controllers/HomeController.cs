@@ -22,8 +22,13 @@ namespace QuanLyNhaHang.Controllers
         {
             return View();
         }
-        [Route("/tin-thuc")]
+        [Route("/tin-tuc")]
         public IActionResult News()
+        {
+            return View();
+        }
+        [Route("/tin-tuc/chi-tiet")]
+        public IActionResult NewDetails()
         {
             return View();
         }

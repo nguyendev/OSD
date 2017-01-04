@@ -43,12 +43,12 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Index(ManageMessageId? message = null)
         {
             ViewData["StatusMessage"] =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                message == ManageMessageId.ChangePasswordSuccess ? "M?t kh?u c?a b?n ?ã ???c thay ??i."
+                : message == ManageMessageId.SetPasswordSuccess ? "B?n ?ã thi?t ??t m?t kh?u thành công."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
                 : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.AddPhoneSuccess ? "S? ?i?n tho?i c?a b?n ?ã ???c thêm."
+                : message == ManageMessageId.RemovePhoneSuccess ? "S? ?i?n tho?i c?a b?n ?ã ???c xóa."
                 : "";
 
             var user = await GetCurrentUserAsync();
@@ -121,6 +121,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/quan-ly-tai-khoan/bat-xac-thuc-tai-khoan")]
         public async Task<IActionResult> EnableTwoFactorAuthentication()
         {
             var user = await GetCurrentUserAsync();
@@ -137,6 +138,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // POST: /Manage/DisableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/quan-ly-tai-khoan/tat-xac-thuc-tai-khoan")]
         public async Task<IActionResult> DisableTwoFactorAuthentication()
         {
             var user = await GetCurrentUserAsync();

@@ -1,15 +1,19 @@
 ﻿@model QuanLyNhaHang.ViewModels.Manage.ManageLoginsViewModel
 @using Microsoft.AspNetCore.Http.Authentication
 @{
-    ViewData["Title"] = "Manage your external logins";
+    Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
+    ViewData["Title"] = "Đăng nhập bằng phương thức khác";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Quản lý tài khoản";
+    ViewData["action"] = "Phương thức đăng nhập";
+    ViewData["h2"] = "Phương thức đăng nhập";
 }
-
 <h2>@ViewData["Title"].</h2>
 
 <p class="text-success">@ViewData["StatusMessage"]</p>
 @if (Model.CurrentLogins.Count > 0)
 {
-    <h4>Registered Logins</h4>
+    <h4>Đăng ký đăng nhập</h4>
     <table class="table">
         <tbody>
             @for (var index = 0; index < Model.CurrentLogins.Count; index++)
@@ -39,7 +43,7 @@
 }
 @if (Model.OtherLogins.Count > 0)
 {
-    <h4>Add another service to log in.</h4>
+    <h4>Thêm vào phương thức đăng nhập khác</h4>
     <hr />
     <form asp-controller="Manage" asp-action="LinkLogin" method="post" class="form-horizontal">
         <div id="socialLoginList">

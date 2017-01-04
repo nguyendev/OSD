@@ -1,12 +1,13 @@
 ﻿@model QuanLyNhaHang.ViewModels.Manage.AddPhoneNumberViewModel
 @{
-    ViewData["Title"] = "Add Phone Number";
+    Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
+    ViewData["Title"] = "Thêm số điện thoại";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Quản lý tài khoản";
+    ViewData["action"] = "Số điện thọai";
+    ViewData["h2"] = "Thêm số điện thoại";
 }
-
-<h2>@ViewData["Title"].</h2>
-<form asp-controller="Manage" asp-action="AddPhoneNumber" method="post" class="form-horizontal">
-    <h4>Add a phone number.</h4>
-    <hr />
+<form asp-controller="quanlytaikhoan" asp-action="addphonenumber" method="post" class="form-horizontal">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="PhoneNumber" class="col-md-2 control-label"></label>
@@ -17,11 +18,8 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Send verification code</button>
+            <button type="submit" class="btn btn-default">Gửi mã xác thực</button>
         </div>
     </div>
 </form>
 
-@section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}

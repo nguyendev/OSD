@@ -10,7 +10,7 @@ namespace QuanLyNhaHang.ViewModels.Manage
     {
         [Required]
         [Phone]
-        [Display(Name = "Phone number")]
+        [Display(Name = "Số điên thoại")]
         public string PhoneNumber { get; set; }
     }
 }

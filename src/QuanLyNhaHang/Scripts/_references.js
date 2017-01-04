@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="../wwwroot/_references.js" />
+/// <reference path="../wwwroot/fileinput/fileinput.js" />
 /// <reference path="../wwwroot/gentelella/build/js/custom.js" />
 /// <reference path="../wwwroot/gentelella/production/js/datepicker/daterangepicker.js" />
 /// <reference path="../wwwroot/gentelella/production/js/moment/moment.min.js" />

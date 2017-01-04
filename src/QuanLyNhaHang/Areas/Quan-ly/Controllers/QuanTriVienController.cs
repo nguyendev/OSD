@@ -144,6 +144,7 @@ namespace QuanLyNhaHang.Areas.Admin.Controllers
             }
         }
         [HttpPost]
+        [Route("quan-ly/quan-tri-vien/chinh-sua-nguoi-dung/{id}")]
         public async Task<IActionResult> Edit(string id, string email,
         string password)
         {

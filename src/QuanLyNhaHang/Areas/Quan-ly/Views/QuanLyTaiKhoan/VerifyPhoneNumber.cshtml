@@ -1,13 +1,15 @@
 ﻿@model QuanLyNhaHang.ViewModels.Manage.VerifyPhoneNumberViewModel
-@{
-    ViewData["Title"] = "Verify Phone Number";
+@{ 
+    Layout = "~/Areas/Quan-ly/Views/Shared/_LayoutContent.cshtml";
+    ViewData["Title"] = "Xác thực số điện thọai";
+    ViewData["areas"] = "Quản lý";
+    ViewData["controller"] = "Quản lý tài khoản";
+    ViewData["action"] = "Xác thực số điện thoại";
+    ViewData["h2"] = "Mã xác thực số điện thọai";
 }
 
-<h2>@ViewData["Title"].</h2>
-
-<form asp-controller="Manage" asp-action="VerifyPhoneNumber" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+<form asp-controller="quanlytaikhoan" asp-action="VerifyPhoneNumber" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
     <input asp-for="PhoneNumber" type="hidden" />
-    <h4>Add a phone number.</h4>
     <h5>@ViewData["Status"]</h5>
     <hr />
     <div asp-validation-summary="All" class="text-danger"></div>
@@ -20,11 +22,8 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default">Gửi</button>
         </div>
     </div>
 </form>
 
-@section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}

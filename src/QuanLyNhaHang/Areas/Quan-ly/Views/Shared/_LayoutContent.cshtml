@@ -147,7 +147,8 @@
         @section css{
             <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet" /> 
             
-<link href="~/lib/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+            <link href="~/lib/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+            <link href="~/fileinput/fileinput.min.css" rel="stylesheet" />
         }
         @section Scripts {
             <!-- bootstrap-daterangepicker -->
@@ -203,6 +204,29 @@
 
 		            });
             </script>
+            <script src="~/fileinput/fileinput.js"></script>
+            <script>
+                var btnCust = '<button type="button" class="btn btn-default" title="Add picture tags" ' +
+    'onclick="alert(\'Call your custom code here.\')">' +
+    '<i class="glyphicon glyphicon-tag"></i>' +
+    '</button>';
+                $("#avatar-1").fileinput({
+                overwriteInitial: true,
+                maxFileSize: 1500,
+                showClose: false,
+                showCaption: false,
+                browseLabel: '',
+                removeLabel: '',
+                browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+                removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                removeTitle: 'Cancel or reset changes',
+                elErrorContainer: '#kv-avatar-errors-1',
+                msgErrorClass: 'alert alert-block alert-danger',
+                defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar" style="width:160px">',
+                layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
+                allowedFileExtensions: ["jpg", "png", "gif"]
+                });
+            </script>                                                                                 
             <!-- js default -->
             @{
                 await Html.RenderPartialAsync("_ValidationScriptsPartial");
@@ -211,5 +235,4 @@
 
         break;
        }
-
 

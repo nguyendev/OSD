@@ -330,6 +330,8 @@ E:\Project\OOD\1.7\trunk\src\QuanLyNhaHang\Models\YEUCAUNHAPHANG.cs
 E:\Project\OOD\1.7\trunk\src\QuanLyNhaHang\Services\IEmailSender.cs
 E:\Project\OOD\1.7\trunk\src\QuanLyNhaHang\Services\ISmsSender.cs
 E:\Project\OOD\1.7\trunk\src\QuanLyNhaHang\Services\MessageServices.cs
+E:\Project\OOD\1.7\trunk\src\QuanLyNhaHang\ViewModels\ForgotPasswordViewModel.cs
+E:\Project\OOD\1.7\trunk\src\QuanLyNhaHang\ViewModels\ResetPasswordViewModel.cs
 E:\Project\OOD\1.7\trunk\src\QuanLyNhaHang\ViewModels\Manage\AddPhoneNumberViewModel.cs
 E:\Project\OOD\1.7\trunk\src\QuanLyNhaHang\ViewModels\Manage\ChangePasswordViewModel.cs
 E:\Project\OOD\1.7\trunk\src\QuanLyNhaHang\ViewModels\Manage\ConfigureTwoFactorViewModel.cs
