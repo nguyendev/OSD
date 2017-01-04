@@ -74,7 +74,7 @@ namespace QuanLyNhaHang
             services.AddIdentity<AppUser, IdentityRole>(opts =>
             {
 
-                opts.Cookies.ApplicationCookie.LoginPath = "/Quan-Ly/Account/Login";
+                opts.Cookies.ApplicationCookie.LoginPath = "/quan-Ly/tai-khoan/dang-nhap";
                 //opts.User.RequireUniqueEmail = true;
                 //// opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
                 //opts.Password.RequiredLength = 6;

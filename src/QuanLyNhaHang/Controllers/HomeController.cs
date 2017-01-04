@@ -10,22 +10,53 @@ namespace QuanLyNhaHang.Controllers
     public class HomeController : Controller
     {
 
-        public IActionResult Index() => View(GetData(nameof(Index)));
+        public IActionResult Index() => View();
 
+        [Route("/gioi-thieu")]
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
-
+        [Route("/thuc-don")]
+        public IActionResult Menu()
+        {
+            return View();
+        }
+        [Route("/tin-thuc")]
+        public IActionResult News()
+        {
+            return View();
+        }
+        [Route("/khuyen-mai")]
+        public IActionResult Khuyenmai()
+        {
+            return View();
+        }
+        [Route("/kien-thuc")]
+        public IActionResult Kienthuc()
+        {
+            return View();
+        }
+        [Route("/dat-ban")]
+        public IActionResult Reseration()
+        {
+            return View();
+        }
+        [Route("/phan-hoi")]
+        public IActionResult Feedback()
+        {
+            return View();
+        }
+        [Route("/thuc-don/thuc-don-chi-tiet")]
+        public IActionResult Menudetails()
+        {
+            return View();
+        }
+        [Route("/lien-he")]
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
-
         public IActionResult NotFound()
         {
             return View();
@@ -34,20 +65,6 @@ namespace QuanLyNhaHang.Controllers
         {
             return LocalRedirect("~/quan-ly/tai-khoan/dang-nhap");
         }
-
-
-        [Authorize(Roles = "Guest")]
-        public IActionResult OtherAction() => View("Index",
-GetData(nameof(OtherAction)));
-        private Dictionary<string, object> GetData(string actionName) =>
-        new Dictionary<string, object>
-        {
-            ["Action"] = actionName,
-            ["User"] = HttpContext.User.Identity.Name,
-            ["Authenticated"] = HttpContext.User.Identity.IsAuthenticated,
-            ["Auth Type"] = HttpContext.User.Identity.AuthenticationType,
-            ["In Users Role"] = HttpContext.User.IsInRole("Users")
-        };
     }
 
 }

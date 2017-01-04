@@ -1,0 +1,43 @@
+﻿<nav class="navbar navbar-inverse navbar-fixed-top bs-docs-nav navbar-static-top" id="top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="logo"><img src=""></div>
+
+        </div>
+        <div class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="nav navbar-nav">
+                <li role="presentation" class="menu-item active">
+                    <a asp-action="index"><span class="glyphicon glyphicon-home"></span></a>
+                </li>
+                <li role="presentation" class="menu-item"><a asp-action="about"><strong>Giới thiệu</strong></a></li>
+                <li role="presentation" class="menu-item"><a asp-action="menu">Thực đơn</a></li>
+                <li role="presentation" class="menu-item"><a asp-action="news">Tin tức</a></li>
+                <li role="presentation" class="menu-item"><a asp-action="khuyenmai">Khuyến mãi</a></li>
+                <li role="presentation" class="menu-item"><a asp-action="kienthuc">Kiến thức ẩm thực</a></li>
+                <li role="presentation" class="menu-item"><a asp-action="reseration">Đặt bàn</a></li>
+                <li role="presentation" class="menu-item dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">Liên hệ<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-action="feedback">Phản hồi</a></li>
+                        <li><a asp-action="contact">Liên hệ</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li role="presentation" class="social-top">
+                    <a href="http://facebook.com"> <span class="fa fa-facebook"></span></a>
+                    <a href="https://www.instagram.com/"> <i class="fa fa-instagram"></i></a>
+                    <a href="http://facebook.com"> <i class="fa fa-rss"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

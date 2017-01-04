@@ -1,69 +1,150 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - QuanLyNhaHang</title>
 
-    <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/restaurant/assets/img/logo.png" type="image/x-icon" />
+    <title>@ViewData["Title"] | Sóng</title>
+    <meta title=@ViewData["Title"] />
+    <link rel="stylesheet" href="~/restaurant/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/restaurant/assets/css/user.css">
+    <link rel="stylesheet" href="~/restaurant/assets/css/Hoa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.min.css">
+    <link rel="stylesheet" type="text/css" href="~/restaurant/assets/css/bottomtotop.css">
+    <link rel="stylesheet" type="text/css" href="~/restaurant/assets/css/bootstrap-touch-slider.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
+    @RenderSection("css",false)
     @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
 </head>
+<style>
+    .carousel-inner > img,
+    .carousel-inner > .item > a > img {
+        width: 100%;
+    }
+</style>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">QuanLyNhaHang</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-                @await Html.PartialAsync("_LoginPartial")
+
+    <header>
+        <!-- top navigation -->
+        @await Html.PartialAsync("_Topnavigation")
+        <!-- /top navigation -->
+    </header>
+    <div class='thetop'></div>
+    @RenderBody()
+    <footer id="footer">
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 bordered">
+                        <h3></h3>
+
+                        <div class="col-sm-3">
+                            <img class="" src="~/restaurant/assets/img/logo.png" width="60" height="60">
+                        </div>
+                        <div class="col-sm-9 special-text" style="text-align:justify">
+                            <p>"Sự hài lòng của quý khách là niềm hạnh phúc lớn nhất của chúng tôi"</p>
+                        </div>
+
+                        <div class="text-center">
+                            <a href="" class="button1 ">Giới thiệu</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+
+                        <h3>Liên hệ</h3>
+                        <div class="form-group">
+                            <i class="fa fa-location-arrow"></i>
+                            123 Võ Văn Ngân, Bình Thọ, Thủ Đức, Hồ Chí Minh
+                        </div>
+                        <div class="form-group">
+                            <i class="fa fa-mail-forward"></i>
+                            nhahangsong@gmail.com
+                        </div>
+                        <div class="form-group">
+                            <i class="fa fa-phone"></i>
+                            0123 456 789
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <h3>Hình ảnh</h3>
+                        <div class="footer-picture">
+                            <ul>
+                                <li>
+                                    <a href="~/restaurant/assets/img/f1.jpg" data-lightbox="roadtrip">
+                                        <img class="img-responsive" src="~/restaurant/assets/img/f1.jpg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="~/restaurant/assets/img/f2.jpg" data-lightbox="roadtrip">
+                                        <img class="img-responsive" src="~/restaurant/assets/img/f2.jpg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="~/restaurant/assets/img/f3.jpg" data-lightbox="roadtrip">
+                                        <img class="img-responsive" src="~/restaurant/assets/img/f3.jpg" data-lightbox="roadtrip">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="~/restaurant/assets/img/f4.jpg" data-lightbox="roadtrip">
+                                        <img class="img-responsive" src="~/restaurant/assets/img/f4.jpg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="~/restaurant/assets/img/f5.jpg" data-lightbox="roadtrip">
+                                        <img class="img-responsive" src="~/restaurant/assets/img/f5.jpg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="~/restaurant/assets/img/f6.jpg" data-lightbox="roadtrip">
+                                        <img class="img-responsive" src="~/restaurant/assets/img/f6.jpg">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2016 - QuanLyNhaHang</p>
-        </footer>
+    </footer>
+
+
+    <div class="block-quydinhgiaohang2 hidden-xs">
+        <div class="icon icon-2">
+            <div class="quydinh-tip quydinh-tip-2">
+                (+84-8) 123 4567 <br>
+                123 Võ Văn Ngân, Bình Thọ <br>
+                Thủ Đức, Hồ Chí Minh
+            </div>
+            <img src="~/restaurant/assets/img/2.png" width="74" height="75">
+        </div>
+
+        <div class="icon icon-1 scrolltop">
+            <!--i class="fa fa-4x fa-angle-up "></i-->
+            <img src="~/restaurant/assets/img/1.png" class="scroll" width="74" height="75">
+        </div>
     </div>
 
-    <environment names="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
 
+    <script src="~/restaurant/assets/js/jquery.min.js"></script>
+    <script src="~/restaurant/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/restaurant/assets/js/bootstrap-touch-slider.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox-plus-jquery.min.js"></script>
+    <script type="text/javascript">
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('.scrolltop:hidden').stop(true, true).fadeIn();
+            }
+            else {
+                $('.scrolltop').stop(true, true).fadeOut();
+            }
+        });
+        $(function () { $(".scroll").click(function () { $("html,body").animate({ scrollTop: $(".thetop").offset().top }, "1000"); return false }) })
+    </script>
     @RenderSection("scripts", required: false)
 </body>
+
 </html>
+
+

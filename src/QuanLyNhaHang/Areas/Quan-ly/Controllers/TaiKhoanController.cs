@@ -55,7 +55,7 @@ namespace QuanLyNhaHang.Areas.Admin.Controllers
                     }
                 }
                 ModelState.AddModelError(nameof(LoginModel.Email),
-                "Invalid user or password");
+                "Sai tên đăng nhập hoặc mật khẩu");
             }
             return View(details);
         }

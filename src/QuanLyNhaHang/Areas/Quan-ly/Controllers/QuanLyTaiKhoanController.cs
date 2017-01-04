@@ -99,6 +99,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // POST: /Manage/AddPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/quan-ly-tai-khoan/them-so-dien-thoai")]
         public async Task<IActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
@@ -168,6 +169,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // POST: /Manage/VerifyPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
@@ -221,6 +223,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/quan-ly-tai-khoan/doi-mat-khau")]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -256,6 +259,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // POST: /Manage/SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/quan-ly-tai-khoan/dat-mat-khau")]
         public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -307,6 +311,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         // POST: /Manage/LinkLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("quan-ly/quan-ly-tai-khoan/link-dang-nhap")]
         public IActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user

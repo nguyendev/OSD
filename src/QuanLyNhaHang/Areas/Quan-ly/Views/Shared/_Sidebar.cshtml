@@ -1,9 +1,9 @@
 ﻿<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
-        <h3>General</h3>
+        <h3>Chức năng</h3>
         <ul class="nav side-menu">
             <li>
-                <a asp-action="index" asp-controller="trangchu"><i class="fa fa-home"></i> Home </a>
+                <a asp-action="index" asp-controller="trangchu"><i class="fa fa-home"></i> Tổng quan</a>
             </li>
             <li>
                 <a><i class="fa fa-lemon-o"></i> Nhập hàng <span class="fa fa-chevron-down"></span></a>
@@ -44,37 +44,33 @@
                 </ul>
             </li>
             <li>
-                <a asp-action="index" asp-controller="phanhoi"><i class="fa fa-bullhorn"></i> Phản hồi </a>
-             </li>
-            <li>
-                <a href="~/Client/Restaurant/index.html"><i class="fa fa-info"></i>Giới thiệu</a>
+                <a><i class="fa fa-user"></i> Tài khoản <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a asp-action="index" asp-controller="Quanlytaikhoan">Tổng quan</a></li>
+                    <li><a asp-action="addphonenumber" asp-controller="Quanlytaikhoan">Thêm số điện thoại</a></li>
+                    <li><a asp-action="changepassword" asp-controller="Quanlytaikhoan">Đổi mật khẩu</a></li>
+                    <li><a asp-action="managelogins" asp-controller="Quanlytaikhoan">Quản lý đăng nhập</a></li>
+                </ul>
             </li>
-            
         </ul>
     </div>
     <div class="menu_section">
         <h3>Quản trị viên</h3>
         <ul class="nav side-menu">
             <li>
-                <a><i class="fa fa-bug"></i> Quản lý người dùng <span class="fa fa-chevron-down"></span></a>
+                <a><i class="fa fa-user-plus"></i> Người dùng <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a asp-controller="QuanTriVien" asp-action="index">Tổng quan</a></li>
-                    <li><a asp-controller="QuanTriVien" asp-action="create">Projects</a></li>
+                    <li><a asp-controller="QuanTriVien" asp-action="create">Tạo mới</a></li>
                 </ul>
             </li>
             <li>
-                <a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
+                <a><i class="fa fa-user-secret"></i> Phân quyền <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="page_403.html">403 Error</a></li>
-                    <li><a href="page_404.html">404 Error</a></li>
-                    <li><a href="page_500.html">500 Error</a></li>
-                    <li><a href="plain_page.html">Plain Page</a></li>
-                    <li><a href="login.html">Login Page</a></li>
-                    <li><a href="pricing_tables.html">Pricing Tables</a></li>
+                    <li><a asp-controller="PhanQuyen" asp-action="index">Tổng quan</a></li>
                 </ul>
             </li>
            
-            <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
         </ul>
     </div>
 </div>

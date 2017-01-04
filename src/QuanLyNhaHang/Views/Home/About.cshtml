@@ -1,7 +1,168 @@
 ﻿@{
-    ViewData["Title"] = "About";
+    ViewData["Title"] = "Giới thiệu nhà hàng";
 }
-<h2>@ViewData["Title"].</h2>
-<h3>@ViewData["Message"]</h3>
-<h3>Hello Mẫn</h3>
-<p>Use this area to provide additional information.</p>
+<br />
+<div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>
+        <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>
+        <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>
+        <!--li data-target="#myCarousel" data-slide-to="3"></li>-->
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+        <div class="item active">
+
+            <img src="assets/img/new-slider.jpg" class="slide-image" alt="Hai san">
+            <div class="bs-slider-overlay"></div>
+
+            <div class="container">
+                <div class="row">
+                    <!-- Slide Text Layer -->
+                    <div class="slide-text slide_style_center">
+                        <h1 data-animation="animated zoomInRight" class="">Nhà hàng Sóng</h1>
+                        <p data-animation="animated fadeInLeft" class="">Vui lòng khách đến, vừa lòng khách đi</p>
+                        <a href="intro.html" target="_blank" class="btn btn-default" data-animation="animated fadeInLeft">Giới thiệu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="assets/img/new-slider2.jpg" class="slide-image" alt="không an tâm">
+            <div class="bs-slider-overlay"></div>
+            <!-- Slide Text Layer -->
+            <div class="slide-text slide_style_center">
+                <h1 data-animation="animated flipInX">Nhà hàng Sóng</h1>
+                <p data-animation="animated lightSpeedIn">Những thông tin khuyến mãi mới nhất dành cho bạn</p>
+                <a href="khuyen_mai.html" target="_blank" class="btn btn-primary" data-animation="animated fadeInDown">Khuyến mãi</a>
+            </div>
+        </div>
+        <div class="item">
+            <img src="assets/img/new-slider3.png" class="slide-image" alt="không an tâm">
+            <div class="bs-slider-overlay"></div>
+            <!-- Slide Text Layer -->
+            <div class="slide-text slide_style_center">
+                <h1 data-animation="animated flipInX">Nhà hàng Sóng</h1>
+                <p data-animation="animated lightSpeedIn">Còn chần chờ gì nữa mà không đặt bàn ngay</p>
+                <a href="reservation.html" target="_blank" class="btn btn-primary" data-animation="animated fadeInDown">Đặt bàn</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
+        <span class="fa fa-angle-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
+        <span class="fa fa-angle-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<section class="background-content">
+    <div class="new-food">
+        <br />
+        <h2 class="text-primary">Lịch sử hình thành</h2>
+
+        <div class="container">
+            <hr class="special-food-hr">
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-center text-primary" style="text-align:justify;">
+                        Bằng tình yêu và tâm huyết với hải sản của các cổ đông, tháng 10 năm 2013, Nhà hàng Siêu thị Thế Giới Hải Sản cơ sở 1 ra đời, tại địa điểm số 18 Dương Đình Nghệ, Cầu Giấy, Hà Nội. Sau chặng khởi đầu đầy gian nan và nhiều thách thức, đến tháng 6/2014,  CB CNV Thế Giới Hải Sản hân hoan chào đón cơ sở 2 tại 75A Trần Hưng Đạo. Một năm sau, vào tháng 11 năm 2015, cơ sở 3 với quy mô lớn hơn, được đầu tư mạnh hơn, đã được khai trương, tại tòa nhà Golden Palace, Mễ Trì, Nam Từ Liêm, Hà Nội. Tới ngày 25/6/2016, cơ sở 5 số 196 Thái Thịnh với sức chứa hơn 150 chỗ ngồi cũng đã ra đời, để tăng diện tích phục vụ thực khách yêu thích hải sản. Kế thừa những thành công tại Hà Nội và thấu hiểu thời gian thực khách bỏ ra còn giá trị hơn cả số tiền chi tiêu, hệ thống Nhà hàng Siêu thị Thế giới hải sản – “Con gì đang bơi chúng tôi đều có” chính thức đi vào hoạt động tại Sài Gòn tại địa chỉ 244Pasteur, Phường 6, Quận 3 từ ngày 8/12/2016.  Đây được xem là một bước tiến mới của thương hiệu Thế Giới Hải Sản, mang theo làn sóng mới cho ẩm thực hải sản Sài Gòn.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <img class="img-responsive" src="http://thegioihaisan.vn/wp-content/uploads/2014/12/cs6-khaitruong-570x330.jpg" />
+                </div>
+            </div>
+            <br />
+            <hr class="special-food-hr">
+
+        </div>
+
+    </div>
+
+    <br>
+    <div class="special-promotion" style="background-color:white;">
+        <div class="container">
+            <h2 class="text-center text-success">Không gian nhà hàng</h2>
+
+            <div class="row">
+                <div class="col-sm-6"><img class="img-responsive" src="http://thegioihaisan.vn/wp-content/uploads/2014/12/Khong-Gian-09-570x330.jpg" style="padding: 20px 20px 20px 20px;"></div>
+                <div class="col-sm-6">
+                    <br>
+                    <p class="text-success" style="font-weight:lighter; text-align:justify">
+                        Toàn bộ hệ thống Nhà hàng Siêu thị Thế Giới Hải Sản được thiết kế thống nhất theo chủ đề “Đưa đại dương xanh vào nhà” nên mang đậm hơi thở của biển. Kiến trúc độc đáo, xanh mát tạo cho khách hàng cảm giác thư thái, sảng khoái như được du ngoạn trên những bãi biển thực sự.
+                        – Cơ sở Dương Đình Nghệ: 9 phòng VIP và 1 khu vực chung, sức chứa gần 300 khách
+                        – Cơ sở Trần Hưng Đạo: 9 phòng VIP và 1 khu vực chung, sức chứa 200 khách
+                        – Cơ sở Golden Palace: 14 phòng VIP, 2 sảnh chung với sức chứa lên tới 500 khách
+                        – Cơ sở 196 Thái Thịnh, Hà Nội: 8 phòng VIP, 1 sảnh chung, sức chứa lên tới 150 khách
+                    </p>
+
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+    </div>
+    <div class="special-promotion">
+        <div class="container">
+
+            <h2 class="text-center text-primary">Dịch vụ tiêu chuẩn 3T3K</h2>
+            <div class="row">
+                <div class="col-sm-6" style="padding:40px;">
+                    <br />
+                    <div class="special-promotion">
+                        <div class="container">
+
+                        </div>
+                    </div>
+                    <p class="text-primary" style="font-weight:lighter;">
+                        Với tâm niệm “Sự hài lòng của khách hàng là niềm hạnh phúc của chúng tôi”, Thế Giới Hải Sản luôn phục vụ khách hàng theo nguyên tắc 3T3K:
+                    </p>
+                    <ul class="text-primary">
+                        <li>Tươi cười</li>
+                        <li>Trung thực</li>
+                        <li>Tận tâm</li>
+                        <li>Không này ép khách</li>
+                        <li>Không lười dối khách</li>
+                        <li>Không tranh cãi với khách</li>
+                    </ul>
+
+                </div>
+                <div class="col-sm-6"><img class="img-responsive" src="http://thegioihaisan.vn/wp-content/uploads/2014/12/3.phucvu-1.jpg" style="padding: 20px 20px 20px 20px;"></div>
+
+            </div>
+            <br><br><br>
+        </div>
+    </div>
+    <div class="special-promotion" style="background-color:white;">
+        <div class="container">
+            <h2 class="text-center text-success">Sản phẩm đa dạng chất lượng</h2>
+
+            <div class="row">
+                <div class="col-sm-6"><img class="img-responsive" src="http://thegioihaisan.vn/wp-content/uploads/2014/12/sanpham6.png" style="padding: 20px 20px 20px 20px;"></div>
+                <div class="col-sm-6">
+                    <br>
+                    <p class="text-success" style="font-weight:lighter; text-align:justify">
+                        Tại hệ thống siêu thị, chúng tôi cung cấp hơn 100 loại con hàng tươi sống, chất lượng loại 1, được đưa về từ những vùng biển trải dài khắp đất nước và được thả sống trong các bể kính, dưới sự giám sát nghiêm túc của đội ngũ kỹ sư thủy sản.
+                        Tại hệ thống nhà hàng, chúng tôi phục vụ những món ăn ngon, được chế biến tinh tế, menu đa dạng, phong phú chắc chắn sẽ làm hài lòng thực khách.
+                    </p>
+                    <div class="view-detail">
+                        <br>
+                        <a href="" class="button1" type="button">Xem chi tiết</a>
+                    </div>
+
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+    </div>
+</section>
