@@ -47,7 +47,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Display(Name = "Mã loại món")]
+        [Display(Name = "Tên loại món")]
         [Required(ErrorMessage = "Vui lòng chọn mã loại món")]
         public string MaLoaiMon
         {

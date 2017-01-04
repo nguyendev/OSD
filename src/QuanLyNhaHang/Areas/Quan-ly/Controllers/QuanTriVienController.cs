@@ -51,30 +51,30 @@ namespace QuanLyNhaHang.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var uploads = Path.Combine(_environment.WebRootPath, "uploads");
-                model.Avatar = Path.Combine(uploads, file.FileName);
-                if (file.Length > 0)
+                try
                 {
-                    try
+                    if (file.Length > 0)
                     {
-                        using (var fileStream = new FileStream(model.Avatar, FileMode.Create))
+                        var uploads = Path.Combine(_environment.WebRootPath, "uploads");
+                        model.Avatar = Path.Combine(uploads, file.FileName);
+                        try
                         {
-                            
-                            Image image = new Image(file.OpenReadStream());
-                            image.Resize(128,128)
-                                 .Save(fileStream);
-                            model.Avatar = Path.Combine("~\\uploads", file.FileName);
-                            file.CopyTo(fileStream);
+                            using (var fileStream = new FileStream(model.Avatar, FileMode.Create))
+                            {
+
+                                Image image = new Image(file.OpenReadStream());
+                                image.Resize(128, 128)
+                                     .Save(fileStream);
+                                model.Avatar = Path.Combine("~\\uploads", file.FileName);
+                                file.CopyTo(fileStream);
+                            }
+                        }
+                        catch (Exception e)
+                        {
                         }
                     }
-                    catch (Exception e)
-                    {
-                    }
-
-                    
-
-
                 }
+                catch (Exception) { }
                 AppUser user = new AppUser
                 {
                     UserName = model.Name,

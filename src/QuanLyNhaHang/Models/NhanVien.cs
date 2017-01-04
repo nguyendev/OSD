@@ -41,7 +41,7 @@ namespace QuanLyNhaHang.Models
         [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
         [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         [StringLength(15, ErrorMessage = "Số điện thoại không hợp lệ", MinimumLength = 6)]
-        public int SoDT
+        public string SoDT
         {
             get;
             set;

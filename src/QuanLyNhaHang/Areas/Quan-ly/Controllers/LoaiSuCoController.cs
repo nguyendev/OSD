@@ -33,7 +33,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         private void AllViewBag()
         {
             var bophanxulylist = _bophancontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
-            ViewData["MaBP"] = new SelectList(bophanxulylist, "MaBP", "MaBP");
+            ViewData["MaBP"] = new SelectList(bophanxulylist, "MaBP", "TenBP");
         }
 
         private async Task<IActionResult> GetResult(string maloaisuco = null,

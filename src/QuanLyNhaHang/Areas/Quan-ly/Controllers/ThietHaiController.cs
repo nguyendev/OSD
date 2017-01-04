@@ -33,6 +33,10 @@ namespace QuanLyNhaHang.Areas.Quan_ly.Controllers
 
         private void AllViewBag()
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
+            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
             var loaisucolist = _bienbansucocontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaBienBan"] = new SelectList(loaisucolist, "MaBienBan", "MaBienBan");
         }
@@ -40,13 +44,28 @@ namespace QuanLyNhaHang.Areas.Quan_ly.Controllers
         [Route("quan-ly/thiet-hai")]
         public async Task<IActionResult> Index()
         {
-            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
-            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
-            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
-            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
+            AllViewBag();
             return View(await _context.GetAll());
         }
 
+        [Route("quan-ly/thiet-hai")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int ?id, string trangthaiduyet)
+        {
+            AllViewBag();
+            if (id == null)
+                return NotFound();
+            var thiethai = await _context.Get(id);
+            if (thiethai == null)
+                return NotFound();
+            if (ModelState.IsValid)
+            {
+                _context.SetState(thiethai, EntityState.Modified);
+                await _context.Update(thiethai, trangthaiduyet, "1", _userManager.GetUserId(User));
+            }
+            return await Index();
+        }
         // GET: PhanHoi/Details/5
         [Route("quan-ly/thiet-hai/chi-tiet/{id}")]
         public async Task<IActionResult> Details(int? id)

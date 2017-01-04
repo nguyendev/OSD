@@ -37,18 +37,23 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         
         private void AllViewBag()
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
+            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
             var yeucaunhaphanglist = _yeucaunhaphangcontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
-            ViewData["MaNV"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
-            ViewData["MaYC"] = new SelectList(nhanvienlist, "MaYeuCau", "MaYeuCau");
+            ViewData["MaNV"] = new SelectList(nhanvienlist, "MaNV", "TenNV");
+            ViewData["MaYC"] = new SelectList(yeucaunhaphanglist, "MaYeuCau", "MaYeuCau");
         }
+
         private async Task<IActionResult> GetResult(string mahd = null,
             string manv = null, string ngaylap = null, string mayc = null)
         {
             var yeucaunhaphanglist = _yeucaunhaphangcontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["manv"] = new SelectList(nhanvienlist, "MaNV", "MaNV", manv);
-            ViewData["mayc"] = new SelectList(nhanvienlist, "MaYeuCau", "MaYeuCau", mayc);
+            ViewData["mayc"] = new SelectList(yeucaunhaphanglist, "MaYeuCau", "MaYeuCau", mayc);
             IQueryable<HOADONNHAPHANG> result = _context.GetList().Where(c =>
           (mahd == null || c.MaHD == mahd) && (manv == null || c.MaNV == manv)
           && (mahd == null || c.MaHD == mahd) && (ngaylap == null || Convert.ToDateTime(ngaylap).Date 

@@ -135,8 +135,9 @@ namespace QuanLyNhaHang.Data
         }
         public static async Task CreateExampleQuanly(IServiceProvider serviceProvider)
         {
+            SeedData.CreateExampleBophan(serviceProvider).Wait();
             SeedData.CreateExampleBienbansuco(serviceProvider).Wait();
-            //SeedData.CreateExampleBophan(serviceProvider).Wait();
+            
             SeedData.CreateExampleDatban(serviceProvider).Wait();
 
         }

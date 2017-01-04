@@ -41,7 +41,6 @@ namespace QuanLyNhaHang.Models
         //}
 
         [Display(Name = "Thành tiền")]
-        [Required]
         [DataType(DataType.Currency)]
         public string ThanhTien
         {

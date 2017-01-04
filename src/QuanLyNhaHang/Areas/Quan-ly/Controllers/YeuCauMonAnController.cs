@@ -35,6 +35,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 
         private void AllViewBag()
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
+            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
             var monanlist = _monancontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaMon"] = new SelectList(monanlist, "MaMon", "TenMon");
             var nguoilaplist = _luotkhachcontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
@@ -56,11 +60,8 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         [Route("quan-ly/yeu-cau-mon-an")]
         public async Task<IActionResult> Search(string maluot = null, string mamon = null)
         {
-            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
-            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
-            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
-            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
 
+            AllViewBag();
             return await GetResult(maluot, mamon);
         }
 

@@ -37,7 +37,7 @@ namespace QuanLyNhaHang.Models
             set;
         }
 
-        [Display(Name = "Mã bộ phận xử lý")]
+        [Display(Name = "Bộ phận xử lý")]
         public string MaBoPhanXuLy
         {
             get;

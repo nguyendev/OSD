@@ -63,7 +63,7 @@ namespace QuanLyNhaHang.Models
         //}
 
         [Display(Name = "Mã nhà cung cấp")]
-        [Required(ErrorMessage = "Vui lòng chọn mã nhà cung cấp")]
+       // [Required(ErrorMessage = "Vui lòng chọn mã nhà cung cấp")]
         public string MaNCC
         {
             get;

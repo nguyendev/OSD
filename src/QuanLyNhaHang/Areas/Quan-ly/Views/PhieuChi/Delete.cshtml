@@ -20,6 +20,13 @@
         </div>
     </div>
     <div class="form-group">
+        <label asp-for="NguoiLap" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <select disabled asp-for="NguoiLap" class="select2_group form-control" asp-items="ViewBag.NguoiLap"></select>
+            <span asp-validation-for="NguoiLap" class="text-danger" />
+        </div>
+    </div>
+    <div class="form-group">
         <label asp-for="MaHD" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
         <div class="col-md-6 col-sm-6 col-xs-12">
             <select disabled asp-for="MaHD" class="select2_group form-control" asp-items="ViewBag.MaHD"></select>

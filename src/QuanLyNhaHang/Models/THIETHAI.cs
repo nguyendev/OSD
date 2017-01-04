@@ -64,7 +64,6 @@ namespace QuanLyNhaHang.Models
 
         [Display(Name = "Thành tiền")]
         [DataType(DataType.Currency)]
-        [Required]
         public string ThanhTien
         {
             get;

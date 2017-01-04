@@ -8,9 +8,10 @@ using QuanLyNhaHang.Data;
 namespace QuanLyNhaHang.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170104082810_new")]
+    partial class @new
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -816,7 +817,8 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("Ten");
 
-                    b.Property<string>("ThanhTien");
+                    b.Property<string>("ThanhTien")
+                        .IsRequired();
 
                     b.Property<string>("TrangThai");
 
@@ -850,7 +852,8 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("NguoiTao");
 
-                    b.Property<string>("ThanhTien");
+                    b.Property<string>("ThanhTien")
+                        .IsRequired();
 
                     b.Property<string>("TrangThai");
 

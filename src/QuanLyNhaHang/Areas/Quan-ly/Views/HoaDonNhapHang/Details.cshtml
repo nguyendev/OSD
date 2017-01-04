@@ -15,7 +15,7 @@
         <div class="form-group">
             <label asp-for="MaHD" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input asp-for="MaHD" class="form-control" />
+                <input disabled asp-for="MaHD" class="form-control" />
                 <span asp-validation-for="MaHD" class="text-danger" />
             </div>
         </div>
@@ -23,14 +23,14 @@
         <div class="form-group">
             <label asp-for="MaYeuCau" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <select asp-for="MaYeuCau" class="select2_group form-control" asp-items="ViewBag.MaYeuCau"></select>
+                <select disabled asp-for="MaYeuCau" class="select2_group form-control" asp-items="ViewBag.MaYC"></select>
                 <span asp-validation-for="MaYeuCau" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="MaNV" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <select asp-for="MaNV" class="select2_group form-control" asp-items="ViewBag.MaNV"></select>
+                <select disabled asp-for="MaNV" class="select2_group form-control" asp-items="ViewBag.MaNV"></select>
                 <span asp-validation-for="MaNV" class="text-danger" />
             </div>
         </div>
@@ -39,7 +39,7 @@
             <label asp-for="ThanhTien" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
 
-                <input asp-for="ThanhTien" class="form-control" />
+                <input disabled asp-for="ThanhTien" class="form-control" />
                 <span asp-validation-for="ThanhTien" class="text-danger" />
 
             </div>
@@ -47,8 +47,8 @@
         <div class="form-group">
             <label asp-for="ThoiGianNhap" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="input-group date datetimepicker1">
-                    <input asp-for="ThoiGianNhap" type="date" id="date" class="form-control" />
+                <div class="input-group">
+                    <input disabled asp-for="ThoiGianNhap" type="date" id="date" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>

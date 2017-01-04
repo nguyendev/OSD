@@ -11,7 +11,7 @@
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="MaHD" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -19,11 +19,17 @@
                 <span asp-validation-for="MaHD" class="text-danger" />
             </div>
         </div>
-        
+        @*<div class="form-group">
+            <label asp-for="MaNCC" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select asp-for="MaNCC" class="select2_group form-control" asp-items="ViewBag.MaNCC"></select>
+                <span asp-validation-for="MaNCC" class="text-danger" />
+            </div>
+        </div>*@
         <div class="form-group">
             <label asp-for="MaYeuCau" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <select asp-for="MaYeuCau" class="select2_group form-control" asp-items="ViewBag.MaYeuCau"></select>
+                <select asp-for="MaYeuCau" class="select2_group form-control" asp-items="ViewBag.MaYC"></select>
                 <span asp-validation-for="MaYeuCau" class="text-danger" />
             </div>
         </div>
@@ -37,7 +43,7 @@
         <div class="form-group">
             <label asp-for="ThoiGianNhap" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="input-group date datetimepicker1">
+                <div class="input-group">
                     <input asp-for="ThoiGianNhap" type="date" id="date" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>

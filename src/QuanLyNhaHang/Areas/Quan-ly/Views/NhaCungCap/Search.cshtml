@@ -30,19 +30,19 @@
                 </p>
                 <form asp-action="Search" method="get" role="form" enctype="multipart/form-data">
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Mã nhà cung c?p</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Mã nhà cung cấp</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             @Html.TextBox("mancc", "", new { @class = "select2_group form-control" })
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tên nhà cung c?p</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tên nhà cung cấp</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             @Html.TextBox("tenncc", "", new { @class = "select2_group form-control" })
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="submit" class="btn btn-success">Tìm ki?m</button>
+                        <button type="submit" class="btn btn-success">Tìm kiếm</button>
                     </div>
                 </form>
             </div>
@@ -100,8 +100,8 @@
                                     }
                                 </td>
                                 <td>
-                                    <a asp-action="Edit" class="label label-warning" asp-route-id="@item.Id">S?a</a> |
-                                    <a asp-action="Details" class="label label-success" asp-route-id="@item.Id">Chi ti?t</a> |
+                                    <a asp-action="Edit" class="label label-warning" asp-route-id="@item.Id">Sửa</a> |
+                                    <a asp-action="Details" class="label label-success" asp-route-id="@item.Id">Chi tiết</a> |
                                     <a asp-action="Delete" class="label label-danger" asp-route-id="@item.Id">Xóa</a>
 
                                 </td>

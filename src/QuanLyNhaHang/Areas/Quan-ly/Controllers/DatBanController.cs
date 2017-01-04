@@ -160,7 +160,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Search");
             }
             return View(datban);
         }

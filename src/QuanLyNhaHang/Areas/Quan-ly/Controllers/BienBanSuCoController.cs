@@ -40,8 +40,12 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         {
             var loaisucolist = _loaisucocontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
-            ViewData["MaLoaiSuCo"] = new SelectList(loaisucolist, "MaLoaiSuCo", "MaLoaiSuCo");
-            ViewData["MaNV"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
+            ViewData["MaLoaiSuCo"] = new SelectList(loaisucolist, "MaLoaiSuCo", "TenLoaiSuCo");
+            ViewData["MaNV"] = new SelectList(nhanvienlist, "MaNV", "TenNV");
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
+            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
         }
         private async Task<IActionResult> GetResult(string thoigian = null,string mabienban = null,
             string maloaisuco = null, string manv = null)
@@ -71,10 +75,7 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
             string maloaisuco = null, string manv = null)
         {
             //return View(await _context.GetAll());
-            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
-            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
-            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
-            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
+            AllViewBag();
             return await GetResult(thoigian,mabienban, maloaisuco, manv);
         }
 
@@ -84,6 +85,7 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         public async Task<IActionResult> Search(int? id, string trangthaiduyet, string thoigian = null, string mabienban = null,
             string maloaisuco = null, string manv = null)
         {
+            AllViewBag();
             if (id == null)
                 return NotFound();
             var bienbansuco = await _context.Get(id);

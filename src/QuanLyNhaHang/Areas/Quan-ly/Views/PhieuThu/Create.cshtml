@@ -9,7 +9,7 @@
     ViewData["h2"] = "Thêm phiếu thu";
 }
 <form asp-action="Create">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-horizontal">
 
         <div class="form-group">
@@ -20,9 +20,16 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="NguoiLap" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select asp-for="NguoiLap" class="select2_group form-control" asp-items="ViewBag.NguoiLap"></select>
+                <span asp-validation-for="NguoiLap" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
             <label asp-for="MaLuot" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <select asp-for="MaLuot" class="select2_group form-control" asp-items="ViewBag.MaNV"></select>
+                <select asp-for="MaLuot" class="select2_group form-control" asp-items="ViewBag.MaLuot"></select>
                 <span asp-validation-for="MaLuot" class="text-danger" />
             </div>
         </div>

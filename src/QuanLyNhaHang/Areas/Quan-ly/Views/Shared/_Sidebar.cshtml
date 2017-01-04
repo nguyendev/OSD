@@ -30,7 +30,7 @@
                 <ul class="nav child_menu">
                     <li><a asp-action="search" asp-controller="loaisuco">Loại sự cố</a></li>
                     <li><a asp-action="search" asp-controller="bienbansuco">Biên bản sự cố</a></li>
-                    <li><a asp-action="search" asp-controller="thiethai">Thiệt hại</a></li>
+                    <li><a asp-action="index" asp-controller="thiethai">Thiệt hại</a></li>
                 </ul>
             </li>
             <li>
@@ -38,6 +38,7 @@
                 <ul class="nav child_menu">
                     <li><a asp-action="search" asp-controller="nhanvien">Nhân viên</a></li>
                     <li><a asp-action="search" asp-controller="nhacungcap">Nhà cung cấp</a></li>
+                    <li><a asp-action="search" asp-controller="bophan">Bộ phận</a></li>
                     <li><a asp-action="search" asp-controller="nguyenlieu">Nguyên liệu</a></li>
                     <li><a asp-action="search" asp-controller="nguyenlieutrongkho">Nguyên liệu trong kho</a></li>
                     <li><a asp-action="search" asp-controller="loaimonan">Loại món ăn</a></li>
@@ -55,6 +56,8 @@
             </li>
         </ul>
     </div>
+    @if(User.IsInRole("Admins"))
+    {   
     <div class="menu_section">
         <h3>Quản trị viên</h3>
         <ul class="nav side-menu">
@@ -74,4 +77,5 @@
            
         </ul>
     </div>
+    }
 </div>

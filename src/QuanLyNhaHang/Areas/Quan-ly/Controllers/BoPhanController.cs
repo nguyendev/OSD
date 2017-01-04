@@ -32,6 +32,10 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
 
         private void AllViewBag()
         {
+            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
+            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
+            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
             var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaTruongBP"] = new SelectList(nhanvienlist, "MaNV", "MaNV");
         }
@@ -53,10 +57,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
         public async Task<IActionResult> Search(string mabp = null, string tenbp = null,
             string matruongbp = null)
         {
-            List<SelectListItem> listTrangThaiDuyet = new List<SelectListItem>();
-            listTrangThaiDuyet.Add(new SelectListItem { Text = "Đã duyệt", Value = "A" });
-            listTrangThaiDuyet.Add(new SelectListItem { Text = "Chưa duyệt", Value = "U" });
-            ViewData["TrangThaiDuyet"] = listTrangThaiDuyet;
+            AllViewBag();
             return await GetResult(mabp,tenbp,matruongbp);
         }
 
