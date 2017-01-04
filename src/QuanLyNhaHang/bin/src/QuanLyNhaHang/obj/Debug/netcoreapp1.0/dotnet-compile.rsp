@@ -248,7 +248,6 @@ D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Areas\Quan-ly\C
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\NguyenLieuTrongKhoController.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\NhaCungCapController.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\NhanVienController.cs
-D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\PermissionController.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\PhanHoiController.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\PhanQuyenController.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Areas\Quan-ly\Controllers\PhieuChiController.cs
@@ -298,8 +297,8 @@ D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Infrastructure\
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Infrastructure\ThuChiRepository.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Infrastructure\YeuCauMonAnRepository.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Infrastructure\YeuCauNhapHangRepository.cs
-D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Migrations\20170102165430_init.cs
-D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Migrations\20170102165430_init.Designer.cs
+D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Migrations\20170104135159_init.cs
+D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Migrations\20170104135159_init.Designer.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Migrations\ApplicationDbContextModelSnapshot.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Models\AppUser.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Models\BIENBANSUCO.cs
@@ -331,6 +330,8 @@ D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Models\YEUCAUNH
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Services\IEmailSender.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Services\ISmsSender.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\Services\MessageServices.cs
+D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\ViewModels\ForgotPasswordViewModel.cs
+D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\ViewModels\ResetPasswordViewModel.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\ViewModels\Manage\AddPhoneNumberViewModel.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\ViewModels\Manage\ChangePasswordViewModel.cs
 D:\Documents\IT_Documents\OOD\New folder\trunk\src\QuanLyNhaHang\ViewModels\Manage\ConfigureTwoFactorViewModel.cs

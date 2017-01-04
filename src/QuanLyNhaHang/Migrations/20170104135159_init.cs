@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace QuanLyNhaHang.Migrations
 {
-    public partial class @new : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -184,7 +184,7 @@ namespace QuanLyNhaHang.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     GhiChu = table.Column<string>(nullable: true),
                     MaHD = table.Column<string>(maxLength: 12, nullable: false),
-                    MaNCC = table.Column<string>(nullable: false),
+                    MaNCC = table.Column<string>(nullable: true),
                     MaNV = table.Column<string>(maxLength: 12, nullable: false),
                     MaYeuCau = table.Column<string>(maxLength: 12, nullable: false),
                     NgayDuyet = table.Column<DateTime>(nullable: true),
@@ -438,7 +438,7 @@ namespace QuanLyNhaHang.Migrations
                     NguoiTao = table.Column<string>(nullable: true),
                     SoLuong = table.Column<int>(nullable: false),
                     Ten = table.Column<string>(nullable: true),
-                    ThanhTien = table.Column<string>(nullable: false),
+                    ThanhTien = table.Column<string>(nullable: true),
                     TrangThai = table.Column<string>(nullable: true),
                     TrangThaiDuyet = table.Column<string>(nullable: true)
                 },
@@ -461,7 +461,7 @@ namespace QuanLyNhaHang.Migrations
                     NguoiDuyet = table.Column<string>(nullable: true),
                     NguoiLap = table.Column<string>(nullable: false),
                     NguoiTao = table.Column<string>(nullable: true),
-                    ThanhTien = table.Column<string>(nullable: false),
+                    ThanhTien = table.Column<string>(nullable: true),
                     TrangThai = table.Column<string>(nullable: true),
                     TrangThaiDuyet = table.Column<string>(nullable: true),
                     MaHD = table.Column<string>(nullable: true),

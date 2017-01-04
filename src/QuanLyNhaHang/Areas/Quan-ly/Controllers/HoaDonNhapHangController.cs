@@ -45,6 +45,7 @@ namespace QuanLyNhaHang.Areas.QuanLyWebsite.Controllers
             var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["MaNV"] = new SelectList(nhanvienlist, "MaNV", "TenNV");
             ViewData["MaYC"] = new SelectList(yeucaunhaphanglist, "MaYeuCau", "MaYeuCau");
+            ViewData["MaNCC"] = new SelectList(yeucaunhaphanglist, "MaNCC", "MaNCC");
         }
 
         private async Task<IActionResult> GetResult(string mahd = null,

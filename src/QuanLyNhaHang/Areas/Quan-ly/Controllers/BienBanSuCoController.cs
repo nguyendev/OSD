@@ -54,13 +54,6 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
             var nhanvienlist = _nhanviencontext.GetList().Where(c => c.TrangThai == "1" && c.TrangThaiDuyet == "A");
             ViewData["maloaisuco"] = new SelectList(loaisucolist, "MaLoaiSuCo", "MaLoaiSuCo", maloaisuco);
             ViewData["manv"] = new SelectList(nhanvienlist, "MaNV", "MaNV", manv);
-            //var result = from s in _context.GetList() where
-            //             (mabienban == null || s.MaBienBan == mabienban)
-            //             && (maloaisuco == null || s.MaLoaiSuCo == maloaisuco)
-            //             && (manv == null || s.MaNV == manv)
-            //             && (thoigian == null || (DateTime.Compare(Convert.ToDateTime(s.ThoiGian), Convert.ToDateTime(thoigian)) == 0))
-            //             && s.TrangThai == "1"
-            //             select s;
             IQueryable<BIENBANSUCO> result = _context.GetList().Where(c =>
             (mabienban == null || c.MaBienBan == mabienban) && (maloaisuco == null || c.MaLoaiSuCo == maloaisuco)
             && (manv == null || c.MaNV == manv)
@@ -74,7 +67,6 @@ namespace QuanLyNhaHang.Areas.Quanly.Controllers
         public async Task<IActionResult> Search(string thoigian = null, string mabienban = null,
             string maloaisuco = null, string manv = null)
         {
-            //return View(await _context.GetAll());
             AllViewBag();
             return await GetResult(thoigian,mabienban, maloaisuco, manv);
         }

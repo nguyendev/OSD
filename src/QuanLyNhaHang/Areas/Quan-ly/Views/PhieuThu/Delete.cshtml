@@ -35,21 +35,21 @@
     <div class="form-group">
         <label asp-for="KhuyenMai" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <input disabled asp-for="KhuyenMai" class="form-control" />
+            <input disabled asp-for="KhuyenMai"  type="number" class="form-control" />
             <span asp-validation-for="KhuyenMai" class="text-danger" />
         </div>
     </div>
     <div class="form-group">
         <label asp-for="PhiDichVuKhac" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <input disabled asp-for="PhiDichVuKhac" class="form-control" />
+            <input disabled asp-for="PhiDichVuKhac"  type="number" class="form-control" />
             <span asp-validation-for="PhiDichVuKhac" class="text-danger" />
         </div>
     </div>
     <div class="form-group">
         <label asp-for="TienHang" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <input disabled asp-for="TienHang" class="form-control" />
+            <input disabled asp-for="TienHang"  type="number" class="form-control" />
             <span asp-validation-for="TienHang" class="text-danger" />
         </div>
     </div>
@@ -63,7 +63,7 @@
     <div class="form-group">
         <label asp-for="ThanhTien" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
         <div class="col-md-10">
-            <input disabled asp-for="ThanhTien" class="form-control" />
+            <input disabled asp-for="ThanhTien"  type="number" class="form-control" />
             <span asp-validation-for="ThanhTien" class="text-danger" />
         </div>
     </div>
@@ -84,7 +84,7 @@
     <div class="form-group">
         <label asp-for="NgayTao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="input-group date" id='datetimepicker1'>
+            <div class="input-group">
                 <input disabled type="datetime" asp-for="NgayTao" class="form-control" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
@@ -96,7 +96,7 @@
     <div class="form-group">
         <label asp-for="NgayDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="input-group date" id='datetimepicker1'>
+            <div class="input-group">
                 <input disabled type="datetime" asp-for="NgayDuyet" class="form-control" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>

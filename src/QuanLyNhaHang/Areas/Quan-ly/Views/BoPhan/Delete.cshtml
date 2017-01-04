@@ -33,6 +33,51 @@
         </div>
     </div>
     <div class="form-group">
+        <label asp-for="NgayTao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="input-group datetimepicker1">
+                <input disabled asp-for="NgayTao" class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                <span asp-validation-for="NgayTao" class="text-danger" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="NgayDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="input-group datetimepicker1">
+                <input disabled asp-for="NgayDuyet" class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                <span asp-validation-for="NgayDuyet" class="text-danger" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="NguoiTao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input disabled asp-for="NguoiTao" class="form-control" />
+            <span asp-validation-for="NguoiTao" class="text-danger" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="NguoiDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input disabled asp-for="NguoiDuyet" class="form-control" />
+            <span asp-validation-for="NguoiDuyet" class="text-danger" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="TrangThaiDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <input disabled asp-for="TrangThaiDuyet" class="form-control" />
+            <span asp-validation-for="TrangThaiDuyet" class="text-danger" />
+        </div>
+    </div>
+    <div class="form-group">
         <label asp-for="GhiChu" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
         <div class="col-md-6 col-sm-6 col-xs-12">
             <textarea disabled asp-for="GhiChu" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10"></textarea>

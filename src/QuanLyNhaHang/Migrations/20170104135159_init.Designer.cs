@@ -8,8 +8,8 @@ using QuanLyNhaHang.Data;
 namespace QuanLyNhaHang.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170104090734_new3")]
-    partial class new3
+    [Migration("20170104135159_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -392,8 +392,7 @@ namespace QuanLyNhaHang.Migrations
                         .IsRequired()
                         .HasAnnotation("MaxLength", 12);
 
-                    b.Property<string>("MaNCC")
-                        .IsRequired();
+                    b.Property<string>("MaNCC");
 
                     b.Property<string>("MaNV")
                         .IsRequired()
@@ -851,8 +850,7 @@ namespace QuanLyNhaHang.Migrations
 
                     b.Property<string>("NguoiTao");
 
-                    b.Property<string>("ThanhTien")
-                        .IsRequired();
+                    b.Property<string>("ThanhTien");
 
                     b.Property<string>("TrangThai");
 

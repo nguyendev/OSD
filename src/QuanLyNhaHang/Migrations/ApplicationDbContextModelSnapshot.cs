@@ -391,8 +391,7 @@ namespace QuanLyNhaHang.Migrations
                         .IsRequired()
                         .HasAnnotation("MaxLength", 12);
 
-                    b.Property<string>("MaNCC")
-                        .IsRequired();
+                    b.Property<string>("MaNCC");
 
                     b.Property<string>("MaNV")
                         .IsRequired()

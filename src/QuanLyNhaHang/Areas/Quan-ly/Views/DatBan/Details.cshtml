@@ -14,43 +14,43 @@
         <div class="form-group">
             <label asp-for="Gio" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input asp-for="Gio" id="time" class="form-control" />
+                <input disabled asp-for="Gio" id="time" class="form-control" />
                 <span asp-validation-for="Gio" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="HoTen" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input asp-for="HoTen" type="text" class="form-control" />
+                <input disabled asp-for="HoTen" type="text" class="form-control" />
                 <span asp-validation-for="HoTen" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Ngay" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input asp-for="Ngay" type="date" id="date" class="form-control" />
+                <input disabled asp-for="Ngay" id="date" class="form-control" />
                 <span asp-validation-for="Ngay" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="SoDT" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input asp-for="SoDT" type="number" class="form-control" />
+                <input disabled asp-for="SoDT" type="number" class="form-control" />
                 <span asp-validation-for="SoDT" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="SoNguoi" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input asp-for="SoNguoi" type="number" class="form-control" />
+                <input disabled asp-for="SoNguoi" type="number" class="form-control" />
                 <span asp-validation-for="SoNguoi" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="NgayTao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="input-group date" id='datetimepicker1'>
-                    <input disabled type="datetime" asp-for="NgayTao" class="form-control" />
+                <div class="input-group">
+                    <input disabled asp-for="NgayTao" type="datetime" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -61,8 +61,8 @@
         <div class="form-group">
             <label asp-for="NgayDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="input-group date" id='datetimepicker1'>
-                    <input disabled type="datetime" asp-for="NgayDuyet" class="form-control" />
+                <div class="input-group">
+                    <input disabled asp-for="NgayDuyet" type="datetime" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>

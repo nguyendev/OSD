@@ -36,7 +36,7 @@
         <div class="form-group">
             <label asp-for="NgayTao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="input-group date" id='datetimepicker1'>
+                <div class="input-group">
                     <input disabled type="datetime" asp-for="NgayTao" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
@@ -48,7 +48,7 @@
         <div class="form-group">
             <label asp-for="NgayDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="input-group date" id='datetimepicker1'>
+                <div class="input-group">
                     <input disabled type="datetime" asp-for="NgayDuyet" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
@@ -89,7 +89,7 @@
         <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <a asp-action="search" asp-controller="thuchi" class="btn btn-success pull-left">Quay lại</a>
-                <a asp-action="edit" asp-controller="thuchi" class="btn btn-warning pull-left">Chỉnh sửa</a>
+                @*<a asp-action="edit" asp-controller="thuchi" class="btn btn-warning pull-left">Chỉnh sửa</a>*@
             </div>
         </div>
     </div>

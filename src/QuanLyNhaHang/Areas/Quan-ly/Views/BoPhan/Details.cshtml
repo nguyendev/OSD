@@ -15,29 +15,29 @@
         <div class="form-group">
             <label asp-for="MaBP" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input asp-for="MaBP" class="form-control" />
+                <input disabled asp-for="MaBP" class="form-control" />
                 <span asp-validation-for="MaBP" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="TenBP" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input asp-for="TenBP" class="form-control" />
+                <input disabled asp-for="TenBP" class="form-control" />
                 <span asp-validation-for="TenBP" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="MaTruongBP" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <select asp-for="MaTruongBP" class="select2_group form-control" asp-items="ViewBag.MaTruongBP"></select>
+                <select disabled asp-for="MaTruongBP" class="select2_group form-control" asp-items="ViewBag.MaTruongBP"></select>
                 <span asp-validation-for="MaTruongBP" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="NgayTao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="input-group date" id='datetimepicker1'>
-                    <input disabled type="datetime" asp-for="NgayTao" class="form-control" />
+                <div class="input-group datetimepicker1">
+                    <input disabled asp-for="NgayTao" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -48,8 +48,8 @@
         <div class="form-group">
             <label asp-for="NgayDuyet" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="input-group date" id='datetimepicker1'>
-                    <input disabled type="datetime" asp-for="NgayDuyet" class="form-control" />
+                <div class="input-group datetimepicker1">
+                    <input disabled asp-for="NgayDuyet" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>

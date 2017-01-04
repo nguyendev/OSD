@@ -14,12 +14,14 @@ namespace QuanLyNhaHang.Infrastructure
         protected DbSet<HOADONNHAPHANG> DbSet;
         private readonly YeuCauNhapHangRepository yeucaurep;
         private readonly NguyenLieuRepository nccrep;
+        private readonly NguyenLieuTrongKhoRepository nlrep;
         public HoaDonNhapHangRepository(ApplicationDbContext context)
         {
             Context = context;
             DbSet = context.Set<HOADONNHAPHANG>();
             yeucaurep = new YeuCauNhapHangRepository(Context);
             nccrep = new NguyenLieuRepository(Context);
+            nlrep = new NguyenLieuTrongKhoRepository(Context);
         }
         public async Task Add(HOADONNHAPHANG Entity, string nguoitao)
         {
@@ -71,11 +73,26 @@ namespace QuanLyNhaHang.Infrastructure
             {
                 Entity.NgayDuyet = DateTime.Now;
                 Entity.NguoiDuyet = nguoiduyet;
+                var nguyenlieutrongkho = nlrep.GetList().Where(c => c.MaNL == nguyenlieu.MaNL).SingleOrDefault();
+                if (nguyenlieutrongkho == null)
+                {
+                    var nltk = new NGUYENLIEUTRONGKHO();
+                    nltk.NguoiTao = Entity.NguoiTao;
+                    nltk.NgayTao = DateTime.Now;
+                    nltk.TrangThai = "1";
+                    nltk.TrangThaiDuyet = "U";
+                    nltk.SoLuong = yeucaunhaphang.SoLuong;
+                }
+                else
+                {
+                    nlrep.SetState(nguyenlieutrongkho, EntityState.Modified);
+                    nguyenlieutrongkho.SoLuong = nguyenlieutrongkho.SoLuong + yeucaunhaphang.SoLuong;
+                }
             }
             Entity.TrangThaiDuyet = trangthaiduyet;
             Entity.TrangThai = trangthai;
             Entity.MaNCC = yeucaunhaphang.MaNCC;
-            DbSet.Update(Entity);
+            DbSet.Update(Entity);    
             await Save();
         }
 
